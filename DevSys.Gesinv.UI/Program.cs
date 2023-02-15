@@ -1,10 +1,21 @@
+using DevSys.Gesinv.DAL;
+using DevSys.Gesinv.DAL.Contracts;
 using DevSys.Gesinv.DAL.DataContext;
+using DevSys.Gesinv.DAL.Repositories;
+using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Logic.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// Servicios del Modulo de Orden Compra
+
+// Creo que llamar al repositorio esta de sobra y creo que es una falla a la proteccion del DAL
+builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<OrdenCompra>>();
+
+builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
 
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
