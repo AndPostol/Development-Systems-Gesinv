@@ -595,6 +595,16 @@ VALUES
 	(4,'Generico 4');
 SET IDENTITY_INSERT [Linea] OFF;
 
+SET IDENTITY_INSERT [Grupo] ON;
+INSERT INTO [Grupo] (LineaID,Nombre)
+VALUES
+	(1,'Generico'),
+	(2,'Generico 2'),
+	(3,'Generico 3'),
+	(4,'Generico 4');
+SET IDENTITY_INSERT [Grupo] OFF;
+
+
 SET IDENTITY_INSERT [Ingreso] ON;
 
 INSERT INTO [Ingreso] (IngresoID,CodigoIngreso,ProveedorID,MotivoID,BodegaID,TipoIngresoID,Fecha,Descuento,Impuestos,Total)
@@ -610,3 +620,79 @@ VALUES
   (9,1458,2,5,3,2,CONVERT(DATETIME,'05-06-23'),14,9,7347),
   (10,6199,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
 SET IDENTITY_INSERT [Ingreso] OFF;
+
+/*
+
+
+
+
+                      PRODUCTO MOMENT
+
+
+
+
+
+*/
+
+SET IDENTITY_INSERT [Medida] ON;
+
+INSERT INTO [Medida] (MedidaID,Dimension,ProductoID)
+VALUES
+  (1,'Metro',9),
+  (2,'Centimetro',4),
+  (3,'Milimetro',4),
+  (4,'Kilo',4),
+  (5,'Gramo',2),
+  (6,'Miligramo',6),
+  (7,'Litro',1),
+  (8,'Mililitro',9);
+
+SET IDENTITY_INSERT [Medida] OFF;
+
+SET IDENTITY_INSERT [Existencia] ON;
+
+INSERT INTO [Existencia] (ExistenciaID,ProductoID,BodegaID,Stock)
+VALUES
+  (1,3,3,3),
+  (2,6,9,6),
+  (3,1,8,7),
+  (4,7,7,2),
+  (5,1,3,3),
+  (6,4,4,4),
+  (7,5,9,5),
+  (8,9,9,1),
+  (9,2,8,4),
+  (10,3,9,8);
+SET IDENTITY_INSERT [Existencia] OFF;
+
+SET IDENTITY_INSERT [LineaCompra] ON;
+
+INSERT INTO [LineaCompra] (LineaCompraID,OrdenCompraID,ProductoID,DepartamentoID,Cantidad,Caja,Precio,Descuento,Total)
+VALUES
+  (1,5,2,9,83,3,247,71,942),
+  (2,6,8,3,50,10,65,65,716),
+  (3,4,7,5,15,71,719,38,452),
+  (4,3,5,4,46,14,330,41,732),
+  (5,2,4,10,98,28,754,45,55),
+  (6,6,2,10,29,46,805,21,43),
+  (7,2,3,3,21,79,767,40,113),
+  (8,1,7,9,81,87,715,78,50),
+  (9,2,2,2,49,44,257,43,447),
+  (10,5,7,8,79,82,16,83,556);
+SET IDENTITY_INSERT [LineaCompra] OFF;
+
+SET IDENTITY_INSERT [IngresoDetalle] ON;
+INSERT INTO [IngresoDetalle] (IngresoDetalleID,ProductoID,IngresoID,PrecioBruto,Fecha,Caja,Cantidad)
+VALUES
+  (1,5,9,83,CONVERT(DATE,'06/02/2023'),247,71),
+  (2,5,3,50,CONVERT(DATE,'06/02/2023'),65,65),
+  (3,3,5,15,CONVERT(DATE,'06/02/2023'),719,38),
+  (4,5,4,46,CONVERT(DATE,'06/02/2023'),330,41),
+  (5,6,10,98,CONVERT(DATE,'06/02/2023'),754,45),
+  (6,2,10,29,CONVERT(DATE,'06/02/2023'),805,21),
+  (7,3,3,21,CONVERT(DATE,'06/02/2023'),767,40),
+  (8,9,9,81,CONVERT(DATE,'06/02/2023'),715,78),
+  (9,2,2,49,CONVERT(DATE,'06/02/2023'),257,43),
+  (10,5,8,79,CONVERT(DATE,'06/02/2023'),16,83);
+SET IDENTITY_INSERT [IngresoDetalle] OFF;
+
