@@ -471,7 +471,7 @@ VALUES
   (5,'Proveduria');
 
 
-  INSERT INTO [Color] (ColorID,Nombre)
+INSERT INTO [Color] (ColorID,Nombre)
 VALUES
 	(1, 'violeta'),
 	(2,'amarillo'),
