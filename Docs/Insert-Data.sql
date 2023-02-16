@@ -596,7 +596,7 @@ VALUES
 SET IDENTITY_INSERT [Linea] OFF;
 
 SET IDENTITY_INSERT [Grupo] ON;
-INSERT INTO [Grupo] (LineaID,Nombre)
+INSERT INTO [Grupo] (GrupoID,Nombre)
 VALUES
 	(1,'Generico'),
 	(2,'Generico 2'),
@@ -621,18 +621,20 @@ VALUES
   (10,6199,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
 SET IDENTITY_INSERT [Ingreso] OFF;
 
-/*
-
-
-
-
-                      PRODUCTO MOMENT
-
-
-
-
-
-*/
+SET IDENTITY_INSERT [Producto] ON;
+INSERT INTO [Producto] (ProductoID,Nombre,Codigo,LineaID,TipoID,Unidad,Caja,GrupoID,Activo,Iva,Perecible,Comentario,FechaCaducidad,Precio)
+VALUES
+  (1,'Producto',2197,3,6,55,38,3,'0','1','0','libero lacus, varius et, euismod','09-22-23',190),
+  (2,'Producto',9486,3,3,56,12,3,'0','0','0','tempor diam dictum sapien.','09-02-23',343),
+  (3,'Producto',6820,4,5,40,38,4,'1','0','0','vitae dolor. Donec fringilla. Donec feugiat metus sit amet','02-10-23',805),
+  (4,'Producto',7817,1,3,18,20,2,'0','1','1','mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit','12-29-22',754),
+  (5,'Producto',6503,3,2,65,43,3,'1','0','0','dolor dapibus gravida. Aliquam tincidunt,','04-23-22',933),
+  (6,'Producto',1779,1,3,23,76,2,'1','0','1','Nulla eget metus eu erat','04-13-23',182),
+  (7,'Producto',8340,3,3,24,3,2,'1','0','0','non, dapibus rutrum, justo. Praesent luctus. Curabitur','12-17-23',555),
+  (8,'Producto',8108,3,6,3,84,2,'1','0','0','a purus.','07-12-22',98),
+  (9,'Producto',3776,4,2,29,22,4,'1','1','0','lorem ipsum sodales purus, in molestie tortor nibh sit amet','01-03-23',901),
+  (10,'Producto',4004,2,5,77,42,2,'0','1','1','id, erat. Etiam vestibulum massa rutrum magna. Cras','05-15-22',410);
+SET IDENTITY_INSERT [Producto] OFF;
 
 SET IDENTITY_INSERT [Medida] ON;
 
