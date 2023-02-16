@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevSys.Gesinv.DAL", "DevSys.Gesinv.DAL\DevSys.Gesinv.DAL.csproj", "{0A613AC1-37B4-429F-8AB0-FB510B483ED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.DAL", "DevSys.Gesinv.DAL\DevSys.Gesinv.DAL.csproj", "{0A613AC1-37B4-429F-8AB0-FB510B483ED5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - UI", "0 - UI", "{F2D083B0-B806-4A92-8BFF-F7FFEDBCEC3D}"
 EndProject
@@ -13,11 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Models", "2 - Models", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Business Logic", "3 - Business Logic", "{DC4AF1F8-AC5D-4B15-BA12-5D0350864BAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevSys.Gesinv.Models", "DevSys.Gesinv.Models\DevSys.Gesinv.Models.csproj", "{802EFC79-3EC1-4761-BA98-E26E3F0E28BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.Models", "DevSys.Gesinv.Models\DevSys.Gesinv.Models.csproj", "{802EFC79-3EC1-4761-BA98-E26E3F0E28BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevSys.Gesinv.Logic", "DevSys.Gesinv.Logic\DevSys.Gesinv.Logic.csproj", "{8823F0C8-C3A7-4956-8872-1E308D4605CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.Logic", "DevSys.Gesinv.Logic\DevSys.Gesinv.Logic.csproj", "{8823F0C8-C3A7-4956-8872-1E308D4605CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevSys.Gesinv.UI", "DevSys.Gesinv.UI\DevSys.Gesinv.UI.csproj", "{B36D376E-CE59-4008-8A1C-306F92CE7D36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.UI", "DevSys.Gesinv.UI\DevSys.Gesinv.UI.csproj", "{B36D376E-CE59-4008-8A1C-306F92CE7D36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Test Unit", "4 - Test Unit", "{3DBEAFE7-8880-461B-85D0-6A3BB3602BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesinvTest", "GesinvTest\GesinvTest.csproj", "{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{B36D376E-CE59-4008-8A1C-306F92CE7D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B36D376E-CE59-4008-8A1C-306F92CE7D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B36D376E-CE59-4008-8A1C-306F92CE7D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,7 @@ Global
 		{802EFC79-3EC1-4761-BA98-E26E3F0E28BE} = {AD6947F0-5C03-4AD6-B9D1-B283EB8808F1}
 		{8823F0C8-C3A7-4956-8872-1E308D4605CF} = {DC4AF1F8-AC5D-4B15-BA12-5D0350864BAB}
 		{B36D376E-CE59-4008-8A1C-306F92CE7D36} = {F2D083B0-B806-4A92-8BFF-F7FFEDBCEC3D}
+		{87BD3126-0C7A-4D28-B710-6303ABA8CCE1} = {3DBEAFE7-8880-461B-85D0-6A3BB3602BC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50A115A9-2BE0-4717-A4F3-4D357631723C}
