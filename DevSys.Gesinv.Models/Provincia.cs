@@ -13,7 +13,7 @@ namespace DevSys.Gesinv.Models
 
         public int ProvinciaId { get; set; }
         public int? EstadoId { get; set; }
-        public string Provincia1 { get; set; } = null!;
+        public string Nombre { get; set; } = null!;
 
         public virtual Estado? Estado { get; set; }
         public virtual ICollection<Bodega> Bodega { get; set; }

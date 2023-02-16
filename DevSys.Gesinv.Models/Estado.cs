@@ -13,7 +13,7 @@ namespace DevSys.Gesinv.Models
         }
 
         public int EstadoId { get; set; }
-        public string Estado1 { get; set; } = null!;
+        public string Nombre { get; set; } = null!;
 
         public virtual ICollection<Bodega> Bodega { get; set; }
         public virtual ICollection<Proveedor> Proveedor { get; set; }
