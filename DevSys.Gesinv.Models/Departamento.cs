@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class Departamento
     {
@@ -12,7 +12,7 @@ namespace DevSys.Gesinv.DAL
         }
 
         public int DepartamentoId { get; set; }
-        public string? Nombre { get; set; }
+        public string Nombre { get; set; } = null!;
 
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
         public virtual ICollection<Requisicion> Requisicion { get; set; }

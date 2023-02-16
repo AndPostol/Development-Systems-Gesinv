@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class OrdenCompra
     {
@@ -16,7 +16,7 @@ namespace DevSys.Gesinv.DAL
         public string? Referencia { get; set; }
         public int? CondicionPagoId { get; set; }
         public string? Observacion { get; set; }
-        public DateTime? Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public double SubTotal { get; set; }
         public double Descuento { get; set; }
         public double Impuestos { get; set; }

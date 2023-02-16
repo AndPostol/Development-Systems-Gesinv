@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class Producto
     {
@@ -17,11 +17,11 @@ namespace DevSys.Gesinv.DAL
         }
 
         public int ProductoId { get; set; }
-        public string? Nombre { get; set; }
-        public int? Codigo { get; set; }
+        public string Nombre { get; set; } = null!;
+        public int Codigo { get; set; }
         public int? LineaId { get; set; }
         public int? TipoId { get; set; }
-        public int? Unidad { get; set; }
+        public int Unidad { get; set; }
         public int? Caja { get; set; }
         public int? GrupoId { get; set; }
         public bool? Activo { get; set; }

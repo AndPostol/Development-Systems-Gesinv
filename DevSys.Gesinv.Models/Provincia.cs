@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class Provincia
     {
@@ -12,8 +12,10 @@ namespace DevSys.Gesinv.DAL
         }
 
         public int ProvinciaId { get; set; }
-        public string Nombre { get; set; } = null!;
+        public int? EstadoId { get; set; }
+        public string Provincia1 { get; set; } = null!;
 
+        public virtual Estado? Estado { get; set; }
         public virtual ICollection<Bodega> Bodega { get; set; }
         public virtual ICollection<Proveedor> Proveedor { get; set; }
     }

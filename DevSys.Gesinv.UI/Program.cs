@@ -1,5 +1,6 @@
 using DevSys.Gesinv.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
+using DevSys.Gesinv.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
