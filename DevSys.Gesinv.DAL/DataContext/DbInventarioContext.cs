@@ -14,7 +14,14 @@ namespace DevSys.Gesinv.DAL.DataContext
         protected override void OnConfiguring(DbContextOptionsBuilder options) {
             options.UseSqlServer(SQLConnecion);
         }
-        
+        public DbInventarioContext()
+        {
+
+        }
+        public DbInventarioContext(DbContextOptions<DbInventarioContext> options) : base(options)
+        {
+
+        }
 
         public virtual DbSet<Bodega> Bodega { get; set; } = null!;
         public virtual DbSet<Color> Color { get; set; } = null!;
