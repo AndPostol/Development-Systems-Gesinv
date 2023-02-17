@@ -24,5 +24,36 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual CondicionPago? CondicionPago { get; set; }
         public virtual Proveedor? Proveedor { get; set; }
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
+
+        public static List<OrdenCompraViewModel> ToListOCModelView(List<OrdenCompra> lstModel) 
+        {
+            List<OrdenCompraViewModel> lstModelView = new List<OrdenCompraViewModel>();
+            foreach (var model in lstModel)
+            {
+                lstModelView.Add(ToOCModelView(model));
+            }
+
+            return lstModelView;
+        }
+        public static OrdenCompraViewModel ToOCModelView(OrdenCompra model)
+        {
+            OrdenCompraViewModel result = new OrdenCompraViewModel() 
+            { 
+                OrdenCompraId = model.OrdenCompraId,
+                ProveedorId= model.ProveedorId,
+                CodProveedor= model.CodProveedor,
+                Referencia= model.Referencia,
+                CondicionPagoId= model.CondicionPagoId,
+                Observacion = model.Observacion,
+                Fecha= model.Fecha,
+                SubTotal= model.SubTotal,
+                Descuento= model.Descuento,
+                Impuestos= model.Impuestos,
+                Total= model.Total
+            };
+            return result;
+        }
+
+
     }
 }

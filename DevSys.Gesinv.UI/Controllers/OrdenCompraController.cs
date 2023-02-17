@@ -1,4 +1,6 @@
-﻿using DevSys.Gesinv.Logic.Contracts;
+﻿using DevSys.Gesinv.DAL;
+using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +16,16 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: OrdenCompraController
         public ActionResult Index()
         {
-            return View();
+            List<OrdenCompra> lst = _service.GetAll().Result.ToList();
+
+            return View(OrdenCompraViewModel.ToListOCModelView(lst));
         }
 
         // GET: OrdenCompraController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            OrdenCompraViewModel model = OrdenCompraViewModel.ToOCModelView(_service.GetById(id).Result);
+            return View(model);
         }
 
         // GET: OrdenCompraController/Create

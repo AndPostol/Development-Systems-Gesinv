@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DevSys.Gesinv.Logic\DevSys.Gesinv.Logic.csproj" />
     <ProjectReference Include="..\DevSys.Gesinv.Models\DevSys.Gesinv.Models.csproj" />
   </ItemGroup>
