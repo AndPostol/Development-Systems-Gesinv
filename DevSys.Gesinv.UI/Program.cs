@@ -6,6 +6,10 @@ using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Logic.Services;
 using Microsoft.EntityFrameworkCore;
 using DevSys.Gesinv.Models;
+using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Logic.Services;
+using DevSys.Gesinv.DAL.Contracts;
+using DevSys.Gesinv.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<OrdenCompra>>();
 
 builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
+
+builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
+builder.Services.AddScoped<IProductoService, ProductoService>();
 
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
