@@ -11,11 +11,18 @@ namespace DevSys.Gesinv.DAL.DataContext
     public class DbInventarioContext : DbContext
     {
         private readonly string SQLConnecion = "Data Source=localhost;Initial Catalog=DbInventario;Integrated Security=True;Trust Server Certificate=True;";
-        protected override void OnConfiguring(DbContextOptionsBuilder options) {
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
             options.UseSqlServer(SQLConnecion);
         }
-        
+        public DbInventarioContext()
+        {
 
+        }
+        public DbInventarioContext(DbContextOptions<DbInventarioContext> options): base(options)
+        {
+
+        }
         public virtual DbSet<Bodega> Bodega { get; set; } = null!;
         public virtual DbSet<Color> Color { get; set; } = null!;
         public virtual DbSet<CondicionPago> CondicionPago { get; set; } = null!;

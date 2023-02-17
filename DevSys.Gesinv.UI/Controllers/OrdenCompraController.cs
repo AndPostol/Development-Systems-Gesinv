@@ -3,6 +3,7 @@ using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DevSys.Gesinv.Models;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
