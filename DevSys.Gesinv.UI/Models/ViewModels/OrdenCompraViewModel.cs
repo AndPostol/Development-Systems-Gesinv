@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.DAL;
+using DevSys.Gesinv.Models;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
