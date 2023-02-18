@@ -13,14 +13,30 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 // Servicios del Modulo de Orden Compra
 
-// Creo que llamar al repositorio esta de sobra y creo que es una falla a la proteccion del DAL
+// Repositories
 builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<OrdenCompra>>();
+builder.Services.AddScoped<IGenericRepository<CondicionPago>, GenericRepository<CondicionPago>>();
+builder.Services.AddScoped<IGenericRepository<Departamento>, GenericRepository<Departamento>>();
+builder.Services.AddScoped<IGenericRepository<LineaCompra>, GenericRepository<LineaCompra>>();
+builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
+builder.Services.AddScoped<IGenericRepository<Proveedor>, GenericRepository<Proveedor>>();
 
+
+
+// Services 
 builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
+builder.Services.AddScoped<ICondicionPagoService, CondicionPagoService>();
+builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+builder.Services.AddScoped<ILineaCompraService, LineaCompraService>();
+builder.Services.AddScoped<IProductoService, ProductoService>();
+builder.Services.AddScoped<IProveedorService, ProveedorService>();
+
+
+
 
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
+    options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
 });
 
 var app = builder.Build();

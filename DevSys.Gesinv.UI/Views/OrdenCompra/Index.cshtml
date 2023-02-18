@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Referencia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CondicionPagoId)
+                @Html.DisplayNameFor(model => model.CondicionPago)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Observacion)
@@ -55,22 +55,24 @@
                 @Html.DisplayFor(modelItem => item.OrdenCompraId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProveedorId)
+                @Html.DisplayFor(modelItem => item.Proveedor.RazonSocial)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodProveedor)
+                @Html.DisplayFor(modelItem => item.Proveedor.Codigo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Referencia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CondicionPagoId)
+                @Html.DisplayFor(modelItem => item.CondicionPago.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Observacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
+
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SubTotal)
@@ -85,9 +87,9 @@
                 @Html.DisplayFor(modelItem => item.Total)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.OrdenCompraId }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.OrdenCompraId  }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.OrdenCompraId })
             </td>
         </tr>
 }

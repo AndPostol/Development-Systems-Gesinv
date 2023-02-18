@@ -1,5 +1,4 @@
-﻿using DevSys.Gesinv.DAL;
-using DevSys.Gesinv.Models;
+﻿using DevSys.Gesinv.Models;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
@@ -26,17 +25,38 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual Proveedor? Proveedor { get; set; }
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
 
-        public static List<OrdenCompraViewModel> ToListOCModelView(List<OrdenCompra> lstModel) 
+        public static List<OrdenCompraViewModel> ToViewModelList(List<OrdenCompra> lstModel) 
         {
             List<OrdenCompraViewModel> lstModelView = new List<OrdenCompraViewModel>();
             foreach (var model in lstModel)
             {
-                lstModelView.Add(ToOCModelView(model));
+                lstModelView.Add(ToViewModel(model));
             }
 
             return lstModelView;
         }
-        public static OrdenCompraViewModel ToOCModelView(OrdenCompra model)
+        public static OrdenCompra ToModel(OrdenCompraViewModel modelView) 
+        {
+            OrdenCompra model = new OrdenCompra() 
+            {
+                OrdenCompraId = modelView.OrdenCompraId,
+                ProveedorId= modelView.ProveedorId,
+                CodProveedor= modelView.CodProveedor,
+                Referencia= modelView.Referencia,
+                CondicionPagoId= modelView.CondicionPagoId,
+                Observacion = modelView.Observacion,
+                Fecha = modelView.Fecha.Value,
+                SubTotal= modelView.SubTotal,
+                Descuento= modelView.Descuento,
+                Impuestos= modelView.Impuestos,
+                Total= modelView.Total,
+                CondicionPago= modelView.CondicionPago,
+                Proveedor=modelView.Proveedor,
+                LineaCompra= modelView.LineaCompra
+            };
+            return model;
+        }
+        public static OrdenCompraViewModel ToViewModel(OrdenCompra model)
         {
             OrdenCompraViewModel result = new OrdenCompraViewModel() 
             { 
@@ -50,7 +70,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 SubTotal= model.SubTotal,
                 Descuento= model.Descuento,
                 Impuestos= model.Impuestos,
-                Total= model.Total
+                Total= model.Total,
+                CondicionPago= model.CondicionPago,
+                Proveedor=model.Proveedor,
+                LineaCompra= model.LineaCompra
             };
             return result;
         }
