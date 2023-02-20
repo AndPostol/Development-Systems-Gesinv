@@ -12,7 +12,6 @@ namespace DevSys.Gesinv.Models
 
         public int OrdenCompraId { get; set; }
         public int? ProveedorId { get; set; }
-        public int CodProveedor { get; set; }
         public string? Referencia { get; set; }
         public int? CondicionPagoId { get; set; }
         public string? Observacion { get; set; }

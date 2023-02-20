@@ -22,6 +22,13 @@ namespace DevSys.Gesinv.UI.Controllers
             List<DepartamentoViewModel> lstViewModel = DepartamentoViewModel.ToViewModelList(query.ToList());
             return View(lstViewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> getList() 
+        {
+            IEnumerable<Departamento> query = await _service.GetAll();
+            List<DepartamentoViewModel> lstVM = DepartamentoViewModel.ToViewModelList(query);
+            return StatusCode(StatusCodes.Status200OK, lstVM);
+        }
 
         // GET: DepartamentoController/Details/5
         public async Task<ActionResult> Details(int id)

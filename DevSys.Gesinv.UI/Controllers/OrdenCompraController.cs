@@ -37,16 +37,8 @@ namespace DevSys.Gesinv.UI.Controllers
         }
 
         // GET: OrdenCompraController/Create
-        public async Task<ActionResult> Create()
+        public IActionResult Create()
         {
-            IEnumerable<Proveedor> query = await _serviceProveedor.GetAll();
-            // Transform Dictionary
-            Dictionary<int,string> optionsProv = new Dictionary<int, string>();
-            foreach (Proveedor item in query)
-            {
-                optionsProv.Add(item.ProveedorId,item.RazonSocial);
-            }
-            ViewBag.Proveedor = optionsProv;
             return View();
         }
 

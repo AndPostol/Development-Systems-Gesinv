@@ -6,42 +6,44 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    public class CondicionPagoController : Controller
+    public class ProveedorController : Controller
     {
-        private readonly ICondicionPagoService _service;
-
-        public CondicionPagoController(ICondicionPagoService service)
+        private readonly IProveedorService _service;
+        public ProveedorController(IProveedorService service)
         {
             _service = service;
         }
-        // GET: CondicionPagoController
+
+        // GET: ProveedorController
         public ActionResult Index()
         {
-            List<CondicionPago> query = _service.GetAll().Result.ToList();
-            return View(CondicionPagoViewModel.ToViewModelList(query));
+            return View();
         }
-
         [HttpGet]
         public async Task<IActionResult> getList()
         {
-            IEnumerable<CondicionPago> query = await _service.GetAll();
-            List<CondicionPagoViewModel> lstVM = CondicionPagoViewModel.ToViewModelList(query);
-            return StatusCode(StatusCodes.Status200OK, lstVM);
+            IEnumerable<Proveedor> query = await _service.GetAll();
+            List<object> result = new List<object>();
+            foreach (Proveedor prov in query)
+            {
+                result.Add(new { ProveedorId = prov.ProveedorId, RazonSocial = prov.RazonSocial });
+            }
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
-        // GET: CondicionPagoController/Details/5
+        // GET: ProveedorController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CondicionPagoController/Create
+        // GET: ProveedorController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CondicionPagoController/Create
+        // POST: ProveedorController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -56,13 +58,13 @@ namespace DevSys.Gesinv.UI.Controllers
             }
         }
 
-        // GET: CondicionPagoController/Edit/5
+        // GET: ProveedorController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CondicionPagoController/Edit/5
+        // POST: ProveedorController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -77,13 +79,13 @@ namespace DevSys.Gesinv.UI.Controllers
             }
         }
 
-        // GET: CondicionPagoController/Delete/5
+        // GET: ProveedorController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CondicionPagoController/Delete/5
+        // POST: ProveedorController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

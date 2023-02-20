@@ -4,14 +4,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class OrdenCompraViewModel
     {
-        public OrdenCompraViewModel()
-        {
-            LineaCompra = new HashSet<LineaCompra>();
-        }
 
         public int OrdenCompraId { get; set; }
         public int? ProveedorId { get; set; }
-        public int CodProveedor { get; set; }
         public string? Referencia { get; set; }
         public int? CondicionPagoId { get; set; }
         public string? Observacion { get; set; }
@@ -20,10 +15,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public double Descuento { get; set; }
         public double Impuestos { get; set; }
         public double Total { get; set; }
+        public int LineaCompraId { get; set; }
 
-        public virtual CondicionPago? CondicionPago { get; set; }
-        public virtual Proveedor? Proveedor { get; set; }
-        public virtual ICollection<LineaCompra> LineaCompra { get; set; }
 
         public static List<OrdenCompraViewModel> ToViewModelList(List<OrdenCompra> lstModel) 
         {
@@ -41,7 +34,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 OrdenCompraId = modelView.OrdenCompraId,
                 ProveedorId= modelView.ProveedorId,
-                CodProveedor= modelView.CodProveedor,
                 Referencia= modelView.Referencia,
                 CondicionPagoId= modelView.CondicionPagoId,
                 Observacion = modelView.Observacion,
@@ -49,10 +41,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 SubTotal= modelView.SubTotal,
                 Descuento= modelView.Descuento,
                 Impuestos= modelView.Impuestos,
-                Total= modelView.Total,
-                CondicionPago= modelView.CondicionPago,
-                Proveedor=modelView.Proveedor,
-                LineaCompra= modelView.LineaCompra
+                Total= modelView.Total
             };
             return model;
         }
@@ -61,19 +50,16 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             OrdenCompraViewModel result = new OrdenCompraViewModel() 
             { 
                 OrdenCompraId = model.OrdenCompraId,
-                ProveedorId= model.ProveedorId,
-                CodProveedor= model.CodProveedor,
+                ProveedorId= model.Proveedor.ProveedorId,
                 Referencia= model.Referencia,
-                CondicionPagoId= model.CondicionPagoId,
+                CondicionPagoId= model.CondicionPago.CondicionPagoId,
                 Observacion = model.Observacion,
                 Fecha= model.Fecha,
                 SubTotal= model.SubTotal,
                 Descuento= model.Descuento,
                 Impuestos= model.Impuestos,
                 Total= model.Total,
-                CondicionPago= model.CondicionPago,
-                Proveedor=model.Proveedor,
-                LineaCompra= model.LineaCompra
+                LineaCompraId = 1
             };
             return result;
         }
