@@ -4,22 +4,25 @@ using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
   public class SalidaController : Controller
   {
-    private readonly ISalidaService _salidaService;
-    //private readonly IGenericService<Producto> _genericService;
-    public SalidaController(ISalidaService salidaService)
+    private readonly IGenericService<Salida> _salidaService;
+    private readonly IGenericService<Producto> _productoService;
+
+    public SalidaController(IGenericService<Salida> salidaService, IGenericService<Producto> productoService)
     {
       _salidaService = salidaService;
+      _productoService = productoService;
     }
-
 
     // GET: SalidaController
     public ActionResult Index()
     {
+      //SALIDA
       //List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
       //List<SalidaViewModel> lstSalidaViewModel = querySalidaSQL.
       //                                                  Select(s => new SalidaViewModel()
@@ -35,15 +38,32 @@ namespace DevSys.Gesinv.UI.Controllers
 
       //return View(lstSalidaViewModel);
 
-      List<Producto> queryProductosSQL = _genericService.GetAll().Result.ToList();
-      List<SalidaViewModel> lstSalidaViewModels = queryProductosSQL
-                                                  .Select(p => new SalidaViewModel()
-                                                  {
-                                                    
 
+      //GENERICO
+      List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
+      List<SalidaViewModel> lstSalidaViewModels = querySalidaSQL
+                                                  .Select(s => new SalidaViewModel()
+                                                  {
+                                                    SalidaId = s.SalidaId,
+                                                    Codigo = s.Codigo,
+                                                    MotivoId = s.MotivoId,
+                                                    
+                                                    Fecha = s.Fecha,
+                                                    Comentario = s.Comentario,
+                                                    RequisicionId = s.RequisicionId,
+                                                    BodegaId = s.BodegaId
                                                   }).ToList();
 
-      return View();
+      //List<Producto> queryProductosSQL = _productoService.GetAll().Result.ToList();
+      //List<ProductoViewModel> lstProductoViewModels = queryProductosSQL
+      //                                            .Select(p => new ProductoViewModel()
+      //                                            {
+      //                                              ProductoId = p.ProductoId,
+      //                                              Nombre = p.Nombre,
+      //                                              FechaCaducidad = p.FechaCaducidad
+      //                                            }).ToList();
+
+      return View(lstSalidaViewModels);
     }
 
     // GET: SalidaController/Details/5
