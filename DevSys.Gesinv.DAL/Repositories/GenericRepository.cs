@@ -51,6 +51,12 @@ namespace DevSys.Gesinv.DAL.Repositories
             return await table.FindAsync(id);
         }
 
+        //public Task<T> GetLastId()
+        //{
+        //    ();
+        //}
+
+
         //public Task<IEnumerable<T>> GetName(string name)
         //{
         //    return await table.Where;

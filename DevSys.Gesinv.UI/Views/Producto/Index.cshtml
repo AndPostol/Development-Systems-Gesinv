@@ -23,10 +23,10 @@
                 @Html.DisplayNameFor(model => model.Codigo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LineaID)
+                @Html.DisplayNameFor(model => model.Linea)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoID)
+                @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Unidad)
@@ -35,7 +35,7 @@
                 @Html.DisplayNameFor(model => model.Caja)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GrupoID)
+                @Html.DisplayNameFor(model => model.Grupo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Activo)
@@ -71,10 +71,10 @@
                 @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LineaID)
+                @Html.DisplayFor(modelItem => item.Linea.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoID)
+                @Html.DisplayFor(modelItem => item.Tipo.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Unidad)
@@ -83,16 +83,23 @@
                 @Html.DisplayFor(modelItem => item.Caja)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GrupoID)
+                @Html.DisplayFor(modelItem => item.Grupo.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Activo)
+                @Html.CheckBoxFor(modelItem => item.Activo.Value)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Iva)
+                @Html.CheckBoxFor(modelItem => item.Iva.Value)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Perecible)
+                @if (item.Perecible == true)
+                    {
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    }
+                else
+                   {
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                   }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comentario)

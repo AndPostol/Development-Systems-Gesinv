@@ -37,6 +37,11 @@ namespace DevSys.Gesinv.Logic.Services
             return await _repository.GetById(id);
         }
 
+        //public async Task<T> GetLastId()
+        //{
+        //    return await _repository.GetLastId();
+        //}
+
         public async Task<bool> Update(T entity)
         {
             return await _repository.Update(entity);

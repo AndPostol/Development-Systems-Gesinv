@@ -14,6 +14,7 @@ namespace DevSys.Gesinv.Logic.Services
         public ProductoService(IGenericRepository<Producto> respository) : base(respository)
         {
         }
+
     }
 }
 

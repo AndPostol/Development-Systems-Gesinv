@@ -6,10 +6,8 @@ using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 
 
-
 namespace DevSys.Gesinv.UI.Controllers
 {
-
     public class ProductoController : Controller
     {
         private readonly IProductoService _productoService;
@@ -28,11 +26,11 @@ namespace DevSys.Gesinv.UI.Controllers
                 ProductoID = p.ProductoId,
                 Nombre = p.Nombre,
                 Codigo = p.Codigo,
-                LineaID = p.LineaId,
-                TipoID = p.TipoId,
+                Linea = p.Linea,
+                Tipo = p.Tipo,
                 Unidad = p.Unidad,
                 Caja = p.Caja,
-                GrupoID = p.GrupoId,
+                Grupo = p.Grupo,
                 Activo = p.Activo,
                 Iva = p.Iva,
                 Perecible = p.Perecible,
@@ -45,9 +43,10 @@ namespace DevSys.Gesinv.UI.Controllers
         }
 
         // GET: ProductoController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            Task<Producto> _producto = _productoService.GetById(id);
+            return View(_producto);
         }
 
         // GET: ProductoController/Create
@@ -59,56 +58,102 @@ namespace DevSys.Gesinv.UI.Controllers
         // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(ProductoViewModel p)
         {
+            Producto producto = ProductoViewModel.ToPVM(p);
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _productoService.Create(producto);
+                return RedirectToAction("Index", "Producto");
             }
             catch
             {
                 return View();
             }
+            return View();
         }
 
         // GET: ProductoController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            Task<Producto> p = _productoService.GetById(id);
+
+            ProductoViewModel productoViewModel = new ProductoViewModel()
+            {
+                ProductoID = p.Result.ProductoId,
+                Nombre = p.Result.Nombre,
+                Codigo = p.Result.Codigo,
+                Linea = p.Result.Linea,
+                Tipo = p.Result.Tipo,
+                Unidad = p.Result.Unidad,
+                Caja = p.Result.Caja,
+                Grupo = p.Result.Grupo,
+                Activo = (bool)p.Result.Activo,
+                Iva = p.Result.Iva,
+                Perecible = p.Result.Perecible,
+                Comentario = p.Result.Comentario,
+                FechaCaducidad = (DateTime)p.Result.FechaCaducidad,
+                Precio = (float)p.Result.Precio,
+            };
+            return View(productoViewModel);
         }
 
         // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(ProductoViewModel p)
         {
+            Producto producto = ProductoViewModel.ToPVM(p);
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _productoService.Update(producto);
+                return RedirectToAction("Index", "Producto");
+                
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Message = ex.Message;
+                return View(p);
             }
         }
 
         // GET: ProductoController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            Task<Producto> p = _productoService.GetById(id);
+            ProductoViewModel productoViewModel = new ProductoViewModel()
+            {
+                ProductoID = p.Result.ProductoId,
+                Nombre = p.Result.Nombre,
+                Codigo = p.Result.Codigo,
+                Linea = p.Result.Linea,
+                Tipo = p.Result.Tipo,
+                Unidad = p.Result.Unidad,
+                Caja = p.Result.Caja,
+                Grupo = p.Result.Grupo,
+                Activo = p.Result.Activo,
+                Iva = p.Result.Iva,
+                Perecible = p.Result.Perecible,
+                Comentario = p.Result.Comentario,
+                FechaCaducidad = (DateTime)p.Result.FechaCaducidad,
+                Precio = (float)p.Result.Precio,
+            };
+            return View(productoViewModel);
         }
 
         // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, ProductoViewModel p)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                bool respuesta = await _productoService.Delete(id);
+                return RedirectToAction("Index", "Producto");
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }

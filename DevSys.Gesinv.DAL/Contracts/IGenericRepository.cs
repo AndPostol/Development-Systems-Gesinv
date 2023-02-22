@@ -13,6 +13,7 @@ namespace DevSys.Gesinv.DAL.Contracts
         Task<bool> Create(TEntity entity);
         Task<bool> Update(TEntity entity);
         Task<bool> Delete(int id);
-        //Task<IQueryable<TEntity>> GetName(string name);
+        //Task<TEntity> GetLastId();
+        
     }
 }

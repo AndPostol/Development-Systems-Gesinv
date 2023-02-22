@@ -1,4 +1,3 @@
-using DevSys.Gesinv.DAL;
 using DevSys.Gesinv.DAL.Contracts;
 using DevSys.Gesinv.DAL.DataContext;
 using DevSys.Gesinv.DAL.Repositories;
@@ -6,10 +5,6 @@ using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Logic.Services;
 using Microsoft.EntityFrameworkCore;
 using DevSys.Gesinv.Models;
-using DevSys.Gesinv.Logic.Contracts;
-using DevSys.Gesinv.Logic.Services;
-using DevSys.Gesinv.DAL.Contracts;
-using DevSys.Gesinv.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,12 +17,14 @@ builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<Or
 
 builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
 
+//Inyencción de dependencias
 builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 
+//Conexión a la base de datos
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
+    options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
 });
 
 var app = builder.Build();
