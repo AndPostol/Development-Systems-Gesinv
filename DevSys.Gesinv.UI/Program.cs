@@ -23,8 +23,25 @@ builder.Services.AddScoped<IGenericRepository<Salida>, GenericRepository<Salida>
 builder.Services.AddScoped<ISalidaService, SalidaService>();
 
 // Repositorios y Servicios Genericos
+builder.Services.AddScoped<IGenericRepository<LineaSalida>, GenericRepository<LineaSalida>>();
+builder.Services.AddScoped<IGenericService<LineaSalida>, GenericService<LineaSalida>>();
+
 builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
 builder.Services.AddScoped<IGenericService<Producto>, GenericService<Producto>>();
+
+builder.Services.AddScoped<IGenericRepository<Existencia>, GenericRepository<Existencia>>();
+builder.Services.AddScoped<IGenericService<Existencia>, GenericService<Existencia>>();
+
+builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
+builder.Services.AddScoped<IGenericService<Bodega>, GenericService<Bodega>>();
+
+builder.Services.AddScoped<IGenericRepository<Motivo>, GenericRepository<Motivo>>();
+builder.Services.AddScoped<IGenericService<Motivo>, GenericService<Motivo>>();
+
+builder.Services.AddScoped<IGenericRepository<Requisicion>, GenericRepository<Requisicion>>();
+builder.Services.AddScoped<IGenericService<Requisicion>, GenericService<Requisicion>>();
+
+
 
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
