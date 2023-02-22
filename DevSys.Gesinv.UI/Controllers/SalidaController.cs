@@ -15,6 +15,7 @@ namespace DevSys.Gesinv.UI.Controllers
     private readonly IGenericService<Producto> _productoService;
     private readonly IGenericService<Bodega> _bodegaService;
     private readonly IGenericService<Motivo> _motivoService;
+
     public SalidaController(IGenericService<Salida> salidaService,
                             IGenericService<Producto> productoService,
                             IGenericService<Bodega> bodegaService,
@@ -30,23 +31,6 @@ namespace DevSys.Gesinv.UI.Controllers
     public ActionResult Index()
     {
       //SALIDA
-      //List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
-      //List<SalidaViewModel> lstSalidaViewModel = querySalidaSQL.
-      //                                                  Select(s => new SalidaViewModel()
-      //                                                  {
-      //                                                    SalidaId = s.SalidaId,
-      //                                                    Codigo= s.Codigo,
-      //                                                    MotivoId = s.MotivoId,
-      //                                                    Fecha = s.Fecha,
-      //                                                    Comentario = s.Comentario,
-      //                                                    RequisicionId = s.RequisicionId,
-      //                                                    BodegaId= s.BodegaId
-      //                                                  }).ToList();
-
-      //return View(lstSalidaViewModel);
-
-
-      //GENERICO
       List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
       List<SalidaViewModel> lstSalidaViewModels = querySalidaSQL
                                                   .Select(s => new SalidaViewModel()
@@ -54,13 +38,16 @@ namespace DevSys.Gesinv.UI.Controllers
                                                     SalidaId = s.SalidaId,
                                                     Codigo = s.Codigo,
                                                     MotivoId = s.MotivoId,
-                                                    
+
                                                     Fecha = s.Fecha,
                                                     Comentario = s.Comentario,
                                                     RequisicionId = s.RequisicionId,
                                                     BodegaId = s.BodegaId
                                                   }).ToList();
 
+      ViewBag.lstSalida = lstSalidaViewModels;
+
+      //PRODUCTO
       List<Producto> queryProductosSQL = _productoService.GetAll().Result.ToList();
       List<ProductoViewModel> lstProductoViewModels = queryProductosSQL
                                                   .Select(p => new ProductoViewModel()
@@ -70,9 +57,9 @@ namespace DevSys.Gesinv.UI.Controllers
                                                     FechaCaducidad = p.FechaCaducidad
                                                   }).ToList();
 
-      ViewBag.lstproducto = lstProductoViewModels;
+      ViewBag.lstProducto = lstProductoViewModels;
 
-      //DropDownList Bodega
+      //BODEGA
       List<Bodega> queryBodegaSQL = _bodegaService.GetAll().Result.ToList();
       List<BodegaViewModel> lstbodegaViewModels = queryBodegaSQL
                                                         .Select(b => new BodegaViewModel()
@@ -93,7 +80,7 @@ namespace DevSys.Gesinv.UI.Controllers
       });
       ViewBag.sliBodega = sliBodega;
 
-      //DropDownList Bodega
+      //MOTIVO
       List<Motivo> queryMotivoSQL = _motivoService.GetAll().Result.ToList();
       List<MotivoViewModel> lstMotivoViewModels = queryMotivoSQL
                                                         .Select(m => new MotivoViewModel()
@@ -113,7 +100,6 @@ namespace DevSys.Gesinv.UI.Controllers
       });
 
       ViewBag.sliMotivo = sliMotivo;
-
 
       return View(lstSalidaViewModels);
     }
