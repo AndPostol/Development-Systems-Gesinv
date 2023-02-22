@@ -12,16 +12,19 @@ namespace DevSys.Gesinv.UI.Controllers
   public class SalidaController : Controller
   {
     private readonly IGenericService<Salida> _salidaService;
+    private readonly IGenericService<LineaSalida> _lineaSalidaService;
     private readonly IGenericService<Producto> _productoService;
     private readonly IGenericService<Bodega> _bodegaService;
     private readonly IGenericService<Motivo> _motivoService;
 
     public SalidaController(IGenericService<Salida> salidaService,
+                            IGenericService<LineaSalida> lineaSalidaService,
                             IGenericService<Producto> productoService,
                             IGenericService<Bodega> bodegaService,
                             IGenericService<Motivo> motivoService)
     {
       _salidaService = salidaService;
+      _lineaSalidaService = lineaSalidaService;
       _productoService = productoService;
       _bodegaService = bodegaService;
       _motivoService = motivoService;
@@ -31,6 +34,20 @@ namespace DevSys.Gesinv.UI.Controllers
     public ActionResult Index()
     {
       //SALIDA
+      //List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
+      //List<SalidaViewModel> lstSalidaViewModels = querySalidaSQL
+      //                                            .Select(s => new SalidaViewModel()
+      //                                            {
+      //                                              SalidaId = s.SalidaId,
+      //                                              Codigo = s.Codigo,
+      //                                              MotivoId = s.MotivoId,
+
+      //                                              Fecha = s.Fecha,
+      //                                              Comentario = s.Comentario,
+      //                                              RequisicionId = s.RequisicionId,
+      //                                              BodegaId = s.BodegaId
+      //                                            }).ToList();
+
       List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
       List<SalidaViewModel> lstSalidaViewModels = querySalidaSQL
                                                   .Select(s => new SalidaViewModel()
