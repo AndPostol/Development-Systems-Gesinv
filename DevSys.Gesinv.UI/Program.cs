@@ -18,6 +18,14 @@ builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<Or
 
 builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
 
+// Servicios del Modulo de Salida
+builder.Services.AddScoped<IGenericRepository<Salida>, GenericRepository<Salida>>();
+builder.Services.AddScoped<ISalidaService, SalidaService>();
+
+// Repositorios y Servicios Genericos
+builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
+builder.Services.AddScoped<IGenericService<Producto>, GenericService<Producto>>();
+
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
