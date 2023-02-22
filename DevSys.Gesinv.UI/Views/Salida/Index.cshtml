@@ -2,6 +2,8 @@
 
 @{
   ViewData["Title"] = "Index";
+  List<SelectListItem> sliBodega = (List<SelectListItem>)ViewBag.sliBodega;
+  List<SelectListItem> sliMotivo = (List<SelectListItem>)ViewBag.sliMotivo;
 }
 
 <!DOCTYPE html>
@@ -23,6 +25,7 @@
 
   <div>
     <label>Bodega:</label>
+    @Html.DropDownList("Bodega", sliBodega)
   </div>
 
   <div>
@@ -33,7 +36,7 @@
   </div>
     <div>
     <label>Motivo:</label>
-    
+    @Html.DropDownList("Motivo", sliMotivo)
   </div>
 
   

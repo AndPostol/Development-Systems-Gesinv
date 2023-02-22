@@ -4,6 +4,7 @@ using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevSys.Gesinv.UI.Controllers
@@ -12,11 +13,17 @@ namespace DevSys.Gesinv.UI.Controllers
   {
     private readonly IGenericService<Salida> _salidaService;
     private readonly IGenericService<Producto> _productoService;
-
-    public SalidaController(IGenericService<Salida> salidaService, IGenericService<Producto> productoService)
+    private readonly IGenericService<Bodega> _bodegaService;
+    private readonly IGenericService<Motivo> _motivoService;
+    public SalidaController(IGenericService<Salida> salidaService,
+                            IGenericService<Producto> productoService,
+                            IGenericService<Bodega> bodegaService,
+                            IGenericService<Motivo> motivoService)
     {
       _salidaService = salidaService;
       _productoService = productoService;
+      _bodegaService = bodegaService;
+      _motivoService = motivoService;
     }
 
     // GET: SalidaController
@@ -54,14 +61,59 @@ namespace DevSys.Gesinv.UI.Controllers
                                                     BodegaId = s.BodegaId
                                                   }).ToList();
 
-      //List<Producto> queryProductosSQL = _productoService.GetAll().Result.ToList();
-      //List<ProductoViewModel> lstProductoViewModels = queryProductosSQL
-      //                                            .Select(p => new ProductoViewModel()
-      //                                            {
-      //                                              ProductoId = p.ProductoId,
-      //                                              Nombre = p.Nombre,
-      //                                              FechaCaducidad = p.FechaCaducidad
-      //                                            }).ToList();
+      List<Producto> queryProductosSQL = _productoService.GetAll().Result.ToList();
+      List<ProductoViewModel> lstProductoViewModels = queryProductosSQL
+                                                  .Select(p => new ProductoViewModel()
+                                                  {
+                                                    ProductoId = p.ProductoId,
+                                                    Nombre = p.Nombre,
+                                                    FechaCaducidad = p.FechaCaducidad
+                                                  }).ToList();
+
+      ViewBag.lstproducto = lstProductoViewModels;
+
+      //DropDownList Bodega
+      List<Bodega> queryBodegaSQL = _bodegaService.GetAll().Result.ToList();
+      List<BodegaViewModel> lstbodegaViewModels = queryBodegaSQL
+                                                        .Select(b => new BodegaViewModel()
+                                                        {
+                                                          BodegaId= b.BodegaId,
+                                                          Direccion = b.Direccion
+                                                        }).ToList();
+
+      
+      List<SelectListItem> sliBodega = lstbodegaViewModels.ConvertAll(b =>
+      {
+        return new SelectListItem()
+        {
+          Text = b.Direccion.ToString(),
+          Value = b.BodegaId.ToString(),
+          Selected = false
+        };
+      });
+      ViewBag.sliBodega = sliBodega;
+
+      //DropDownList Bodega
+      List<Motivo> queryMotivoSQL = _motivoService.GetAll().Result.ToList();
+      List<MotivoViewModel> lstMotivoViewModels = queryMotivoSQL
+                                                        .Select(m => new MotivoViewModel()
+                                                        {
+                                                          MotivoId= m.MotivoId,
+                                                          Nombre= m.Nombre
+                                                        }).ToList();
+
+      List<SelectListItem> sliMotivo = lstMotivoViewModels.ConvertAll(m =>
+      {
+        return new SelectListItem()
+        {
+          Text = m.Nombre.ToString(),
+          Value = m.MotivoId.ToString(),
+          Selected = false
+        };
+      });
+
+      ViewBag.sliMotivo = sliMotivo;
+
 
       return View(lstSalidaViewModels);
     }
