@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using DevSys.Gesinv.Logic.Contracts;
-using DevSys.Gesinv.Logic.Services;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 
@@ -20,32 +18,15 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Producto> queryProductoSQL = await _productoService.GetAll();
-            List<ProductoViewModel> lstProductoVM = queryProductoSQL.Select(p => new ProductoViewModel()
-            {
-                ProductoID = p.ProductoId,
-                Nombre = p.Nombre,
-                Codigo = p.Codigo,
-                Linea = p.Linea,
-                Tipo = p.Tipo,
-                Unidad = p.Unidad,
-                Caja = p.Caja,
-                Grupo = p.Grupo,
-                Activo = p.Activo,
-                Iva = p.Iva,
-                Perecible = p.Perecible,
-                Comentario = p.Comentario,
-                FechaCaducidad = (DateTime)p.FechaCaducidad,
-                Precio = (float)p.Precio,
-
-            }).ToList();
-            return View(lstProductoVM);
+            IEnumerable<Producto> queryP = await _productoService.GetAll(); 
+            List<ProductoViewModel> lstPVM = ProductoViewModel.ListVM(queryP);
+            return View(lstPVM);
         }
 
         // GET: ProductoController/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            Task<Producto> _producto = _productoService.GetById(id);
+            ProductoViewModel _producto = ProductoViewModel.ToVM(await _productoService.GetById(id));
             return View(_producto);
         }
 
@@ -60,7 +41,7 @@ namespace DevSys.Gesinv.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductoViewModel p)
         {
-            Producto producto = ProductoViewModel.ToPVM(p);
+            Producto producto = ProductoViewModel.ToM(p);
             try
             {
                 await _productoService.Create(producto);
@@ -70,32 +51,13 @@ namespace DevSys.Gesinv.UI.Controllers
             {
                 return View();
             }
-            return View();
         }
 
         // GET: ProductoController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            Task<Producto> p = _productoService.GetById(id);
-
-            ProductoViewModel productoViewModel = new ProductoViewModel()
-            {
-                ProductoID = p.Result.ProductoId,
-                Nombre = p.Result.Nombre,
-                Codigo = p.Result.Codigo,
-                Linea = p.Result.Linea,
-                Tipo = p.Result.Tipo,
-                Unidad = p.Result.Unidad,
-                Caja = p.Result.Caja,
-                Grupo = p.Result.Grupo,
-                Activo = (bool)p.Result.Activo,
-                Iva = p.Result.Iva,
-                Perecible = p.Result.Perecible,
-                Comentario = p.Result.Comentario,
-                FechaCaducidad = (DateTime)p.Result.FechaCaducidad,
-                Precio = (float)p.Result.Precio,
-            };
-            return View(productoViewModel);
+            ProductoViewModel _producto = ProductoViewModel.ToVM(await _productoService.GetById(id));
+            return View(_producto);
         }
 
         // POST: ProductoController/Edit/5
@@ -103,7 +65,7 @@ namespace DevSys.Gesinv.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProductoViewModel p)
         {
-            Producto producto = ProductoViewModel.ToPVM(p);
+            Producto producto = ProductoViewModel.ToM(p);
             try
             {
                 await _productoService.Update(producto);
@@ -120,25 +82,8 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            Task<Producto> p = _productoService.GetById(id);
-            ProductoViewModel productoViewModel = new ProductoViewModel()
-            {
-                ProductoID = p.Result.ProductoId,
-                Nombre = p.Result.Nombre,
-                Codigo = p.Result.Codigo,
-                Linea = p.Result.Linea,
-                Tipo = p.Result.Tipo,
-                Unidad = p.Result.Unidad,
-                Caja = p.Result.Caja,
-                Grupo = p.Result.Grupo,
-                Activo = p.Result.Activo,
-                Iva = p.Result.Iva,
-                Perecible = p.Result.Perecible,
-                Comentario = p.Result.Comentario,
-                FechaCaducidad = (DateTime)p.Result.FechaCaducidad,
-                Precio = (float)p.Result.Precio,
-            };
-            return View(productoViewModel);
+            ProductoViewModel _producto = ProductoViewModel.ToVM(await _productoService.GetById(id));
+            return View(_producto);
         }
 
         // POST: ProductoController/Delete/5

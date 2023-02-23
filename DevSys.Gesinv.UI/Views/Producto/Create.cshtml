@@ -47,26 +47,20 @@
                 <input asp-for="GrupoID" class="form-control" />
                 <span asp-validation-for="GrupoID" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-check">
                 <label asp-for="Activo" class="control-label"></label>
-                <input asp-for="Activo" class="form-control" />
+                <input type=checkbox name="Activo" checked="@Model?.Activo" value="true" class="form-check-input" id="Activo"/> 
                 <span asp-validation-for="Activo" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-check">
                 <label asp-for="Iva" class="control-label"></label>
-                <input asp-for="Iva" class="form-control" />
+                <input type=checkbox name="Iva" checked="@Model?.Iva" value="true" class="form-check-input" id="Iva"/> 
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                @*<label asp-for="Perecible" class="control-label"></label>*@
-                <div class="form-check">  
-                    <input name="Perecible" class="form-check-input" id="checkPerecible" type=checkbox @( Model?.Perecible == true ? "" : "checked" ) />  
-                    @*checked="@Model?.Perecible"*@
-                    @*<input name="Perecible" type="hidden" value="false" >*@
-                    <label class="form-check-label" name="Perecible" for="checkPerecible">Perecible</label>  
-                </div>
-                @*<input asp-for="Perecible" class="form-control" />
-                <span asp-validation-for="Perecible" class="text-danger"></span>*@
+            <div class="checkbox">
+                <label asp-for="Perecible" class="control-label"></label>
+                <input type=checkbox name="Perecible" class="form-check-input" id="Perecible" @(Model?.Perecible == true ? "checked" : "")/> 
+                <span asp-validation-for="Perecible" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Comentario" class="control-label"></label>
