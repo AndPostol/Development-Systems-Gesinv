@@ -12,9 +12,9 @@ namespace DevSys.Gesinv.Logic.Services
     {
         private IGenericRepository<T> _repository;
 
-        public GenericService(IGenericRepository<T> respository)
+        public GenericService(IGenericRepository<T> repository)
         {
-            _repository = respository;
+            _repository = repository;
         }
 
         public async Task<bool> Create(T entity)
