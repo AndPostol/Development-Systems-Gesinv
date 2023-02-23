@@ -7,13 +7,13 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public MotivoViewModel()
     {
       Ingreso = new HashSet<Ingreso>();
-      Salida = new HashSet<Salida>();
+      Salida = new HashSet<SalidaViewModel>();
     }
 
     public int MotivoId { get; set; }
     public string Nombre { get; set; } = null!;
 
     public virtual ICollection<Ingreso> Ingreso { get; set; }
-    public virtual ICollection<Salida> Salida { get; set; }
+    public virtual ICollection<SalidaViewModel> Salida { get; set; }
   }
 }

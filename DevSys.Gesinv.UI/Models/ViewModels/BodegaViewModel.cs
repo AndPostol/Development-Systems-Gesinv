@@ -6,9 +6,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   {
     public BodegaViewModel()
     {
-      Existencia = new HashSet<Existencia>();
+      Existencia = new HashSet<ExistenciaViewModel>();
       Ingreso = new HashSet<Ingreso>();
-      Salida = new HashSet<Salida>();
+      Salida = new HashSet<SalidaViewModel>();
     }
 
     public int BodegaId { get; set; }
@@ -20,8 +20,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public virtual Empresa? Empresa { get; set; }
     public virtual Estado? Estado { get; set; }
     public virtual Provincia? Provincia { get; set; }
-    public virtual ICollection<Existencia> Existencia { get; set; }
+    public virtual ICollection<ExistenciaViewModel> Existencia { get; set; }
     public virtual ICollection<Ingreso> Ingreso { get; set; }
-    public virtual ICollection<Salida> Salida { get; set; }
+    public virtual ICollection<SalidaViewModel> Salida { get; set; }
   }
 }

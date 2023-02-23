@@ -6,7 +6,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   {
     public RequisicionViewModel()
     {
-      Salida = new HashSet<Salida>();
+      Salida = new HashSet<SalidaViewModel>();
     }
 
     public int RequisicionId { get; set; }
@@ -16,6 +16,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public string? Comentario { get; set; }
 
     public virtual Departamento? OrdenCompra { get; set; }
-    public virtual ICollection<Salida> Salida { get; set; }
+    public virtual ICollection<SalidaViewModel> Salida { get; set; }
   }
 }

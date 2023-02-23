@@ -6,10 +6,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public ProductoViewModel()
     {
       Color = new HashSet<Color>();
-      Existencia = new HashSet<Existencia>();
+      Existencia = new HashSet<ExistenciaViewModel>();
       IngresoDetalle = new HashSet<IngresoDetalle>();
       LineaCompra = new HashSet<LineaCompra>();
-      LineaSalida = new HashSet<LineaSalida>();
+      LineaSalida = new HashSet<LineaSalidaViewModel>();
       Marca = new HashSet<Marca>();
       Medida = new HashSet<Medida>();
     }
@@ -33,10 +33,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public virtual Linea? Linea { get; set; }
     public virtual Tipo? Tipo { get; set; }
     public virtual ICollection<Color> Color { get; set; }
-    public virtual ICollection<Existencia> Existencia { get; set; }
+    public virtual ICollection<ExistenciaViewModel> Existencia { get; set; }
     public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
     public virtual ICollection<LineaCompra> LineaCompra { get; set; }
-    public virtual ICollection<LineaSalida> LineaSalida { get; set; }
+    public virtual ICollection<LineaSalidaViewModel> LineaSalida { get; set; }
     public virtual ICollection<Marca> Marca { get; set; }
     public virtual ICollection<Medida> Medida { get; set; }
   }

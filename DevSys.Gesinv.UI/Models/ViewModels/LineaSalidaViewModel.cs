@@ -10,7 +10,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public double CostoSalida { get; set; }
     public int? ProductoId { get; set; }
 
-    public virtual Producto? Producto { get; set; }
-    public virtual Salida? Salida { get; set; }
+    public virtual ProductoViewModel? Producto { get; set; }
+    public virtual SalidaViewModel? Salida { get; set; }
   }
 }

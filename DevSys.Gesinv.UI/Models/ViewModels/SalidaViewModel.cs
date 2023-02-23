@@ -6,7 +6,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   {
     public SalidaViewModel()
     {
-      LineaSalida = new HashSet<LineaSalida>();
+      LineaSalida = new HashSet<LineaSalidaViewModel>();
     }
 
     public int SalidaId { get; set; }
@@ -17,9 +17,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public int? RequisicionId { get; set; }
     public int? BodegaId { get; set; }
 
-    public virtual Bodega? Bodega { get; set; }
-    public virtual Motivo? Motivo { get; set; }
-    public virtual Requisicion? Requisicion { get; set; }
-    public virtual ICollection<LineaSalida> LineaSalida { get; set; }
+    public virtual BodegaViewModel? Bodega { get; set; }
+    public virtual MotivoViewModel? Motivo { get; set; }
+    public virtual RequisicionViewModel? Requisicion { get; set; }
+    public virtual ICollection<LineaSalidaViewModel> LineaSalida { get; set; }
   }
 }

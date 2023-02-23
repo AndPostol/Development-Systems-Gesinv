@@ -33,36 +33,52 @@ namespace DevSys.Gesinv.UI.Controllers
     // GET: SalidaController
     public ActionResult Index()
     {
-      //SALIDA
-      //List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
-      //List<SalidaViewModel> lstSalidaViewModels = querySalidaSQL
-      //                                            .Select(s => new SalidaViewModel()
-      //                                            {
-      //                                              SalidaId = s.SalidaId,
-      //                                              Codigo = s.Codigo,
-      //                                              MotivoId = s.MotivoId,
-
-      //                                              Fecha = s.Fecha,
-      //                                              Comentario = s.Comentario,
-      //                                              RequisicionId = s.RequisicionId,
-      //                                              BodegaId = s.BodegaId
-      //                                            }).ToList();
-
+      //SALIDA OK
       List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
-      List<SalidaViewModel> lstSalidaViewModels = querySalidaSQL
+      List<SalidaViewModel> lstSalidaViewModel = querySalidaSQL
                                                   .Select(s => new SalidaViewModel()
                                                   {
                                                     SalidaId = s.SalidaId,
                                                     Codigo = s.Codigo,
                                                     MotivoId = s.MotivoId,
-
                                                     Fecha = s.Fecha,
                                                     Comentario = s.Comentario,
                                                     RequisicionId = s.RequisicionId,
                                                     BodegaId = s.BodegaId
                                                   }).ToList();
 
-      ViewBag.lstSalida = lstSalidaViewModels;
+      //ViewBag.lstSalida = lstSalidaViewModel;
+
+      ////JOIN
+      //List<Salida> querySalidaSQL = _salidaService.GetAll().Result.ToList();
+      //List<LineaSalida> queryLineaSalidaSQL = _lineaSalidaService.GetAll().Result.ToList();
+
+      //var lstSalidaViewModel = (from s in querySalidaSQL
+      //                          join ls in queryLineaSalidaSQL
+      //                          on s.SalidaId equals ls.SalidaId
+      //                          select new
+      //                          {
+      //                            s.Codigo,
+      //                            s.Fecha,
+      //                            s.MotivoId,
+      //                            s.BodegaId,
+      //                            ls.Cantidad,
+      //                            ls.CostoSalida
+
+      //                          }).ToList();
+
+
+      //Ejemplo
+      //var categorias_productos = (from categorias in contexto.Categoria
+      //                            join productos in contexto.Producto
+      //                               on categorias.Id equals productos.CategoriaId
+      //                            select new
+      //                            {
+      //                              categoria.Id,
+      //                              categoria.Nombre,
+      //                              IdProducto = productos.Id,
+      //                              NombreProducto = productos.Nombre
+      //                            }).ToList();
 
       //PRODUCTO
       List<Producto> queryProductosSQL = _productoService.GetAll().Result.ToList();
@@ -118,7 +134,7 @@ namespace DevSys.Gesinv.UI.Controllers
 
       ViewBag.sliMotivo = sliMotivo;
 
-      return View(lstSalidaViewModels);
+      return View(lstSalidaViewModel);
     }
 
     // GET: SalidaController/Details/5

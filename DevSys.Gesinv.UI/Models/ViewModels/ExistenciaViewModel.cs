@@ -9,7 +9,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public int? BodegaId { get; set; }
     public int Stock { get; set; }
 
-    public virtual Bodega? Bodega { get; set; }
-    public virtual Producto? Producto { get; set; }
+    public virtual BodegaViewModel? Bodega { get; set; }
+    public virtual ProductoViewModel? Producto { get; set; }
   }
 }
