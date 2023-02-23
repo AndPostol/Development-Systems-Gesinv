@@ -38,7 +38,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             return viewModel;
         }
 
-        public static List<LineaCompraViewModel> ToViewModelList(List<LineaCompra> lstModel) 
+        public static List<LineaCompraViewModel> ToViewModelList(IEnumerable<LineaCompra> lstModel) 
         {
             List<LineaCompraViewModel> lstViewModel = new List<LineaCompraViewModel>();
             foreach (var model in lstModel)

@@ -37,24 +37,39 @@ namespace DevSys.Gesinv.UI.Controllers
         }
 
         // GET: OrdenCompraController/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            IEnumerable<Proveedor> query = await _serviceProveedor.GetAll();
+            List<ProveedorViewModel> lista = ProveedorViewModel.ToViewModelList(query.ToList());
+            ViewBag.Proveedor = lista;
             return View();
         }
 
         // POST: OrdenCompraController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(OrdenCompraViewModel collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
-                if (ModelState.IsValid)
-                { 
-                    OrdenCompra nOrdenCompra = OrdenCompraViewModel.ToModel(collection);
-                    await _service.Create(nOrdenCompra); 
-                    return RedirectToAction("Index","OrdenCompra");
-                }
+                OrdenCompraViewModel nuevo = new OrdenCompraViewModel();
+                Dictionary<string,string> list = new Dictionary<string, string>();
+                List<LineaCompra> lineaPrueba = new List<LineaCompra>();
+                //foreach (var item in collection)
+                //{
+                //    Console.WriteLine(item.Key);
+                //    if (item.Key.StartsWith("Linea-"))
+                //    {
+                //        list.Add(item.Key,item.Value);
+                //    }
+                //}
+                //if (ModelState.IsValid)
+                //{ 
+                //    OrdenCompra nOrdenCompra = OrdenCompraViewModel.ToModel(collection);
+                    
+                //    await _service.Create(nOrdenCompra); 
+                //    return RedirectToAction("Index","OrdenCompra");
+                //}
                 return View();
             }
             catch

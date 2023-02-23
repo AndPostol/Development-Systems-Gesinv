@@ -15,7 +15,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public double Descuento { get; set; }
         public double Impuestos { get; set; }
         public double Total { get; set; }
-        public int LineaCompraId { get; set; }
+        public List<LineaCompraViewModel> LineaCompra { get; set; }
 
 
         public static List<OrdenCompraViewModel> ToViewModelList(List<OrdenCompra> lstModel) 
@@ -59,7 +59,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Descuento= model.Descuento,
                 Impuestos= model.Impuestos,
                 Total= model.Total,
-                LineaCompraId = 1
+                LineaCompra = LineaCompraViewModel.ToViewModelList(model.LineaCompra)
             };
             return result;
         }

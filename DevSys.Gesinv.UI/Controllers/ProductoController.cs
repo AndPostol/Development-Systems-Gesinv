@@ -6,37 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    public class LineaCompraController : Controller
+    public class ProductoController : Controller
     {
-        // GET: LineaCompraController
-        private readonly ILineaCompraService _service;
-
-        public LineaCompraController(ILineaCompraService service)
+        private readonly IProductoService _service;
+        public ProductoController(IProductoService service)
         {
             _service = service;
         }
 
+        // GET: ProductoController
         public async Task<ActionResult> Index()
         {
-            IEnumerable<LineaCompra> query = await _service.GetAll();
-            List<LineaCompraViewModel> lstViewModel = LineaCompraViewModel.ToViewModelList(query.ToList());
-            return View(lstViewModel);
+            IEnumerable<Producto> query = await _service.GetAll();
+            List<ProductoViewModel> list = ProductoViewModel.ToViewModelList(query);
+            return View(list);
         }
 
-        // GET: LineaCompraController/Details/5
+        // GET: ProductoController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: LineaCompraController/Create
-        public async Task<ActionResult> Create()
+        // GET: ProductoController/Create
+        public ActionResult Create()
         {
-
             return View();
         }
 
-        // POST: LineaCompraController/Create
+        // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -51,13 +49,13 @@ namespace DevSys.Gesinv.UI.Controllers
             }
         }
 
-        // GET: LineaCompraController/Edit/5
+        // GET: ProductoController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: LineaCompraController/Edit/5
+        // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -72,13 +70,13 @@ namespace DevSys.Gesinv.UI.Controllers
             }
         }
 
-        // GET: LineaCompraController/Delete/5
+        // GET: ProductoController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: LineaCompraController/Delete/5
+        // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

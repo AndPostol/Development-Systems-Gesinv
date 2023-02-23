@@ -12,14 +12,13 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="OrdenCompraId" class="control-label"></label>
-                <input asp-for="OrdenCompraId" class="form-control" />
+                <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
                 <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="ProveedorId" class="control-label"></label>
-                <input asp-for="ProveedorId" class="form-control" />
+                <select asp-for="ProveedorId" class="form-select">
+                    
+                </select>
                 <span asp-validation-for="ProveedorId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,7 +28,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="CondicionPagoId" class="control-label"></label>
-                <input asp-for="CondicionPagoId" class="form-control" />
+                <select asp-for="CondicionPagoId" class="form-select">
+                    
+                </select>
                 <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -75,4 +76,38 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        setSelectCondicionPago();
+        setSelectProveedor();
+        console.log(@Model.CondicionPagoId)
+        function setSelectCondicionPago() {
+            const inputCondicionPago = $("#CondicionPagoId");
+            fetch("@Url.Action("getList", "CondicionPago")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        if(item.condicionPagoId == @Model.CondicionPagoId) {
+                            inputCondicionPago.append(`<option selected value="${item.condicionPagoId}">${item.nombre}</option>`);
+                        }
+                        else {
+                            inputCondicionPago.append(`<option value="${item.condicionPagoId}">${item.nombre}</option>`);
+                        }
+                    })
+                });
+        }
+        function setSelectProveedor() {
+            const inputCondicionPago = $("#ProveedorId");
+            fetch("@Url.Action("getList", "Proveedor")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        inputCondicionPago.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                    })
+                });
+        }
+    </script>
 }
