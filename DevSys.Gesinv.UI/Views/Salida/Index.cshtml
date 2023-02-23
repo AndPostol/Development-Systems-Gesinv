@@ -1,2 +1,125 @@
 ﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel>
 
+@{
+  ViewData["Title"] = "Index";
+  //List<ProductoViewModel> lstProducto = (List<ProductoViewModel>)ViewBag.lstProducto;
+  //List<SelectListItem> sliBodega = (List<SelectListItem>)ViewBag.sliBodega;
+  //List<SelectListItem> sliMotivo = (List<SelectListItem>)ViewBag.sliMotivo;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <title>Index</title>
+</head>
+<body>
+  <h1>Salida de Productos</h1>
+  <p>
+    <a asp-action="Create">Ingresar</a>
+  </p>
+
+@*  <div>
+    <label>Cod. Salida:</label>
+  </div>
+
+  <div>
+    <label>Bodega:</label>
+    @Html.DropDownList("Bodega", sliBodega)
+  </div>
+
+  <div>
+    <label>Comentario:</label>
+  </div>
+  <div>
+    <textarea name cols="30" rows="3"></textarea>
+  </div>
+    <div>
+    <label>Motivo:</label>
+    @Html.DropDownList("Motivo", sliMotivo)
+  </div>
+
+
+  <div>
+    <label>Fecha:</label>
+    <input type="date">
+  </div>*@
+
+
+  <h5 align="center">PRODUCTOS</h5>
+  <table class="table">
+    <thread>
+      <tr>
+@*        <th>
+          @Html.DisplayNameFor(model => model.SalidaId)
+        </th>*@
+        <th>
+          @Html.DisplayNameFor(model => model.Codigo)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.MotivoId)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.Comentario)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.RequisicionId)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.BodegaId)
+        </th>
+        <th>
+          Cantidad
+        </th>
+@*        <th>
+          @Html.DisplayNameFor(model => model.BodegaNombre)
+        </th>*@
+        <th></th>
+      </tr>
+    </thread>
+    <tbody>
+      @foreach (var item in Model)
+      {
+          <tr>
+@*            <td>
+            @Html.DisplayFor(modelItem => item.SalidaId)
+            </td>*@
+            <td>
+            @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.MotivoId)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Comentario)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.RequisicionId)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.BodegaId)
+            </td>
+              <td>
+            @Html.DisplayFor(modelItem => item.LineaSalida.First().Cantidad)
+              </td>
+@*              <td>
+            @Html.DisplayFor(modelItem => item.BodegaNombre)
+              </td>*@
+            <td>
+              <a asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a>
+              <a asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>
+            </td>
+          </tr>
+      }
+    </tbody>
+  </table>
+</body>
+</html>
+

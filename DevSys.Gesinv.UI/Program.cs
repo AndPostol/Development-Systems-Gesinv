@@ -45,10 +45,10 @@ builder.Services.AddScoped<IGenericRepository<Requisicion>, GenericRepository<Re
 builder.Services.AddScoped<IGenericService<Requisicion>, GenericService<Requisicion>>();
 
 
-
+// Inyeccion de dependencia
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
+    options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
 });
 
 var app = builder.Build();
