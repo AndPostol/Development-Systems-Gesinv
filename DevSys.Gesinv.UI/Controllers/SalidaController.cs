@@ -18,7 +18,7 @@ namespace DevSys.Gesinv.UI.Controllers
     public async Task<IActionResult> Index()
     {
       IEnumerable<Salida> querySalida = await _salidaService.GetAll();
-      List<SalidaViewModel> lstSalida = SalidaViewModel.ToVMList(querySalida.ToList());
+      List<SalidaViewModel> lstSalida = SalidaViewModel.ToSalidaVMList(querySalida.ToList());
       return View(lstSalida);
     }
   }

@@ -29,15 +29,15 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public DateTime? FechaCaducidad { get; set; }
     public double Precio { get; set; }
 
-    public virtual Grupo? Grupo { get; set; }
-    public virtual Linea? Linea { get; set; }
-    public virtual Tipo? Tipo { get; set; }
-    public virtual ICollection<Color> Color { get; set; }
-    public virtual ICollection<ExistenciaViewModel> Existencia { get; set; }
-    public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
-    public virtual ICollection<LineaCompra> LineaCompra { get; set; }
-    public virtual ICollection<LineaSalidaViewModel> LineaSalida { get; set; }
-    public virtual ICollection<Marca> Marca { get; set; }
-    public virtual ICollection<Medida> Medida { get; set; }
+    public Grupo? Grupo { get; set; }
+    public Linea? Linea { get; set; }
+    public Tipo? Tipo { get; set; }
+    public ICollection<Color> Color { get; set; }
+    public ICollection<ExistenciaViewModel> Existencia { get; set; }
+    public ICollection<IngresoDetalle> IngresoDetalle { get; set; }
+    public ICollection<LineaCompra> LineaCompra { get; set; }
+    public ICollection<LineaSalidaViewModel> LineaSalida { get; set; }
+    public ICollection<Marca> Marca { get; set; }
+    public ICollection<Medida> Medida { get; set; }
   }
 }
