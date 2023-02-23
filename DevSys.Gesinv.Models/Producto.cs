@@ -24,11 +24,11 @@ namespace DevSys.Gesinv.Models
         public int Unidad { get; set; }
         public int? Caja { get; set; }
         public int? GrupoId { get; set; }
-        public bool? Activo { get; set; }
-        public bool? Iva { get; set; }
-        public bool? Perecible { get; set; }
+        public bool Activo { get; set; }
+        public bool Iva { get; set; }
+        public bool Perecible { get; set; }
         public string? Comentario { get; set; }
-        public DateTime? FechaCaducidad { get; set; }
+        public DateOnly FechaCaducidad { get; set; }
         public double Precio { get; set; }
 
         public virtual Grupo? Grupo { get; set; }

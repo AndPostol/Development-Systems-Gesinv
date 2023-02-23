@@ -49,17 +49,17 @@
             </div>
             <div class="form-check">
                 <label asp-for="Activo" class="control-label"></label>
-                <input type=checkbox name="Activo" checked="@Model?.Activo" value="true" class="form-check-input" id="Activo"/> 
+                @Html.CheckBoxFor(model => model.Activo) 
                 <span asp-validation-for="Activo" class="text-danger"></span>
             </div>
             <div class="form-check">
                 <label asp-for="Iva" class="control-label"></label>
-                <input type=checkbox name="Iva" checked="@Model?.Iva" value="true" class="form-check-input" id="Iva"/> 
+                @Html.CheckBoxFor(model => model.Iva)
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
-            <div class="checkbox">
+            <div class="form-check">
                 <label asp-for="Perecible" class="control-label"></label>
-                <input type=checkbox name="Perecible" class="form-check-input" id="Perecible" @(Model?.Perecible == true ? "checked" : "")/> 
+                @Html.CheckBoxFor(model => model.Perecible)
                 <span asp-validation-for="Perecible" class="text-danger"></span>
             </div>
             <div class="form-group">

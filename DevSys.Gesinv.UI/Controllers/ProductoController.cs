@@ -18,15 +18,15 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Producto> queryP = await _productoService.GetAll(); 
-            List<ProductoViewModel> lstPVM = ProductoViewModel.ListVM(queryP);
-            return View(lstPVM);
+            IEnumerable<Producto> queryProducto = await _productoService.GetAll(); 
+            List<ProductoViewModel> lstProductoViewModel = ProductoViewModel.ListViewModel(queryProducto);
+            return View(lstProductoViewModel);
         }
 
         // GET: ProductoController/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            ProductoViewModel _producto = ProductoViewModel.ToVM(await _productoService.GetById(id));
+            ProductoViewModel _producto = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
             return View(_producto);
         }
 
@@ -39,9 +39,9 @@ namespace DevSys.Gesinv.UI.Controllers
         // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductoViewModel p)
+        public async Task<ActionResult> Create(ProductoViewModel productoViewModel)
         {
-            Producto producto = ProductoViewModel.ToM(p);
+            Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
             try
             {
                 await _productoService.Create(producto);
@@ -56,16 +56,16 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            ProductoViewModel _producto = ProductoViewModel.ToVM(await _productoService.GetById(id));
-            return View(_producto);
+            ProductoViewModel productoViewModel = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
+            return View(productoViewModel);
         }
 
         // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ProductoViewModel p)
+        public async Task<IActionResult> Edit(ProductoViewModel productoViewModel)
         {
-            Producto producto = ProductoViewModel.ToM(p);
+            Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
             try
             {
                 await _productoService.Update(producto);
@@ -75,21 +75,21 @@ namespace DevSys.Gesinv.UI.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
-                return View(p);
+                return View(productoViewModel);
             }
         }
 
         // GET: ProductoController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            ProductoViewModel _producto = ProductoViewModel.ToVM(await _productoService.GetById(id));
-            return View(_producto);
+            ProductoViewModel productoViewModel = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
+            return View(productoViewModel);
         }
 
         // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id, ProductoViewModel p)
+        public async Task<ActionResult> Delete(int id, ProductoViewModel productoViewModel)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace DevSys.Gesinv.UI.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
-                return View();
+                return View(productoViewModel);
             }
         }
     }

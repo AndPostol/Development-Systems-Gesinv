@@ -16,11 +16,13 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int Unidad { get; set; }
         public int? Caja { get; set; }
         public int? GrupoID { get; set; }
-        public bool? Activo { get; set; }
-        public bool? Iva { get; set; }
-        public bool? Perecible { get; set; }
+
+        
+        public bool Activo { get; set; }
+        public bool Iva { get; set; }
+        public bool Perecible { get; set; }
         public string? Comentario { get; set; }
-        public DateTime? FechaCaducidad { get; set; } //revisar y cambiar por DateOnly
+        public DateOnly FechaCaducidad { get; set; } 
         public float Precio { get; set; }
 
         public virtual Grupo? Grupo { get; set; }
@@ -34,58 +36,58 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual ICollection<Marca> Marca { get; set; }
         public virtual ICollection<Medida> Medida { get; set; }
 
-        public static ProductoViewModel ToVM(Producto pM)
+        public static ProductoViewModel ConvertToViewModel(Producto producto)
         {
-            ProductoViewModel productoVM = new ProductoViewModel()
+            ProductoViewModel productoViewModel = new ProductoViewModel()
             {
-                ProductoID = pM.ProductoId,
-                Nombre = pM.Nombre,
-                Codigo = pM.Codigo,
-                Linea = pM.Linea,
-                Tipo = pM.Tipo,
-                Unidad = pM.Unidad,
-                Caja = pM.Caja,
-                Grupo = pM.Grupo,
-                Activo = pM.Activo,
-                Iva = pM.Iva,
-                Perecible = pM.Perecible,
-                Comentario = pM.Comentario,
-                FechaCaducidad = pM.FechaCaducidad,
-                Precio = (float)pM.Precio
+                ProductoID = producto.ProductoId,
+                Nombre = producto.Nombre,
+                Codigo = producto.Codigo,
+                Linea = producto.Linea,
+                Tipo = producto.Tipo,
+                Unidad = producto.Unidad,
+                Caja = producto.Caja,
+                Grupo = producto.Grupo,
+                Activo = producto.Activo,
+                Iva = producto.Iva,
+                Perecible = producto.Perecible,
+                Comentario = producto.Comentario,
+                FechaCaducidad = producto.FechaCaducidad,
+                Precio = (float)producto.Precio
             };
-            return productoVM;
+            return productoViewModel;
         }
 
-        public static Producto ToM(ProductoViewModel pMV)
+        public static Producto ConvertToModel(ProductoViewModel productoViewModel)
         {
             Producto productoVM = new Producto()
             {
-                ProductoId = pMV.ProductoID,
-                Nombre = pMV.Nombre,
-                Codigo = pMV.Codigo,
-                Linea = pMV.Linea,
-                Tipo = pMV.Tipo,
-                Unidad = pMV.Unidad,
-                Caja = pMV.Caja,
-                Grupo = pMV.Grupo,
-                Activo = pMV.Activo,
-                Iva = pMV.Iva,
-                Perecible = pMV.Perecible,
-                Comentario = pMV.Comentario,
-                FechaCaducidad = pMV.FechaCaducidad,
-                Precio = (float)pMV.Precio
+                ProductoId = productoViewModel.ProductoID,
+                Nombre = productoViewModel.Nombre,
+                Codigo = productoViewModel.Codigo,
+                Linea = productoViewModel.Linea,
+                Tipo = productoViewModel.Tipo,
+                Unidad = productoViewModel.Unidad,
+                Caja = productoViewModel.Caja,
+                Grupo = productoViewModel.Grupo,
+                Activo = productoViewModel.Activo,
+                Iva = productoViewModel.Iva,
+                Perecible = productoViewModel.Perecible,
+                Comentario = productoViewModel.Comentario,
+                FechaCaducidad = productoViewModel.FechaCaducidad,
+                Precio = (float)productoViewModel.Precio
             };
             return productoVM;
         }
 
-        public static List<ProductoViewModel> ListVM(IEnumerable<Producto> lstModel)
+        public static List<ProductoViewModel> ListViewModel(IEnumerable<Producto> lstModel)
         {
-            List<ProductoViewModel> listVM = new List<ProductoViewModel>();
+            List<ProductoViewModel> listViewModel = new List<ProductoViewModel>();
             foreach (var model in lstModel)
             {
-                listVM.Add(ToVM(model));
+                listViewModel.Add(ConvertToViewModel(model));
             }
-            return listVM;
+            return listViewModel;
         }
 
     }
