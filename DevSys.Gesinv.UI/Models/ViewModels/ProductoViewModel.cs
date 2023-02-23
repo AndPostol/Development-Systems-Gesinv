@@ -22,8 +22,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public bool Iva { get; set; }
         public bool Perecible { get; set; }
         public string? Comentario { get; set; }
-        public DateOnly FechaCaducidad { get; set; } 
-        public float Precio { get; set; }
+        public string FechaCaducidad { get; set; } 
+        public decimal Precio { get; set; }
 
         public virtual Grupo? Grupo { get; set; }
         public virtual Linea? Linea { get; set; }
@@ -52,8 +52,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Iva = producto.Iva,
                 Perecible = producto.Perecible,
                 Comentario = producto.Comentario,
-                FechaCaducidad = producto.FechaCaducidad,
-                Precio = (float)producto.Precio
+                FechaCaducidad = producto.FechaCaducidad.Value.ToString("dd/MM/yyyy"),
+                Precio = producto.Precio
             };
             return productoViewModel;
         }
@@ -74,8 +74,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Iva = productoViewModel.Iva,
                 Perecible = productoViewModel.Perecible,
                 Comentario = productoViewModel.Comentario,
-                FechaCaducidad = productoViewModel.FechaCaducidad,
-                Precio = (float)productoViewModel.Precio
+                FechaCaducidad = DateTime.Parse(productoViewModel.FechaCaducidad),
+                Precio = (decimal)productoViewModel.Precio
             };
             return productoVM;
         }

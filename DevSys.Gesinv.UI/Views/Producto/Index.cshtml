@@ -86,36 +86,13 @@
                 @Html.DisplayFor(modelItem => item.Grupo.Nombre)
             </td>
             <td>
-                @if (item.Activo == true)
-                    {
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
-                    }
-                else
-                   {
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" disabled>
-                   }
-                @*@Html.CheckBoxFor(modelItem => item.Activo.Value, new { disabled="disable"})*@
-               @* Otra manera de hacerlo, al parecer es un problema cambiar el estilo*@
+                @Html.CheckBoxFor(modelItem => item.Activo, new { disabled="disable"})
             </td>
             <td>
-                @if (item.Iva == true)
-                    {
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
-                    }
-                else
-                   {
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" disabled>
-                   }
+                @Html.CheckBoxFor(modelItem => item.Iva, new { disabled="disable"})
             </td>
             <td>
-                @if (item.Perecible == true)
-                    {
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
-                    }
-                else
-                   {
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" disabled>
-                   }
+                @Html.CheckBoxFor(modelItem => item.Perecible, new { disabled="disable"})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comentario)
@@ -127,8 +104,7 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.ProductoID  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.ProductoID  }) |
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ProductoID  })
                 @Html.ActionLink("Delete", "Delete", new {  id=item.ProductoID  })
             </td>
         </tr>

@@ -28,8 +28,8 @@ namespace DevSys.Gesinv.Models
         public bool Iva { get; set; }
         public bool Perecible { get; set; }
         public string? Comentario { get; set; }
-        public DateOnly FechaCaducidad { get; set; }
-        public double Precio { get; set; }
+        public DateTime? FechaCaducidad { get; set; }
+        public decimal Precio { get; set; }
 
         public virtual Grupo? Grupo { get; set; }
         public virtual Linea? Linea { get; set; }

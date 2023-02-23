@@ -7,14 +7,12 @@
 
 <h1>Edit</h1>
 
-<h4>ProductoViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ProductoID" class="control-label"></label>
                 <input asp-for="ProductoID" hidden="hidden" class="form-control" />
                 <span asp-validation-for="ProductoID" class="text-danger"></span>
             </div>
@@ -54,18 +52,18 @@
                 <span asp-validation-for="GrupoID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.CheckBoxFor(model => model.Activo)
                 <label asp-for="Activo" class="control-label"></label>
-                <input asp-for="Activo" class="form-control" />
                 <span asp-validation-for="Activo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.CheckBoxFor(model => model.Iva)
                 <label asp-for="Iva" class="control-label"></label>
-                <input asp-for="Iva" class="form-control" />
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.CheckBoxFor(model => model.Perecible)
                 <label asp-for="Perecible" class="control-label"></label>
-                <input asp-for="Perecible" class="form-control" />
                 <span asp-validation-for="Perecible" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -75,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="FechaCaducidad" class="control-label"></label>
-                <input asp-for="FechaCaducidad" class="form-control" />
+                <input asp-for="FechaCaducidad" class="form-control"/>
                 <span asp-validation-for="FechaCaducidad" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -91,7 +89,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar a Catalogo de Productos</a>
 </div>
 
 @section Scripts {
