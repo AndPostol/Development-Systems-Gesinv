@@ -28,6 +28,7 @@ namespace DevSys.Gesinv.UI.Controllers
             {
                 result.Add(new { ProveedorId = prov.ProveedorId, RazonSocial = prov.RazonSocial });
             }
+            ViewBag.Proveedores =  result;
             return StatusCode(StatusCodes.Status200OK, result);
         }
 

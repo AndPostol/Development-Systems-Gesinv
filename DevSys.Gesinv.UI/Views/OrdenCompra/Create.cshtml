@@ -37,6 +37,11 @@
                         </select>
                         <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
                     </div>
+                    <div class="form-group col">
+                        <label asp-for="Descuento" class="control-label"></label>
+                        <input asp-for="Descuento" class="form-control" />
+                        <span asp-validation-for="Descuento" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="row my-5">
                     
@@ -77,22 +82,20 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label asp-for="SubTotal" class="control-label"></label>
-                            <input asp-for="SubTotal" class="form-control" />
+                            <input asp-for="SubTotal" readonly class="form-control" />
                             <span asp-validation-for="SubTotal" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Descuento" class="control-label"></label>
-                            <input asp-for="Descuento" class="form-control" />
-                            <span asp-validation-for="Descuento" class="text-danger"></span>
+                            
                         </div>
                         <div class="form-group">
                             <label asp-for="Impuestos" class="control-label"></label>
-                            <input asp-for="Impuestos" class="form-control" />
+                            <input asp-for="Impuestos" readonly class="form-control" />
                             <span asp-validation-for="Impuestos" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                         <label asp-for="Total" class="control-label"></label>
-                        <input asp-for="Total" class="form-control" />
+                        <input asp-for="Total" readonly class="form-control" />
                         <span asp-validation-for="Total" class="text-danger"></span>
                     </div>
                     </div>
@@ -177,6 +180,17 @@
                 })
         }
         let count = 0;
+        let calc_subtotal = () => {
+            let sub = 0
+            for (let i = 1; i <= count; i++) {
+                sub = sub + parseFloat($(`#Linea-Total-${i}`).text())
+            }
+            return sub
+        }
+
+        let subtotal = calc_subtotal();
+        let impuestos = subtotal * .19;
+        let total =  subtotal + impuestos ;
         $("#AgregarProducto").click(() => {
             count += 1;
             $("#LineaCompra").append(
@@ -185,8 +199,8 @@
                     $("<td>").append(`<select class="form-select PendienteProducts" id="Linea-Nombre-${count}" name="Linea-Nombre-${count}" placeholder="Type to search..."> </select>`),
                     $("<td>").append(`<select class="form-select" id="Linea-Departamento-${count}" name="Linea-Departamento-${count}" aria-label="Default select example">
                                             ${departamentos_select}</select>`),
-                    $("<td>").append(`<input type="number" value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
-                    $("<td>").append(`<input type="number" value="0" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" disabled="disabled" value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" disabled="disabled" value="1" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
                     $("<td>").attr("id", `Linea-PrecioUnitario-${count}`).text("10"),
                     $("<td>").attr("id", `Linea-Descuento-${count}`).text("10"),
                     $("<td>").attr("id", `Linea-Total-${count}`).text("10")
@@ -206,13 +220,22 @@
                                 .select2({ placeholder: "Seleccionar", width: "100%", selectionCssClass: ":all:", theme:"none"})
                                 .removeClass("PendienteProducts")
                         })
-                        $(element).on('change', (select) => {
+                        $(element).on('change', (ev) => {
                             let find_product = response.find( r => element.value == r.productoId)
                             const count_property = element.id.slice(-1)
                             $(`#Linea-Codigo-${count_property}`).text(find_product.codigo)
                             $(`#Linea-PrecioUnitario-${count_property}`).text(find_product.precio)
                             $(`#Linea-PrecioUnitario-${count_property}`).text(find_product.precio)
+                            //$(`#Linea-Unidad-${count_property}`).removeAttr("disabled").on('change', () => {
+                            //})
+                            console.log(find_product);
+                            setValuesPriceFields(count_property, find_product, $(`#Linea-Cantidad-${count_property}`).val());
 
+                            $(`#Linea-Cantidad-${count_property}`).removeAttr("disabled").on('change', (ev) => {
+                                setValuesPriceFields(count_property,find_product,ev.target.value);
+                            })
+
+                                
                         });
 
                     }).removeClass("PendienteProducts");
@@ -222,6 +245,20 @@
 
             })
         }
-        $("#LineaCompra")
+        function setValuesPriceFields(index, product, cantidad){
+            let descuento = (($("#Descuento").val() / 100) * product.precio).toFixed(2)
+            $(`#Linea-Descuento-${index}`).text(`${descuento}`)
+            let total_linea = ((product.precio - descuento) * cantidad).toFixed(2)
+            $(`#Linea-Total-${index}`).text(`${total_linea}`)
+
+            let subtotal = parseFloat(calc_subtotal()).toFixed(2);
+            let impuestos = parseFloat(subtotal * .19).toFixed(2);
+            let total = parseFloat(parseFloat(subtotal) + parseFloat(impuestos)).toFixed(2);
+            $("#SubTotal").val(`${subtotal}`)
+            $("#Impuestos").val(`${impuestos}`)
+            $("#Total").val(`${total}`)
+        }
+        
+        
     </script>
 }
