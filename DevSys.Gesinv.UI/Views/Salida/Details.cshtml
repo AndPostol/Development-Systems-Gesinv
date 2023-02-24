@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel>
 
 @{
-  ViewData["Title"] = "Salida";
+  ViewData["Title"] = "Salida - Detalles";
 }
 
 <!DOCTYPE html>
@@ -12,16 +12,14 @@
   <title>Index</title>
 </head>
 <body>
-  <h3>Salida de Productos</h3>
-  <p>
-    <a asp-action="Create">Ingresar</a>
-  </p>
-  <h5 align="center">SALIDAS</h5>
-  <table class="table">
+  <h1>Detalle de Salida</h1>
+
+  <h3 align="center">SALIDA</h3>
+@*  <table class="table">
     <thread>
       <tr align="center">
         <th>
-          @Html.DisplayNameFor(model => model.Codigo)
+          @Html.DisplayNameFor(model => model.LineaSalidaId)
         </th>
         <th>
           @Html.DisplayNameFor(model => model.MotivoNombre)
@@ -41,33 +39,33 @@
     <tbody>
       @foreach (var item in Model)
       {
-        <tr align="center">
-          <td>
-            @Html.DisplayFor(modelItem => item.Codigo)
-          </td>
-          <td>
+          <tr align="center">
+            <td>
+            @Html.DisplayFor(modelItem => item.LineaSalidaId)
+            </td>
+            <td>
             @Html.DisplayFor(modelItem => item.MotivoNombre)
-          </td>
-            <td type="date(dd-mm-yyyy)">
+            </td>
+              <td type="date(dd-mm-yyyy)">
             @Html.DisplayFor(modelItem => item.Fecha)
-          </td>
-          <td>
+            </td>
+            <td>
             @Html.DisplayFor(modelItem => item.RequisicionCodigo)
-          </td>
-          <td>
+            </td>
+            <td>
             @Html.DisplayFor(modelItem => item.BodegaNombre)
-          </td>
-          <td>
+            </td>
+            <td>
             @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
             @Html.ActionLink("Editar", "Edit", new { id=item.SalidaId }) |
             @Html.ActionLink("Eliminar", "Eliminar", new { id=item.SalidaId }) |
-@*            <a asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a>
+            <a asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a>
             <a asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a>
-            <a asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>*@
-          </td>
-        </tr>
+            <a asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>
+            </td>
+          </tr>
       }
     </tbody>
-  </table>
+  </table>*@
 </body>
 </html>

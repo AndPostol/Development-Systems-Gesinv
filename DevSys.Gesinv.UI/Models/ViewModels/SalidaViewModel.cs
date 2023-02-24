@@ -1,9 +1,11 @@
-﻿using DevSys.Gesinv.Models;
+﻿using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
+  
   public class SalidaViewModel
   {
     public int SalidaId { get; set; }
@@ -23,12 +25,13 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public BodegaViewModel? Bodega { get; set; }
     public MotivoViewModel? Motivo { get; set; }
     public RequisicionViewModel? Requisicion { get; set; }
-    public List<LineaSalidaViewModel>? LineaSalida { get; set; }
+    public List<LineaSalidaViewModel> LineaSalida { get; set; }
 
     public static SalidaViewModel ToSalidaVM(Salida model)
     {
       SalidaViewModel result = new()
       {
+        SalidaId = model.SalidaId,
         Codigo = model.Codigo,
         MotivoNombre = model.Bodega.Direccion,
         Fecha = model.Fecha,
@@ -50,3 +53,29 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     }
   }
 }
+
+//void mAutorLibros()
+//{
+//  Console.WriteLine("Autores y Publicaciones:");
+//  int resultado = 0;
+//  var agrupacion = from libro in DataList.ListBooks
+//                   join autor in DataList.ListAuthors on libro.AuthorId equals autor.AuthorId
+//                   group libro by new
+//                   {
+//                     libro.AuthorId,
+//                     autor.Name
+//                   } into grupo
+//                   select grupo;
+
+//  foreach (var grupo in agrupacion)
+//  {
+//    Console.WriteLine("\nAutor: " + grupo.Key.Name + ", (ID: " + grupo.Key.AuthorId + ")");
+//    foreach (var objetoAgrupado in grupo)
+//    {
+//      Console.WriteLine("Titulo: " + objetoAgrupado.Title + ", Fecha de publicacion: " + objetoAgrupado.PublicationDate + ", Ventas: " + objetoAgrupado.Sales + " millones");
+//      resultado++;
+//    }
+//    Console.WriteLine("Cantidad de Publicaciones: " + resultado);
+//    resultado = 0;
+//  }
+//}
