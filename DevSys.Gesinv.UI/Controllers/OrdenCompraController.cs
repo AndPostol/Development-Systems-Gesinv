@@ -11,13 +11,11 @@ namespace DevSys.Gesinv.UI.Controllers
     public class OrdenCompraController : Controller
     {
         private readonly IOrdenCompraService _service;
-        private readonly IProveedorService _serviceProveedor;
 
 
-        public OrdenCompraController(IOrdenCompraService service, IProveedorService proveedorService)
+        public OrdenCompraController(IOrdenCompraService service)
         {
             _service = service;
-            _serviceProveedor = proveedorService;
         }
 
         // GET: OrdenCompraController
@@ -39,9 +37,6 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: OrdenCompraController/Create
         public async Task<IActionResult> Create()
         {
-            IEnumerable<Proveedor> query = await _serviceProveedor.GetAll();
-            List<ProveedorViewModel> lista = ProveedorViewModel.ToViewModelList(query.ToList());
-            ViewBag.Proveedor = lista;
             return View();
         }
 
@@ -52,21 +47,32 @@ namespace DevSys.Gesinv.UI.Controllers
         {
             try
             {
-                OrdenCompraViewModel nuevo = new OrdenCompraViewModel();
-                Dictionary<string,string> list = new Dictionary<string, string>();
-                List<LineaCompra> lineaPrueba = new List<LineaCompra>();
-                //foreach (var item in collection)
-                //{
-                //    Console.WriteLine(item.Key);
-                //    if (item.Key.StartsWith("Linea-"))
-                //    {
-                //        list.Add(item.Key,item.Value);
-                //    }
-                //}
+
+                OrdenCompraViewModel nuevaOC = new OrdenCompraViewModel() {
+                    ProveedorId = Convert.ToInt32(collection["ProveedorId"]),
+                    Referencia = collection["Referencia"],
+                    CondicionPagoId = Convert.ToInt32(collection["CondicionPagoId"]),
+                    Observacion = collection["Observacion"],
+                    Fecha = Convert.ToDateTime(collection["Fecha"]),
+                    SubTotal = Convert.ToDouble(collection["SubTotal"]),
+                    Descuento = Convert.ToInt32(collection["Descuento"]),
+                    Impuestos = Convert.ToInt32(collection["Impuestos"]),
+                    Total = Convert.ToInt32(collection["Total"])
+                };
+                Dictionary<string,string> listLinea = new Dictionary<string, string>();
+                int num = 0;
+                foreach (var item in collection)
+                {
+
+                    if (item.Key.StartsWith("Linea-"))
+                    {
+                        //listLinea.Add(item.Key);
+                    }
+                }
                 //if (ModelState.IsValid)
                 //{ 
                 //    OrdenCompra nOrdenCompra = OrdenCompraViewModel.ToModel(collection);
-                    
+
                 //    await _service.Create(nOrdenCompra); 
                 //    return RedirectToAction("Index","OrdenCompra");
                 //}

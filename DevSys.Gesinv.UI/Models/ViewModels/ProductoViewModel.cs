@@ -13,7 +13,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int? Caja { get; set; }
         public int? GrupoId { get; set; }
         public bool? Activo { get; set; }
-        public bool? Iva { get; set; }
+        public int? Iva { get; set; }
         public bool? Perecible { get; set; }
         public string? Comentario { get; set; }
         public DateTime? FechaCaducidad { get; set; }
@@ -32,7 +32,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Caja = model.Caja,
                 GrupoId= model.GrupoId,
                 Activo= model.Activo,
-                Iva= model.Iva,
+                Iva= model.Iva.Value == true ? 1 : 0,
                 Perecible= model.Perecible,
                 Comentario= model.Comentario,
                 FechaCaducidad = model.FechaCaducidad,

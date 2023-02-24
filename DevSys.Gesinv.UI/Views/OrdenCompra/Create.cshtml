@@ -14,6 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="container">
                 <div class="row">
+                    <datalist id="listProducts">
+
+                    </datalist>
                     <div class="form-group col">
                         <label asp-for="ProveedorId" class="control-label"></label>
                         <span asp-validation-for="ProveedorId" class="text-danger"></span>
@@ -23,7 +26,7 @@
                     </div>
                     <div class="form-group col">
                         <label asp-for="Fecha" class="control-label"></label>
-                        <input asp-for="Fecha" class="form-control" />
+                        <input asp-for="Fecha" type="date" class="form-control" />
                         <span asp-validation-for="Fecha" class="text-danger"></span>
                     </div>
                     <div class="form-group col">
@@ -118,6 +121,7 @@
             setSelectCondicionPago();
             setSelectProveedor();
             setSelectDepartamento();
+            getAllProducto();
         
         });
 
@@ -147,56 +151,77 @@
                 })
             });
         }
-        //function setSelectDepartamento() {
-        //    return new Promise((resolve, reject) => {
-        //        fetch("@Url.Action("getList", "Proveedor")")
-        //            .then((response) => {
-        //                return response.ok ? response.json() : Promise.reject(response)
-        //            })
-        //            .then((data) => {
-        //                let list = "";
-        //                data.forEach((item) => {
-        //                    list += `<option value="${item.proveedorId}">${item.razonSocial}</option>`
-        //                })
-        //                resolve(list)
-        //            })
-        //            .catch((err) => reject(err))
-        //    })
-        //}
         function setSelectDepartamento() {
-            var elements = $(".Departamento")
             fetch("@Url.Action("getList", "Departamento")")
                 .then((response) => {
                     return response.ok ? response.json() : Promise.reject(response)
                 })
                 .then((data) => {
                     data.forEach((item) => {
-                        departamentos_select = departamentos_select + `<option data-value=${item.departamentoId}> ${item.nombre} </option>`
+                        departamentos_select = departamentos_select + `<option value=${item.departamentoId}> ${item.nombre} </option>`
                     });
                 })
         }
+        function getAllProducto() {
+            fetch(`/Producto/getAllProducto`)
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                        let option_product_list = '';
+                       data.forEach((item) => { 
+                           option_product_list = option_product_list + `<option data-value=${item.productoId}> ${item.nombre} </option>` 
+                       })
+                    $("#listProducts").append(option_product_list)
+                    
+                })
+        }
+        let count = 0;
         $("#AgregarProducto").click(() => {
+            count += 1;
             $("#LineaCompra").append(
                 $("<tr>").append(
-                    $("<td>").append(`<input class="form-control" id="Linea-Codigo1" name="Linea-Codigo1" placeholder="Type to search...">`),
-                    $("<td>").append("Producto X"),
-                    $("<td>").append(`<select class="form-select" id="Linea-Departamento1" name="Linea-Departamento1" aria-label="Default select example">
+                    $("<td>").append(`<p class="form-control" id="Linea-Codigo-${count}" name="Linea-Codigo-${count}">${20250}</p>`),
+                    $("<td>").append(`<select class="form-select PendienteProducts" id="Linea-Nombre-${count}" name="Linea-Nombre-${count}" placeholder="Type to search..."> </select>`),
+                    $("<td>").append(`<select class="form-select" id="Linea-Departamento-${count}" name="Linea-Departamento-${count}" aria-label="Default select example">
                                             ${departamentos_select}</select>`),
-
-
-                    $("<td>").append(`<input type="number" value="0" id="Linea-Unidad1" name="Linea-Unidad1" class="form-control" />`),
-                    $("<td>").append(`<input type="number" value="0" id="Linea-Cantidad1" name="Linea-Cantidad1" class="form-control" />`),
-                    $("<td>").text("10"),
-                    $("<td>").text("10"),
-                    $("<td>").text("10")
+                    $("<td>").append(`<input type="number" value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" value="0" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
+                    $("<td>").attr("id", `Linea-PrecioUnitario-${count}`).text("10"),
+                    $("<td>").attr("id", `Linea-Descuento-${count}`).text("10"),
+                    $("<td>").attr("id", `Linea-Total-${count}`).text("10")
                 )
             )
-
-            //setSelectDepartamento().then(data => {                
-                
-            //})
+            getProducts();
         });
+        function getProducts(){
+            $.ajax({
+                url: "@Url.Action("getAllProducto","Producto")",
+                type: "GET",
+                dataType: "json",
+                success: (response) => {
+                    $(".PendienteProducts").each((index, element) => {
+                        $.each(response, (i, product) => {
+                            $(element).append(`<option value="${product.productoId}"> ${product.nombre} </option>`)
+                                .select2({ placeholder: "Seleccionar", width: "100%", selectionCssClass: ":all:", theme:"none"})
+                                .removeClass("PendienteProducts")
+                        })
+                        $(element).on('change', (select) => {
+                            let find_product = response.find( r => element.value == r.productoId)
+                            const count_property = element.id.slice(-1)
+                            $(`#Linea-Codigo-${count_property}`).text(find_product.codigo)
+                            $(`#Linea-PrecioUnitario-${count_property}`).text(find_product.precio)
+                            $(`#Linea-PrecioUnitario-${count_property}`).text(find_product.precio)
 
-        
+                        });
+
+                    }).removeClass("PendienteProducts");
+                    $(".select2-selection").each((index, element) => { $(element).removeClass("select2-selection--single") })
+
+                }
+
+            })
+        }
+        $("#LineaCompra")
     </script>
 }
