@@ -8,13 +8,13 @@ namespace DevSys.Gesinv.UI.Controllers
 {
   public class SalidaController : Controller
   {
-    private readonly IGenericService<Salida> _salidaService;
-    private readonly IGenericService<LineaSalida> _lineaSalidaService;
-    private readonly IGenericService<Producto> _productoService;
+    private readonly ISalidaService _salidaService;
+    private readonly ILineaSalidaService _lineaSalidaService;
+    private readonly IProductoService _productoService;
 
-    public SalidaController(IGenericService<Salida> salidaService,
-                            IGenericService<LineaSalida> lineaSalidaService,
-                            IGenericService<Producto> productoService)
+    public SalidaController(ISalidaService salidaService,
+                            ILineaSalidaService lineaSalidaService,
+                            IProductoService productoService)
     {
       _salidaService = salidaService;
       _lineaSalidaService = lineaSalidaService;
