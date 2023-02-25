@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DevSys.Gesinv.Logic.Services
 {
-  public class SalidaService : GenericService<Salida>, ISalidaService
+  public class BodegaService : GenericService<Bodega>, IBodegaService
   {
-    private IGenericRepository<Salida> _repository;
+    private IGenericRepository<Bodega> _repository;
 
-    public SalidaService(IGenericRepository<Salida> repository) : base(repository)
+    public BodegaService(IGenericRepository<Bodega> repository) : base(repository)
     {
       _repository = repository;
     }
