@@ -1,13 +1,13 @@
-﻿using DevSys.Gesinv.DAL;
+﻿using DevSys.Gesinv.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DevSys.Gesinv.Models;
-namespace DevSys.Gesinv.Logic.Contracts
+
+namespace DevSys.Gesinv.DAL.Contracts
 {
-    public interface IOrdenCompraService : IGenericService<OrdenCompra>
+    public interface IOrdenCompraRepository : IGenericRepository<OrdenCompra>
     {
         Task<OrdenCompra> Registrar(OrdenCompra entidad);
     }

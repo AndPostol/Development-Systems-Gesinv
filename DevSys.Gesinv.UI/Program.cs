@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 // Servicios del Modulo de Orden Compra
 
 // Repositories
-builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<OrdenCompra>>();
+builder.Services.AddScoped<IOrdenCompraRepository, OrdenCompraRepository>();
 builder.Services.AddScoped<IGenericRepository<CondicionPago>, GenericRepository<CondicionPago>>();
 builder.Services.AddScoped<IGenericRepository<Departamento>, GenericRepository<Departamento>>();
 builder.Services.AddScoped<IGenericRepository<LineaCompra>, GenericRepository<LineaCompra>>();

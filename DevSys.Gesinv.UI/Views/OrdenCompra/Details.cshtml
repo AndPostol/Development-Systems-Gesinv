@@ -17,10 +17,10 @@
             @Html.DisplayFor(model => model.OrdenCompraId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProveedorId)
+            Proveedor
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProveedorId)
+            @Model.NombreProveedor
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Referencia)
@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.Referencia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CondicionPagoId)
+            Condicion Pago
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CondicionPagoId)
+            @Model.CondicionPago
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Observacion)
@@ -70,13 +70,38 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Total)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LineaCompra)
-        </dt>
-        <dd class="col-sm-10">
-            @Model.LineaCompra.Select(l => l.Producto.Nombre)
-        </dd>
     </dl>
+    @Html.DisplayNameFor(model => model.LineaCompra)
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Entrega</th>
+                <th scope="col">Unidad</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">%</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LineaCompra)
+            {
+                <tr>
+                    <td>@item.Producto.Codigo</td>
+                    <td>@item.Producto.Nombre</td>
+                    <td>@item.Departamento.Nombre</td>
+                    <td>@item.Caja</td>
+                    <td>@item.Cantidad</td>
+                    <td>@item.Precio</td>
+                    <td>@item.Descuento</td>
+                    <td>@item.Total</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new {  id = Model.OrdenCompraId }) |

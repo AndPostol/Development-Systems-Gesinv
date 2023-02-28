@@ -8,67 +8,120 @@
 
 <h4>OrdenCompraViewModel</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
-                <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
-            <div class="form-group">
-                <label asp-for="ProveedorId" class="control-label"></label>
-                <select asp-for="ProveedorId" class="form-select">
+<form asp-action="Edit">
+    <div class="row">
+        <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
+                    <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="ProveedorId" class="control-label"></label>
+                    <select asp-for="ProveedorId" name="ProveedorId" class="form-select">
                     
-                </select>
-                <span asp-validation-for="ProveedorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Referencia" class="control-label"></label>
-                <input asp-for="Referencia" class="form-control" />
-                <span asp-validation-for="Referencia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CondicionPagoId" class="control-label"></label>
-                <select asp-for="CondicionPagoId" class="form-select">
+                    </select>
+                    <span asp-validation-for="ProveedorId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Referencia" class="control-label"></label>
+                    <input asp-for="Referencia" class="form-control" />
+                    <span asp-validation-for="Referencia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CondicionPagoId" class="control-label"></label>
+                    <select asp-for="CondicionPagoId" name="CondicionPagoId" class="form-select">
                     
-                </select>
-                <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Observacion" class="control-label"></label>
-                <input asp-for="Observacion" class="form-control" />
-                <span asp-validation-for="Observacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
-                <span asp-validation-for="Fecha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubTotal" class="control-label"></label>
-                <input asp-for="SubTotal" class="form-control" />
-                <span asp-validation-for="SubTotal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descuento" class="control-label"></label>
-                <input asp-for="Descuento" class="form-control" />
-                <span asp-validation-for="Descuento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Impuestos" class="control-label"></label>
-                <input asp-for="Impuestos" class="form-control" />
-                <span asp-validation-for="Impuestos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                    </select>
+                    <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Observacion" class="control-label"></label>
+                    <input asp-for="Observacion" class="form-control" />
+                    <span asp-validation-for="Observacion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Fecha" class="control-label"></label>
+                    <input asp-for="Fecha" class="form-control" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubTotal" class="control-label"></label>
+                    <input asp-for="SubTotal" class="form-control" />
+                    <span asp-validation-for="SubTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descuento" class="control-label"></label>
+                    <input asp-for="Descuento" class="form-control" />
+                    <span asp-validation-for="Descuento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Impuestos" class="control-label"></label>
+                    <input asp-for="Impuestos" class="form-control" />
+                    <span asp-validation-for="Impuestos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Total" class="control-label"></label>
+                    <input asp-for="Total" class="form-control" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        @Html.DisplayNameFor(model => model.LineaCompra)
+        <table class="table table-striped border">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Entrega</th>
+                            <th scope="col">Unidad</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">%</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="LineaCompra">
+                        @for (int i = 0; i < Model.LineaCompra.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <p class="form-control"> @Model.LineaCompra[i].Producto.Codigo </p>
+                                    @Html.HiddenFor(m => m.LineaCompra[i].LineaCompraId)
+
+                                </td>
+                                <td>
+                                    <input class="form-control" readonly value="@Model.LineaCompra[i].Producto.Nombre">
+                                    @Html.HiddenFor(m => m.LineaCompra[i].ProductoId)
+                                </td>
+                                <td>
+                                    <input class="form-control" readonly value="@Model.LineaCompra[i].Departamento.Nombre">
+                                    @Html.HiddenFor(m => m.LineaCompra[i].DepartamentoId)
+
+                                </td>
+                                <td>
+                                    <input  type="number" readonly value="@Model.LineaCompra[i].Caja" asp-for="@Model.LineaCompra[i].Caja" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="number" readonly value="@Model.LineaCompra[i].Cantidad" asp-for="@Model.LineaCompra[i].Cantidad" class="form-control" />
+                                </td> 
+                                <td>
+                                    <input  type="number" readonly value="@Model.LineaCompra[i].Precio" asp-for="@Model.LineaCompra[i].Precio" class="form-control" />
+                                </td>                            
+                                <td>
+                                    <input  type="number" readonly value="@Model.LineaCompra[i].Descuento" asp-for="@Model.LineaCompra[i].Descuento" class="form-control" />
+                                </td>                            
+                                <td>
+                                    <input type="number" readonly value="@Model.LineaCompra[i].Total" asp-for="@Model.LineaCompra[i].Total" class="form-control" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -79,7 +132,6 @@
     <script>
         setSelectCondicionPago();
         setSelectProveedor();
-        console.log(@Model.CondicionPagoId)
         function setSelectCondicionPago() {
             const inputCondicionPago = $("#CondicionPagoId");
             fetch("@Url.Action("getList", "CondicionPago")")
@@ -108,6 +160,31 @@
                         inputCondicionPago.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
                     })
                 });
+        }
+        function setSelectDepartamento() {
+            fetch("@Url.Action("getList", "Departamento")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        departamentos_select = departamentos_select + `<option value=${item.departamentoId}> ${item.nombre} </option>`
+                    });
+                })
+        }
+        function getAllProducto() {
+            fetch(`/Producto/getAllProducto`)
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    let option_product_list = '';
+                    data.forEach((item) => {
+                        option_product_list = option_product_list + `<option data-value=${item.productoId}> ${item.nombre} </option>`
+                    })
+                    $("#listProducts").append(option_product_list)
+
+                })
         }
     </script>
 }

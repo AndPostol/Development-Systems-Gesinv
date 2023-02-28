@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DevSys.Gesinv.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
@@ -48,37 +49,41 @@ namespace DevSys.Gesinv.UI.Controllers
             try
             {
 
-                OrdenCompraViewModel nuevaOC = new OrdenCompraViewModel() {
+                OrdenCompraViewModel nuevaOC = new OrdenCompraViewModel()
+                {
                     ProveedorId = Convert.ToInt32(collection["ProveedorId"]),
                     Referencia = collection["Referencia"],
                     CondicionPagoId = Convert.ToInt32(collection["CondicionPagoId"]),
                     Observacion = collection["Observacion"],
                     Fecha = Convert.ToDateTime(collection["Fecha"]),
                     SubTotal = Convert.ToDouble(collection["SubTotal"]),
-                    Descuento = Convert.ToInt32(collection["Descuento"]),
-                    Impuestos = Convert.ToInt32(collection["Impuestos"]),
-                    Total = Convert.ToInt32(collection["Total"])
+                    Descuento = Convert.ToDouble(collection["Descuento"]),
+                    Impuestos = Convert.ToDouble(collection["Impuestos"]),
+                    Total = Convert.ToDouble(collection["Total"]),
+                    LineaCompra = new List<LineaCompraViewModel>()
+                    
                 };
-                Dictionary<string,string> listLinea = new Dictionary<string, string>();
-                int num = 0;
-                foreach (var item in collection)
+                // Esto es un input que trae la cantidad de lineas a registrar
+                int cantidad = Convert.ToInt32(collection["CantidadProducto"]);
+
+                for (int i = 1; i <= cantidad; i++)
                 {
-
-                    if (item.Key.StartsWith("Linea-"))
-                    {
-                        //listLinea.Add(item.Key);
-                    }
+                    LineaCompraViewModel row = new LineaCompraViewModel();
+                    row.ProductoId = Convert.ToInt32(collection[$"Linea-Nombre-{i}"]);
+                    row.DepartamentoId = Convert.ToInt32(collection[$"Linea-Departamento-{i}"]);
+                    row.Cantidad = Convert.ToInt32(collection[$"Linea-Cantidad-{i}"]);
+                    row.Caja = 0;
+                    row.Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"]);
+                    row.Descuento = Convert.ToDouble(collection[$"Linea-Descuento-{i}"]);
+                    row.Total = Convert.ToDouble(collection[$"Linea-Total-{i}"]);
+                    nuevaOC.LineaCompra.Add(row);
                 }
-                //if (ModelState.IsValid)
-                //{ 
-                //    OrdenCompra nOrdenCompra = OrdenCompraViewModel.ToModel(collection);
 
-                //    await _service.Create(nOrdenCompra); 
-                //    return RedirectToAction("Index","OrdenCompra");
-                //}
-                return View();
+                OrdenCompra model = OrdenCompraViewModel.ToModel(nuevaOC);
+                OrdenCompra result = await _service.Registrar(model);
+                return RedirectToAction("Details", "OrdenCompra", new { id = result.OrdenCompraId });
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
@@ -99,18 +104,31 @@ namespace DevSys.Gesinv.UI.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                // Esto remueve de la validacion del ViewModel los campos innecesario en el formulario
+                //ModelState.Remove("NombreProveedor");
+                //ModelState.Remove("CondicionPago");
+                //ModelState.Remove("LineaCompra");
+                //ModelState.Remove("Departamento");
+                //ModelState.Remove("OrdenCompra");
+                //ModelState.Remove("Producto");
+
+
+                if (ModelState.IsValid)
                 {
+                    // Busco la entidad a actualizar debido a que no quiero que la lista de productos sea modificada
+                    //OrdenCompra oldOC = await _service.GetById(id);
+                    //collection.LineaCompra = LineaCompraViewModel.ToViewModelList(oldOC.LineaCompra);
+
                     OrdenCompra updateOrdenCompra = OrdenCompraViewModel.ToModel(collection);
                     updateOrdenCompra.OrdenCompraId = id;
                     await _service.Update(updateOrdenCompra);
                     return RedirectToAction("Index","OrdenCompra");
                 }
-                return View();
+                return View(collection.OrdenCompraId);
             }
             catch
             {
-                return View();
+                return View(collection.OrdenCompraId);
             }
         }
 

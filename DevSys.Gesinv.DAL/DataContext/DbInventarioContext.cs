@@ -15,6 +15,17 @@ namespace DevSys.Gesinv.DAL.DataContext
         {
             options.UseSqlServer(SQLConnecion);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        {
+            modelBuilder
+                .Entity<LineaCompra>()
+                .HasKey(l => l.LineaCompraId);
+
+            //modelBuilder
+            //    .Entity<LineaCompra>()
+            //    .Property(l => l.LineaCompraId)
+            //    .ValueGeneratedOnAdd();
+        }
         public DbInventarioContext()
         {
 

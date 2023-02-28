@@ -417,14 +417,14 @@ VALUES
 SET IDENTITY_INSERT [CondicionPago] OFF;
 
 SET IDENTITY_INSERT [OrdenCompra] ON;
-INSERT INTO [OrdenCompra] (OrdenCompraID,ProveedorID,CodProveedor,Referencia,CondicionPagoID,Observacion,Fecha,SubTotal,Descuento,Impuestos,Total)
+INSERT INTO [OrdenCompra] (OrdenCompraID,ProveedorID,Referencia,CondicionPagoID,Observacion,Fecha,SubTotal,Descuento,Impuestos,Total)
 VALUES
-  (1,6,3423,'Portia',2,'laoreet ipsum. Curabitur consequat, lectus','08-05-2022',631,18,982,3),
-  (2,5,5914,'William',3,'luctus et ultrices posuere cubilia','04-01-2023',756,13,958,2),
-  (3,4,4043,'Maisie',1,'sollicitudin adipiscing ligula. Aenean gravida','11-22-2023',718,3,977,5),
-  (4,6,5746,'Janna',1,'sodales. Mauris blandit enim consequat','02-07-2024',381,18,799,0),
-  (5,2,4945,'Brenda',1,'urna, nec luctus felis purus','04-16-2022',168,17,516,6),
-  (6,6,1162,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2);
+  (1,6,'Portia',2,'laoreet ipsum. Curabitur consequat, lectus','08-05-2022',631,18,982,3),
+  (2,5,'William',3,'luctus et ultrices posuere cubilia','04-01-2023',756,13,958,2),
+  (3,4,'Maisie',1,'sollicitudin adipiscing ligula. Aenean gravida','11-22-2023',718,3,977,5),
+  (4,6,'Janna',1,'sodales. Mauris blandit enim consequat','02-07-2024',381,18,799,0),
+  (5,2,'Brenda',1,'urna, nec luctus felis purus','04-16-2022',168,17,516,6),
+  (6,6,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2);
 SET IDENTITY_INSERT [OrdenCompra] OFF;
 
 

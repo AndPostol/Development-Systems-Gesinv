@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
@@ -16,6 +17,11 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public double Impuestos { get; set; }
         public double Total { get; set; }
         public List<LineaCompraViewModel> LineaCompra { get; set; }
+        // Adds
+        [ValidateNever]
+        public string? NombreProveedor { get; set; }
+        [ValidateNever]
+        public string? CondicionPago { get; set; }
 
 
         public static List<OrdenCompraViewModel> ToViewModelList(List<OrdenCompra> lstModel) 
@@ -41,7 +47,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 SubTotal= modelView.SubTotal,
                 Descuento= modelView.Descuento,
                 Impuestos= modelView.Impuestos,
-                Total= modelView.Total
+                Total= modelView.Total,
+                LineaCompra = LineaCompraViewModel.ToModelList(modelView.LineaCompra)
             };
             return model;
         }
@@ -59,7 +66,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Descuento= model.Descuento,
                 Impuestos= model.Impuestos,
                 Total= model.Total,
-                LineaCompra = LineaCompraViewModel.ToViewModelList(model.LineaCompra)
+                LineaCompra = LineaCompraViewModel.ToViewModelList(model.LineaCompra),
+                NombreProveedor = model.Proveedor.RazonSocial,
+                CondicionPago = model.CondicionPago.Nombre
             };
             return result;
         }
