@@ -2,17 +2,25 @@
 using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
-
+using DevSys.Gesinv.Logic.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
     public class ProductoController : Controller
     {
         private readonly IProductoService _productoService;
+        private readonly IMarcaService _marcaService;
+        private readonly IColorService _colorService;
+        private readonly ILineaService _lineaService;
 
-        public ProductoController(IProductoService productoService)
+
+        public ProductoController(IProductoService productoService, IColorService colorService, ILineaService lineaService, IMarcaService marcaService)
         {
             _productoService = productoService;
+            _colorService = colorService;
+            _lineaService = lineaService;
+            _marcaService = marcaService;
         }
 
         // GET: ProductoController
@@ -31,9 +39,26 @@ namespace DevSys.Gesinv.UI.Controllers
         }
 
         // GET: ProductoController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            IEnumerable<Linea> queryLinea = await _lineaService.GetAll();
+            List<LineaViewModel> lstLineaViewModel = LineaViewModel.ListViewModel(queryLinea);
+
+            var model = new ProductoViewModel();
+            model.LineasSelectList = new List<SelectListItem>();
+            foreach (var linea in lstLineaViewModel)
+            {
+                model.LineasSelectList.Add(new SelectListItem
+                {
+                    Text = linea.Nombre.ToString(),
+                    Value = linea.LineaId.ToString(),
+                    Selected = false
+                });
+            }
+
+            //ViewBag.LineaOptions = model;
+
+            return View(model);
         }
 
         // POST: ProductoController/Create
@@ -42,15 +67,21 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<ActionResult> Create(ProductoViewModel productoViewModel)
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
+            var selectedLinea = productoViewModel.LineaID; //esto no va a ningun lado
+            
             try
             {
-                await _productoService.Create(producto);
+                if (!ModelState.IsValid)
+                {
+                    await _productoService.Create(producto); 
+                }
                 return RedirectToAction("Index", "Producto");
             }
             catch
             {
-                return View();
+                return View(productoViewModel);
             }
+           
         }
 
         // GET: ProductoController/Edit/5

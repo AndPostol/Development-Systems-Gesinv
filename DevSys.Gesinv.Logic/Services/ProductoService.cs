@@ -17,6 +17,11 @@ namespace DevSys.Gesinv.Logic.Services
             _repository = repository;
         }
 
+        //public async Task<IList<Linea>> GetLinea()
+        //{
+        //    Task<IList<Linea>> queryLinea = _repository.GetAll();
+        //}
+
         public async Task<Producto> ObtenerPorCodigo(int Codigo)
         {
             IEnumerable<Producto> queryProducto = await _repository.GetAll();

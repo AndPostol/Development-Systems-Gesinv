@@ -21,6 +21,15 @@ builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
 builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 
+builder.Services.AddScoped<IGenericRepository<Linea>, GenericRepository<Linea>>();
+builder.Services.AddScoped<ILineaService, LineaService>();
+
+builder.Services.AddScoped<IGenericRepository<Marca>, GenericRepository<Marca>>();
+builder.Services.AddScoped<IMarcaService, MarcaService>();
+
+builder.Services.AddScoped<IGenericRepository<Color>, GenericRepository<Color>>();
+builder.Services.AddScoped<IColorService, ColorService>();
+
 //Conexión a la base de datos
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
