@@ -36,7 +36,7 @@ namespace DevSys.Gesinv.UI.Controllers
         }
 
         // GET: OrdenCompraController/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -69,7 +69,19 @@ namespace DevSys.Gesinv.UI.Controllers
                 for (int i = 1; i <= cantidad; i++)
                 {
                     LineaCompraViewModel row = new LineaCompraViewModel();
-                    row.ProductoId = Convert.ToInt32(collection[$"Linea-Nombre-{i}"]);
+                    try
+                    {
+                        row.ProductoId = Convert.ToInt32(collection[$"Linea-Nombre-{i}"]);
+                    }
+                    catch (Exception)
+                    {
+                        row.ProductoId = 0;
+                        row.Producto = new Producto
+                        {
+                            Nombre = collection[$"Linea-Nombre-{i}"],
+                            Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"])
+                        };
+                    }
                     row.DepartamentoId = Convert.ToInt32(collection[$"Linea-Departamento-{i}"]);
                     row.Cantidad = Convert.ToInt32(collection[$"Linea-Cantidad-{i}"]);
                     row.Caja = 0;
@@ -104,21 +116,8 @@ namespace DevSys.Gesinv.UI.Controllers
         {
             try
             {
-                // Esto remueve de la validacion del ViewModel los campos innecesario en el formulario
-                //ModelState.Remove("NombreProveedor");
-                //ModelState.Remove("CondicionPago");
-                //ModelState.Remove("LineaCompra");
-                //ModelState.Remove("Departamento");
-                //ModelState.Remove("OrdenCompra");
-                //ModelState.Remove("Producto");
-
-
                 if (ModelState.IsValid)
                 {
-                    // Busco la entidad a actualizar debido a que no quiero que la lista de productos sea modificada
-                    //OrdenCompra oldOC = await _service.GetById(id);
-                    //collection.LineaCompra = LineaCompraViewModel.ToViewModelList(oldOC.LineaCompra);
-
                     OrdenCompra updateOrdenCompra = OrdenCompraViewModel.ToModel(collection);
                     updateOrdenCompra.OrdenCompraId = id;
                     await _service.Update(updateOrdenCompra);

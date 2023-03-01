@@ -9,65 +9,33 @@
 <h4>OrdenCompraViewModel</h4>
 <hr />
 <form asp-action="Edit">
-    <div class="row">
-        <div class="col-md-4">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
-                    <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
-                <div class="form-group">
+    <div class="container">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
+                <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
+            <div class="form-group col-4">
                     <label asp-for="ProveedorId" class="control-label"></label>
                     <select asp-for="ProveedorId" name="ProveedorId" class="form-select">
                     
                     </select>
                     <span asp-validation-for="ProveedorId" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Referencia" class="control-label"></label>
-                    <input asp-for="Referencia" class="form-control" />
-                    <span asp-validation-for="Referencia" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CondicionPagoId" class="control-label"></label>
-                    <select asp-for="CondicionPagoId" name="CondicionPagoId" class="form-select">
-                    
-                    </select>
-                    <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Observacion" class="control-label"></label>
-                    <input asp-for="Observacion" class="form-control" />
-                    <span asp-validation-for="Observacion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
+            <div class="form-group col-4">
                     <label asp-for="Fecha" class="control-label"></label>
                     <input asp-for="Fecha" class="form-control" />
                     <span asp-validation-for="Fecha" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="SubTotal" class="control-label"></label>
-                    <input asp-for="SubTotal" class="form-control" />
-                    <span asp-validation-for="SubTotal" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Descuento" class="control-label"></label>
-                    <input asp-for="Descuento" class="form-control" />
-                    <span asp-validation-for="Descuento" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Impuestos" class="control-label"></label>
-                    <input asp-for="Impuestos" class="form-control" />
-                    <span asp-validation-for="Impuestos" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Total" class="control-label"></label>
-                    <input asp-for="Total" class="form-control" />
-                    <span asp-validation-for="Total" class="text-danger"></span>
-                </div>
+            <div class="form-group col-4">
+                <label asp-for="CondicionPagoId" class="control-label"></label>
+                <select asp-for="CondicionPagoId" name="CondicionPagoId" class="form-select">
+                    
+                </select>
+                <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        @Html.DisplayNameFor(model => model.LineaCompra)
-        <table class="table table-striped border">
+        <div class="row my-5">
+            <table class="table table-striped border">
                     <thead>
                         <tr>
                             <th scope="col">Codigo</th>
@@ -102,7 +70,7 @@
                                     <input  type="number" readonly value="@Model.LineaCompra[i].Caja" asp-for="@Model.LineaCompra[i].Caja" class="form-control" />
                                 </td>
                                 <td>
-                                    <input type="number" readonly value="@Model.LineaCompra[i].Cantidad" asp-for="@Model.LineaCompra[i].Cantidad" class="form-control" />
+                                    <input type="number" value="@Model.LineaCompra[i].Cantidad" asp-for="@Model.LineaCompra[i].Cantidad" class="form-control" />
                                 </td> 
                                 <td>
                                     <input  type="number" readonly value="@Model.LineaCompra[i].Precio" asp-for="@Model.LineaCompra[i].Precio" class="form-control" />
@@ -117,6 +85,45 @@
                         }
                     </tbody>
                 </table>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group col-8">
+                <label asp-for="Observacion" class="control-label"></label>
+                <input asp-for="Observacion" class="form-control" />
+                <span asp-validation-for="Observacion" class="text-danger"></span>
+            </div>
+                <div class="form-group col-8">
+                    <label asp-for="Referencia" class="control-label"></label>
+                    <input asp-for="Referencia" class="form-control" />
+                    <span asp-validation-for="Referencia" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="SubTotal" class="control-label"></label>
+                    <input asp-for="SubTotal" readonly class="form-control" />
+                    <span asp-validation-for="SubTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descuento" class="control-label"></label>
+                    <input asp-for="Descuento" readonly class="form-control" />
+                    <span asp-validation-for="Descuento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Impuestos" class="control-label"></label>
+                    <input asp-for="Impuestos" readonly class="form-control" />
+                    <span asp-validation-for="Impuestos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Total" class="control-label"></label>
+                    <input asp-for="Total" readonly class="form-control" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+
+            </div>
+
+        </div>
     </div>
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
@@ -130,8 +137,20 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        setSelectCondicionPago();
-        setSelectProveedor();
+        $(document).ready( () => {
+            setSelectCondicionPago();
+            setSelectProveedor();
+            for(let i = 0;i < @Model.LineaCompra.Count;i++){
+                $(`#LineaCompra_${i}__Cantidad`).on("change", (ev) => {
+                    console.log("Funciona")
+                    let producto = {
+                        precio : $(`#LineaCompra_${i}__Precio`).val()
+                    }
+                    setValuesPriceFields(i, producto, ev.target.value)
+                })
+            }
+        })
+
         function setSelectCondicionPago() {
             const inputCondicionPago = $("#CondicionPagoId");
             fetch("@Url.Action("getList", "CondicionPago")")
@@ -157,7 +176,12 @@
                 })
                 .then((data) => {
                     data.forEach((item) => {
-                        inputCondicionPago.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                        if (item.proveedorId == @Model.ProveedorId) {
+                            inputCondicionPago.append(`<option selected value="${item.proveedorId}">${item.razonSocial}</option>`);
+                        }
+                        else {
+                            inputCondicionPago.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                        }
                     })
                 });
         }
@@ -172,19 +196,30 @@
                     });
                 })
         }
-        function getAllProducto() {
-            fetch(`/Producto/getAllProducto`)
-                .then((response) => {
-                    return response.ok ? response.json() : Promise.reject(response)
-                })
-                .then((data) => {
-                    let option_product_list = '';
-                    data.forEach((item) => {
-                        option_product_list = option_product_list + `<option data-value=${item.productoId}> ${item.nombre} </option>`
-                    })
-                    $("#listProducts").append(option_product_list)
+        
+        function calc_subtotal(index) {
+            let sub = 0
+            for (let i = 0; i < @Model.LineaCompra.Count; i++) {
+                sub = sub + parseFloat($(`#LineaCompra_${index}__Total`).val())
+            }
+            return sub
+        }
 
-                })
+        function setValuesPriceFields(index, product, cantidad) {
+            let descuento = (($("#Descuento").val() / 100) * parseFloat(product.precio)).toFixed(2)
+            $(`#LineaCompra_${index}__Descuento`).val(descuento)
+            let total_linea = ((product.precio - descuento) * cantidad).toFixed(2)
+            $(`#LineaCompra_${index}__Total`).val(total_linea)
+
+            let subtotal = parseFloat(calc_subtotal(index)).toFixed(2);
+            let impuestos = parseFloat(subtotal * .19).toFixed(2);
+            let total = parseFloat(parseFloat(subtotal) + parseFloat(impuestos)).toFixed(2);
+            $("#SubTotal").val(subtotal)
+            $("#Impuestos").val(impuestos)
+            $("#Total").val(total)
+
+
+            console.log(subtotal)
         }
     </script>
 }

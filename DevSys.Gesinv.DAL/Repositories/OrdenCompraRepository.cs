@@ -29,21 +29,29 @@ namespace DevSys.Gesinv.DAL.Repositories
                 try
                 {
                     // Si agrego la entidad aqui ya se le asigna un id el entity
-                    //_dbContext.OrdenCompra.Add(entidad);
-                    //double subtotal = 0f;
-                    //double total = 0f;
-                    //foreach (LineaCompra linea in entidad.LineaCompra)
-                    //{
-                    //    Producto producto =  await _dbContext.Producto.FindAsync(linea.ProductoId);
-                    //    double descuento = producto.Precio * (linea.Descuento / 100); 
-                    //    subtotal += ((producto.Precio * linea.Cantidad) + descuento);
+                    double subtotal = 0f;
+                    double total = 0f;
+                    foreach (LineaCompra linea in entidad.LineaCompra)
+                    {
+                        Producto producto = await _dbContext.Producto.FindAsync(linea.ProductoId);
+                        if (producto == null)
+                        {
+                            Random rand = new Random();
+                            linea.Producto.Codigo = rand.Next(1,1000);
+                            linea.Producto.Activo = false;
+                            linea.Producto.Iva = false;
+                            linea.Producto.Perecible = false;
+                            //_dbContext.Producto.Add(linea.Producto);
+                            //_dbContext.SaveChanges();
+                            producto = linea.Producto;
+                             
+                        }
+                        double descuento = producto.Precio * (linea.Descuento / 100);
+                        subtotal += ((producto.Precio * linea.Cantidad) + descuento);
 
-                    //}
-                    //total = subtotal + (subtotal * .19);
-                    //if (total == entidad.Total) 
-                    //{
-                    //     await _dbContext.AddAsync(entidad);
-                    //}
+                    }
+
+
                     await _dbContext.OrdenCompra.AddAsync(OCGenerada);
                     await _dbContext.SaveChangesAsync();
                     transaction.Commit();

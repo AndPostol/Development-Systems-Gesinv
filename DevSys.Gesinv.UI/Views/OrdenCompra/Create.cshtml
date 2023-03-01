@@ -219,22 +219,51 @@
                     $(".PendienteProducts").each((index, element) => {
                         $.each(response, (i, product) => {
                             $(element).append(`<option value="${product.productoId}"> ${product.nombre} </option>`)
-                                .select2({ placeholder: "Seleccionar", width: "100%", selectionCssClass: ":all:", theme:"none"})
+                                .select2({
+                                    placeholder: "Seleccionar", 
+                                    width: "100%", 
+                                    selectionCssClass: ":all:", 
+                                    theme:"none",
+                                    tags: true,
+                                    createTag: function (params) {
+                                        var term = $.trim(params.term);
+
+                                        if (term === '') {
+                                            return null;
+                                        }
+
+                                        return {
+                                            id: term,
+                                            text: term,
+                                        }
+                                    }
+                                })
                                 .removeClass("PendienteProducts")
+                            
                         })
                         $(element).on('change', (ev) => {
-                            let find_product = response.find( r => element.value == r.productoId)
+                            let find_product = typeof (response.find(r => element.value == r.productoId)) == 'undefined'
+                                ? { productoId: 0, codigo: 0, precio: 0 }
+                                : response.find(r => element.value == r.productoId)
+                            response.push(find_product)
+                            console.log(response)
                             const count_property = element.id.slice(-1)
                             $(`#Linea-Codigo-${count_property}`).text(find_product.codigo)
                             $(`#Linea-PrecioUnitario-${count_property}`).val(find_product.precio)
                             //$(`#Linea-Unidad-${count_property}`).removeAttr("disabled").on('change', () => {
                             //})
-                            console.log(find_product);
                             setValuesPriceFields(count_property, find_product, $(`#Linea-Cantidad-${count_property}`).val());
 
                             $(`#Linea-Cantidad-${count_property}`).removeAttr("disabled").on('change', (ev) => {
                                 setValuesPriceFields(count_property,find_product,ev.target.value);
                             })
+                            if(find_product.codigo == 0){
+                                $(`#Linea-PrecioUnitario-${count_property}`).removeAttr("readonly").on('change', (ev) => {
+                                    find_product.precio = ev.target.value
+                                    setValuesPriceFields(count_property, find_product, $(`#Linea-Cantidad-${count_property}`).val());
+                                })
+                            }
+                            
 
                                 
                         });
