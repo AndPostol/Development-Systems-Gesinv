@@ -20,12 +20,20 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name = "Linea")]
         public int LineaID { get; set; }
 
+
         //para hacer el dropdownlist https://www.youtube.com/watch?v=A1yJVmtIDXA
-
         [NotMapped] //para que no la mapee a la DB
-        public List<SelectListItem> LineasSelectList { get; set; } 
+        public List<SelectListItem> LineasSelectList { get; set; }
+        [NotMapped]
+        public List<SelectListItem> TiposSelectList { get; set; }
+        [NotMapped]
+        public List<SelectListItem> GruposSelectList { get; set; }
+        [NotMapped]
+        public List<SelectListItem> MarcasSelectList { get; set; }
 
-        //public string SelectedLinea { get; set; } // no hace falta ya guardo el id en LineaId
+
+
+
 
         [Display(Name = "Tipo")]
         public int? TipoID { get; set; }
@@ -98,11 +106,14 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Linea = productoViewModel.Linea,
                 LineaId = productoViewModel.LineaID,
                 Tipo = productoViewModel.Tipo,
+                TipoId = productoViewModel.TipoID,
                 Unidad = productoViewModel.Unidad,
                 Caja = productoViewModel.Caja,
                 Grupo = productoViewModel.Grupo,
+                GrupoId = productoViewModel.GrupoID,
                 Activo = productoViewModel.Activo,
                 Iva = productoViewModel.Iva,
+                Marca = productoViewModel.Marca,
                 Perecible = productoViewModel.Perecible,
                 Comentario = productoViewModel.Comentario,
                 FechaCaducidad = DateTime.Parse(productoViewModel.FechaCaducidad),

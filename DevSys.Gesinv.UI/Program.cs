@@ -30,6 +30,16 @@ builder.Services.AddScoped<IMarcaService, MarcaService>();
 builder.Services.AddScoped<IGenericRepository<Color>, GenericRepository<Color>>();
 builder.Services.AddScoped<IColorService, ColorService>();
 
+builder.Services.AddScoped<IGenericRepository<Tipo>, GenericRepository<Tipo>>();
+builder.Services.AddScoped<ITipoService, TipoService>();
+
+builder.Services.AddScoped<IGenericRepository<Grupo>, GenericRepository<Grupo>>();
+builder.Services.AddScoped<IGrupoService, GrupoService>();
+
+builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
+builder.Services.AddScoped<IBodegaService, BodegaService>();
+
+
 //Conexión a la base de datos
 builder.Services.AddDbContext<DbInventarioContext>(options =>
 {

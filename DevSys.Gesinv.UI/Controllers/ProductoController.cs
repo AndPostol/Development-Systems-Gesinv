@@ -13,14 +13,17 @@ namespace DevSys.Gesinv.UI.Controllers
         private readonly IMarcaService _marcaService;
         private readonly IColorService _colorService;
         private readonly ILineaService _lineaService;
+        private readonly IGrupoService _grupoService;
+        private readonly ITipoService _tipoService;
 
-
-        public ProductoController(IProductoService productoService, IColorService colorService, ILineaService lineaService, IMarcaService marcaService)
+        public ProductoController(IProductoService productoService, IColorService colorService, ILineaService lineaService, IMarcaService marcaService, IGrupoService grupoService, ITipoService tipoService)
         {
             _productoService = productoService;
             _colorService = colorService;
             _lineaService = lineaService;
             _marcaService = marcaService;
+            _grupoService = grupoService;
+            _tipoService = tipoService;
         }
 
         // GET: ProductoController
@@ -41,14 +44,15 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController/Create
         public async Task<ActionResult> Create()
         {
+            //Opciones de Linea
             IEnumerable<Linea> queryLinea = await _lineaService.GetAll();
             List<LineaViewModel> lstLineaViewModel = LineaViewModel.ListViewModel(queryLinea);
 
-            var model = new ProductoViewModel();
-            model.LineasSelectList = new List<SelectListItem>();
+            var lineas = new ProductoViewModel();
+            lineas.LineasSelectList = new List<SelectListItem>();
             foreach (var linea in lstLineaViewModel)
             {
-                model.LineasSelectList.Add(new SelectListItem
+                lineas.LineasSelectList.Add(new SelectListItem
                 {
                     Text = linea.Nombre.ToString(),
                     Value = linea.LineaId.ToString(),
@@ -56,9 +60,69 @@ namespace DevSys.Gesinv.UI.Controllers
                 });
             }
 
-            //ViewBag.LineaOptions = model;
+            ViewBag.LineaOptions = lineas.LineasSelectList;
 
-            return View(model);
+            //Opciones de Grupo
+            IEnumerable<Grupo> queryGrupo = await _grupoService.GetAll();
+            List<GrupoViewModel> lstGrupoViewModel = GrupoViewModel.ListViewModel(queryGrupo);
+
+            var grupos = new ProductoViewModel();
+            grupos.GruposSelectList = new List<SelectListItem>();
+            foreach (var grupo in lstGrupoViewModel)
+            {
+                grupos.GruposSelectList.Add(new SelectListItem
+                {
+                    Text = grupo.Nombre.ToString(),
+                    Value = grupo.GrupoId.ToString(),
+                    Selected = false
+                });
+            }
+
+            ViewBag.GrupoOptions = grupos.GruposSelectList;
+
+            //Opciones de Marca
+            IEnumerable<Marca> queryMarca = await _marcaService.GetAll();
+            List<MarcaViewModel> lstMarcaViewModel = MarcaViewModel.ListViewModel(queryMarca);
+
+            var marcas = new ProductoViewModel();
+            marcas.MarcasSelectList = new List<SelectListItem>();
+            foreach (var marca in lstMarcaViewModel)
+            {
+                marcas.MarcasSelectList.Add(new SelectListItem
+                {
+                    Text = marca.Nombre.ToString(),
+                    Value = marca.MarcaId.ToString(),
+                    Selected = false
+                });
+            }
+
+            ViewBag.MarcaOptions = marcas.MarcasSelectList;
+
+            //Opciones de Tipo
+            IEnumerable<Tipo> queryTipo = await _tipoService.GetAll();
+            List<TipoViewModel> lstTipoViewModel = TipoViewModel.ListViewModel(queryTipo);
+
+            var tipos = new ProductoViewModel();
+            tipos.TiposSelectList = new List<SelectListItem>();
+            foreach (var tipo in lstTipoViewModel)
+            {
+                tipos.TiposSelectList.Add(new SelectListItem
+                {
+                    Text = tipo.Nombre.ToString(),
+                    Value = tipo.TipoId.ToString(),
+                    Selected = false
+                });
+            }
+
+            ViewBag.TipoOptions = tipos.TiposSelectList;
+
+            //
+
+
+
+
+
+            return View();
         }
 
         // POST: ProductoController/Create

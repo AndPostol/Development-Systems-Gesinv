@@ -28,8 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="LineaID" class="control-label"></label>
-                                @*@Html.DropDownList("LineasSelectList", "--Select--")*@
-                                <select class="form-select" asp-items="Model?.LineasSelectList" asp-for="LineaID"></select>
+                                <select class="form-select" asp-items="ViewBag.LineaOptions" asp-for="LineaID"></select>
                                 <span asp-validation-for="LineaID" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -51,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="TipoID" class="control-label"></label>
-                                <input asp-for="TipoID" class="form-control" />
+                                <select class="form-select" asp-items="ViewBag.TipoOptions" asp-for="TipoID"></select>
                                 <span asp-validation-for="TipoID" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -68,8 +67,13 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label asp-for="GrupoID" class="control-label"></label>
-                                <input asp-for="GrupoID" class="form-control" />
+                                <select class="form-select" asp-items="ViewBag.GrupoOptions" asp-for="GrupoID"></select>
                                 <span asp-validation-for="GrupoID" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Marca" class="control-label"></label>
+                                <select class="form-select" asp-items="ViewBag.MarcaOptions" asp-for="Marca"></select>
+                                <span asp-validation-for="Marca" class="text-danger"></span>
                             </div>
                             <div class="form-check">
                                 @Html.CheckBoxFor(model => model.Activo)
