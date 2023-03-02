@@ -81,6 +81,28 @@
                 <input asp-for="Precio" class="form-control" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
+            <div class="form-group row">
+               @foreach (var item in Model?.Existencia)
+               {
+                   <div>@item.Bodega.Direccion</div>
+                   <div>@item.Stock</div>
+               }
+            </div>
+            <div class="form-group">
+                <select asp-for="Marca" class="form-select">
+                    @foreach (var item in ViewBag.MarcaOptions)
+                    {
+                       if (item.MarcaId == Model?.MarcaId)
+                       {
+                            <option value="@item.MarcaId" selected>@item.Nombre</option>
+                       }
+                       else
+                       {
+                         <option value="@item.MarcaId">@item.Nombre</option>   
+                       }
+                    }
+                </select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

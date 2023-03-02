@@ -12,8 +12,6 @@ namespace DevSys.Gesinv.Models
             IngresoDetalle = new HashSet<IngresoDetalle>();
             LineaCompra = new HashSet<LineaCompra>();
             LineaSalida = new HashSet<LineaSalida>();
-            Marca = new HashSet<Marca>();
-            Medida = new HashSet<Medida>();
         }
 
         public int ProductoId { get; set; }
@@ -21,6 +19,7 @@ namespace DevSys.Gesinv.Models
         public int Codigo { get; set; }
         public int? LineaId { get; set; }
         public int? TipoId { get; set; }
+        public int? MarcaId { get; set; } 
         public int Unidad { get; set; }
         public int? Caja { get; set; }
         public int? GrupoId { get; set; }
@@ -39,7 +38,7 @@ namespace DevSys.Gesinv.Models
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
         public virtual ICollection<LineaSalida> LineaSalida { get; set; }
-        public virtual ICollection<Marca> Marca { get; set; }
-        public virtual ICollection<Medida> Medida { get; set; }
+        public virtual Marca? Marca { get; set; }
+        public virtual Medida? Medida { get; set; }
     }
 }

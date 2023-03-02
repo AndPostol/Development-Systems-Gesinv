@@ -131,7 +131,6 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<ActionResult> Create(ProductoViewModel productoViewModel)
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
-            var selectedLinea = productoViewModel.LineaID; //esto no va a ningun lado
             
             try
             {
@@ -152,6 +151,10 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             ProductoViewModel productoViewModel = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
+
+            List<MarcaViewModel> lstMarca = MarcaViewModel.ListViewModel(await _marcaService.GetAll());
+            ViewBag.MarcaOptions = lstMarca;
+
             return View(productoViewModel);
         }
 

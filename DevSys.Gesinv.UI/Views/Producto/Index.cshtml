@@ -71,10 +71,10 @@
                 @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Linea.Nombre)
+                @Html.DisplayFor(modelItem => item.LineaNombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo.Nombre)
+                @Html.DisplayFor(modelItem => item.TipoNombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Unidad)
@@ -83,7 +83,7 @@
                 @Html.DisplayFor(modelItem => item.Caja)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Grupo.Nombre)
+                @Html.DisplayFor(modelItem => item.GrupoNombre)
             </td>
             <td>
                 @Html.CheckBoxFor(modelItem => item.Activo, new { disabled="disable"})

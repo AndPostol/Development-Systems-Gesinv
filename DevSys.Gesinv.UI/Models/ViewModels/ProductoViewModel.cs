@@ -18,7 +18,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int Codigo { get; set; }
 
         [Display(Name = "Linea")]
-        public int LineaID { get; set; }
+        public int? LineaID { get; set; }
+
+        public string? LineaNombre { get; set; } 
 
 
         //para hacer el dropdownlist https://www.youtube.com/watch?v=A1yJVmtIDXA
@@ -37,7 +39,12 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         [Display(Name = "Tipo")]
         public int? TipoID { get; set; }
+
+        public string? TipoNombre { get; set; }
+
         public string? Bodega { get; set; }
+
+        public int? MarcaId { get; set; } 
 
         [Required]
         public int Unidad { get; set; }
@@ -45,6 +52,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         [Display(Name = "Grupo")]
         public int? GrupoID { get; set; }
+
+        public string? GrupoNombre { get; set; }
 
         [Required]
         public bool Activo { get; set; }
@@ -71,8 +80,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
         public virtual ICollection<LineaSalida> LineaSalida { get; set; }
-        public virtual ICollection<Marca> Marca { get; set; }
-        public virtual ICollection<Medida> Medida { get; set; }
+        public virtual Marca? Marca { get; set; }
+        public virtual Medida? Medida { get; set; }
 
         public static ProductoViewModel ConvertToViewModel(Producto producto)
         {
@@ -81,17 +90,20 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProductoID = producto.ProductoId,
                 Nombre = producto.Nombre,
                 Codigo = producto.Codigo,
-                Linea = producto.Linea,
-                Tipo = producto.Tipo,
                 Unidad = producto.Unidad,
                 Caja = producto.Caja,
-                Grupo = producto.Grupo,
                 Activo = producto.Activo,
                 Iva = producto.Iva,
                 Perecible = producto.Perecible,
                 Comentario = producto.Comentario,
                 FechaCaducidad = producto.FechaCaducidad.Value.ToString("dd/MM/yyyy"),
-                Precio = producto.Precio
+                Precio = producto.Precio,
+                LineaNombre = producto.Linea.Nombre,
+                TipoNombre = producto.Tipo.Nombre,
+                GrupoNombre = producto.Grupo.Nombre,
+                MarcaId = producto.MarcaId,
+                Existencia = producto.Existencia,
+
             };
             return productoViewModel;
         }
@@ -103,17 +115,14 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProductoId = productoViewModel.ProductoID,
                 Nombre = productoViewModel.Nombre,
                 Codigo = productoViewModel.Codigo,
-                Linea = productoViewModel.Linea,
                 LineaId = productoViewModel.LineaID,
-                Tipo = productoViewModel.Tipo,
                 TipoId = productoViewModel.TipoID,
                 Unidad = productoViewModel.Unidad,
                 Caja = productoViewModel.Caja,
-                Grupo = productoViewModel.Grupo,
                 GrupoId = productoViewModel.GrupoID,
                 Activo = productoViewModel.Activo,
                 Iva = productoViewModel.Iva,
-                Marca = productoViewModel.Marca,
+                MarcaId = productoViewModel.MarcaId,
                 Perecible = productoViewModel.Perecible,
                 Comentario = productoViewModel.Comentario,
                 FechaCaducidad = DateTime.Parse(productoViewModel.FechaCaducidad),
