@@ -7,9 +7,11 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     {
 
         public int OrdenCompraId { get; set; }
-        public int? ProveedorId { get; set; }
+        public int ProveedorId { get; set; }
         public string? Referencia { get; set; }
-        public int? CondicionPagoId { get; set; }
+        public int CondicionPagoId { get; set; }
+        public int BodegaId { get; set; }
+
         public string? Observacion { get; set; }
         public DateTime? Fecha { get; set; }
         public double SubTotal { get; set; }
@@ -40,6 +42,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 OrdenCompraId = modelView.OrdenCompraId,
                 ProveedorId= modelView.ProveedorId,
+                BodegaId = modelView.BodegaId,
                 Referencia= modelView.Referencia,
                 CondicionPagoId= modelView.CondicionPagoId,
                 Observacion = modelView.Observacion,
@@ -58,6 +61,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             { 
                 OrdenCompraId = model.OrdenCompraId,
                 ProveedorId= model.Proveedor.ProveedorId,
+                BodegaId= model.BodegaId,
                 Referencia= model.Referencia,
                 CondicionPagoId= model.CondicionPago.CondicionPagoId,
                 Observacion = model.Observacion,

@@ -7,7 +7,15 @@ VALUES
   (3,'Generico 3');
 SET IDENTITY_INSERT [TipoProveedor] OFF;
 
+SET IDENTITY_INSERT [TipoPersona] ON;
+INSERT INTO [TipoPersona] (TipoPersonaID, Nombre)
+VALUES
+(1, 'Normal'),
+(2, 'Juridica'),
+(3, 'Generico');
+
 SET IDENTITY_INSERT [TipoPersona] OFF;
+
 
 SET IDENTITY_INSERT [Empresa] ON;
 INSERT INTO [Empresa] (EmpresaID,Correo,Password)
@@ -416,15 +424,30 @@ VALUES
   (3,'Generico');
 SET IDENTITY_INSERT [CondicionPago] OFF;
 
-SET IDENTITY_INSERT [OrdenCompra] ON;
-INSERT INTO [OrdenCompra] (OrdenCompraID,ProveedorID,Referencia,CondicionPagoID,Observacion,Fecha,SubTotal,Descuento,Impuestos,Total)
+SET IDENTITY_INSERT [Bodega] ON;
+
+INSERT INTO Bodega (BodegaID,Direccion)
 VALUES
-  (1,6,'Portia',2,'laoreet ipsum. Curabitur consequat, lectus','08-05-2022',631,18,982,3),
-  (2,5,'William',3,'luctus et ultrices posuere cubilia','04-01-2023',756,13,958,2),
-  (3,4,'Maisie',1,'sollicitudin adipiscing ligula. Aenean gravida','11-22-2023',718,3,977,5),
-  (4,6,'Janna',1,'sodales. Mauris blandit enim consequat','02-07-2024',381,18,799,0),
-  (5,2,'Brenda',1,'urna, nec luctus felis purus','04-16-2022',168,17,516,6),
-  (6,6,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2);
+  (1,'Almacen A'),
+  (2,'Almacen B'),
+  (3,'Bodega A'),
+  (4,'Bodega B'),
+  (5,'Proveduria');
+SET IDENTITY_INSERT [Bodega] OFF;
+
+SET IDENTITY_INSERT [OrdenCompra] ON;
+INSERT INTO [OrdenCompra] (OrdenCompraID,ProveedorID,BodegaID,Referencia,CondicionPagoID,Observacion,Fecha,SubTotal,Descuento,Impuestos,Total)
+VALUES
+  (1,6,1,'Portia',2,'laoreet ipsum. Curabitur consequat, lectus','08-05-2022',631,18,982,3),
+  (2,5,2,'William',3,'luctus et ultrices posuere cubilia','04-01-2023',756,13,958,2),
+  (3,4,3,'Maisie',1,'sollicitudin adipiscing ligula. Aenean gravida','11-22-2023',718,3,977,5),
+  (4,6,4,'Janna',1,'sodales. Mauris blandit enim consequat','02-07-2024',381,18,799,0),
+  (5,2,5,'Brenda',1,'urna, nec luctus felis purus','04-16-2022',168,17,516,6),
+  (6,6,1,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2),
+  (7,4,3,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2),
+  (8,3,2,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2),
+  (9,9,1,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2),
+  (10,7,4,'Miranda',2,'ligula consectetuer rhoncus. Nullam velit','02-05-2023',272,10,556,2);
 SET IDENTITY_INSERT [OrdenCompra] OFF;
 
 
@@ -476,16 +499,6 @@ VALUES
   (10,10, CONVERT(DATETIME,'01/02/2023'),'arcu eu odio tristique pharetra. Quisque ac');
 SET IDENTITY_INSERT [Requisicion] OFF;
 
-SET IDENTITY_INSERT [Bodega] ON;
-
-INSERT INTO Bodega (BodegaID,Direccion)
-VALUES
-  (1,'Almacen A'),
-  (2,'Almacen B'),
-  (3,'Bodega A'),
-  (4,'Bodega B'),
-  (5,'Proveduria');
-SET IDENTITY_INSERT [Bodega] OFF;
 
 SET IDENTITY_INSERT [Color] ON;
 
@@ -607,18 +620,18 @@ SET IDENTITY_INSERT [Grupo] OFF;
 
 SET IDENTITY_INSERT [Ingreso] ON;
 
-INSERT INTO [Ingreso] (IngresoID,CodigoIngreso,ProveedorID,MotivoID,BodegaID,TipoIngresoID,Fecha,Descuento,Impuestos,Total)
+INSERT INTO [Ingreso] (IngresoID,OrdenCompraID,CodigoIngreso,ProveedorID,MotivoID,BodegaID,TipoIngresoID,Fecha,Descuento,Impuestos,Total)
 VALUES
-  (1,3930,7,5,2,2,CONVERT(DATETIME,'04-04-23'),17,16,2734),
-  (2,8294,7,2,3,2,CONVERT(DATETIME,'01-17-23'),6,13,8490),
-  (3,2605,10,5,2,2,CONVERT(DATETIME,'02-04-23'),16,10,7241),
-  (4,7978,5,6,4,1,CONVERT(DATETIME,'01-05-24'),10,12,8000),
-  (5,2280,2,1,4,1,CONVERT(DATETIME,'06-30-22'),1,17,7287),
-  (6,2867,6,4,4,2,CONVERT(DATETIME,'03-27-22'),10,8,6935),
-  (7,3149,3,1,2,1,CONVERT(DATETIME,'04-24-22'),8,3,3203),
-  (8,4215,5,3,1,1,CONVERT(DATETIME,'07-07-22'),5,12,5458),
-  (9,1458,2,5,3,2,CONVERT(DATETIME,'05-06-23'),14,9,7347),
-  (10,6199,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
+  (1,1,3930,7,5,2,2,CONVERT(DATETIME,'04-04-23'),17,16,2734),
+  (2,2,8294,7,2,3,2,CONVERT(DATETIME,'01-17-23'),6,13,8490),
+  (3,3,2605,10,5,2,2,CONVERT(DATETIME,'02-04-23'),16,10,7241),
+  (4,4,7978,5,6,4,1,CONVERT(DATETIME,'01-05-24'),10,12,8000),
+  (5,5,2280,2,1,4,1,CONVERT(DATETIME,'06-30-22'),1,17,7287),
+  (6,6,2867,6,4,4,2,CONVERT(DATETIME,'03-27-22'),10,8,6935),
+  (7,7,3149,3,1,2,1,CONVERT(DATETIME,'04-24-22'),8,3,3203),
+  (8,8,4215,5,3,1,1,CONVERT(DATETIME,'07-07-22'),5,12,5458),
+  (9,9,1458,2,5,3,2,CONVERT(DATETIME,'05-06-23'),14,9,7347),
+  (10,10,6199,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
 SET IDENTITY_INSERT [Ingreso] OFF;
 
 SET IDENTITY_INSERT [Producto] ON;

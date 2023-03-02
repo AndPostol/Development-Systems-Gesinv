@@ -20,6 +20,8 @@ builder.Services.AddScoped<IGenericRepository<Departamento>, GenericRepository<D
 builder.Services.AddScoped<IGenericRepository<LineaCompra>, GenericRepository<LineaCompra>>();
 builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
 builder.Services.AddScoped<IGenericRepository<Proveedor>, GenericRepository<Proveedor>>();
+builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
+
 
 
 
@@ -30,6 +32,7 @@ builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
 builder.Services.AddScoped<ILineaCompraService, LineaCompraService>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<IProveedorService, ProveedorService>();
+builder.Services.AddScoped<IBodegaService, BodegaService>();
 
 
 

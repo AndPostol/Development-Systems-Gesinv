@@ -74,10 +74,17 @@
                             <span asp-validation-for="Observacion" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                        <label asp-for="Referencia" class="control-label"></label>
-                        <input asp-for="Referencia" class="form-control" />
-                        <span asp-validation-for="Referencia" class="text-danger"></span>
-                    </div>
+                            <label asp-for="Referencia" class="control-label"></label>
+                            <input asp-for="Referencia" class="form-control" />
+                            <span asp-validation-for="Referencia" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-4">
+                            <label asp-for="BodegaId" class="control-label"></label>
+                            <select asp-for="BodegaId" class="form-select"> 
+                                <option selected>Seleccione</option>
+                            </select>
+                            <span asp-validation-for="BodegaId" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
@@ -94,12 +101,12 @@
                             <span asp-validation-for="Impuestos" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                        <label asp-for="Total" class="control-label"></label>
-                        <input asp-for="Total" readonly class="form-control" />
-                        <span asp-validation-for="Total" class="text-danger"></span>
+                            <label asp-for="Total" class="control-label"></label>
+                            <input asp-for="Total" readonly class="form-control" />
+                            <span asp-validation-for="Total" class="text-danger"></span>
                             <input type="hidden" id="CantidadProducto" name="CantidadProducto" value="0" />
-                    </div>
-                    </div>
+                        </div>
+                       
                 </div>
             </div>
             
@@ -125,7 +132,7 @@
             setSelectCondicionPago();
             setSelectProveedor();
             setSelectDepartamento();
-            getAllProducto();
+            setSelectBodega();
         
         });
 
@@ -143,14 +150,14 @@
             });
         }
         function setSelectProveedor(){
-            const inputCondicionPago = $("#ProveedorId");
+            const inputProveedor = $("#ProveedorId");
             fetch("@Url.Action("getList", "Proveedor")")
             .then((response) => {
                 return response.ok ? response.json() : Promise.reject(response)
             })
             .then((data) => {
                 data.forEach((item) => {
-                    inputCondicionPago.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                        inputProveedor.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
                     return data
                 })
             });
@@ -166,18 +173,17 @@
                     });
                 })
         }
-        function getAllProducto() {
-            fetch(`/Producto/getAllProducto`)
+        function setSelectBodega(){
+            const inputBodega = $("#BodegaId");
+
+            fetch("@Url.Action("getList", "Bodega")")
                 .then((response) => {
                     return response.ok ? response.json() : Promise.reject(response)
                 })
                 .then((data) => {
-                        let option_product_list = '';
-                       data.forEach((item) => { 
-                           option_product_list = option_product_list + `<option data-value=${item.productoId}> ${item.nombre} </option>` 
-                       })
-                    $("#listProducts").append(option_product_list)
-                    
+                    data.forEach((item) => {
+                        inputBodega.append(`<option value=${item.bodegaId}> ${item.nombre} </option>`)
+                    });
                 })
         }
         let count = 0;
@@ -197,9 +203,12 @@
             $("#LineaCompra").append(
                 $("<tr>").append(
                     $("<td>").append(`<p class="form-control" id="Linea-Codigo-${count}" name="Linea-Codigo-${count}">${20250}</p>`),
-                    $("<td>").append(`<select class="form-select PendienteProducts" id="Linea-Nombre-${count}" name="Linea-Nombre-${count}" placeholder="Type to search..."> </select>`),
+                    $("<td>").append(`<select class="form-select PendienteProducts" id="Linea-Nombre-${count}" name="Linea-Nombre-${count}" placeholder="Type to search...">
+                                    <option selected>Seleccione</option>
+                            </select>`),
                     $("<td>").append(`<select class="form-select" id="Linea-Departamento-${count}" name="Linea-Departamento-${count}" aria-label="Default select example">
-                                            ${departamentos_select}</select>`),
+                                    <option selected>Seleccione</option>
+                            ${departamentos_select}</select>`),
                     $("<td>").append(`<input type="number" disabled="disabled" value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
                     $("<td>").append(`<input type="number" disabled="disabled" value="1" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
                     $("<td>").append(`<input type="number" readonly value="1" id="Linea-PrecioUnitario-${count}" name="Linea-PrecioUnitario-${count}" class="form-control" />`),

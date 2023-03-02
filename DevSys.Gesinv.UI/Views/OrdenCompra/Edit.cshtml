@@ -98,6 +98,12 @@
                     <input asp-for="Referencia" class="form-control" />
                     <span asp-validation-for="Referencia" class="text-danger"></span>
                 </div>
+                <div class="form-group col-8">
+                    <label asp-for="BodegaId" class="control-label"></label>
+                    <select asp-for="BodegaId" name="BodegaId" class="form-control">
+                    </select>
+                    <span asp-validation-for="BodegaId" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
@@ -140,6 +146,7 @@
         $(document).ready( () => {
             setSelectCondicionPago();
             setSelectProveedor();
+            setSelectBodega();
             for(let i = 0;i < @Model.LineaCompra.Count;i++){
                 $(`#LineaCompra_${i}__Cantidad`).on("change", (ev) => {
                     console.log("Funciona")
@@ -169,7 +176,7 @@
                 });
         }
         function setSelectProveedor() {
-            const inputCondicionPago = $("#ProveedorId");
+            const inputProveedor = $("#ProveedorId");
             fetch("@Url.Action("getList", "Proveedor")")
                 .then((response) => {
                     return response.ok ? response.json() : Promise.reject(response)
@@ -177,26 +184,31 @@
                 .then((data) => {
                     data.forEach((item) => {
                         if (item.proveedorId == @Model.ProveedorId) {
-                            inputCondicionPago.append(`<option selected value="${item.proveedorId}">${item.razonSocial}</option>`);
+                            inputProveedor.append(`<option selected value="${item.proveedorId}">${item.razonSocial}</option>`);
                         }
                         else {
-                            inputCondicionPago.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                            inputProveedor.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
                         }
                     })
                 });
         }
-        function setSelectDepartamento() {
-            fetch("@Url.Action("getList", "Departamento")")
+        function setSelectBodega() {
+            const inputBodega = $("#BodegaId");
+            fetch("@Url.Action("getList", "Bodega")")
                 .then((response) => {
                     return response.ok ? response.json() : Promise.reject(response)
                 })
                 .then((data) => {
                     data.forEach((item) => {
-                        departamentos_select = departamentos_select + `<option value=${item.departamentoId}> ${item.nombre} </option>`
-                    });
-                })
+                        if (item.bodegaId == @Model.BodegaId) {
+                            inputBodega.append(`<option selected value="${item.bodegaId}">${item.nombre}</option>`);
+                        }
+                        else {
+                            inputBodega.append(`<option value="${item.bodegaId}">${item.nombre}</option>`);
+                        }
+                    })
+                });
         }
-        
         function calc_subtotal(index) {
             let sub = 0
             for (let i = 0; i < @Model.LineaCompra.Count; i++) {
@@ -221,5 +233,18 @@
 
             console.log(subtotal)
         }
+        
+        //function setSelectDepartamento() {
+        //    fetch("@Url.Action("getList", "Departamento")")
+        //        .then((response) => {
+        //            return response.ok ? response.json() : Promise.reject(response)
+        //        })
+        //        .then((data) => {
+        //            data.forEach((item) => {
+        //                departamentos_select = departamentos_select + `<option value=${item.departamentoId}> ${item.nombre} </option>`
+        //            });
+        //        })
+        //}
+        
     </script>
 }

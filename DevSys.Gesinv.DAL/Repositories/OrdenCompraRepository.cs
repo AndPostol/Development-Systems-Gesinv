@@ -14,7 +14,6 @@ namespace DevSys.Gesinv.DAL.Repositories
     public class OrdenCompraRepository : GenericRepository<OrdenCompra>, IOrdenCompraRepository
     {
         private readonly DbInventarioContext _dbContext;
-        // Me parece que el table no va en este repo porque ya trabajamos con tablas especificas
         public OrdenCompraRepository(DbInventarioContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
@@ -29,6 +28,8 @@ namespace DevSys.Gesinv.DAL.Repositories
                 try
                 {
                     // Si agrego la entidad aqui ya se le asigna un id el entity
+                    Random rand = new Random();
+                    List<IngresoDetalle> listIngresoDetalle = new List<IngresoDetalle>();
                     double subtotal = 0f;
                     double total = 0f;
                     foreach (LineaCompra linea in entidad.LineaCompra)
@@ -36,21 +37,36 @@ namespace DevSys.Gesinv.DAL.Repositories
                         Producto producto = await _dbContext.Producto.FindAsync(linea.ProductoId);
                         if (producto == null)
                         {
-                            Random rand = new Random();
-                            linea.Producto.Codigo = rand.Next(1,1000);
+                            linea.Producto.Codigo = rand.Next(1, 1000);
                             linea.Producto.Activo = false;
                             linea.Producto.Iva = false;
                             linea.Producto.Perecible = false;
-                            //_dbContext.Producto.Add(linea.Producto);
-                            //_dbContext.SaveChanges();
+                            _dbContext.Producto.Add(linea.Producto);
+                            _dbContext.SaveChanges();
                             producto = linea.Producto;
-                             
+
                         }
                         double descuento = producto.Precio * (linea.Descuento / 100);
                         subtotal += ((producto.Precio * linea.Cantidad) + descuento);
 
-                    }
+                        // Registramos las lineas ingreso detalles
+                        listIngresoDetalle.Add(new IngresoDetalle() { 
+                            ProductoId = producto.ProductoId,
+                            PrecioBruto = linea.Total,
+                            Caja = 0,
+                            Cantidad= linea.Cantidad
+                        });
 
+                    }
+                    OCGenerada.Ingreso = new Ingreso() {
+                        CodigoIngreso = rand.Next(1,1000),
+                        ProveedorId = OCGenerada.ProveedorId,
+                        Fecha = OCGenerada.Fecha,
+                        Descuento = OCGenerada.SubTotal,
+                        Impuestos= OCGenerada.Impuestos,
+                        Total= subtotal,
+                        IngresoDetalle=listIngresoDetalle
+                    };
 
                     await _dbContext.OrdenCompra.AddAsync(OCGenerada);
                     await _dbContext.SaveChangesAsync();

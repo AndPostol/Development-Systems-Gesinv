@@ -52,6 +52,7 @@ namespace DevSys.Gesinv.UI.Controllers
                 OrdenCompraViewModel nuevaOC = new OrdenCompraViewModel()
                 {
                     ProveedorId = Convert.ToInt32(collection["ProveedorId"]),
+                    BodegaId = Convert.ToInt32(collection["BodegaId"]),
                     Referencia = collection["Referencia"],
                     CondicionPagoId = Convert.ToInt32(collection["CondicionPagoId"]),
                     Observacion = collection["Observacion"],
