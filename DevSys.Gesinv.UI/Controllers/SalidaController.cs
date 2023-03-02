@@ -32,42 +32,49 @@ namespace DevSys.Gesinv.UI.Controllers
     // GET: SalidaController/Details/5
     public async Task<ActionResult> Details(int id)
     {
-      //Salida salida = await _salidaService.GetById(id);
+
+      Salida salida = await _salidaService.GetById(id);
       //SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(salida);
 
-      //List<LineaSalida> lineaSalidas = _lineaSalidaService.GetAll().Result.Where(s => s.SalidaId == salida.SalidaId).ToList();
+      List<LineaSalida> lineaSalida = _lineaSalidaService.GetAll().Result.Where(s => s.SalidaId == salida.SalidaId).ToList();
 
 
-
-
-      //var dbContext = new GestionClinicaEntities();
-
-      //var actualizarMedico = dbContext.Medico.Where(m => m.Nombre.StartsWith("Pablo"));
-
-      //foreach (var m in actualizarMedico)
-      //{
-      //  m.Nombre = m.Nombre.Replace("Pablo", "Pablo Jose");
-      //}
-
-
-      ////List<LineaSalida> lineaSalidas = LineaSalidaViewModel.ToLineaSalidaVMList(salidaVM.LineaSalida);
-
-      //List<SalidaViewModel> lstSalidaVM = from s in salidaVM
-      //                                    join ls in lineaSalidas on s.SalidaID equals ls.SalidaId
+      //List<SalidaViewModel> lstSalidaVM = from s in salida
+      //                                    join ls in lineaSalida on s.SalidaId equals ls.SalidaId
       //                                    group s by new
       //                                    {
       //                                      s.Codigo,
-      //                                      s.Motivo.Nombre,
-      //                                      s.Fecha,
-      //                                      s.Requisicion.CodigoRequisicion,
-      //                                      s.Bodega.Direccion,
-      //                                      ls.LineaSalidaId,
-      //                                      ls.ProductoId,
       //                                      ls.Cantidad,
       //                                      ls.CostoSalida
       //                                    } into grupo
       //                                    select grupo;
 
+      return View(salida);
+    }
+
+
+    public async Task<IActionResult> Delete(int id)
+    {
+      Salida salida = await _salidaService.GetById(id);
+
+      SalidaViewModel salidaViewModel = new()
+      {
+        Codigo = salida.Codigo,
+        MotivoNombre = salida.Motivo.Nombre,
+        RequisicionCodigo = salida.Requisicion.CodigoRequisicion,
+        BodegaNombre = salida.Bodega.Direccion,
+      };
+      return View(salida);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(int id, SalidaViewModel salidaViewModel)
+    {
+      if (ModelState.IsValid)
+      {
+        bool respuesta = await _salidaService.Delete(id);
+        return RedirectToAction("Index", "Salida");
+      }
       return View();
     }
   }

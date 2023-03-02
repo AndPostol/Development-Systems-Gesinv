@@ -1,0 +1,43 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel
+
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <title>Eliminar</title>
+</head>
+<body>
+    <h3>Desea eliminar el registro?</h3>
+  <div>
+    <h4>Eliminar</h4>
+    <hr />
+
+    <dl class="row">
+      <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Codigo)
+      </dt>
+      <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.MotivoNombre)
+      </dd>
+      <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.RequisicionCodigo)
+      </dt>
+      <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.BodegaNombre)
+      </dd>
+    </dl>
+
+    <form asp-action="Delete">
+      <input type="hidden" asp-for="SalidaId" />
+      <input type="submit" value="Delete" class="btn btn-danger" />
+      <a asp-action="Index">Back to List</a>
+    </form>
+
+  </div>
+</body>
+</html>

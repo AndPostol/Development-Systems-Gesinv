@@ -33,7 +33,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
       {
         SalidaId = model.SalidaId,
         Codigo = model.Codigo,
-        MotivoNombre = model.Bodega.Direccion,
+        MotivoNombre = model.Motivo.Nombre,
         Fecha = model.Fecha,
         RequisicionCodigo = model.Requisicion.CodigoRequisicion,
         BodegaNombre = model.Bodega.Direccion,
