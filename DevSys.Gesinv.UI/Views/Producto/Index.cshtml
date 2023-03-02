@@ -1,0 +1,121 @@
+﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.ProductoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrupoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Perecible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCaducidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LineaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Caja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrupoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iva)
+            </td>
+            <td>
+                    @Html.CheckBoxFor(modelItem => item.Perecible.Value, new {  disabled="disable"} )
+@*                @if (item.Perecible.Value)
+                    {
+                        <input class="form-check-input" type="checkbox" value="" disabled="disabled" id="flexCheckDefault" checked>
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" value="" disabled="disabled" id="flexCheckDefault">
+                    }*@
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCaducidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,303 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.OrdenCompraViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>OrdenCompraViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container">
+                <div class="row">
+                    <datalist id="listProducts">
+
+                    </datalist>
+                    <div class="form-group col">
+                        <label asp-for="ProveedorId" class="control-label"></label>
+                        <span asp-validation-for="ProveedorId" class="text-danger"></span>
+                        <select class="form-select" asp-for="ProveedorId" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Fecha" class="control-label"></label>
+                        <input asp-for="Fecha" type="date" class="form-control" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="CondicionPagoId" class="control-label"></label>
+                        <select class="form-select" asp-for="CondicionPagoId" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+
+                        </select>
+                        <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Descuento" class="control-label"></label>
+                        <input asp-for="Descuento" class="form-control" />
+                        <span asp-validation-for="Descuento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row my-5">
+                    
+                    <table class="table table-striped border">
+                            <thead>
+                            <tr>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Entrega</th>
+                                <th scope="col">Unidad</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio Unitario</th>
+                                <th scope="col">%</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody id="LineaCompra">
+                            
+                            </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary col-1" id="AgregarProducto">Agregar</button>
+                    <button type="button" class="btn btn-primary col-1">Buscar</button>
+
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label asp-for="Observacion" class="control-label"></label>
+                            <input asp-for="Observacion" class="form-control" />
+                            <span asp-validation-for="Observacion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Referencia" class="control-label"></label>
+                            <input asp-for="Referencia" class="form-control" />
+                            <span asp-validation-for="Referencia" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-4">
+                            <label asp-for="BodegaId" class="control-label"></label>
+                            <select asp-for="BodegaId" class="form-select"> 
+                                <option selected>Seleccione</option>
+                            </select>
+                            <span asp-validation-for="BodegaId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label asp-for="SubTotal" class="control-label"></label>
+                            <input asp-for="SubTotal" readonly class="form-control" />
+                            <span asp-validation-for="SubTotal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Impuestos" class="control-label"></label>
+                            <input asp-for="Impuestos" readonly class="form-control" />
+                            <span asp-validation-for="Impuestos" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Total" class="control-label"></label>
+                            <input asp-for="Total" readonly class="form-control" />
+                            <span asp-validation-for="Total" class="text-danger"></span>
+                            <input type="hidden" id="CantidadProducto" name="CantidadProducto" value="0" />
+                        </div>
+                       
+                </div>
+            </div>
+            
+            
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        let departamentos_select = ''
+        $(document).ready(() => {
+            // Ejecucion
+            setSelectCondicionPago();
+            setSelectProveedor();
+            setSelectDepartamento();
+            setSelectBodega();
+        
+        });
+
+        // Funciones
+        function setSelectCondicionPago() {
+            const inputCondicionPago = $("#CondicionPagoId");
+            fetch("@Url.Action("getList", "CondicionPago")")
+            .then((response) => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then((data) => {
+                data.forEach((item) => {
+                    inputCondicionPago.append(`<option value="${item.condicionPagoId}">${item.nombre}</option>`);
+                })
+            });
+        }
+        function setSelectProveedor(){
+            const inputProveedor = $("#ProveedorId");
+            fetch("@Url.Action("getList", "Proveedor")")
+            .then((response) => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then((data) => {
+                data.forEach((item) => {
+                        inputProveedor.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                    return data
+                })
+            });
+        }
+        function setSelectDepartamento() {
+            fetch("@Url.Action("getList", "Departamento")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        departamentos_select = departamentos_select + `<option value=${item.departamentoId}> ${item.nombre} </option>`
+                    });
+                })
+        }
+        function setSelectBodega(){
+            const inputBodega = $("#BodegaId");
+
+            fetch("@Url.Action("getList", "Bodega")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        inputBodega.append(`<option value=${item.bodegaId}> ${item.nombre} </option>`)
+                    });
+                })
+        }
+        let count = 0;
+        let calc_subtotal = () => {
+            let sub = 0
+            for (let i = 1; i <= count; i++) {
+                sub = sub + parseFloat($(`#Linea-Total-${i}`).val())
+            }
+            return sub
+        }
+
+        let subtotal = calc_subtotal();
+        let impuestos = subtotal * .19;
+        let total =  subtotal + impuestos ;
+        $("#AgregarProducto").click(() => {
+            count += 1;
+            $("#LineaCompra").append(
+                $("<tr>").append(
+                    $("<td>").append(`<p class="form-control" id="Linea-Codigo-${count}" name="Linea-Codigo-${count}">${20250}</p>`),
+                    $("<td>").append(`<select class="form-select PendienteProducts" id="Linea-Nombre-${count}" name="Linea-Nombre-${count}" placeholder="Type to search...">
+                                    <option selected>Seleccione</option>
+                            </select>`),
+                    $("<td>").append(`<select class="form-select" id="Linea-Departamento-${count}" name="Linea-Departamento-${count}" aria-label="Default select example">
+                                    <option selected>Seleccione</option>
+                            ${departamentos_select}</select>`),
+                    $("<td>").append(`<input type="number" disabled="disabled" value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" disabled="disabled" value="1" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" readonly value="1" id="Linea-PrecioUnitario-${count}" name="Linea-PrecioUnitario-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" readonly value="1" id="Linea-Descuento-${count}" name="Linea-Descuento-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" readonly value="1" id="Linea-Total-${count}" name="Linea-Total-${count}" class="form-control" />`)
+                )
+            )
+            getProducts();
+            $("#CantidadProducto").val(count)
+        });
+        function getProducts(){
+            $.ajax({
+                url: "@Url.Action("getAllProducto","Producto")",
+                type: "GET",
+                dataType: "json",
+                success: (response) => {
+                    $(".PendienteProducts").each((index, element) => {
+                        $.each(response, (i, product) => {
+                            $(element).append(`<option value="${product.productoId}"> ${product.nombre} </option>`)
+                                .select2({
+                                    placeholder: "Seleccionar", 
+                                    width: "100%", 
+                                    selectionCssClass: ":all:", 
+                                    theme:"none",
+                                    tags: true,
+                                    createTag: function (params) {
+                                        var term = $.trim(params.term);
+
+                                        if (term === '') {
+                                            return null;
+                                        }
+
+                                        return {
+                                            id: term,
+                                            text: term,
+                                        }
+                                    }
+                                })
+                                .removeClass("PendienteProducts")
+                            
+                        })
+                        $(element).on('change', (ev) => {
+                            let find_product = typeof (response.find(r => element.value == r.productoId)) == 'undefined'
+                                ? { productoId: 0, codigo: 0, precio: 0 }
+                                : response.find(r => element.value == r.productoId)
+                            response.push(find_product)
+                            console.log(response)
+                            const count_property = element.id.slice(-1)
+                            $(`#Linea-Codigo-${count_property}`).text(find_product.codigo)
+                            $(`#Linea-PrecioUnitario-${count_property}`).val(find_product.precio)
+                            //$(`#Linea-Unidad-${count_property}`).removeAttr("disabled").on('change', () => {
+                            //})
+                            setValuesPriceFields(count_property, find_product, $(`#Linea-Cantidad-${count_property}`).val());
+
+                            $(`#Linea-Cantidad-${count_property}`).removeAttr("disabled").on('change', (ev) => {
+                                setValuesPriceFields(count_property,find_product,ev.target.value);
+                            })
+                            if(find_product.codigo == 0){
+                                $(`#Linea-PrecioUnitario-${count_property}`).removeAttr("readonly").on('change', (ev) => {
+                                    find_product.precio = ev.target.value
+                                    setValuesPriceFields(count_property, find_product, $(`#Linea-Cantidad-${count_property}`).val());
+                                })
+                            }
+                            
+
+                                
+                        });
+
+                    }).removeClass("PendienteProducts");
+                    $(".select2-selection").each((index, element) => { $(element).removeClass("select2-selection--single") })
+
+                }
+
+            })
+        }
+        function setValuesPriceFields(index, product, cantidad){
+            let descuento = (($("#Descuento").val() / 100) * product.precio).toFixed(2)
+            $(`#Linea-Descuento-${index}`).val(descuento)
+            let total_linea = ((product.precio - descuento) * cantidad).toFixed(2)
+            $(`#Linea-Total-${index}`).val(total_linea)
+
+            let subtotal = parseFloat(calc_subtotal()).toFixed(2);
+            let impuestos = parseFloat(subtotal * .19).toFixed(2);
+            let total = parseFloat(parseFloat(subtotal) + parseFloat(impuestos)).toFixed(2);
+            $("#SubTotal").val(`${subtotal}`)
+            $("#Impuestos").val(`${impuestos}`)
+            $("#Total").val(`${total}`)
+        }
+        
+        
+    </script>
+}

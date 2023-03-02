@@ -11,6 +11,8 @@ namespace DevSys.Gesinv.Models
         }
 
         public int IngresoId { get; set; }
+        public int OrdenCompraId { get; set; }
+
         public int CodigoIngreso { get; set; }
         public int? ProveedorId { get; set; }
         public int? MotivoId { get; set; }
@@ -22,6 +24,8 @@ namespace DevSys.Gesinv.Models
         public double Total { get; set; }
 
         public virtual Bodega? Bodega { get; set; }
+        public virtual OrdenCompra OrdenCompra{ get; set; }
+        
         public virtual Motivo? Motivo { get; set; }
         public virtual Proveedor? Proveedor { get; set; }
         public virtual TipoIngreso? TipoIngreso { get; set; }

@@ -4,6 +4,7 @@ using DevSys.Gesinv.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevSys.Gesinv.DAL.Migrations
 {
     [DbContext(typeof(DbInventarioContext))]
-    partial class DbInventarioContextModelSnapshot : ModelSnapshot
+    [Migration("20230218203551_Campo-CodProveedor-Eliminado")]
+    partial class CampoCodProveedorEliminado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,9 +219,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Property<int?>("MotivoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdenCompraId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProveedorId")
                         .HasColumnType("int");
 
@@ -234,9 +233,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.HasIndex("BodegaId");
 
                     b.HasIndex("MotivoId");
-
-                    b.HasIndex("OrdenCompraId")
-                        .IsUnique();
 
                     b.HasIndex("ProveedorId");
 
@@ -311,19 +307,19 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartamentoId")
+                    b.Property<int?>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Descuento")
                         .HasColumnType("float");
 
-                    b.Property<int>("OrdenCompraId")
+                    b.Property<int?>("OrdenCompraId")
                         .HasColumnType("int");
 
                     b.Property<double>("Precio")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProductoId")
+                    b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Total")
@@ -438,10 +434,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrdenCompraId"), 1L, 1);
 
-                    b.Property<int>("BodegaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CondicionPagoId")
+                    b.Property<int?>("CondicionPagoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Descuento")
@@ -456,7 +449,7 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Property<string>("Observacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProveedorId")
+                    b.Property<int?>("ProveedorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Referencia")
@@ -469,8 +462,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("OrdenCompraId");
-
-                    b.HasIndex("BodegaId");
 
                     b.HasIndex("CondicionPagoId");
 
@@ -849,12 +840,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                         .WithMany("Ingreso")
                         .HasForeignKey("MotivoId");
 
-                    b.HasOne("DevSys.Gesinv.Models.OrdenCompra", "OrdenCompra")
-                        .WithOne("Ingreso")
-                        .HasForeignKey("DevSys.Gesinv.Models.Ingreso", "OrdenCompraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DevSys.Gesinv.Models.Proveedor", "Proveedor")
                         .WithMany("Ingreso")
                         .HasForeignKey("ProveedorId");
@@ -866,8 +851,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Navigation("Bodega");
 
                     b.Navigation("Motivo");
-
-                    b.Navigation("OrdenCompra");
 
                     b.Navigation("Proveedor");
 
@@ -893,21 +876,15 @@ namespace DevSys.Gesinv.DAL.Migrations
                 {
                     b.HasOne("DevSys.Gesinv.Models.Departamento", "Departamento")
                         .WithMany("LineaCompra")
-                        .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartamentoId");
 
                     b.HasOne("DevSys.Gesinv.Models.OrdenCompra", "OrdenCompra")
                         .WithMany("LineaCompra")
-                        .HasForeignKey("OrdenCompraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrdenCompraId");
 
                     b.HasOne("DevSys.Gesinv.Models.Producto", "Producto")
                         .WithMany("LineaCompra")
-                        .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductoId");
 
                     b.Navigation("Departamento");
 
@@ -951,25 +928,13 @@ namespace DevSys.Gesinv.DAL.Migrations
 
             modelBuilder.Entity("DevSys.Gesinv.Models.OrdenCompra", b =>
                 {
-                    b.HasOne("DevSys.Gesinv.Models.Bodega", "Bodega")
-                        .WithMany("OrdenCompra")
-                        .HasForeignKey("BodegaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DevSys.Gesinv.Models.CondicionPago", "CondicionPago")
                         .WithMany("OrdenCompra")
-                        .HasForeignKey("CondicionPagoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CondicionPagoId");
 
                     b.HasOne("DevSys.Gesinv.Models.Proveedor", "Proveedor")
                         .WithMany("OrdenCompra")
-                        .HasForeignKey("ProveedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Bodega");
+                        .HasForeignKey("ProveedorId");
 
                     b.Navigation("CondicionPago");
 
@@ -1084,8 +1049,6 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.Navigation("Ingreso");
 
-                    b.Navigation("OrdenCompra");
-
                     b.Navigation("Salida");
                 });
 
@@ -1143,9 +1106,6 @@ namespace DevSys.Gesinv.DAL.Migrations
 
             modelBuilder.Entity("DevSys.Gesinv.Models.OrdenCompra", b =>
                 {
-                    b.Navigation("Ingreso")
-                        .IsRequired();
-
                     b.Navigation("LineaCompra");
                 });
 

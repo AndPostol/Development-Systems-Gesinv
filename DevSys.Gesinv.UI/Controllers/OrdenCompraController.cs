@@ -4,33 +4,40 @@ using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DevSys.Gesinv.Models;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
     public class OrdenCompraController : Controller
     {
         private readonly IOrdenCompraService _service;
-        public OrdenCompraController(IOrdenCompraService service) 
+
+
+        public OrdenCompraController(IOrdenCompraService service)
         {
             _service = service;
         }
-        // GET: OrdenCompraController
-        public ActionResult Index()
-        {
-            List<OrdenCompra> lst = _service.GetAll().Result.ToList();
 
-            return View(OrdenCompraViewModel.ToListOCModelView(lst));
+        // GET: OrdenCompraController
+        public async Task<ActionResult> Index()
+        {
+            IEnumerable<OrdenCompra> query = await _service.GetAll();
+            List<OrdenCompraViewModel> lstViewModel = OrdenCompraViewModel.ToViewModelList(query.ToList());
+            return View(lstViewModel);
         }
 
         // GET: OrdenCompraController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            OrdenCompraViewModel model = OrdenCompraViewModel.ToOCModelView(_service.GetById(id).Result);
-            return View(model);
+            OrdenCompra query = await _service.GetById(id);
+            OrdenCompraViewModel modelView = OrdenCompraViewModel.ToViewModel(query);
+            return View(modelView);
         }
 
         // GET: OrdenCompraController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -38,53 +45,111 @@ namespace DevSys.Gesinv.UI.Controllers
         // POST: OrdenCompraController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+                OrdenCompraViewModel nuevaOC = new OrdenCompraViewModel()
+                {
+                    ProveedorId = Convert.ToInt32(collection["ProveedorId"]),
+                    BodegaId = Convert.ToInt32(collection["BodegaId"]),
+                    Referencia = collection["Referencia"],
+                    CondicionPagoId = Convert.ToInt32(collection["CondicionPagoId"]),
+                    Observacion = collection["Observacion"],
+                    Fecha = Convert.ToDateTime(collection["Fecha"]),
+                    SubTotal = Convert.ToDouble(collection["SubTotal"]),
+                    Descuento = Convert.ToDouble(collection["Descuento"]),
+                    Impuestos = Convert.ToDouble(collection["Impuestos"]),
+                    Total = Convert.ToDouble(collection["Total"]),
+                    LineaCompra = new List<LineaCompraViewModel>()
+                    
+                };
+                // Esto es un input que trae la cantidad de lineas a registrar
+                int cantidad = Convert.ToInt32(collection["CantidadProducto"]);
+
+                for (int i = 1; i <= cantidad; i++)
+                {
+                    LineaCompraViewModel row = new LineaCompraViewModel();
+                    try
+                    {
+                        row.ProductoId = Convert.ToInt32(collection[$"Linea-Nombre-{i}"]);
+                    }
+                    catch (Exception)
+                    {
+                        row.ProductoId = 0;
+                        row.Producto = new Producto
+                        {
+                            Nombre = collection[$"Linea-Nombre-{i}"],
+                            Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"])
+                        };
+                    }
+                    row.DepartamentoId = Convert.ToInt32(collection[$"Linea-Departamento-{i}"]);
+                    row.Cantidad = Convert.ToInt32(collection[$"Linea-Cantidad-{i}"]);
+                    row.Caja = 0;
+                    row.Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"]);
+                    row.Descuento = Convert.ToDouble(collection[$"Linea-Descuento-{i}"]);
+                    row.Total = Convert.ToDouble(collection[$"Linea-Total-{i}"]);
+                    nuevaOC.LineaCompra.Add(row);
+                }
+
+                OrdenCompra model = OrdenCompraViewModel.ToModel(nuevaOC);
+                OrdenCompra result = await _service.Registrar(model);
+                return RedirectToAction("Details", "OrdenCompra", new { id = result.OrdenCompraId });
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
         }
 
         // GET: OrdenCompraController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            OrdenCompra query = await _service.GetById(id);
+            OrdenCompraViewModel viewModel = OrdenCompraViewModel.ToViewModel(query);
+            return View(viewModel);
         }
 
         // POST: OrdenCompraController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, OrdenCompraViewModel collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    OrdenCompra updateOrdenCompra = OrdenCompraViewModel.ToModel(collection);
+                    updateOrdenCompra.OrdenCompraId = id;
+                    await _service.Update(updateOrdenCompra);
+                    return RedirectToAction("Index","OrdenCompra");
+                }
+                return View(collection.OrdenCompraId);
             }
             catch
             {
-                return View();
+                return View(collection.OrdenCompraId);
             }
         }
 
         // GET: OrdenCompraController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            OrdenCompra query = await _service.GetById(id);
+            OrdenCompraViewModel viewModel = OrdenCompraViewModel.ToViewModel(query);
+            return View(viewModel);
         }
 
         // POST: OrdenCompraController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, OrdenCompraViewModel collection)
         {
             try
-            {
-                return RedirectToAction(nameof(Index));
+            {             
+                await _service.Delete(id);
+                return RedirectToAction("Index", "OrdenCompra");   
             }
             catch
             {
