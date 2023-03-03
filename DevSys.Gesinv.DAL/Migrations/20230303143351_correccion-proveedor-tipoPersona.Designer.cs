@@ -4,6 +4,7 @@ using DevSys.Gesinv.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevSys.Gesinv.DAL.Migrations
 {
     [DbContext(typeof(DbInventarioContext))]
-    partial class DbInventarioContextModelSnapshot : ModelSnapshot
+    [Migration("20230303143351_correccion-proveedor-tipoPersona")]
+    partial class correccionproveedortipoPersona
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProvinciaId");
 
-                    b.ToTable("Bodega", (string)null);
+                    b.ToTable("Bodega");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Color", b =>
@@ -73,7 +75,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Color", (string)null);
+                    b.ToTable("Color");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.CondicionPago", b =>
@@ -90,7 +92,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("CondicionPagoId");
 
-                    b.ToTable("CondicionPago", (string)null);
+                    b.ToTable("CondicionPago");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Departamento", b =>
@@ -107,7 +109,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("DepartamentoId");
 
-                    b.ToTable("Departamento", (string)null);
+                    b.ToTable("Departamento");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Empresa", b =>
@@ -128,7 +130,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("EmpresaId");
 
-                    b.ToTable("Empresa", (string)null);
+                    b.ToTable("Empresa");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Estado", b =>
@@ -145,7 +147,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("EstadoId");
 
-                    b.ToTable("Estado", (string)null);
+                    b.ToTable("Estado");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Existencia", b =>
@@ -171,7 +173,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Existencia", (string)null);
+                    b.ToTable("Existencia");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Grupo", b =>
@@ -188,7 +190,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("GrupoId");
 
-                    b.ToTable("Grupo", (string)null);
+                    b.ToTable("Grupo");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Ingreso", b =>
@@ -242,7 +244,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("TipoIngresoId");
 
-                    b.ToTable("Ingreso", (string)null);
+                    b.ToTable("Ingreso");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.IngresoDetalle", b =>
@@ -277,7 +279,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("IngresoDetalle", (string)null);
+                    b.ToTable("IngresoDetalle");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Linea", b =>
@@ -294,7 +296,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("LineaId");
 
-                    b.ToTable("Linea", (string)null);
+                    b.ToTable("Linea");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.LineaCompra", b =>
@@ -337,7 +339,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("LineaCompra", (string)null);
+                    b.ToTable("LineaCompra");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.LineaSalida", b =>
@@ -366,7 +368,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("SalidaId");
 
-                    b.ToTable("LineaSalida", (string)null);
+                    b.ToTable("LineaSalida");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Marca", b =>
@@ -388,7 +390,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Marca", (string)null);
+                    b.ToTable("Marca");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Medida", b =>
@@ -410,7 +412,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Medida", (string)null);
+                    b.ToTable("Medida");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Motivo", b =>
@@ -427,7 +429,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("MotivoId");
 
-                    b.ToTable("Motivo", (string)null);
+                    b.ToTable("Motivo");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.OrdenCompra", b =>
@@ -476,7 +478,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProveedorId");
 
-                    b.ToTable("OrdenCompra", (string)null);
+                    b.ToTable("OrdenCompra");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Producto", b =>
@@ -535,7 +537,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("TipoId");
 
-                    b.ToTable("Producto", (string)null);
+                    b.ToTable("Producto");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Proveedor", b =>
@@ -606,7 +608,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("TipoProveedorId");
 
-                    b.ToTable("Proveedor", (string)null);
+                    b.ToTable("Proveedor");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Provincia", b =>
@@ -628,7 +630,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("EstadoId");
 
-                    b.ToTable("Provincia", (string)null);
+                    b.ToTable("Provincia");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Requisicion", b =>
@@ -656,7 +658,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("OrdenCompraId");
 
-                    b.ToTable("Requisicion", (string)null);
+                    b.ToTable("Requisicion");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Salida", b =>
@@ -694,7 +696,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("RequisicionId");
 
-                    b.ToTable("Salida", (string)null);
+                    b.ToTable("Salida");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Tipo", b =>
@@ -711,7 +713,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoId");
 
-                    b.ToTable("Tipo", (string)null);
+                    b.ToTable("Tipo");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.TipoIngreso", b =>
@@ -728,7 +730,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoIngresoId");
 
-                    b.ToTable("TipoIngreso", (string)null);
+                    b.ToTable("TipoIngreso");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.TipoPersona", b =>
@@ -745,7 +747,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoPersonaId");
 
-                    b.ToTable("TipoPersona", (string)null);
+                    b.ToTable("TipoPersona");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.TipoProveedor", b =>
@@ -762,7 +764,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoProveedorId");
 
-                    b.ToTable("TipoProveedor", (string)null);
+                    b.ToTable("TipoProveedor");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Usuario", b =>
@@ -788,7 +790,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Usuario", (string)null);
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Bodega", b =>

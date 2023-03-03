@@ -17,7 +17,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public string Ruc { get; set; } = null!;
         public int? ProvinciaId { get; set; }
         public int? EstadoId { get; set; }
-        public int? TipoPersona { get; set; }
+        public int? TipoPersonaId { get; set; }
         public string? PaginaWeb { get; set; }
 
         public static ProveedorViewModel ToViewModel(Proveedor model)
@@ -37,7 +37,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Ruc = model.Ruc,
                 ProvinciaId = model.ProvinciaId,
                 EstadoId = model.EstadoId,
-                TipoPersona = model.TipoPersona,
+                TipoPersonaId = model.TipoPersonaId,
                 PaginaWeb = model.PaginaWeb
             };
             return modelView;
