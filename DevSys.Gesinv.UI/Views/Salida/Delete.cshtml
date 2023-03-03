@@ -54,14 +54,13 @@
     </thread>
   </table>
 </div>
-
+  <div class="d-flex flex-row-reverse">
   <form asp-action="Delete">
-    <input type="hidden" asp-for="SalidaId" />
-    <input type="submit" value="Eliminar" class="btn btn-outline-danger" /> |
-    @*<input type="submit" value="Eliminar" class="btn btn-danger" />*@
+    <input type="hidden" asp-for="SalidaId"/>
+    <input type="submit" value="Eliminar" class="btn btn-outline-danger"/> |
     <a class="btn btn-outline-success" asp-action="Index">Regresar</a>
   </form>
-
+  </div>
 </div>
 </body>
 </html>
