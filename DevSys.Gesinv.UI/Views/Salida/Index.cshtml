@@ -14,7 +14,7 @@
 <body>
   <h3>Salida de Productos</h3>
   <p>
-    <a asp-action="Create">Ingresar</a>
+    <a class="btn btn-outline-primary" asp-action="Create">Ingresar</a>
   </p>
   <h5 align="center">SALIDAS</h5>
   <table class="table">
@@ -58,12 +58,12 @@
             @Html.DisplayFor(modelItem => item.BodegaNombre)
           </td>
           <td>
-            @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
+@*            @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
             @Html.ActionLink("Editar", "Edit", new { id=item.SalidaId }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.SalidaId }) |
-@*            <a asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a>
-            <a asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a>
-            <a asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>*@
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.SalidaId }) |*@
+            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a> |
+            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a> |
+            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>
           </td>
         </tr>
       }

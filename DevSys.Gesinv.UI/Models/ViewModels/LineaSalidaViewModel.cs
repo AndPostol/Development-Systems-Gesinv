@@ -20,7 +20,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
       LineaSalidaViewModel result = new()
       {
         //LineaSalidaId = model.LineaSalidaId,
-        //SalidaId = model.SalidaId,
+        SalidaId = model.SalidaId,
         ProductoCodigo = model.Producto.Codigo,
         ProductoNombre = model.Producto.Nombre,
         Cantidad = model.Cantidad,
