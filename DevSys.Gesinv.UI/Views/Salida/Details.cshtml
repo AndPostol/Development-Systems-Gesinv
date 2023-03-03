@@ -53,6 +53,57 @@
     </table>
 </div>
 <div>
+
+<div>
+    <table class="table">
+    <thread>
+      <tr align="center">
+        <th>
+          Codigo
+          @*@Html.DisplayNameFor(model => model.Codigo)*@
+        </th>
+        <th>
+          Producto
+          @*@Html.DisplayNameFor(model => model.MotivoNombre)*@
+        </th>
+        <th>
+          Cantidad
+          @*@Html.DisplayNameFor(model => model.Fecha)*@
+        </th>
+        <th>
+          Costo
+          @*@Html.DisplayNameFor(model => model.RequisicionCodigo)*@
+        </th>
+        <th></th>
+      </tr>
+    </thread>
+    <tbody>
+      @foreach (var item in Model.LineaSalida)
+      {
+        <tr align="center">
+          <td>
+            @item.ProductoCodigo
+            @*@Html.DisplayFor(modelItem => item.Codigo)*@
+          </td>
+          <td>
+            @item.ProductoNombre
+            @*@Html.DisplayFor(modelItem => item.MotivoNombre)*@
+          </td>
+          <td>
+            @item.Cantidad
+            @*@Html.DisplayFor(modelItem => item.Fecha)*@
+          </td>
+          <td>
+            @item.CostoSalida
+            @*@Html.DisplayFor(modelItem => item.RequisicionCodigo)*@
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+
     @Html.ActionLink("Editar", "Edit", new {  id = Model.SalidaId  }) |
     <a asp-action="Index">Regresar</a>
 </div>

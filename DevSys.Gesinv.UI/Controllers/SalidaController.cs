@@ -34,16 +34,17 @@ namespace DevSys.Gesinv.UI.Controllers
     {
 
       Salida salida = await _salidaService.GetById(id);
-      //SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(salida);
+      SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(salida);
 
-      SalidaViewModel salidaViewModel = new()
-      {
-        SalidaId = salida.SalidaId,
-        Codigo = salida.Codigo,
-        MotivoNombre = salida.Motivo.Nombre,
-        Fecha = salida.Fecha,
-        BodegaNombre = salida.Bodega.Direccion
-      };
+      //SalidaViewModel salidaViewModel = new()
+      //{
+      //  SalidaId = salida.SalidaId,
+      //  Codigo = salida.Codigo,
+      //  MotivoNombre = salida.Motivo.Nombre,
+      //  Fecha = salida.Fecha,
+      //  BodegaNombre = salida.Bodega.Direccion,
+      //  LineaSalida = (List<LineaSalidaViewModel>)salida.LineaSalida
+      //};
 
 
       //List<LineaSalida> lineaSalida = _lineaSalidaService.GetAll().Result.Where(s => s.SalidaId == salida.SalidaId).ToList();
@@ -59,7 +60,7 @@ namespace DevSys.Gesinv.UI.Controllers
       //                                    } into grupo
       //                                    select grupo;
 
-      return View(salidaViewModel);
+      return View(salidaVM);
     }
 
 
