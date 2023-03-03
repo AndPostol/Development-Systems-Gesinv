@@ -1,1 +1,60 @@
-﻿
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel
+
+@{
+    ViewData["Title"] = "Salida - Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalles</title>
+</head>
+<body>
+
+<div>
+  <h5 align="center">SALIDA</h5>
+  <hr />
+    <table class="table">
+      <thread>
+        <tr align="center">
+          <th>
+            @Html.DisplayNameFor(model => model.Codigo)
+          </th>
+          <th>
+            @Html.DisplayNameFor(model => model.MotivoNombre)
+          </th>
+          <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+          </th>
+          <th>
+            @Html.DisplayNameFor(model => model.BodegaNombre)
+          </th>
+          <th></th>
+        </tr>
+        <tr align="center">
+          <td>
+            @Html.DisplayFor(model => model.Codigo)
+          </td>
+          <td>
+            @Html.DisplayFor(model => model.MotivoNombre)
+          </td>
+          <td>
+            @Html.DisplayFor(model => model.Fecha)
+          </td>
+          <td>
+            @Html.DisplayFor(model => model.BodegaNombre)
+          </td>
+          <th></th>
+        </tr>
+        </thread>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new {  id = Model.SalidaId  }) |
+    <a asp-action="Index">Regresar</a>
+</div>
+</body>
+</html>

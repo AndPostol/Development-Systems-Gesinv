@@ -36,7 +36,17 @@ namespace DevSys.Gesinv.UI.Controllers
       Salida salida = await _salidaService.GetById(id);
       //SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(salida);
 
-      List<LineaSalida> lineaSalida = _lineaSalidaService.GetAll().Result.Where(s => s.SalidaId == salida.SalidaId).ToList();
+      SalidaViewModel salidaViewModel = new()
+      {
+        SalidaId = salida.SalidaId,
+        Codigo = salida.Codigo,
+        MotivoNombre = salida.Motivo.Nombre,
+        Fecha = salida.Fecha,
+        BodegaNombre = salida.Bodega.Direccion
+      };
+
+
+      //List<LineaSalida> lineaSalida = _lineaSalidaService.GetAll().Result.Where(s => s.SalidaId == salida.SalidaId).ToList();
 
 
       //List<SalidaViewModel> lstSalidaVM = from s in salida
@@ -49,7 +59,7 @@ namespace DevSys.Gesinv.UI.Controllers
       //                                    } into grupo
       //                                    select grupo;
 
-      return View(salida);
+      return View(salidaViewModel);
     }
 
 
@@ -59,22 +69,23 @@ namespace DevSys.Gesinv.UI.Controllers
 
       SalidaViewModel salidaViewModel = new()
       {
+        SalidaId = salida.SalidaId,
         Codigo = salida.Codigo,
         MotivoNombre = salida.Motivo.Nombre,
-        RequisicionCodigo = salida.Requisicion.CodigoRequisicion,
+        Fecha = salida.Fecha,
         BodegaNombre = salida.Bodega.Direccion,
       };
-      return View(salida);
+      return View(salidaViewModel);
     }
 
     [HttpPost]
     public async Task<IActionResult> Delete(int id, SalidaViewModel salidaViewModel)
     {
-      if (ModelState.IsValid)
-      {
+      //if (ModelState.IsValid)
+      //{
         bool respuesta = await _salidaService.Delete(id);
         return RedirectToAction("Index", "Salida");
-      }
+      //}
       return View();
     }
   }
