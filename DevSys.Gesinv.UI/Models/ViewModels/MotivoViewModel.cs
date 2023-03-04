@@ -1,4 +1,5 @@
-﻿using DevSys.Gesinv.Models;
+﻿using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Models;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {

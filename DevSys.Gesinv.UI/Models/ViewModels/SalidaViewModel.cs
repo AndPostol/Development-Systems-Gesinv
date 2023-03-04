@@ -35,8 +35,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         Codigo = model.Codigo,
         MotivoNombre = model.Motivo.Nombre,
         Fecha = model.Fecha,
-        RequisicionCodigo = model.Requisicion.CodigoRequisicion,
+        //RequisicionCodigo = model.Requisicion.CodigoRequisicion,
         BodegaNombre = model.Bodega.Direccion,
+        Comentario = model.Comentario,
         LineaSalida = LineaSalidaViewModel.ToLineaSalidaVMList(model.LineaSalida.ToList())
       };
       return result;
@@ -53,29 +54,3 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     }
   }
 }
-
-//void mAutorLibros()
-//{
-//  Console.WriteLine("Autores y Publicaciones:");
-//  int resultado = 0;
-//  var agrupacion = from libro in DataList.ListBooks
-//                   join autor in DataList.ListAuthors on libro.AuthorId equals autor.AuthorId
-//                   group libro by new
-//                   {
-//                     libro.AuthorId,
-//                     autor.Name
-//                   } into grupo
-//                   select grupo;
-
-//  foreach (var grupo in agrupacion)
-//  {
-//    Console.WriteLine("\nAutor: " + grupo.Key.Name + ", (ID: " + grupo.Key.AuthorId + ")");
-//    foreach (var objetoAgrupado in grupo)
-//    {
-//      Console.WriteLine("Titulo: " + objetoAgrupado.Title + ", Fecha de publicacion: " + objetoAgrupado.PublicationDate + ", Ventas: " + objetoAgrupado.Sales + " millones");
-//      resultado++;
-//    }
-//    Console.WriteLine("Cantidad de Publicaciones: " + resultado);
-//    resultado = 0;
-//  }
-//}

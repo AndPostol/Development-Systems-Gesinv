@@ -16,64 +16,38 @@
 
 <div>
   <h5 align="center">SALIDA</h5>
-  <hr />
-    <table class="table">
-      <thread>
-        <tr align="center">
-          <th>
-            @Html.DisplayNameFor(model => model.Codigo)
-          </th>
-          <th>
-            @Html.DisplayNameFor(model => model.MotivoNombre)
-          </th>
-          <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-          </th>
-          <th>
-            @Html.DisplayNameFor(model => model.BodegaNombre)
-          </th>
-          <th></th>
-        </tr>
-        <tr align="center">
-          <td>
-            @Html.DisplayFor(model => model.Codigo)
-          </td>
-          <td>
-            @Html.DisplayFor(model => model.MotivoNombre)
-          </td>
-          <td>
-            @Html.DisplayFor(model => model.Fecha)
-          </td>
-          <td>
-            @Html.DisplayFor(model => model.BodegaNombre)
-          </td>
-          <th></th>
-        </tr>
-        </thread>
-    </table>
+  <hr/>
+  <table class="table">
+    <thread>
+      <tr align="center">
+        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+        <th></th>
+      </tr>
+      <tr align="center">
+        <td>@Html.DisplayFor(model => model.Codigo)</td>
+        <td>@Html.DisplayFor(model => model.MotivoNombre)</td>
+        <td>@Html.DisplayFor(model => model.Fecha)</td>
+        <td>@Html.DisplayFor(model => model.BodegaNombre)</td>
+        <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
+        <th></th>
+      </tr>
+      </thread>
+  </table>
 </div>
 <div>
   <h5 align="center">PRODUCTOS</h5>
   <div>
-      <table class="table">
+    <table class="table">
       <thread>
         <tr align="center">
-          <th>
-            Codigo
-            @*@Html.DisplayNameFor(model => model.Lineasalida.Codigo)*@
-          </th>
-          <th>
-            Producto
-            @*@Html.DisplayNameFor(model => model.MotivoNombre)*@
-          </th>
-          <th>
-            Cantidad
-            @*@Html.DisplayNameFor(model => model.Fecha)*@
-          </th>
-          <th>
-            Costo
-            @*@Html.DisplayNameFor(model => model.RequisicionCodigo)*@
-          </th>
+          <th>Codigo</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Costo</th>
           <th></th>
         </tr>
       </thread>
@@ -81,22 +55,10 @@
         @foreach (var item in Model.LineaSalida)
         {
           <tr align="center">
-            <td>
-              @item.ProductoCodigo
-              @*@Html.DisplayFor(modelItem => item.Codigo)*@
-            </td>
-            <td>
-              @item.ProductoNombre
-              @*@Html.DisplayFor(modelItem => item.MotivoNombre)*@
-            </td>
-            <td>
-              @item.Cantidad
-              @*@Html.DisplayFor(modelItem => item.Fecha)*@
-            </td>
-            <td>
-              @item.CostoSalida
-              @*@Html.DisplayFor(modelItem => item.RequisicionCodigo)*@
-            </td>
+            <td>@item.ProductoCodigo</td>
+            <td>@item.ProductoNombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.CostoSalida</td>
           </tr>
         }
       </tbody>

@@ -20,21 +20,11 @@
   <table class="table">
     <thread>
       <tr align="center">
-        <th>
-          @Html.DisplayNameFor(model => model.Codigo)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.MotivoNombre)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.RequisicionCodigo)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.BodegaNombre)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
         <th></th>
       </tr>
     </thread>
@@ -42,21 +32,11 @@
       @foreach (var item in Model)
       {
         <tr align="center">
-          <td>
-            @Html.DisplayFor(modelItem => item.Codigo)
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.MotivoNombre)
-          </td>
-            <td type="date(dd-mm-yyyy)">
-            @Html.DisplayFor(modelItem => item.Fecha)
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.RequisicionCodigo)
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.BodegaNombre)
-          </td>
+          <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+          <td>@Html.DisplayFor(modelItem => item.MotivoNombre)</td>
+          <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+          <td>@Html.DisplayFor(modelItem => item.BodegaNombre)</td>
+          <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(modelItem => item.Comentario)</textarea></td>
           <td>
 @*            @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
             @Html.ActionLink("Editar", "Edit", new { id=item.SalidaId }) |
