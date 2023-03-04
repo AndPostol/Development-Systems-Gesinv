@@ -75,6 +75,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public decimal Precio { get; set; }
         public int? MedidaId { get; set; }
 
+        public int[]? ListaColoresId { get; set; } //
 
         public virtual Marca? Marca { get; set; }
         public virtual Medida? Medida { get; set; }

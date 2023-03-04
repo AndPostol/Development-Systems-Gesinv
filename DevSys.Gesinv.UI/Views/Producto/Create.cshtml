@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-check">
                                 <label asp-for="ColorProducto" class="control-label"></label>
-                                <select asp-for="ColorProducto" name="ColorProducto" class="form-select" multiple>
+                                <select asp-for="ListaColoresId" name="ListaColoresId" class="form-select" multiple>
                                     @foreach (var item in ViewBag.ColorOptions)
                                     {
                                        <option value="@item.ColorId">@item.Color.Nombre</option> 

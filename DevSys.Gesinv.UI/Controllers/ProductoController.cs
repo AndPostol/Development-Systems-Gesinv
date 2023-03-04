@@ -46,7 +46,7 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController/Create
         public async Task<ActionResult> Create()
         {
-            ProductoViewModel productoViewModel = new ProductoViewModel();
+            //ProductoViewModel productoViewModel = new ProductoViewModel();
             
             //Opciones de Linea
             IEnumerable<Linea> queryLinea = await _lineaService.GetAll();
@@ -128,7 +128,7 @@ namespace DevSys.Gesinv.UI.Controllers
             List<MedidaViewModel> lstMedida = MedidaViewModel.ListViewModel(await _medidaService.GetAll());
             ViewBag.MedidaOptions = lstMedida;
 
-            return View(productoViewModel);
+            return View();
         }
 
         // POST: ProductoController/Create
@@ -137,6 +137,12 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<ActionResult> Create(ProductoViewModel productoViewModel)
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
+            producto.ColorProducto = new List<ColorProducto>();
+            foreach (var item in productoViewModel.ListaColoresId)
+            {
+                producto.ColorProducto.Add(new ColorProducto { ColorId = item });
+            }
+            //OJOOOOOOO si la lista de colores es null o 0 no ejecuta el foreach, para evitar el error de compilacion si esta vacia
             
             try
             {
