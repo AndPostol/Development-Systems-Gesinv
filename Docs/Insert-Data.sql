@@ -652,6 +652,21 @@ VALUES
   (10,'Pack Paletas',4004,2,5,77,42,2,'0','1','1','id, erat. Etiam vestibulum massa rutrum magna. Cras','05-15-22',410, 10, 3);
 SET IDENTITY_INSERT [Producto] OFF;
 
+SET IDENTITY_INSERT [ColorProducto] ON;
+INSERT INTO [ColorProducto] (ColorProductoID, ColorID, ProductoID)
+VALUES
+  (1,1,1),
+  (2,2,2),
+  (3,3,3),
+  (4,4,4),
+  (5,5,5),
+  (6,6,6),
+  (7,7,7),
+  (8,8,8),
+  (9,9,9),
+  (10,10,10);
+SET IDENTITY_INSERT [ColorProducto] OFF;
+
 SET IDENTITY_INSERT [Existencia] ON;
 
 INSERT INTO [Existencia] (ExistenciaID,ProductoID,BodegaID,Stock)

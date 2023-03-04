@@ -17,9 +17,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public int Codigo { get; set; }
 
-        [Display(Name = "Linea")]
         public int? LineaID { get; set; }
 
+        [Display(Name = "Linea")]
         public string? LineaNombre { get; set; } 
 
 
@@ -34,25 +34,25 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public List<SelectListItem> MarcasSelectList { get; set; }
 
 
-
-
-
-        [Display(Name = "Tipo")]
         public int? TipoID { get; set; }
 
+        [Display(Name = "Tipo")]
         public string? TipoNombre { get; set; }
 
         public string? Bodega { get; set; }
 
-        public int? MarcaId { get; set; } 
+        public int? MarcaId { get; set; }
+
+        [Display(Name = "Marca")]
+        public string MarcaNombre { get; set; }
 
         [Required]
         public int Unidad { get; set; }
         public int? Caja { get; set; }
 
-        [Display(Name = "Grupo")]
         public int? GrupoID { get; set; }
 
+        [Display(Name = "Grupo")]
         public string? GrupoNombre { get; set; }
 
         [Required]
@@ -71,17 +71,20 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Column(TypeName = "decimal(5, 2)"), Required]
         public decimal Precio { get; set; }
 
-        
+
+        public virtual Marca? Marca { get; set; }
+        public virtual Medida? Medida { get; set; }
         public virtual Grupo? Grupo { get; set; }
         public virtual Linea? Linea { get; set; }
         public virtual Tipo? Tipo { get; set; }
-        public virtual ICollection<Color> Color { get; set; }
+
+        [Display(Name = "Color")]
+        public virtual ICollection<ColorProducto> ColorProducto { get; set; }
         public virtual ICollection<Existencia> Existencia { get; set; }
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
         public virtual ICollection<LineaSalida> LineaSalida { get; set; }
-        public virtual Marca? Marca { get; set; }
-        public virtual Medida? Medida { get; set; }
+        
 
         public static ProductoViewModel ConvertToViewModel(Producto producto)
         {
@@ -101,8 +104,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 LineaNombre = producto.Linea.Nombre,
                 TipoNombre = producto.Tipo.Nombre,
                 GrupoNombre = producto.Grupo.Nombre,
+                MarcaNombre = producto.Marca.Nombre,
                 MarcaId = producto.MarcaId,
                 Existencia = producto.Existencia,
+                ColorProducto = producto.ColorProducto
 
             };
             return productoViewModel;
@@ -126,7 +131,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Perecible = productoViewModel.Perecible,
                 Comentario = productoViewModel.Comentario,
                 FechaCaducidad = DateTime.Parse(productoViewModel.FechaCaducidad),
-                Precio = (decimal)productoViewModel.Precio
+                Precio = (decimal)productoViewModel.Precio,
+                ColorProducto = productoViewModel.ColorProducto
             };
             return producto;
         }

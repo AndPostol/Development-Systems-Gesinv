@@ -7,7 +7,7 @@ namespace DevSys.Gesinv.Models
     {
         public Producto()
         {
-            Color = new HashSet<Color>();
+            ColorProducto = new HashSet<ColorProducto>();
             Existencia = new HashSet<Existencia>();
             IngresoDetalle = new HashSet<IngresoDetalle>();
             LineaCompra = new HashSet<LineaCompra>();
@@ -18,8 +18,9 @@ namespace DevSys.Gesinv.Models
         public string Nombre { get; set; } = null!;
         public int Codigo { get; set; }
         public int? LineaId { get; set; }
+        public int? MedidaId { get; set; }
         public int? TipoId { get; set; }
-        public int? MarcaId { get; set; } 
+        public int? MarcaId { get; set; }
         public int Unidad { get; set; }
         public int? Caja { get; set; }
         public int? GrupoId { get; set; }
@@ -30,15 +31,17 @@ namespace DevSys.Gesinv.Models
         public DateTime? FechaCaducidad { get; set; }
         public decimal Precio { get; set; }
 
+        public virtual Marca? Marca { get; set; }
+        public virtual Medida? Medida { get; set; }
         public virtual Grupo? Grupo { get; set; }
         public virtual Linea? Linea { get; set; }
         public virtual Tipo? Tipo { get; set; }
-        public virtual ICollection<Color> Color { get; set; }
+      
+        public virtual ICollection<ColorProducto> ColorProducto { get; set; }
         public virtual ICollection<Existencia> Existencia { get; set; }
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
         public virtual ICollection<LineaSalida> LineaSalida { get; set; }
-        public virtual Marca? Marca { get; set; }
-        public virtual Medida? Medida { get; set; }
+
     }
 }
