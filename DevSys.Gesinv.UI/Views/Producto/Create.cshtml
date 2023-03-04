@@ -67,13 +67,23 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label asp-for="GrupoID" class="control-label"></label>
-                                <select class="form-select" asp-items="ViewBag.GrupoOptions" asp-for="GrupoID"></select>
+                                <select class="form-select" asp-items="ViewBag.GrupoOptions" name="GrupoID" asp-for="GrupoID"></select>
                                 <span asp-validation-for="GrupoID" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Marca" class="control-label"></label>
-                                <select class="form-select" asp-items="ViewBag.MarcaOptions" asp-for="Marca"></select>
-                                <span asp-validation-for="Marca" class="text-danger"></span>
+                                <label asp-for="MarcaId" class="control-label"></label>
+                                <select class="form-select" asp-items="ViewBag.MarcaOptions" name="MarcaId" asp-for="Marca"></select>
+                                <span asp-validation-for="MarcaId" class="text-danger"></span>
+                            </div>
+                            <div class="form-check">
+                                <label asp-for="Medida" class="control-label"></label>
+                                <select asp-for="MedidaId" name="MedidaId" class="form-select">
+                                    @foreach (var item in ViewBag.MedidaOptions)
+                                    {
+                                       <option value="@item.MedidaId">@item.Dimension</option> 
+                                    }
+                                </select>
+                                <span asp-validation-for="MedidaId" class="text-danger"></span>
                             </div>
                             <div class="form-check">
                                 @Html.CheckBoxFor(model => model.Activo)
@@ -89,6 +99,16 @@
                                 @Html.CheckBoxFor(Model => Model.Perecible)
                                 <label asp-for="Perecible" class="control-label"></label>
                                 <span asp-validation-for="Perecible" class="text-danger"></span>
+                            </div>
+                            <div class="form-check">
+                                <label asp-for="ColorProducto" class="control-label"></label>
+                                <select asp-for="ColorProducto" name="ColorProducto" class="form-select" multiple>
+                                    @foreach (var item in ViewBag.ColorOptions)
+                                    {
+                                       <option value="@item.ColorId">@item.Color.Nombre</option> 
+                                    }
+                                </select>
+                                <span asp-validation-for="ColorProducto" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

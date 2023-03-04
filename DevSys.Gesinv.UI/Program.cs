@@ -27,8 +27,8 @@ builder.Services.AddScoped<ILineaService, LineaService>();
 builder.Services.AddScoped<IGenericRepository<Marca>, GenericRepository<Marca>>();
 builder.Services.AddScoped<IMarcaService, MarcaService>();
 
-builder.Services.AddScoped<IGenericRepository<Color>, GenericRepository<Color>>();
-builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<IGenericRepository<ColorProducto>, GenericRepository<ColorProducto>>();
+builder.Services.AddScoped<IColorProductoService, ColorProductoService>();
 
 builder.Services.AddScoped<IGenericRepository<Tipo>, GenericRepository<Tipo>>();
 builder.Services.AddScoped<ITipoService, TipoService>();
@@ -38,6 +38,9 @@ builder.Services.AddScoped<IGrupoService, GrupoService>();
 
 builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
 builder.Services.AddScoped<IBodegaService, BodegaService>();
+
+builder.Services.AddScoped<IGenericRepository<Medida>, GenericRepository<Medida>>();
+builder.Services.AddScoped<IMedidaService, MedidaService>();
 
 
 //Conexión a la base de datos

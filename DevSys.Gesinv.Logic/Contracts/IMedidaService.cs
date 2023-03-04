@@ -7,7 +7,7 @@ using DevSys.Gesinv.Models;
 
 namespace DevSys.Gesinv.Logic.Contracts
 {
-    public interface IColorService: IGenericService<Color>
+    public interface IMedidaService: IGenericService<Medida>
     {
     }
 }

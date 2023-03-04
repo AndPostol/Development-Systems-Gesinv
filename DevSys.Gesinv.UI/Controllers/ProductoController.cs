@@ -11,19 +11,21 @@ namespace DevSys.Gesinv.UI.Controllers
     {
         private readonly IProductoService _productoService;
         private readonly IMarcaService _marcaService;
-        private readonly IColorService _colorService;
+        private readonly IColorProductoService _colorProductoService;
         private readonly ILineaService _lineaService;
         private readonly IGrupoService _grupoService;
         private readonly ITipoService _tipoService;
+        private readonly IMedidaService _medidaService;
 
-        public ProductoController(IProductoService productoService, IColorService colorService, ILineaService lineaService, IMarcaService marcaService, IGrupoService grupoService, ITipoService tipoService)
+        public ProductoController(IProductoService productoService, IColorProductoService colorProductoService, ILineaService lineaService, IMarcaService marcaService, IGrupoService grupoService, ITipoService tipoService, IMedidaService medidaService)
         {
             _productoService = productoService;
-            _colorService = colorService;
+            _colorProductoService = colorProductoService;
             _lineaService = lineaService;
             _marcaService = marcaService;
             _grupoService = grupoService;
             _tipoService = tipoService;
+            _medidaService = medidaService;
         }
 
         // GET: ProductoController
@@ -44,6 +46,8 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController/Create
         public async Task<ActionResult> Create()
         {
+            ProductoViewModel productoViewModel = new ProductoViewModel();
+            
             //Opciones de Linea
             IEnumerable<Linea> queryLinea = await _lineaService.GetAll();
             List<LineaViewModel> lstLineaViewModel = LineaViewModel.ListViewModel(queryLinea);
@@ -116,13 +120,15 @@ namespace DevSys.Gesinv.UI.Controllers
 
             ViewBag.TipoOptions = tipos.TiposSelectList;
 
-            //
+            //Opciones de Colores
+            List<ColorProductoViewModel> lstColorProducto = ColorProductoViewModel.ListViewModel(await _colorProductoService.GetAll());
+            ViewBag.ColorOptions = lstColorProducto;
 
+            //Opciones de Medidas
+            List<MedidaViewModel> lstMedida = MedidaViewModel.ListViewModel(await _medidaService.GetAll());
+            ViewBag.MedidaOptions = lstMedida;
 
-
-
-
-            return View();
+            return View(productoViewModel);
         }
 
         // POST: ProductoController/Create

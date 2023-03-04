@@ -9,10 +9,10 @@ using DevSys.Gesinv.DAL.Contracts;
 
 namespace DevSys.Gesinv.Logic.Services
 {
-    public class ColorService: GenericService<Color>, IColorService
+    public class MedidaService: GenericService<Medida>, IMedidaService
     {
-        private readonly IGenericRepository<Color> _repository;
-        public ColorService(IGenericRepository<Color> repository) : base(repository)
+        private readonly IGenericRepository<Medida> _repository;
+        public MedidaService(IGenericRepository<Medida> repository) : base(repository)
         {
             _repository = repository;
         }

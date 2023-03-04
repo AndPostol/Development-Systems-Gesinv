@@ -17,6 +17,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public int Codigo { get; set; }
 
+        [Display(Name = "Linea")]
         public int? LineaID { get; set; }
 
         [Display(Name = "Linea")]
@@ -33,7 +34,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [NotMapped]
         public List<SelectListItem> MarcasSelectList { get; set; }
 
-
+        [Display(Name = "Tipo")]
         public int? TipoID { get; set; }
 
         [Display(Name = "Tipo")]
@@ -41,6 +42,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         public string? Bodega { get; set; }
 
+        [Display(Name = "Marca")]
         public int? MarcaId { get; set; }
 
         [Display(Name = "Marca")]
@@ -50,6 +52,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int Unidad { get; set; }
         public int? Caja { get; set; }
 
+        [Display(Name = "Grupo")]
         public int? GrupoID { get; set; }
 
         [Display(Name = "Grupo")]
@@ -70,6 +73,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         [Column(TypeName = "decimal(5, 2)"), Required]
         public decimal Precio { get; set; }
+        public int? MedidaId { get; set; }
 
 
         public virtual Marca? Marca { get; set; }
@@ -106,6 +110,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 GrupoNombre = producto.Grupo.Nombre,
                 MarcaNombre = producto.Marca.Nombre,
                 MarcaId = producto.MarcaId,
+                MedidaId = producto.MedidaId,
                 Existencia = producto.Existencia,
                 ColorProducto = producto.ColorProducto
 
@@ -128,6 +133,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Activo = productoViewModel.Activo,
                 Iva = productoViewModel.Iva,
                 MarcaId = productoViewModel.MarcaId,
+                MedidaId= productoViewModel.MedidaId,
                 Perecible = productoViewModel.Perecible,
                 Comentario = productoViewModel.Comentario,
                 FechaCaducidad = DateTime.Parse(productoViewModel.FechaCaducidad),
