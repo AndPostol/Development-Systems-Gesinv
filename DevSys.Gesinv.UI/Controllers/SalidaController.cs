@@ -42,7 +42,7 @@ namespace DevSys.Gesinv.UI.Controllers
       Salida _salida = await _salidaService.GetById(id);
       SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(_salida);
 
-      //BODEGA
+      //BODEGA DropDownList
       List<Bodega> _bodega = _bodegaService.GetAll().Result.ToList();
       List<BodegaViewModel> lstBodegaVM = _bodega
                                                         .Select(b => new BodegaViewModel()
@@ -62,7 +62,7 @@ namespace DevSys.Gesinv.UI.Controllers
       });
       ViewBag.sliBodega = sliBodega;
 
-      //MOTIVO
+      //MOTIVO DropDownList
       List<Motivo> _motivo = _motivoService.GetAll().Result.ToList();
       List<MotivoViewModel> lstMotivoVM = _motivo
                                                         .Select(m => new MotivoViewModel()
@@ -86,7 +86,6 @@ namespace DevSys.Gesinv.UI.Controllers
       return View(salidaVM);
     }
 
-
     // GET: SalidaController/Delete/
     public async Task<IActionResult> Delete(int id)
     {
@@ -96,11 +95,19 @@ namespace DevSys.Gesinv.UI.Controllers
       return View(salidaVM);
     }
 
+    // POST: SalidaController/Delete/
     [HttpPost]
     public async Task<IActionResult> Delete(int id, SalidaViewModel salidaViewModel)
     {
-        bool respuesta = await _salidaService.Delete(id);
-        return RedirectToAction("Index", "Salida");
+      try
+      {
+          bool respuesta = await _salidaService.Delete(id);
+          return RedirectToAction("Index", "Salida");
+      }
+      catch
+      {
+        return View();
+      }
     }
   }
 }

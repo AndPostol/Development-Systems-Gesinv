@@ -35,7 +35,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         Codigo = model.Codigo,
         MotivoNombre = model.Motivo.Nombre,
         Fecha = model.Fecha,
-        //RequisicionCodigo = model.Requisicion.CodigoRequisicion,
         BodegaNombre = model.Bodega.Direccion,
         Comentario = model.Comentario,
         LineaSalida = LineaSalidaViewModel.ToLineaSalidaVMList(model.LineaSalida.ToList())

@@ -22,38 +22,50 @@
   <table class="table">
     <thread>
       <tr align="center">
-        <th>
-          @Html.DisplayNameFor(model => model.Codigo)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.MotivoNombre)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-          @Html.DisplayNameFor(model => model.BodegaNombre)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
         <th></th>
       </tr>
       <tr align="center">
-        <td>
-          @Html.DisplayFor(model => model.Codigo)
-        </td>
-        <td>
-          @Html.DisplayFor(model => model.MotivoNombre)
-        </td>
-        <td>
-          @Html.DisplayFor(model => model.Fecha)
-        </td>
-        <td>
-          @Html.DisplayFor(model => model.BodegaNombre)
-        </td>
+        <td>@Html.DisplayFor(model => model.Codigo)</td>
+        <td>@Html.DisplayFor(model => model.MotivoNombre)</td>
+        <td>@Html.DisplayFor(model => model.Fecha)</td>
+        <td>@Html.DisplayFor(model => model.BodegaNombre)</td>
+        <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
         <th></th>
       </tr>
     </thread>
   </table>
 </div>
+<div>
+  <h5 align="center">PRODUCTOS</h5>
+  <div>
+    <table class="table">
+      <thread>
+        <tr align="center">
+          <th>Codigo</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Costo</th>
+          <th></th>
+        </tr>
+      </thread>
+      <tbody>
+        @foreach (var item in Model.LineaSalida)
+        {
+          <tr align="center">
+            <td>@item.ProductoCodigo</td>
+            <td>@item.ProductoNombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.CostoSalida</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
   <div class="d-flex flex-row-reverse">
   <form asp-action="Delete">
     <input type="hidden" asp-for="SalidaId"/>
