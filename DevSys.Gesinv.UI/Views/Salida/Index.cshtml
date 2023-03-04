@@ -12,15 +12,39 @@
   <title>Index</title>
 </head>
 <body>
-  <h3>Salida de Productos</h3>
-  <p>
-    <a class="btn btn-outline-primary" asp-action="Create">Ingresar</a>
-  </p>
-  <h5 align="center">SALIDAS</h5>
+
+<div>
   <table class="table">
+    <h5 align="center">PEDIDOS</h5>
     <thread>
       <tr align="center">
-        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+        <th>Cód. Pedido</th>
+        <th>Cód. Cliente</th>
+        <th>Cód. Producto</th>
+        <th>Cantidad</th>
+        <th></th>
+      </tr>
+  </thread>
+      <tbody>
+    @foreach (var item in ViewBag.Pedido)
+    {
+      <tr align="center">
+        <td>@item.Id</td>
+        <td>@item.ClienteId</td>
+        <td>@item.ProductoId</td>
+        <td>@item.Cantidad</td>
+        <td><a class="btn btn-outline-primary" asp-action="Create">Ingresar</a></td>
+      </tr>
+    }
+  </tbody>
+</div>
+
+<div>
+  <table class="table">
+      <h5 align="center">SALIDAS</h5>
+    <thread>
+      <tr align="center">
+        <th>@Html.DisplayNameFor(model => model.SalidaId)</th>
         <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
         <th>@Html.DisplayNameFor(model => model.Fecha)</th>
         <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
@@ -32,7 +56,7 @@
       @foreach (var item in Model)
       {
         <tr align="center">
-          <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+          <td>@Html.DisplayFor(modelItem => item.SalidaId)</td>
           <td>@Html.DisplayFor(modelItem => item.MotivoNombre)</td>
           <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
           <td>@Html.DisplayFor(modelItem => item.BodegaNombre)</td>
@@ -49,5 +73,7 @@
       }
     </tbody>
   </table>
+</div>
+
 </body>
 </html>

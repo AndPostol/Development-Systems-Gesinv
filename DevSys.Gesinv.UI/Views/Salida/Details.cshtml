@@ -20,7 +20,7 @@
   <table class="table">
     <thread>
       <tr align="center">
-        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+        <th>@Html.DisplayNameFor(model => model.SalidaId)</th>
         <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
         <th>@Html.DisplayNameFor(model => model.Fecha)</th>
         <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
@@ -28,7 +28,7 @@
         <th></th>
       </tr>
       <tr align="center">
-        <td>@Html.DisplayFor(model => model.Codigo)</td>
+        <td>@Html.DisplayFor(model => model.SalidaId)</td>
         <td>@Html.DisplayFor(model => model.MotivoNombre)</td>
         <td>@Html.DisplayFor(model => model.Fecha)</td>
         <td>@Html.DisplayFor(model => model.BodegaNombre)</td>
@@ -44,7 +44,7 @@
     <table class="table">
       <thread>
         <tr align="center">
-          <th>Codigo</th>
+          <th>Código</th>
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Costo</th>
@@ -55,7 +55,7 @@
         @foreach (var item in Model.LineaSalida)
         {
           <tr align="center">
-            <td>@item.ProductoCodigo</td>
+            <td>@item.ProductoId</td>
             <td>@item.ProductoNombre</td>
             <td>@item.Cantidad</td>
             <td>@item.CostoSalida</td>

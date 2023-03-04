@@ -8,6 +8,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   
   public class SalidaViewModel
   {
+    [Display(Name = "Código")]
     public int SalidaId { get; set; }
     public string Codigo { get; set; } = null!;
     public int? MotivoId { get; set; }
@@ -32,7 +33,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
       SalidaViewModel result = new()
       {
         SalidaId = model.SalidaId,
-        Codigo = model.Codigo,
+        //Codigo = model.Codigo,
         MotivoNombre = model.Motivo.Nombre,
         Fecha = model.Fecha,
         BodegaNombre = model.Bodega.Direccion,
