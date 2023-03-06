@@ -3,8 +3,6 @@
 @{
   ViewData["Title"] = "Salida - Editar";
   Layout = "~/Views/Shared/_Layout.cshtml";
-  List<SelectListItem> sliBodega = (List<SelectListItem>)ViewBag.sliBodega;
-  List<SelectListItem> sliMotivo = (List<SelectListItem>)ViewBag.sliMotivo;
 }
 
 <!DOCTYPE html>
@@ -28,13 +26,15 @@
           <th>@Html.DisplayNameFor(model => model.Comentario)</th>
           <th></th>
         </tr>
-        <tr align="center">
-          <td>@Html.DisplayFor(model => model.Codigo)</td>
-          <td>@Html.DropDownList("Motivo", sliMotivo)</td>
-          <td>@Html.DisplayFor(model => model.Fecha)<input type="date"></td>
-          <td>@Html.DropDownList("Bodega", sliBodega)</td>
-          <td><textarea cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
-          <th></th>
+        <tr class="col-md-8">
+          <td><input asp-for="Codigo" class="form-control" /></td>
+          <td><input asp-for="MotivoNombre" class="form-control" /></td></td>
+          <td >
+            <input asp-for="Fecha" type="date" class="form-control" />
+            <span asp-validation-for="Fecha" class="text-danger"></span>
+          </td>
+          <td><input asp-for="BodegaNombre" class="form-control" /></td></td>
+          <td><textarea asp-for"Comentario" cols="30" rows="2" class="form-control"></textarea></td></td>
         </tr>
       </thread>
     </table>
@@ -52,7 +52,14 @@
         <th></th>
       </tr>
     </thread>
-    <tbody>
+      <tr class="col-md-8">
+@*        <td><input asp-for="Codigo" class="form-control" /></td>
+        <td><input asp-for="Producto" class="form-control" /></td></td>
+        <td><input asp-for="Cantidad" class="form-control" /></td>
+        <td><input asp-for="Costo" class="form-control" /></td></td>*@
+      </tr>
+
+@*    <tbody>
       @foreach (var item in Model.LineaSalida)
       {
         <tr align="center">
@@ -62,15 +69,16 @@
           <td><input asp-for=@item.CostoSalida class="form-control"/></td>
         </tr>
       }
-    </tbody>
+    </tbody>*@
   </table>
 </div>
 
 <div class="d-flex flex-row-reverse">
-  <form asp-action="Edit">
-    <input type="hidden" asp-for="SalidaId"/>
-    <input type="submit" value="Editar" class="btn btn-outline-primary"/> |
-    <a class="btn btn-outline-success" asp-action="Index">Regresar</a>
+  <form>
+    <button type="submit" asp-action="Create" class="btn btn-outline-primary">Crear</button> |
+    <button type="submit" asp-action="Index" class="btn btn-outline-success">Regresar</button>
+    @*<input type="submit" value="Crear" class="btn btn-outline-primary"/> |
+    <a class="btn btn-outline-success" asp-action="Index">Regresar</a>*@
   </form>
 </div>
 

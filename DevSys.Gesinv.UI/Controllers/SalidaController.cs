@@ -14,6 +14,7 @@ namespace DevSys.Gesinv.UI.Controllers
     //API PEDIDO
     HttpClient client;
     string url = "https://localhost:7219/api/Pedido";
+    //API PEDIDO
 
     private readonly ISalidaService _salidaService;
     private readonly IBodegaService _bodegaService;
@@ -33,7 +34,7 @@ namespace DevSys.Gesinv.UI.Controllers
       //API PEDIDO
     }
 
-    // GET: SalidaController
+    // GET: SalidaController/Index/
     public async Task<IActionResult> Index()
     {
       //API PEDIDO
@@ -45,8 +46,6 @@ namespace DevSys.Gesinv.UI.Controllers
         var Pedido = JsonConvert.DeserializeObject<List<PedidoViewModel>>(_responseData);
         ViewBag.Pedido = Pedido;
       }
-
-      
       //API PEDIDO
 
       IEnumerable<Salida> _salida = await _salidaService.GetAll();
@@ -62,7 +61,35 @@ namespace DevSys.Gesinv.UI.Controllers
       return View(salidaVM);
     }
 
-    // GET: SalidaController/Details/
+    // GET: SalidaController/Create/
+    public async Task<IActionResult> Create()
+    {
+      return View();
+    }
+
+    // POST: SalidaController/Create/
+    [HttpPost]
+    public async Task<IActionResult> Create(SalidaViewModel salidaVM)
+    {
+      //SalidaViewModel nSalida = new()
+      //{
+      //  SalidaId = Convert.ToInt32(salidaVM["SalidaId"]),
+      //  MotivoNombre = Convert.ToString(salidaVM["MotivoNombre"]),
+      //  Referencia = collection["Referencia"],
+      //  CondicionPagoId = Convert.ToInt32(collection["CondicionPagoId"]),
+      //  Observacion = collection["Observacion"],
+      //  Fecha = Convert.ToDateTime(collection["Fecha"]),
+      //  SubTotal = Convert.ToDouble(collection["SubTotal"]),
+      //  Descuento = Convert.ToDouble(collection["Descuento"]),
+      //  Impuestos = Convert.ToDouble(collection["Impuestos"]),
+      //  Total = Convert.ToDouble(collection["Total"]),
+      //  LineaSalida = new List<LineaSalidaViewModel>()
+      //};
+
+      return View();
+    }
+
+    // GET: SalidaController/Edit/
     public async Task<ActionResult> Edit(int id)
     {
       Salida _salida = await _salidaService.GetById(id);
@@ -106,14 +133,18 @@ namespace DevSys.Gesinv.UI.Controllers
           Selected = false
         };
       });
-
       ViewBag.sliMotivo = sliMotivo;
 
       return View(salidaVM);
     }
 
-    // GET: SalidaController/Details/
+    // POST: SalidaController/Edit/
     [HttpPost]
+    public async Task<IActionResult> Edit(int id, SalidaViewModel salidaViewModel)
+    {
+
+      return View();
+    }
 
 
     // GET: SalidaController/Delete/
