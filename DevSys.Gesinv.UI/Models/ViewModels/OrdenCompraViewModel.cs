@@ -24,6 +24,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public string? NombreProveedor { get; set; }
         [ValidateNever]
         public string? CondicionPago { get; set; }
+        [ValidateNever]
+        public string? BodedaNombre { get; set; }
 
 
         public static List<OrdenCompraViewModel> ToViewModelList(List<OrdenCompra> lstModel) 
@@ -62,6 +64,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 OrdenCompraId = model.OrdenCompraId,
                 ProveedorId= model.Proveedor.ProveedorId,
                 BodegaId= model.BodegaId,
+                BodedaNombre = model.Bodega.Direccion,
                 Referencia= model.Referencia,
                 CondicionPagoId= model.CondicionPago.CondicionPagoId,
                 Observacion = model.Observacion,

@@ -4,141 +4,150 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Orden de Compra #@Model.OrdenCompraId</h1>
 
-<h4>OrdenCompraViewModel</h4>
 <hr />
-<form asp-action="Edit">
-    <div class="container">
-        <div class="row">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
-                <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
-            <div class="form-group col-4">
-                    <label asp-for="ProveedorId" class="control-label"></label>
-                    <select asp-for="ProveedorId" name="ProveedorId" class="form-select">
+<div class="row justify-content-center">
+    <div class="card col-10">
+        <form asp-action="Edit">
+            <div class="card-body">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
+                        <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
+                    <div class="form-group col-4">
+                            <label asp-for="ProveedorId" class="control-label"></label>
+                        <select asp-for="ProveedorId" name="ProveedorId" class="custom-select rounded-0">
                     
-                    </select>
-                    <span asp-validation-for="ProveedorId" class="text-danger"></span>
-                </div>
-            <div class="form-group col-4">
-                    <label asp-for="Fecha" class="control-label"></label>
-                    <input asp-for="Fecha" class="form-control" />
-                    <span asp-validation-for="Fecha" class="text-danger"></span>
-                </div>
-            <div class="form-group col-4">
-                <label asp-for="CondicionPagoId" class="control-label"></label>
-                <select asp-for="CondicionPagoId" name="CondicionPagoId" class="form-select">
+                            </select>
+                            <span asp-validation-for="ProveedorId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                            <label asp-for="Fecha" class="control-label"></label>
+                            <input asp-for="Fecha" class="form-control" />
+                            <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="CondicionPagoId" class="control-label"></label>
+                        <select asp-for="CondicionPagoId" name="CondicionPagoId" class="custom-select rounded-0">
                     
-                </select>
-                <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="row my-5">
-            <table class="table table-striped border">
-                    <thead>
-                        <tr>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Entrega</th>
-                            <th scope="col">Unidad</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Precio Unitario</th>
-                            <th scope="col">%</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="LineaCompra">
-                        @for (int i = 0; i < Model.LineaCompra.Count; i++)
-                        {
-                            <tr>
-                                <td>
-                                    <p class="form-control"> @Model.LineaCompra[i].Producto.Codigo </p>
-                                    @Html.HiddenFor(m => m.LineaCompra[i].LineaCompraId)
+                        </select>
+                        <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row my-5">
+                    <table class="table table-striped border">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Entrega</th>
+                                    <th scope="col">Unidad</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio Unitario</th>
+                                    <th scope="col">%</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="LineaCompra">
+                                @for (int i = 0; i < Model.LineaCompra.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <p class="form-control"> @Model.LineaCompra[i].Producto.Codigo </p>
+                                            @Html.HiddenFor(m => m.LineaCompra[i].LineaCompraId)
 
-                                </td>
-                                <td>
-                                    <input class="form-control" readonly value="@Model.LineaCompra[i].Producto.Nombre">
-                                    @Html.HiddenFor(m => m.LineaCompra[i].ProductoId)
-                                </td>
-                                <td>
-                                    <input class="form-control" readonly value="@Model.LineaCompra[i].Departamento.Nombre">
-                                    @Html.HiddenFor(m => m.LineaCompra[i].DepartamentoId)
+                                        </td>
+                                        <td>
+                                            <input class="form-control" readonly value="@Model.LineaCompra[i].Producto.Nombre">
+                                            @Html.HiddenFor(m => m.LineaCompra[i].ProductoId)
+                                        </td>
+                                        <td>
+                                            <input class="form-control" readonly value="@Model.LineaCompra[i].Departamento.Nombre">
+                                            @Html.HiddenFor(m => m.LineaCompra[i].DepartamentoId)
 
-                                </td>
-                                <td>
-                                    <input  type="number" readonly value="@Model.LineaCompra[i].Caja" asp-for="@Model.LineaCompra[i].Caja" class="form-control" />
-                                </td>
-                                <td>
-                                    <input type="number" value="@Model.LineaCompra[i].Cantidad" asp-for="@Model.LineaCompra[i].Cantidad" class="form-control" />
-                                </td> 
-                                <td>
-                                    <input  type="number" readonly value="@Model.LineaCompra[i].Precio" asp-for="@Model.LineaCompra[i].Precio" class="form-control" />
-                                </td>                            
-                                <td>
-                                    <input  type="number" readonly value="@Model.LineaCompra[i].Descuento" asp-for="@Model.LineaCompra[i].Descuento" class="form-control" />
-                                </td>                            
-                                <td>
-                                    <input type="number" readonly value="@Model.LineaCompra[i].Total" asp-for="@Model.LineaCompra[i].Total" class="form-control" />
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <div class="form-group col-8">
-                <label asp-for="Observacion" class="control-label"></label>
-                <input asp-for="Observacion" class="form-control" />
-                <span asp-validation-for="Observacion" class="text-danger"></span>
-            </div>
-                <div class="form-group col-8">
-                    <label asp-for="Referencia" class="control-label"></label>
-                    <input asp-for="Referencia" class="form-control" />
-                    <span asp-validation-for="Referencia" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <input  type="number" readonly value="@Model.LineaCompra[i].Caja" asp-for="@Model.LineaCompra[i].Caja" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input type="number" value="@Model.LineaCompra[i].Cantidad" asp-for="@Model.LineaCompra[i].Cantidad" class="form-control" />
+                                        </td> 
+                                        <td>
+                                            <input  type="number" readonly value="@Model.LineaCompra[i].Precio" asp-for="@Model.LineaCompra[i].Precio" class="form-control" />
+                                        </td>                            
+                                        <td>
+                                            <input  type="number" readonly value="@Model.LineaCompra[i].Descuento" asp-for="@Model.LineaCompra[i].Descuento" class="form-control" />
+                                        </td>                            
+                                        <td>
+                                            <input type="number" readonly value="@Model.LineaCompra[i].Total" asp-for="@Model.LineaCompra[i].Total" class="form-control" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                 </div>
-                <div class="form-group col-8">
-                    <label asp-for="BodegaId" class="control-label"></label>
-                    <select asp-for="BodegaId" name="BodegaId" class="form-control">
-                    </select>
-                    <span asp-validation-for="BodegaId" class="text-danger"></span>
+                <div class="row">
+                <div class="col-8">
+                    <div class="form-group col-8">
+                    <label asp-for="Observacion" class="control-label"></label>
+                    <input asp-for="Observacion" class="form-control" />
+                    <span asp-validation-for="Observacion" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="form-group">
-                    <label asp-for="SubTotal" class="control-label"></label>
-                    <input asp-for="SubTotal" readonly class="form-control" />
-                    <span asp-validation-for="SubTotal" class="text-danger"></span>
+                    <div class="form-group col-8">
+                        <label asp-for="Referencia" class="control-label"></label>
+                        <input asp-for="Referencia" class="form-control" />
+                        <span asp-validation-for="Referencia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-8">
+                        <label asp-for="BodegaId" class="control-label"></label>
+                        <select asp-for="BodegaId" name="BodegaId" class="form-control">
+                        </select>
+                        <span asp-validation-for="BodegaId" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Descuento" class="control-label"></label>
-                    <input asp-for="Descuento" readonly class="form-control" />
-                    <span asp-validation-for="Descuento" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Impuestos" class="control-label"></label>
-                    <input asp-for="Impuestos" readonly class="form-control" />
-                    <span asp-validation-for="Impuestos" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Total" class="control-label"></label>
-                    <input asp-for="Total" readonly class="form-control" />
-                    <span asp-validation-for="Total" class="text-danger"></span>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="SubTotal" class="control-label"></label>
+                        <input asp-for="SubTotal" readonly class="form-control" />
+                        <span asp-validation-for="SubTotal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descuento" class="control-label"></label>
+                        <input asp-for="Descuento" readonly class="form-control" />
+                        <span asp-validation-for="Descuento" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Impuestos" class="control-label"></label>
+                        <input asp-for="Impuestos" readonly class="form-control" />
+                        <span asp-validation-for="Impuestos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Total" class="control-label"></label>
+                        <input asp-for="Total" readonly class="form-control" />
+                        <span asp-validation-for="Total" class="text-danger"></span>
+                    </div>
+
                 </div>
 
             </div>
+        
+            </div>
 
-        </div>
+            <div class="card-footer" style="background-color: white;">
+                <div class="row">
+                    <div class="col-6 ">
+                        <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                    </div>
+                    <div class="form-group col-6" style="text-align: end;">
+                        <input type="submit" value="Guardar" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
