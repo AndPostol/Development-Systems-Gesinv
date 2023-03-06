@@ -35,7 +35,7 @@
         <td>@item.LineaPedidoId</td>
         <td>@item.ProductoId</td>
         <td>@item.Cantidad</td>
-        <td><a class="btn btn-outline-primary" asp-action="Create">Ingresar</a></td>
+        <td><a class="btn btn-outline-primary" asp-action="Create" asp-route-id="@item.Id">Ingresar</a></td>
       </tr>
     }
   </tbody>

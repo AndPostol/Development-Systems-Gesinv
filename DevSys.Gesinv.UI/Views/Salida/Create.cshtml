@@ -3,6 +3,8 @@
 @{
   ViewData["Title"] = "Salida - Editar";
   Layout = "~/Views/Shared/_Layout.cshtml";
+  List<SelectListItem> sliBodega = (List<SelectListItem>)ViewBag.sliBodega;
+  List<SelectListItem> sliMotivo = (List<SelectListItem>)ViewBag.sliMotivo;
 }
 
 <!DOCTYPE html>
@@ -13,63 +15,55 @@
     <title>Editar</title>
 </head>
 <body>
+
+<div>
+
 <div>
   <h5 align="center">SALIDA</h5>
   <hr/>
-    <table class="table">
-      <thread>
-        <tr align="center">
-          <th>@Html.DisplayNameFor(model => model.Codigo)</th>
-          <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
-          <th>@Html.DisplayNameFor(model => model.Fecha)</th>
-          <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
-          <th>@Html.DisplayNameFor(model => model.Comentario)</th>
-          <th></th>
-        </tr>
-        <tr class="col-md-8">
-          <td><input asp-for="Codigo" class="form-control" /></td>
-          <td><input asp-for="MotivoNombre" class="form-control" /></td></td>
-          <td >
-            <input asp-for="Fecha" type="date" class="form-control" />
-            <span asp-validation-for="Fecha" class="text-danger"></span>
-          </td>
-          <td><input asp-for="BodegaNombre" class="form-control" /></td></td>
-          <td><textarea asp-for"Comentario" cols="30" rows="2" class="form-control"></textarea></td></td>
-        </tr>
-      </thread>
-    </table>
-</div>
-
-<div>
-  <h5 align="center">PRODUCTOS</h5>
   <table class="table">
     <thread>
       <tr align="center">
-        <th>Codigo</th>
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+        <th></th>
+      </tr>
+        <tr align="center">
+          <td>@Html.DropDownList("Motivo", sliMotivo)</td>
+          <td>@*@Html.DisplayFor(model => model.Fecha)*@<input type="date"></td>
+          <td>@Html.DropDownList("Bodega", sliBodega)</td>
+          <td><textarea cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
+          <th></th>
+      </tr>
+      </thread>
+  </table>
+</div>
+
+<div>
+  <table class="table">
+    <h5 align="center">PRODUCTOS</h5>
+    <thread>
+      <tr align="center">
+        <th>Cód. Producto</th>
         <th>Producto</th>
         <th>Cantidad</th>
         <th>Costo</th>
         <th></th>
       </tr>
-    </thread>
-      <tr class="col-md-8">
-@*        <td><input asp-for="Codigo" class="form-control" /></td>
-        <td><input asp-for="Producto" class="form-control" /></td></td>
-        <td><input asp-for="Cantidad" class="form-control" /></td>
-        <td><input asp-for="Costo" class="form-control" /></td></td>*@
+  </thread>
+      <tbody>
+    @foreach (var item in Model.LineaSalida)
+    {
+      <tr align="center">
+        <td>@item.ProductoId</td>
+        <td>@item.ProductoNombre</td>
+        <td>@item.Cantidad</td>
+        <td>@item.CostoSalida</td>
       </tr>
-
-@*    <tbody>
-      @foreach (var item in Model.LineaSalida)
-      {
-        <tr align="center">
-          <td>@item.ProductoCodigo</td>
-          <td>@item.ProductoNombre</td>
-          <td><input asp-for=@item.Cantidad class="form-control"/></td>
-          <td><input asp-for=@item.CostoSalida class="form-control"/></td>
-        </tr>
-      }
-    </tbody>*@
+    }
+  </tbody>
   </table>
 </div>
 
@@ -77,10 +71,11 @@
   <form>
     <button type="submit" asp-action="Create" class="btn btn-outline-primary">Crear</button> |
     <button type="submit" asp-action="Index" class="btn btn-outline-success">Regresar</button>
-    @*<input type="submit" value="Crear" class="btn btn-outline-primary"/> |
+@*    <a class="btn btn-outline-primary" asp-action="Create" >Crear</a> |
     <a class="btn btn-outline-success" asp-action="Index">Regresar</a>*@
   </form>
 </div>
 
+</div>
 </body>
 </html>
