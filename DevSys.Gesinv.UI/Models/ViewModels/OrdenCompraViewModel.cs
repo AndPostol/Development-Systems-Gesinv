@@ -1,15 +1,18 @@
 ﻿using DevSys.Gesinv.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class OrdenCompraViewModel
     {
-
         public int OrdenCompraId { get; set; }
+        [Display(Name = "Proveedor")]
         public int ProveedorId { get; set; }
         public string? Referencia { get; set; }
+        [Display(Name = "Condicion de pago")]
         public int CondicionPagoId { get; set; }
+        [Display(Name = "Bodega")]
         public int BodegaId { get; set; }
 
         public string? Observacion { get; set; }
