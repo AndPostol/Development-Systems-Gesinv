@@ -28,12 +28,36 @@
             </div>
             <div class="form-group">
                 <label asp-for="LineaID" class="control-label"></label>
-                <input asp-for="LineaID" class="form-control" />
+                <select asp-for="LineaID" class="form-select">
+                    @foreach (var item in ViewBag.LineaOptions)
+                    {
+                       if (item.LineaId == Model?.LineaID)
+                       {
+                            <option value="@item.LineaId" selected>@item.Nombre</option>
+                       }
+                       else
+                       {
+                         <option value="@item.LineaId">@item.Nombre</option>   
+                       }
+                    }
+                </select>
                 <span asp-validation-for="LineaID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoID" class="control-label"></label>
-                <input asp-for="TipoID" class="form-control" />
+                <select asp-for="TipoID" class="form-select">
+                    @foreach (var item in ViewBag.TipoOptions)
+                    {
+                       if (item.TipoId == Model?.TipoID)
+                       {
+                            <option value="@item.TipoId" selected>@item.Nombre</option>
+                       }
+                       else
+                       {
+                         <option value="@item.TipoId">@item.Nombre</option>   
+                       }
+                    }
+                </select>
                 <span asp-validation-for="TipoID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,7 +72,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="GrupoID" class="control-label"></label>
-                <input asp-for="GrupoID" class="form-control" />
+                <select asp-for="GrupoID" class="form-select">
+                    @foreach (var item in ViewBag.GrupoOptions)
+                    {
+                       if (item.GrupoId == Model?.GrupoID)
+                       {
+                            <option value="@item.GrupoId" selected>@item.Nombre</option>
+                       }
+                       else
+                       {
+                         <option value="@item.GrupoId">@item.Nombre</option>   
+                       }
+                    }
+                </select>
                 <span asp-validation-for="GrupoID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -82,6 +118,7 @@
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
             <div class="form-group row">
+                <label>Ubicación</label>
                @foreach (var item in Model?.Existencia)
                {
                    <div>@item.Bodega.Direccion</div>
@@ -89,7 +126,8 @@
                }
             </div>
             <div class="form-group">
-                <select asp-for="Marca" class="form-select">
+                <label asp-for="MarcaId" class="control-label"></label>
+                <select asp-for="MarcaId" class="form-select">
                     @foreach (var item in ViewBag.MarcaOptions)
                     {
                        if (item.MarcaId == Model?.MarcaId)
@@ -102,6 +140,47 @@
                        }
                     }
                 </select>
+                <span asp-validation-for="MarcaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedidaId" class="control-label"></label>
+                <select asp-for="MedidaId" class="form-select">
+                    @foreach (var item in ViewBag.MedidaOptions)
+                    {
+                       if (item.MedidaId == Model?.MedidaId)
+                       {
+                            <option value="@item.MedidaId" selected>@item.Dimension</option>
+                       }
+                       else
+                       {
+                         <option value="@item.MedidaId">@item.Dimension</option>   
+                       }
+                    }
+                </select>
+                <span asp-validation-for="MarcaId" class="text-danger"></span>
+            </div>
+            <div class="form-check">
+               <label asp-for="ColorProducto" class="control-label"></label>
+               <select asp-for="ListaColoresId" name="ListaColoresId" class="form-select" multiple>
+                   @foreach (var item in ViewBag.ColorOptions)
+                   {   
+                     foreach (var id in Model?.ListaColoresId)
+                     {
+                            if (item.ColorId == id)
+                            {  
+                                <option value="@item.ColorId" selected>@item.Nombre</option>
+                                break;
+                            }
+                            else
+                            {
+                                <option value="@item.ColorId">@item.Nombre</option>
+                                break;
+                            }
+                     }
+                      
+                   }
+               </select>
+               <span asp-validation-for="ColorProducto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

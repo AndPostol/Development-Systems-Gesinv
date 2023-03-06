@@ -16,8 +16,9 @@ namespace DevSys.Gesinv.UI.Controllers
         private readonly IGrupoService _grupoService;
         private readonly ITipoService _tipoService;
         private readonly IMedidaService _medidaService;
+        private readonly IColorService _colorService;
 
-        public ProductoController(IProductoService productoService, IColorProductoService colorProductoService, ILineaService lineaService, IMarcaService marcaService, IGrupoService grupoService, ITipoService tipoService, IMedidaService medidaService)
+        public ProductoController(IProductoService productoService, IColorProductoService colorProductoService, ILineaService lineaService, IMarcaService marcaService, IGrupoService grupoService, ITipoService tipoService, IMedidaService medidaService, IColorService colorService)
         {
             _productoService = productoService;
             _colorProductoService = colorProductoService;
@@ -26,6 +27,7 @@ namespace DevSys.Gesinv.UI.Controllers
             _grupoService = grupoService;
             _tipoService = tipoService;
             _medidaService = medidaService;
+            _colorService = colorService;
         }
 
         // GET: ProductoController
@@ -45,9 +47,7 @@ namespace DevSys.Gesinv.UI.Controllers
 
         // GET: ProductoController/Create
         public async Task<ActionResult> Create()
-        {
-            //ProductoViewModel productoViewModel = new ProductoViewModel();
-            
+        {   
             //Opciones de Linea
             IEnumerable<Linea> queryLinea = await _lineaService.GetAll();
             List<LineaViewModel> lstLineaViewModel = LineaViewModel.ListViewModel(queryLinea);
@@ -138,9 +138,16 @@ namespace DevSys.Gesinv.UI.Controllers
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
             producto.ColorProducto = new List<ColorProducto>();
-            foreach (var item in productoViewModel.ListaColoresId)
+            if (producto.ColorProducto != null)
             {
-                producto.ColorProducto.Add(new ColorProducto { ColorId = item });
+                foreach (var item in productoViewModel.ListaColoresId)
+                {
+                    producto.ColorProducto.Add(new ColorProducto { ColorId = item });
+                }
+            }
+            else
+            {
+                producto.ColorProducto.Add(new ColorProducto { ColorId = 0 });
             }
             //OJOOOOOOO si la lista de colores es null o 0 no ejecuta el foreach, para evitar el error de compilacion si esta vacia
             
@@ -167,6 +174,21 @@ namespace DevSys.Gesinv.UI.Controllers
             List<MarcaViewModel> lstMarca = MarcaViewModel.ListViewModel(await _marcaService.GetAll());
             ViewBag.MarcaOptions = lstMarca;
 
+            List<LineaViewModel> lstLinea = LineaViewModel.ListViewModel(await _lineaService.GetAll());
+            ViewBag.LineaOptions = lstLinea;
+
+            List<GrupoViewModel> lstGrupo = GrupoViewModel.ListViewModel(await _grupoService.GetAll());
+            ViewBag.GrupoOptions = lstGrupo;
+
+            List<MedidaViewModel> lstMedida = MedidaViewModel.ListViewModel(await _medidaService.GetAll());
+            ViewBag.MedidaOptions = lstMedida;
+
+            List<TipoViewModel> lstTipo = TipoViewModel.ListViewModel(await _tipoService.GetAll());
+            ViewBag.TipoOptions = lstTipo;
+
+            List<ColorViewModel> lstColor = ColorViewModel.ListViewModel(await _colorService.GetAll());
+            ViewBag.ColorOptions = lstColor;
+
             return View(productoViewModel);
         }
 
@@ -176,6 +198,19 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<IActionResult> Edit(ProductoViewModel productoViewModel)
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
+            producto.ColorProducto = new List<ColorProducto>();
+            if (producto.ColorProducto != null)
+            {
+                foreach (var item in productoViewModel.ListaColoresId)
+                {
+                    producto.ColorProducto.Add(new ColorProducto { ColorId = item });
+                }
+            }
+            else
+            {
+                producto.ColorProducto.Add(new ColorProducto { ColorId = 0 });
+            }
+
             try
             {
                 await _productoService.Update(producto);

@@ -42,6 +42,9 @@ builder.Services.AddScoped<IBodegaService, BodegaService>();
 builder.Services.AddScoped<IGenericRepository<Medida>, GenericRepository<Medida>>();
 builder.Services.AddScoped<IMedidaService, MedidaService>();
 
+builder.Services.AddScoped<IGenericRepository<Color>, GenericRepository<Color>>();
+builder.Services.AddScoped<IColorService, ColorService>();
+
 
 //Conexión a la base de datos
 builder.Services.AddDbContext<DbInventarioContext>(options =>

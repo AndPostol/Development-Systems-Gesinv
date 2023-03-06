@@ -33,6 +33,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public List<SelectListItem> GruposSelectList { get; set; }
         [NotMapped]
         public List<SelectListItem> MarcasSelectList { get; set; }
+        public int[]? ListaColoresId { get; set; }
+
 
         [Display(Name = "Tipo")]
         public int? TipoID { get; set; }
@@ -68,14 +70,18 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [MaxLength(50)]
         public string? Comentario { get; set; }
 
-        [Display(Name = "Caducidad"), DataType(DataType.Date), Required]
+        [Display(Name = "Caducidad"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public string FechaCaducidad { get; set; }
 
         [Column(TypeName = "decimal(5, 2)"), Required]
         public decimal Precio { get; set; }
+        
+        [Display(Name = "Medida")]
         public int? MedidaId { get; set; }
+        [Display(Name = "Medida")]
+        public string? MedidaNombre { get; set; }   
 
-        public int[]? ListaColoresId { get; set; } //
+        
 
         public virtual Marca? Marca { get; set; }
         public virtual Medida? Medida { get; set; }
@@ -93,6 +99,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         public static ProductoViewModel ConvertToViewModel(Producto producto)
         {
+            
             ProductoViewModel productoViewModel = new ProductoViewModel()
             {
                 ProductoID = producto.ProductoId,
@@ -110,10 +117,12 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 TipoNombre = producto.Tipo.Nombre,
                 GrupoNombre = producto.Grupo.Nombre,
                 MarcaNombre = producto.Marca.Nombre,
+                MedidaNombre = producto.Medida.Dimension,
                 MarcaId = producto.MarcaId,
                 MedidaId = producto.MedidaId,
                 Existencia = producto.Existencia,
-                ColorProducto = producto.ColorProducto
+                ColorProducto = producto.ColorProducto,
+                ListaColoresId = producto.ColorProducto.Select(c => c.ColorId).ToArray() 
 
             };
             return productoViewModel;
