@@ -208,6 +208,7 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<IActionResult> Edit(ProductoViewModel productoViewModel)
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
+            var product = _productoService.GetColors(productoViewModel.ProductoID);
             producto.ColorProducto = new List<ColorProducto>();
             if (producto.ColorProducto != null)
             {

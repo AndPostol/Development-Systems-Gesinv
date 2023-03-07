@@ -17,6 +17,11 @@ namespace DevSys.Gesinv.Logic.Services
             _repository = repository;
         }
 
+        public async Task<Producto> GetColors(int id)
+        {
+            return await _repository.GetProductoColors(id);
+        }
+
         //public async Task<IList<Linea>> GetLinea()
         //{
         //    Task<IList<Linea>> queryLinea = _repository.GetAll();

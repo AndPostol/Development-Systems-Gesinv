@@ -1,6 +1,7 @@
 ﻿using DevSys.Gesinv.DAL.Contracts;
 using DevSys.Gesinv.DAL.DataContext;
 using DevSys.Gesinv.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,11 @@ namespace DevSys.Gesinv.DAL.Repositories
              
             return result;
         }
+
+        public async Task<Producto> GetProductoColors(int id)
+        {
+            return await _dbContext.Producto.Include(p => p.ColorProducto).ThenInclude(pc => pc.Color).FirstOrDefaultAsync(p => p.ProductoId == id);
+        }
+
     }
 }

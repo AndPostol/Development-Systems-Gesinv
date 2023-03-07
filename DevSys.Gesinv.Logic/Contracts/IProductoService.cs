@@ -13,6 +13,7 @@ namespace DevSys.Gesinv.Logic.Contracts
         Task<Producto> ObtenerPorNombre(string Nombre);
         Task<Producto> ProductosInactivos(bool Activo);
         Task<bool> pruebaUpdate(Producto inProducto);
+        Task<Producto> GetColors(int id);
 
         //Task<IList<Linea>> GetLinea();
     }
