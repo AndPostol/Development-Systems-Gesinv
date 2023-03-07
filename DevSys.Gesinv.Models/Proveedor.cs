@@ -24,13 +24,13 @@ namespace DevSys.Gesinv.Models
         public string Ruc { get; set; } = null!;
         public int? ProvinciaId { get; set; }
         public int? EstadoId { get; set; }
-        public int? TipoPersona { get; set; }
+        public int? TipoPersonaId { get; set; }
         public string? PaginaWeb { get; set; }
 
         public virtual Empresa? Empresa { get; set; }
         public virtual Estado? Estado { get; set; }
         public virtual Provincia? Provincia { get; set; }
-        public virtual TipoPersona? TipoPersonaNavigation { get; set; }
+        public virtual TipoPersona? TipoPersona { get; set; }
         public virtual TipoProveedor? TipoProveedor { get; set; }
         public virtual ICollection<Ingreso> Ingreso { get; set; }
         public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }

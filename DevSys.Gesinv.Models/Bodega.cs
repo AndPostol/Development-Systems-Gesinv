@@ -10,6 +10,7 @@ namespace DevSys.Gesinv.Models
             Existencia = new HashSet<Existencia>();
             Ingreso = new HashSet<Ingreso>();
             Salida = new HashSet<Salida>();
+            OrdenCompra = new HashSet<OrdenCompra>();
         }
 
         public int BodegaId { get; set; }
@@ -21,6 +22,8 @@ namespace DevSys.Gesinv.Models
         public virtual Empresa? Empresa { get; set; }
         public virtual Estado? Estado { get; set; }
         public virtual Provincia? Provincia { get; set; }
+        public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
+
         public virtual ICollection<Existencia> Existencia { get; set; }
         public virtual ICollection<Ingreso> Ingreso { get; set; }
         public virtual ICollection<Salida> Salida { get; set; }

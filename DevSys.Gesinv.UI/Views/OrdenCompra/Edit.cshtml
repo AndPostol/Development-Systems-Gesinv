@@ -1,0 +1,259 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.OrdenCompraViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Orden de Compra #@Model.OrdenCompraId</h1>
+
+<hr />
+<div class="row justify-content-center">
+    <div class="card col-10">
+        <form asp-action="Edit">
+            <div class="card-body">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="OrdenCompraId" class="form-control" hidden="hidden" />
+                        <span asp-validation-for="OrdenCompraId" class="text-danger"></span>
+                    <div class="form-group col-4">
+                            <label asp-for="ProveedorId" class="control-label"></label>
+                        <select asp-for="ProveedorId" name="ProveedorId" class="custom-select rounded-0">
+                    
+                            </select>
+                            <span asp-validation-for="ProveedorId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                            <label asp-for="Fecha" class="control-label"></label>
+                            <input asp-for="Fecha" class="form-control" />
+                            <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="CondicionPagoId" class="control-label"></label>
+                        <select asp-for="CondicionPagoId" name="CondicionPagoId" class="custom-select rounded-0">
+                    
+                        </select>
+                        <span asp-validation-for="CondicionPagoId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row my-5">
+                    <table class="table table-striped border">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Entrega</th>
+                                    <th scope="col">Unidad</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio Unitario</th>
+                                    <th scope="col">%</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="LineaCompra">
+                                @for (int i = 0; i < Model.LineaCompra.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <p class="form-control"> @Model.LineaCompra[i].Producto.Codigo </p>
+                                            @Html.HiddenFor(m => m.LineaCompra[i].LineaCompraId)
+
+                                        </td>
+                                        <td>
+                                            <input class="form-control" readonly value="@Model.LineaCompra[i].Producto.Nombre">
+                                            @Html.HiddenFor(m => m.LineaCompra[i].ProductoId)
+                                        </td>
+                                        <td>
+                                            <input class="form-control" readonly value="@Model.LineaCompra[i].Departamento.Nombre">
+                                            @Html.HiddenFor(m => m.LineaCompra[i].DepartamentoId)
+
+                                        </td>
+                                        <td>
+                                            <input  type="number" readonly value="@Model.LineaCompra[i].Caja" asp-for="@Model.LineaCompra[i].Caja" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input type="number" value="@Model.LineaCompra[i].Cantidad" asp-for="@Model.LineaCompra[i].Cantidad" class="form-control" />
+                                        </td> 
+                                        <td>
+                                            <input  type="number" readonly value="@Model.LineaCompra[i].Precio" asp-for="@Model.LineaCompra[i].Precio" class="form-control" />
+                                        </td>                            
+                                        <td>
+                                            <input  type="number" readonly value="@Model.LineaCompra[i].Descuento" asp-for="@Model.LineaCompra[i].Descuento" class="form-control" />
+                                        </td>                            
+                                        <td>
+                                            <input type="number" readonly value="@Model.LineaCompra[i].Total" asp-for="@Model.LineaCompra[i].Total" class="form-control" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                </div>
+                <div class="row">
+                <div class="col-8">
+                    <div class="form-group col-8">
+                    <label asp-for="Observacion" class="control-label"></label>
+                    <input asp-for="Observacion" class="form-control" />
+                    <span asp-validation-for="Observacion" class="text-danger"></span>
+                </div>
+                    <div class="form-group col-8">
+                        <label asp-for="Referencia" class="control-label"></label>
+                        <input asp-for="Referencia" class="form-control" />
+                        <span asp-validation-for="Referencia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-8">
+                        <label asp-for="BodegaId" class="control-label"></label>
+                        <select asp-for="BodegaId" name="BodegaId" class="form-control">
+                        </select>
+                        <span asp-validation-for="BodegaId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="SubTotal" class="control-label"></label>
+                        <input asp-for="SubTotal" readonly class="form-control" />
+                        <span asp-validation-for="SubTotal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descuento" class="control-label"></label>
+                        <input asp-for="Descuento" readonly class="form-control" />
+                        <span asp-validation-for="Descuento" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Impuestos" class="control-label"></label>
+                        <input asp-for="Impuestos" readonly class="form-control" />
+                        <span asp-validation-for="Impuestos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Total" class="control-label"></label>
+                        <input asp-for="Total" readonly class="form-control" />
+                        <span asp-validation-for="Total" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+        
+            </div>
+
+            <div class="card-footer" style="background-color: white;">
+                <div class="row">
+                    <div class="col-6 ">
+                        <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                    </div>
+                    <div class="form-group col-6" style="text-align: end;">
+                        <input type="submit" value="Guardar" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready( () => {
+            setSelectCondicionPago();
+            setSelectProveedor();
+            setSelectBodega();
+            for(let i = 0;i < @Model.LineaCompra.Count;i++){
+                $(`#LineaCompra_${i}__Cantidad`).on("change", (ev) => {
+                    console.log("Funciona")
+                    let producto = {
+                        precio : $(`#LineaCompra_${i}__Precio`).val()
+                    }
+                    setValuesPriceFields(i, producto, ev.target.value)
+                })
+            }
+        })
+
+        function setSelectCondicionPago() {
+            const inputCondicionPago = $("#CondicionPagoId");
+            fetch("@Url.Action("getList", "CondicionPago")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        if(item.condicionPagoId == @Model.CondicionPagoId) {
+                            inputCondicionPago.append(`<option selected value="${item.condicionPagoId}">${item.nombre}</option>`);
+                        }
+                        else {
+                            inputCondicionPago.append(`<option value="${item.condicionPagoId}">${item.nombre}</option>`);
+                        }
+                    })
+                });
+        }
+        function setSelectProveedor() {
+            const inputProveedor = $("#ProveedorId");
+            fetch("@Url.Action("getList", "Proveedor")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        if (item.proveedorId == @Model.ProveedorId) {
+                            inputProveedor.append(`<option selected value="${item.proveedorId}">${item.razonSocial}</option>`);
+                        }
+                        else {
+                            inputProveedor.append(`<option value="${item.proveedorId}">${item.razonSocial}</option>`);
+                        }
+                    })
+                });
+        }
+        function setSelectBodega() {
+            const inputBodega = $("#BodegaId");
+            fetch("@Url.Action("getList", "Bodega")")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((data) => {
+                    data.forEach((item) => {
+                        if (item.bodegaId == @Model.BodegaId) {
+                            inputBodega.append(`<option selected value="${item.bodegaId}">${item.nombre}</option>`);
+                        }
+                        else {
+                            inputBodega.append(`<option value="${item.bodegaId}">${item.nombre}</option>`);
+                        }
+                    })
+                });
+        }
+        function calc_subtotal(index) {
+            let sub = 0
+            for (let i = 0; i < @Model.LineaCompra.Count; i++) {
+                sub = sub + parseFloat($(`#LineaCompra_${index}__Total`).val())
+            }
+            return sub
+        }
+
+        function setValuesPriceFields(index, product, cantidad) {
+            let descuento = (($("#Descuento").val() / 100) * parseFloat(product.precio)).toFixed(2)
+            $(`#LineaCompra_${index}__Descuento`).val(descuento)
+            let total_linea = ((product.precio - descuento) * cantidad).toFixed(2)
+            $(`#LineaCompra_${index}__Total`).val(total_linea)
+
+            let subtotal = parseFloat(calc_subtotal(index)).toFixed(2);
+            let impuestos = parseFloat(subtotal * .19).toFixed(2);
+            let total = parseFloat(parseFloat(subtotal) + parseFloat(impuestos)).toFixed(2);
+            $("#SubTotal").val(subtotal)
+            $("#Impuestos").val(impuestos)
+            $("#Total").val(total)
+
+
+            console.log(subtotal)
+        }
+        
+        //function setSelectDepartamento() {
+        //    fetch("@Url.Action("getList", "Departamento")")
+        //        .then((response) => {
+        //            return response.ok ? response.json() : Promise.reject(response)
+        //        })
+        //        .then((data) => {
+        //            data.forEach((item) => {
+        //                departamentos_select = departamentos_select + `<option value=${item.departamentoId}> ${item.nombre} </option>`
+        //            });
+        //        })
+        //}
+        
+    </script>
+}

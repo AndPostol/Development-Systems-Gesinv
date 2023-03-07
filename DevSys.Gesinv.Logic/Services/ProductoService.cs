@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DevSys.Gesinv.DAL.Contracts;
+using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +16,7 @@ namespace DevSys.Gesinv.Logic.Services
     {
         public ProductoService(IGenericRepository<Producto> respository) : base(respository)
         {
-        }
+        }   
     }
 }
 
