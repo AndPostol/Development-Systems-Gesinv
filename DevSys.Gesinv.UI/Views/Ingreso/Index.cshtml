@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.IngresoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IngresoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProveedorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotivoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodegaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoIngresoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descuento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Impuestos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngresoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProveedorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotivoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BodegaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoIngresoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descuento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Impuestos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
