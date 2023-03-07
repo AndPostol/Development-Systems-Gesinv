@@ -623,21 +623,6 @@ VALUES
 	(10,'Primor');
 SET IDENTITY_INSERT [Marca] OFF;
 
-SET IDENTITY_INSERT [LineaSalida] ON;
-INSERT INTO [LineaSalida] (LineaSalidaID,Cantidad,CostoSalida,SalidaID,ProductoID)
-VALUES
-  (1,98,3223,1,1),
-  (2,54,7732,2,2),
-  (3,0,5455,3,3),
-  (4,67,2287,4,4),
-  (5,63,5508,5,5),
-  (6,85,2704,6,6),
-  (7,32,7124,7,7),
-  (8,2,5880,8,8),
-  (9,89,3768,9,9),
-  (10,12,562,10,10);
-SET IDENTITY_INSERT [LineaSalida] OFF;
-
 SET IDENTITY_INSERT [Medida] ON;
 
 INSERT INTO [Medida] (MedidaID,Dimension)
@@ -729,4 +714,19 @@ VALUES
   (9,2,2,49,CONVERT(DATE,'06/02/2023'),257,43),
   (10,5,8,79,CONVERT(DATE,'06/02/2023'),16,83);
 SET IDENTITY_INSERT [IngresoDetalle] OFF;
+
+SET IDENTITY_INSERT [LineaSalida] ON;
+INSERT INTO [LineaSalida] (LineaSalidaID,Cantidad,CostoSalida,SalidaID,ProductoID)
+VALUES
+  (1,98,3223,1,1),
+  (2,54,7732,2,2),
+  (3,0,5455,3,3),
+  (4,67,2287,4,4),
+  (5,63,5508,5,5),
+  (6,85,2704,6,6),
+  (7,32,7124,7,7),
+  (8,2,5880,8,8),
+  (9,89,3768,9,9),
+  (10,12,562,10,10);
+SET IDENTITY_INSERT [LineaSalida] OFF;
 

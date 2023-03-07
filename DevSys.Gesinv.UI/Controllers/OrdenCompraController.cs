@@ -81,7 +81,7 @@ namespace DevSys.Gesinv.UI.Controllers
                         row.Producto = new Producto
                         {
                             Nombre = collection[$"Linea-Nombre-{i}"],
-                            Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"])
+                            Precio = Convert.ToDecimal(collection[$"Linea-PrecioUnitario-{i}"])
                         };
                     }
                     row.DepartamentoId = Convert.ToInt32(collection[$"Linea-Departamento-{i}"]);
