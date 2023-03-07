@@ -10,5 +10,9 @@ namespace DevSys.Gesinv.Logic.Contracts
 {
     public interface IProductoService: IGenericService<Producto>
     {
+        Task<Producto> ObtenerPorCodigo(int Codigo);
+        Task<Producto> ObtenerPorNombre(string Nombre);
+        Task<Producto> ProductosInactivos(bool Activo);
+        Task<Producto> GetColors(int id);
     }
 }
