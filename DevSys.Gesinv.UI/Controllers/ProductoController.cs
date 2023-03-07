@@ -206,14 +206,10 @@ namespace DevSys.Gesinv.UI.Controllers
                     producto.ColorProducto.Add(new ColorProducto { ColorId = item });
                 }
             }
-            else
-            {
-                producto.ColorProducto.Add(new ColorProducto { ColorId = 0 });
-            }
 
             try
             {
-                await _productoService.Update(producto);
+                bool result = await _productoService.pruebaUpdate(producto);
                 return RedirectToAction("Index", "Producto");
                 
             }

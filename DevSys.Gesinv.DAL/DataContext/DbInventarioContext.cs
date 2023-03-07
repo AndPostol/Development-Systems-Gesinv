@@ -10,7 +10,7 @@ namespace DevSys.Gesinv.DAL.DataContext
 {
     public class DbInventarioContext : DbContext
     {
-        private readonly string SQLConnecion = "Data Source=localhost;Initial Catalog=DbInventario;Integrated Security=True;Trust Server Certificate=True;";
+        private readonly string SQLConnecion = "Data Source=localhost;Initial Catalog=DbInventarioProducto;Integrated Security=True;Trust Server Certificate=True;";
         protected override void OnConfiguring(DbContextOptionsBuilder options) {
             options.UseSqlServer(SQLConnecion);
         }

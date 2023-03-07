@@ -18,7 +18,7 @@ builder.Services.AddScoped<IGenericRepository<OrdenCompra>, GenericRepository<Or
 builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
 
 //Inyencción de dependencias
-builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
+builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 
 builder.Services.AddScoped<IGenericRepository<Linea>, GenericRepository<Linea>>();

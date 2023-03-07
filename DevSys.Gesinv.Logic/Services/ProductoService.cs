@@ -11,8 +11,8 @@ namespace DevSys.Gesinv.Logic.Services
 {
     public class ProductoService : GenericService<Producto>, IProductoService
     {
-        private readonly IGenericRepository<Producto> _repository;
-        public ProductoService(IGenericRepository<Producto> repository) : base(repository)
+        private readonly IProductoRepository _repository;
+        public ProductoService(IProductoRepository repository) : base(repository)
         {
             _repository = repository;
         }
@@ -42,6 +42,11 @@ namespace DevSys.Gesinv.Logic.Services
             Producto producto = queryProducto.Where(producto => producto.Activo == Activo).FirstOrDefault();
             return producto;
             //este metodo esta raro
+        }
+
+        public async Task<bool> pruebaUpdate(Producto inProducto)
+        {
+            return await _repository.pruebaUpdate(inProducto);
         }
     }
 }
