@@ -241,5 +241,19 @@ namespace DevSys.Gesinv.UI.Controllers
         return View();
       }
     }
+
+    public async void allAPI()
+    {
+      //API PEDIDO
+      HttpResponseMessage _responseMessage = await client.GetAsync(url);
+      if (_responseMessage.IsSuccessStatusCode)
+      {
+        var _responseData = _responseMessage.Content.ReadAsStringAsync().Result;
+
+        var Pedido = JsonConvert.DeserializeObject<List<PedidoViewModel>>(_responseData);
+        ViewBag.Pedido = Pedido;
+      }
+      //API PEDIDO
+    }
   }
 }
