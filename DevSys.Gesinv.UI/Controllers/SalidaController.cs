@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Security.Policy;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
@@ -39,34 +41,27 @@ namespace DevSys.Gesinv.UI.Controllers
       client = new HttpClient();
       client.BaseAddress = new Uri(url);
       client.DefaultRequestHeaders.Accept.Clear();
-      client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));      
+      client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
       //API PEDIDO
     }
 
     // GET: SalidaController/Index/
     public async Task<IActionResult> Index()
     {
-      //API PEDIDO
-      HttpResponseMessage _responseMessage = await client.GetAsync(url);
-      if (_responseMessage.IsSuccessStatusCode)
-      {
-        var _responseData = _responseMessage.Content.ReadAsStringAsync().Result;
-
-        var Pedido = JsonConvert.DeserializeObject<List<PedidoViewModel>>(_responseData);
-        ViewBag.Pedido = Pedido;
-      }
-      //API PEDIDO
-
       IEnumerable<Salida> _salida = await _salidaService.GetAll();
       List<SalidaViewModel> lstSalidaVM = SalidaViewModel.ToSalidaVMList(_salida.ToList());
+
+      ViewBag.Pedido = await PedidosAPI();
+
       return View(lstSalidaVM);
     }
 
     // GET: SalidaController/Details/
-    public async Task<ActionResult> Details(int idPedido, int idProducto)
+    public async Task<ActionResult> Details(int id)
     {
-      Salida _salida = await _salidaService.GetById(idPedido);
+      Salida _salida = await _salidaService.GetById(id);
       SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(_salida);
+
       return View(salidaVM);
     }
 
@@ -77,16 +72,7 @@ namespace DevSys.Gesinv.UI.Controllers
       SalidaViewModel salidaGet = new();
       salidaGet.LineaSalida = new List<LineaSalidaViewModel>();
 
-      //API PEDIDO
-      HttpResponseMessage _responseMessage = await client.GetAsync(url);
-      if (_responseMessage.IsSuccessStatusCode)
-      {
-        var _responseData = _responseMessage.Content.ReadAsStringAsync().Result;
-        var query = JsonConvert.DeserializeObject<List<PedidoViewModel>>(_responseData);
-        pedido = query.Where(p => p.Id == id).ToList();
-        ViewBag.Pedido = pedido;
-      }
-      //API PEDIDO
+      pedido = await PedidosAPI(id);
 
       foreach (var item in pedido)
       {
@@ -99,46 +85,8 @@ namespace DevSys.Gesinv.UI.Controllers
         });
       }
 
-
-      //BODEGA DropDownList
-      List<Bodega> _bodega = _bodegaService.GetAll().Result.ToList();
-      List<BodegaViewModel> lstBodegaVM = _bodega
-                                          .Select(b => new BodegaViewModel()
-                                          {
-                                            BodegaId = b.BodegaId,
-                                            Direccion = b.Direccion
-                                          }).ToList();
-
-      List<SelectListItem> sliBodega = lstBodegaVM.ConvertAll(b =>
-      {
-        return new SelectListItem()
-        {
-          Text = b.Direccion.ToString(),
-          Value = b.BodegaId.ToString(),
-          Selected = false
-        };
-      });
-      ViewBag.sliBodega = sliBodega;
-
-      //MOTIVO DropDownList
-      List<Motivo> _motivo = _motivoService.GetAll().Result.ToList();
-      List<MotivoViewModel> lstMotivoVM = _motivo
-                                          .Select(m => new MotivoViewModel()
-                                          {
-                                            MotivoId = m.MotivoId,
-                                            Nombre = m.Nombre
-                                          }).ToList();
-
-      List<SelectListItem> sliMotivo = lstMotivoVM.ConvertAll(m =>
-      {
-        return new SelectListItem()
-        {
-          Text = m.Nombre.ToString(),
-          Value = m.MotivoId.ToString(),
-          Selected = false
-        };
-      });
-      ViewBag.sliMotivo = sliMotivo;
+      DDLBodega();
+      DDLMotivo();
 
       return View(salidaGet);
     }
@@ -146,16 +94,8 @@ namespace DevSys.Gesinv.UI.Controllers
     // POST: SalidaController/Create/
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(IFormCollection collection)
+    public async Task<IActionResult> Create()
     {
-        //SalidaViewModel salidaNueva = new()
-        //{
-        //  SalidaId = Convert.ToInt32(collection["SalidaId"]),
-        //  MotivoNombre = collection["MotivoNombre"],
-        //  Fecha = Convert.ToDateTime(collection["Fecha"]),
-        //  BodegaNombre = collection["BodegaNombre"],
-        //  Comentario = collection["Comentario"],
-        //};
 
       return View();
     }
@@ -166,45 +106,8 @@ namespace DevSys.Gesinv.UI.Controllers
       Salida _salida = await _salidaService.GetById(id);
       SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(_salida);
 
-      //BODEGA DropDownList
-      List<Bodega> _bodega = _bodegaService.GetAll().Result.ToList();
-      List<BodegaViewModel> lstBodegaVM = _bodega
-                                          .Select(b => new BodegaViewModel()
-                                          {
-                                            BodegaId = b.BodegaId,
-                                            Direccion = b.Direccion
-                                          }).ToList();
-
-      List<SelectListItem> sliBodega = lstBodegaVM.ConvertAll(b =>
-      {
-        return new SelectListItem()
-        {
-          Text = b.Direccion.ToString(),
-          Value = b.BodegaId.ToString(),
-          Selected = false
-        };
-      });
-      ViewBag.sliBodega = sliBodega;
-
-      //MOTIVO DropDownList
-      List<Motivo> _motivo = _motivoService.GetAll().Result.ToList();
-      List<MotivoViewModel> lstMotivoVM = _motivo
-                                          .Select(m => new MotivoViewModel()
-                                          {
-                                            MotivoId = m.MotivoId,
-                                            Nombre = m.Nombre
-                                          }).ToList();
-
-      List<SelectListItem> sliMotivo = lstMotivoVM.ConvertAll(m =>
-      {
-        return new SelectListItem()
-        {
-          Text = m.Nombre.ToString(),
-          Value = m.MotivoId.ToString(),
-          Selected = false
-        };
-      });
-      ViewBag.sliMotivo = sliMotivo;
+      DDLBodega();
+      DDLMotivo();
 
       return View(salidaVM);
     }
@@ -242,18 +145,66 @@ namespace DevSys.Gesinv.UI.Controllers
       }
     }
 
-    public async void allAPI()
+    public async Task<List<PedidoViewModel>> PedidosAPI(int? id = null)
     {
-      //API PEDIDO
       HttpResponseMessage _responseMessage = await client.GetAsync(url);
+      List<PedidoViewModel> Pedido = new();
       if (_responseMessage.IsSuccessStatusCode)
       {
         var _responseData = _responseMessage.Content.ReadAsStringAsync().Result;
-
-        var Pedido = JsonConvert.DeserializeObject<List<PedidoViewModel>>(_responseData);
-        ViewBag.Pedido = Pedido;
+        Pedido = JsonConvert.DeserializeObject<List<PedidoViewModel>>(_responseData) ?? new List<PedidoViewModel>();
+        if (id != null)
+        {
+          Pedido = Pedido.Where(p => p.Id == id).ToList();
+        }
       }
-      //API PEDIDO
+      return Pedido;
+    }
+
+    // DropDownList BODEGA 
+    public async void DDLBodega()
+    {
+      List<Bodega> _bodega = _bodegaService.GetAll().Result.ToList();
+      List<BodegaViewModel> lstBodegaVM = _bodega
+                                          .Select(b => new BodegaViewModel()
+                                          {
+                                            BodegaId = b.BodegaId,
+                                            Direccion = b.Direccion
+                                          }).ToList();
+
+      List<SelectListItem> sliBodega = lstBodegaVM.ConvertAll(b =>
+      {
+        return new SelectListItem()
+        {
+          Text = b.Direccion.ToString(),
+          Value = b.BodegaId.ToString(),
+          Selected = false
+        };
+      });
+      ViewBag.sliBodega = sliBodega;
+    }
+
+    // DropDownList MOTIVO
+    public async void DDLMotivo()
+    {
+      List<Motivo> _motivo = _motivoService.GetAll().Result.ToList();
+      List<MotivoViewModel> lstMotivoVM = _motivo
+                                          .Select(m => new MotivoViewModel()
+                                          {
+                                            MotivoId = m.MotivoId,
+                                            Nombre = m.Nombre
+                                          }).ToList();
+
+      List<SelectListItem> sliMotivo = lstMotivoVM.ConvertAll(m =>
+      {
+        return new SelectListItem()
+        {
+          Text = m.Nombre.ToString(),
+          Value = m.MotivoId.ToString(),
+          Selected = false
+        };
+      });
+      ViewBag.sliMotivo = sliMotivo;
     }
   }
 }
