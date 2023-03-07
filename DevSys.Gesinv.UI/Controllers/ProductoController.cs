@@ -4,6 +4,7 @@ using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using DevSys.Gesinv.Logic.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.VisualBasic;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
@@ -201,15 +202,17 @@ namespace DevSys.Gesinv.UI.Controllers
             producto.ColorProducto = new List<ColorProducto>();
             if (producto.ColorProducto != null)
             {
+                producto.ColorProducto.Clear();
                 foreach (var item in productoViewModel.ListaColoresId)
                 {
-                    producto.ColorProducto.Add(new ColorProducto { ColorId = item });
+                    producto.ColorProducto.Add(new ColorProducto { ProductoId = productoViewModel.ProductoID,ColorId = item });
                 }
             }
 
             try
             {
-                bool result = await _productoService.pruebaUpdate(producto);
+                await _colorProductoService.EliminarColoresByIdProducto(producto.ProductoId);
+                await _productoService.Update(producto);
                 return RedirectToAction("Index", "Producto");
                 
             }

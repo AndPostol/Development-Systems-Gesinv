@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DevSys.Gesinv.DAL.Contracts;
 using DevSys.Gesinv.Models;
 
 namespace DevSys.Gesinv.Logic.Contracts
 {
-    public interface IColorProductoService: IGenericService<ColorProducto>
+    public interface IColorProductoService: IColorProductoRepository
     {
     }
 }

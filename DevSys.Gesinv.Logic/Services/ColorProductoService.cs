@@ -11,10 +11,15 @@ namespace DevSys.Gesinv.Logic.Services
 {
     public class ColorProductoService: GenericService<ColorProducto>, IColorProductoService
     {
-        private readonly IGenericRepository<ColorProducto> _repository;
-        public ColorProductoService(IGenericRepository<ColorProducto> repository) : base(repository)
+        private readonly IColorProductoRepository _repository;
+        public ColorProductoService(IColorProductoRepository repository) : base(repository)
         {
             _repository = repository;
+        }
+
+        public async Task<bool> EliminarColoresByIdProducto(int idProducto)
+        {
+            return await _repository.EliminarColoresByIdProducto(idProducto); 
         }
     }
 }

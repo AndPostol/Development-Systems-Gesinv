@@ -25,9 +25,8 @@ namespace DevSys.Gesinv.DAL.Repositories
             Producto find = await _dbContext.Producto.FindAsync(inProducto.ProductoId);
             if (find != null) 
             {
-                find.ColorProducto.Clear();
+                //find.ColorProducto.Clear();
                 find = inProducto;
-
                 await _dbContext.SaveChangesAsync();
                 result= true;
             }
