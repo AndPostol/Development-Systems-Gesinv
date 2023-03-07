@@ -1,4 +1,5 @@
-﻿using DevSys.Gesinv.Logic.Contracts;
+﻿using DevSys.Gesinv.DAL.Contracts;
+using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -9,9 +10,11 @@ namespace DevSys.Gesinv.UI.Controllers
     public class ProveedorController : Controller
     {
         private readonly IProveedorService _service;
-        public ProveedorController(IProveedorService service)
+        private readonly IReporteRepository _serviceReporte;
+        public ProveedorController(IProveedorService service, IReporteRepository serviceReporte)
         {
             _service = service;
+            _serviceReporte = serviceReporte;
         }
 
         // GET: ProveedorController
@@ -99,6 +102,14 @@ namespace DevSys.Gesinv.UI.Controllers
             {
                 return View();
             }
+        }
+        // GET
+        public async Task<IActionResult> Reporte() 
+        {
+            List<ReporteIngreso> list = await _serviceReporte.obtenerReporteProveedores();
+            ViewBag.data = list;
+
+            return View();
         }
     }
 }

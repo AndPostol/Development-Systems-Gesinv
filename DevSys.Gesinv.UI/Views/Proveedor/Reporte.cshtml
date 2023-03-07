@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "Reporte";
+}
+@section Style{
+    <link rel="stylesheet" href="~/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<h1>Reporte</h1>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Cod Proveedor</th>
+                        <th>Nombre</th>
+                        <th>Cod Orden Compra</th>
+                        <th>Cod Prod</th>
+                        <th>Producto</th>
+                        <th>Entrega</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.data)
+                    {
+                        <tr>
+                            <td>
+                                @item.ProveedorId
+                            </td>
+                            <td>
+                                @item.RazonSocial
+                            </td>
+                            <td>
+                                @item.OrdenCompraId
+                            </td>
+                            <td>
+                                @item.ProductoId
+                            </td>
+                            <td>
+                                @item.Nombre
+                            </td>
+                            <td>
+                                @item.Fecha
+                            </td>
+                            <td>
+                                @item.Cantidad
+                            </td>
+                            <td>
+                                @item.Precio
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Cod Proveedor</th>
+                        <th>Nombre</th>
+                        <th>Cod Orden Compra</th>
+                        <th>Cod Prod</th>
+                        <th>Producto</th>
+                        <th>Entrega</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script>
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": true,
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay data disponible",
+                "info": "Mostrando producto _START_ de _END_ de _TOTAL_",
+                "infoEmpty": "Mostrando 0 de 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ total producto)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ producto",
+                "loadingRecords": "Cargando...",
+                "processing": "",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron productos relacionado con su busqueda",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": Ordena de manera ascendente",
+                    "sortDescending": ": Ordena de manera descendente"
+                }
+            }
+        });
+
+    </script>
+
+}
