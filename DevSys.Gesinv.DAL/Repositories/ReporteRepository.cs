@@ -16,7 +16,6 @@ namespace DevSys.Gesinv.DAL.Repositories
     public class ReporteRepository : IReporteRepository
     {
         private readonly ConfigurationConnection _connection;
-        private readonly string _conn = "Data Source=localhost;Initial Catalog=DbInventario;Integrated Security=True;Trust Server Certificate=True;";
         public ReporteRepository(IOptions<ConfigurationConnection> connection) 
         {
             _connection = connection.Value;
@@ -25,7 +24,7 @@ namespace DevSys.Gesinv.DAL.Repositories
         public async Task<List<ReporteIngreso>> obtenerReporteProveedores()
         {
             List<ReporteIngreso> lst = new List<ReporteIngreso>();
-            using (var connection = new SqlConnection(_conn))
+            using (var connection = new SqlConnection(_connection.SQLConnection))
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand("sp_InformeProveedor", connection);

@@ -49,7 +49,7 @@ builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
     options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
 });
-builder.Services.Configure<ConfigurationConnection>(builder.Configuration.GetSection("ConfiguracionConexion"));
+builder.Services.Configure<ConfigurationConnection>(builder.Configuration.GetSection("ConnectionStrings"));
 
 var app = builder.Build();
 

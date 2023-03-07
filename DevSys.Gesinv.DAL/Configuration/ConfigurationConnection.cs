@@ -8,6 +8,6 @@ namespace DevSys.Gesinv.DAL.Configuration
 {
     public class ConfigurationConnection
     {
-        public string ConnectionString { get; set; }
+        public string SQLConnection { get; set; }
     }
 }
