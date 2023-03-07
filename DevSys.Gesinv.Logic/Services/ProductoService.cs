@@ -22,11 +22,6 @@ namespace DevSys.Gesinv.Logic.Services
             return await _repository.GetProductoColors(id);
         }
 
-        //public async Task<IList<Linea>> GetLinea()
-        //{
-        //    Task<IList<Linea>> queryLinea = _repository.GetAll();
-        //}
-
         public async Task<Producto> ObtenerPorCodigo(int Codigo)
         {
             IEnumerable<Producto> queryProducto = await _repository.GetAll();
@@ -46,12 +41,6 @@ namespace DevSys.Gesinv.Logic.Services
             IEnumerable<Producto> queryProducto = await _repository.GetAll();
             Producto producto = queryProducto.Where(producto => producto.Activo == Activo).FirstOrDefault();
             return producto;
-            //este metodo esta raro
-        }
-
-        public async Task<bool> pruebaUpdate(Producto inProducto)
-        {
-            return await _repository.pruebaUpdate(inProducto);
         }
     }
 }

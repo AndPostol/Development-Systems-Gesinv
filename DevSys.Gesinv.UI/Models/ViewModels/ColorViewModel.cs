@@ -46,15 +46,5 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             }
             return listViewModel;
         }
-
-        public static List<ColorViewModel> PruebaLista(List<Color> lstModel)
-        {
-            List<ColorViewModel> listViewModel = new List<ColorViewModel>();
-            foreach (var model in lstModel)
-            {
-                listViewModel.Add(ConvertToViewModel(model));
-            }
-            return listViewModel;
-        }
     }
 }

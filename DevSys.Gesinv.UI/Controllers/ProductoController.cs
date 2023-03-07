@@ -42,8 +42,8 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProductoController/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            ProductoViewModel _producto = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
-            return View(_producto);
+            ProductoViewModel productoViewModel = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
+            return View(productoViewModel);
         }
 
         // GET: ProductoController/Create
@@ -122,7 +122,7 @@ namespace DevSys.Gesinv.UI.Controllers
             ViewBag.TipoOptions = tipos.TiposSelectList;
 
             //Opciones de Colores
-            List<ColorProductoViewModel> lstColorProducto = ColorProductoViewModel.ListViewModel(await _colorProductoService.GetAll());
+            List<ColorViewModel> lstColorProducto = ColorViewModel.ListViewModel(await _colorService.GetAll());
             ViewBag.ColorOptions = lstColorProducto;
 
             //Opciones de Medidas
@@ -146,15 +146,10 @@ namespace DevSys.Gesinv.UI.Controllers
                     producto.ColorProducto.Add(new ColorProducto { ColorId = item });
                 }
             }
-            else
-            {
-                producto.ColorProducto.Add(new ColorProducto { ColorId = 0 });
-            }
-            //OJOOOOOOO si la lista de colores es null o 0 no ejecuta el foreach, para evitar el error de compilacion si esta vacia
             
             try
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     await _productoService.Create(producto); 
                 }
@@ -198,8 +193,6 @@ namespace DevSys.Gesinv.UI.Controllers
             }
             ViewBag.ColorOptions = lstColor;
 
-
-
             return View(productoViewModel);
         }
 
@@ -209,7 +202,6 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<IActionResult> Edit(ProductoViewModel productoViewModel)
         {
             Producto producto = ProductoViewModel.ConvertToModel(productoViewModel);
-            var product = _productoService.GetColors(productoViewModel.ProductoID);
             producto.ColorProducto = new List<ColorProducto>();
             if (producto.ColorProducto != null)
             {
@@ -223,9 +215,13 @@ namespace DevSys.Gesinv.UI.Controllers
             try
             {
                 await _colorProductoService.EliminarColoresByIdProducto(producto.ProductoId);
-                await _productoService.Update(producto);
+                if (ModelState.IsValid)
+                {
+                    await _productoService.Update(producto);
+                }
                 return RedirectToAction("Index", "Producto");
-                
+
+
             }
             catch (Exception ex)
             {

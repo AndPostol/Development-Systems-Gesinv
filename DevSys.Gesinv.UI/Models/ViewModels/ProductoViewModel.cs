@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,17 +26,19 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
 
         //para hacer el dropdownlist https://www.youtube.com/watch?v=A1yJVmtIDXA
-        [NotMapped] //para que no la mapee a la DB
+        [ValidateNever] //para que no la mapee a la DB
         public List<SelectListItem> LineasSelectList { get; set; }
-        [NotMapped]
+        
+        [ValidateNever]
         public List<SelectListItem> TiposSelectList { get; set; }
-        [NotMapped]
+        
+        [ValidateNever]
         public List<SelectListItem> GruposSelectList { get; set; }
-        [NotMapped]
+        
+        [ValidateNever]
         public List<SelectListItem> MarcasSelectList { get; set; }
+        
         public List<int> ListaColoresId { get; set; }
-        public List<ColorViewModel> ColorSelectList { get; set; }
-        //public List<int> SelectedColors { get; set; }
 
 
         [Display(Name = "Tipo")]
@@ -49,7 +52,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name = "Marca")]
         public int? MarcaId { get; set; }
 
-        [Display(Name = "Marca")]
+        [Display(Name = "Marca"), ValidateNever]
         public string MarcaNombre { get; set; }
 
         [Required]
@@ -91,11 +94,19 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual Linea? Linea { get; set; }
         public virtual Tipo? Tipo { get; set; }
 
-        [Display(Name = "Color")]
+        [Display(Name = "Color"), ValidateNever]
         public virtual ICollection<ColorProducto> ColorProducto { get; set; }
+
+        [ValidateNever]
         public virtual ICollection<Existencia> Existencia { get; set; }
+        
+        [ValidateNever]
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
+
+        [ValidateNever]
         public virtual ICollection<LineaCompra> LineaCompra { get; set; }
+
+        [ValidateNever]
         public virtual ICollection<LineaSalida> LineaSalida { get; set; }
         
 
@@ -125,7 +136,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Existencia = producto.Existencia,
                 ColorProducto = producto.ColorProducto,
                 ListaColoresId = producto.ColorProducto.Select(c => c.ColorId).ToList(),
-                //ColorSelectList = ColorViewModel.PruebaLista(producto.ColorProducto.Where(c => c.ColorId == ).ToList())
 
             };
             return productoViewModel;

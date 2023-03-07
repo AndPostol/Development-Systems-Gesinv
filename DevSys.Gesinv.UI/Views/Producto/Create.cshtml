@@ -105,7 +105,7 @@
                                 <select asp-for="ListaColoresId" name="ListaColoresId" class="form-select" multiple>
                                     @foreach (var item in ViewBag.ColorOptions)
                                     {
-                                       <option value="@item.ColorId">@item.Color.Nombre</option> 
+                                       <option value="@item.ColorId">@item.Nombre</option> 
                                     }
                                 </select>
                                 <span asp-validation-for="ColorProducto" class="text-danger"></span>

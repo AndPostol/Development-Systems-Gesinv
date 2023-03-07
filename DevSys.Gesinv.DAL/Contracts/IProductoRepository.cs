@@ -9,8 +9,6 @@ namespace DevSys.Gesinv.DAL.Contracts
 {
     public interface IProductoRepository : IGenericRepository<Producto>
     {
-        Task<bool> pruebaUpdate(Producto inProducto);
-
         Task<Producto> GetProductoColors(int id);
     }
 }
