@@ -187,7 +187,17 @@ namespace DevSys.Gesinv.UI.Controllers
             ViewBag.TipoOptions = lstTipo;
 
             List<ColorViewModel> lstColor = ColorViewModel.ListViewModel(await _colorService.GetAll());
+            foreach(int idColor in productoViewModel.ListaColoresId)
+            {
+                ColorViewModel colorSelect = lstColor.Find(c => c.ColorId == idColor); //?? new ColorViewModel(); //condicion que reemplaza con el segundo valor
+                if (colorSelect != null)
+                {
+                    colorSelect.IsSelected = true;
+                }
+            }
             ViewBag.ColorOptions = lstColor;
+
+
 
             return View(productoViewModel);
         }
@@ -201,6 +211,7 @@ namespace DevSys.Gesinv.UI.Controllers
             producto.ColorProducto = new List<ColorProducto>();
             if (producto.ColorProducto != null)
             {
+                producto.ColorProducto.Clear();
                 foreach (var item in productoViewModel.ListaColoresId)
                 {
                     producto.ColorProducto.Add(new ColorProducto { ColorId = item });

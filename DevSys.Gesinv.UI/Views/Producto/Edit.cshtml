@@ -164,20 +164,14 @@
                <select asp-for="ListaColoresId" name="ListaColoresId" class="form-select" multiple>
                    @foreach (var item in ViewBag.ColorOptions)
                    {   
-                     foreach (var id in Model?.ListaColoresId)
-                     {
-                            if (item.ColorId == id)
-                            {  
-                                <option value="@item.ColorId" selected>@item.Nombre</option>
-                                break;
-                            }
-                            else
-                            {
-                                <option value="@item.ColorId">@item.Nombre</option>
-                                break;
-                            }
-                     }
-                      
+                      if (item.IsSelected == true)
+                      {  
+                         <option value="@item.ColorId" selected>@item.Nombre</option>
+                      }
+                      else
+                      {
+                         <option value="@item.ColorId">@item.Nombre</option>
+                      } 
                    }
                </select>
                <span asp-validation-for="ColorProducto" class="text-danger"></span>

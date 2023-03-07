@@ -33,7 +33,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public List<SelectListItem> GruposSelectList { get; set; }
         [NotMapped]
         public List<SelectListItem> MarcasSelectList { get; set; }
-        public int[]? ListaColoresId { get; set; }
+        public List<int> ListaColoresId { get; set; }
+        public List<ColorViewModel> ColorSelectList { get; set; }
+        //public List<int> SelectedColors { get; set; }
 
 
         [Display(Name = "Tipo")]
@@ -122,7 +124,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 MedidaId = producto.MedidaId,
                 Existencia = producto.Existencia,
                 ColorProducto = producto.ColorProducto,
-                ListaColoresId = producto.ColorProducto.Select(c => c.ColorId).ToArray() 
+                ListaColoresId = producto.ColorProducto.Select(c => c.ColorId).ToList(),
+                //ColorSelectList = ColorViewModel.PruebaLista(producto.ColorProducto.Where(c => c.ColorId == ).ToList())
 
             };
             return productoViewModel;
