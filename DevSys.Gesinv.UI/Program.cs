@@ -21,6 +21,11 @@ builder.Services.AddScoped<IGenericRepository<LineaCompra>, GenericRepository<Li
 builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
 builder.Services.AddScoped<IGenericRepository<Proveedor>, GenericRepository<Proveedor>>();
 builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
+builder.Services.AddScoped<IGenericRepository<Empresa>, GenericRepository<Empresa>>();
+builder.Services.AddScoped<IGenericRepository<TipoProveedor>, GenericRepository<TipoProveedor>>();
+builder.Services.AddScoped<IGenericRepository<Estado>, GenericRepository<Estado>>();
+builder.Services.AddScoped<IGenericRepository<Provincia>, GenericRepository<Provincia>>();
+builder.Services.AddScoped<IGenericRepository<TipoPersona>, GenericRepository<TipoPersona>>();
 
 
 
@@ -33,6 +38,14 @@ builder.Services.AddScoped<ILineaCompraService, LineaCompraService>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<IProveedorService, ProveedorService>();
 builder.Services.AddScoped<IBodegaService, BodegaService>();
+builder.Services.AddScoped<IEmpresaService, EmpresaService>();
+builder.Services.AddScoped<ITipoProveedorService, TipoProveedorService>();
+builder.Services.AddScoped<IEstadoService, EstadoService>();
+builder.Services.AddScoped<IProvinciaService, ProvinciaService>();
+builder.Services.AddScoped<ITipoPersonaService, TipoPersonaService>();
+
+
+
 
 
 
