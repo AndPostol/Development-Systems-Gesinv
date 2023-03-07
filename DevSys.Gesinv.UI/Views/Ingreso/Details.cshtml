@@ -1,0 +1,78 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.IngresoViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>IngresoViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IngresoId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IngresoId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CodigoIngreso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CodigoIngreso)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProveedorId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProveedorId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MotivoId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MotivoId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BodegaId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BodegaId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoIngresoId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoIngresoId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descuento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descuento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Impuestos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Impuestos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
