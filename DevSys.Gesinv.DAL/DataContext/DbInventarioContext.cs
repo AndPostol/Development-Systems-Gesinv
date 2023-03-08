@@ -32,6 +32,7 @@ namespace DevSys.Gesinv.DAL.DataContext
         
         protected override void OnConfiguring(DbContextOptionsBuilder options){}
         public virtual DbSet<Bodega> Bodega { get; set; } = null!;
+        public virtual DbSet<ColorProducto> ColorProducto { get; set; } = null!;
         public virtual DbSet<Color> Color { get; set; } = null!;
         public virtual DbSet<CondicionPago> CondicionPago { get; set; } = null!;
         public virtual DbSet<Departamento> Departamento { get; set; } = null!;
@@ -58,6 +59,7 @@ namespace DevSys.Gesinv.DAL.DataContext
         public virtual DbSet<TipoPersona> TipoPersona { get; set; } = null!;
         public virtual DbSet<TipoProveedor> TipoProveedor { get; set; } = null!;
         public virtual DbSet<Usuario> Usuario { get; set; } = null!;
+        
 
     }
 }

@@ -5,10 +5,14 @@ namespace DevSys.Gesinv.Models
 {
     public partial class Color
     {
+        public Color()
+        {
+            ColorProducto = new HashSet<ColorProducto>();
+        }
+        
         public int ColorId { get; set; }
         public string Nombre { get; set; } = null!;
-        public int? ProductoId { get; set; }
-
-        public virtual Producto? Producto { get; set; }
+        
+        public virtual ICollection<ColorProducto> ColorProducto { get; set; }
     }
 }

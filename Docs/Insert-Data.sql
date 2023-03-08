@@ -534,21 +534,6 @@ VALUES
 	(10,'Seguridad');
 SET IDENTITY_INSERT [Departamento] OFF;
 
-SET IDENTITY_INSERT [Marca] ON;
-
-INSERT INTO [Marca] (MarcaID,Nombre)
-VALUES
-	(1,'Abbott'),
-	(2,'Medtronic'),
-	(3,'Terumo'),
-	(4,'Paper Mate'),
-	(5,'Faber Castell'),
-	(6,'HP'),
-	(7,'Norma'),
-	(8,'Samsung'),
-	(9,'Polar'),
-	(10,'Primor');
-SET IDENTITY_INSERT [Marca] OFF;
 
 SET IDENTITY_INSERT [Salida] ON;
 
@@ -622,50 +607,66 @@ VALUES
   (10,10,6199,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
 SET IDENTITY_INSERT [Ingreso] OFF;
 
-SET IDENTITY_INSERT [Producto] ON;
-INSERT INTO [Producto] (ProductoID,Nombre,Codigo,LineaID,TipoID,Unidad,Caja,GrupoID,Activo,Iva,Perecible,Comentario,FechaCaducidad,Precio)
-VALUES
-  (1,'Vendas',2197,3,6,55,38,3,'0','1','0','libero lacus, varius et, euismod','09-22-23',190),
-  (2,'Gasas',9486,3,3,56,12,3,'0','0','0','tempor diam dictum sapien.','09-02-23',343),
-  (3,'Alcohol',6820,4,5,40,38,4,'1','0','0','vitae dolor. Donec fringilla. Donec feugiat metus sit amet','02-10-23',805),
-  (4,'Inyectadora',7817,1,3,18,20,2,'0','1','1','mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit','12-29-22',754),
-  (5,'Guantes',6503,3,2,65,43,3,'1','0','0','dolor dapibus gravida. Aliquam tincidunt,','04-23-22',933),
-  (6,'Par Muletas',1779,1,3,23,76,2,'1','0','1','Nulla eget metus eu erat','04-13-23',182),
-  (7,'Acetaminofen',8340,3,3,24,3,2,'1','0','0','non, dapibus rutrum, justo. Praesent luctus. Curabitur','12-17-23',555),
-  (8,'Yeso',8108,3,6,3,84,2,'1','0','0','a purus.','07-12-22',98),
-  (9,'Ibuprofeno',3776,4,2,29,22,4,'1','1','0','lorem ipsum sodales purus, in molestie tortor nibh sit amet','01-03-23',901),
-  (10,'Pack Paletas',4004,2,5,77,42,2,'0','1','1','id, erat. Etiam vestibulum massa rutrum magna. Cras','05-15-22',410);
-SET IDENTITY_INSERT [Producto] OFF;
+SET IDENTITY_INSERT [Marca] ON;
 
-SET IDENTITY_INSERT [LineaSalida] ON;
-INSERT INTO [LineaSalida] (LineaSalidaID,Cantidad,CostoSalida,SalidaID,ProductoID)
+INSERT INTO [Marca] (MarcaID,Nombre)
 VALUES
-  (1,98,3223,1,1),
-  (2,54,7732,2,2),
-  (3,0,5455,3,3),
-  (4,67,2287,4,4),
-  (5,63,5508,5,5),
-  (6,85,2704,6,6),
-  (7,32,7124,7,7),
-  (8,2,5880,8,8),
-  (9,89,3768,9,9),
-  (10,12,562,10,10);
-SET IDENTITY_INSERT [LineaSalida] OFF;
+	(1,'Abbott'),
+	(2,'Medtronic'),
+	(3,'Terumo'),
+	(4,'Paper Mate'),
+	(5,'Faber Castell'),
+	(6,'HP'),
+	(7,'Norma'),
+	(8,'Samsung'),
+	(9,'Polar'),
+	(10,'Primor');
+SET IDENTITY_INSERT [Marca] OFF;
 
 SET IDENTITY_INSERT [Medida] ON;
 
-INSERT INTO [Medida] (MedidaID,Dimension,ProductoID)
+INSERT INTO [Medida] (MedidaID,Dimension)
 VALUES
-  (1,'Metro',9),
-  (2,'Centimetro',4),
-  (3,'Milimetro',4),
-  (4,'Kilo',4),
-  (5,'Gramo',2),
-  (6,'Miligramo',6),
-  (7,'Litro',1),
-  (8,'Mililitro',9);
+  (1,'Metro'),
+  (2,'Centimetro'),
+  (3,'Milimetro'),
+  (4,'Kilo'),
+  (5,'Gramo'),
+  (6,'Miligramo'),
+  (7,'Litro'),
+  (8,'Mililitro');
 
 SET IDENTITY_INSERT [Medida] OFF;
+
+SET IDENTITY_INSERT [Producto] ON;
+INSERT INTO [Producto] (ProductoID,Nombre,Codigo,LineaID,TipoID,Unidad,Caja,GrupoID,Activo,Iva,Perecible,Comentario,FechaCaducidad,Precio, MarcaID, MedidaID)
+VALUES
+  (1,'Vendas',2197,3,6,55,38,3,'0','1','0','libero lacus, varius et, euismod','09-22-23',190, 1, 2),
+  (2,'Gasas',9486,3,3,56,12,3,'0','0','0','tempor diam dictum sapien.','09-02-23',343, 2, 3),
+  (3,'Alcohol',6820,4,5,40,38,4,'1','0','0','vitae dolor. Donec fringilla. Donec feugiat metus sit amet','02-10-23',805, 3, 4),
+  (4,'Inyectadora',7817,1,3,18,20,2,'0','1','1','mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit','12-29-22',754, 4, 5),
+  (5,'Guantes',6503,3,2,65,43,3,'1','0','0','dolor dapibus gravida. Aliquam tincidunt,','04-23-22',933, 5, 6),
+  (6,'Par Muletas',1779,1,3,23,76,2,'1','0','1','Nulla eget metus eu erat','04-13-23',182, 6, 7),
+  (7,'Acetaminofen',8340,3,3,24,3,2,'1','0','0','non, dapibus rutrum, justo. Praesent luctus. Curabitur','12-17-23',555, 7, 8),
+  (8,'Yeso',8108,3,6,3,84,2,'1','0','0','a purus.','07-12-22',98, 8, 1),
+  (9,'Ibuprofeno',3776,4,2,29,22,4,'1','1','0','lorem ipsum sodales purus, in molestie tortor nibh sit amet','01-03-23',901, 9, 2),
+  (10,'Pack Paletas',4004,2,5,77,42,2,'0','1','1','id, erat. Etiam vestibulum massa rutrum magna. Cras','05-15-22',410, 10, 3);
+SET IDENTITY_INSERT [Producto] OFF;
+
+SET IDENTITY_INSERT [ColorProducto] ON;
+INSERT INTO [ColorProducto] (ColorProductoID, ColorID, ProductoID)
+VALUES
+  (1,1,1),
+  (2,2,2),
+  (3,3,3),
+  (4,4,4),
+  (5,5,5),
+  (6,6,6),
+  (7,7,7),
+  (8,8,8),
+  (9,9,9),
+  (10,10,10);
+SET IDENTITY_INSERT [ColorProducto] OFF;
 
 SET IDENTITY_INSERT [Existencia] ON;
 
@@ -713,4 +714,19 @@ VALUES
   (9,2,2,49,CONVERT(DATE,'06/02/2023'),257,43),
   (10,5,8,79,CONVERT(DATE,'06/02/2023'),16,83);
 SET IDENTITY_INSERT [IngresoDetalle] OFF;
+
+SET IDENTITY_INSERT [LineaSalida] ON;
+INSERT INTO [LineaSalida] (LineaSalidaID,Cantidad,CostoSalida,SalidaID,ProductoID)
+VALUES
+  (1,98,3223,1,1),
+  (2,54,7732,2,2),
+  (3,0,5455,3,3),
+  (4,67,2287,4,4),
+  (5,63,5508,5,5),
+  (6,85,2704,6,6),
+  (7,32,7124,7,7),
+  (8,2,5880,8,8),
+  (9,89,3768,9,9),
+  (10,12,562,10,10);
+SET IDENTITY_INSERT [LineaSalida] OFF;
 

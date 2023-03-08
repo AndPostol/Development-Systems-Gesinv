@@ -4,6 +4,7 @@ using DevSys.Gesinv.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevSys.Gesinv.DAL.Migrations
 {
     [DbContext(typeof(DbInventarioContext))]
-    partial class DbInventarioContextModelSnapshot : ModelSnapshot
+    [Migration("20230302203923_Correccion-Producto-Marca-Medida")]
+    partial class CorreccionProductoMarcaMedida
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProvinciaId");
 
-                    b.ToTable("Bodega", (string)null);
+                    b.ToTable("Bodega");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Color", b =>
@@ -66,32 +68,14 @@ namespace DevSys.Gesinv.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductoId")
+                        .HasColumnType("int");
+
                     b.HasKey("ColorId");
-
-                    b.ToTable("Color");
-                });
-
-            modelBuilder.Entity("DevSys.Gesinv.Models.ColorProducto", b =>
-                {
-                    b.Property<int>("ColorProductoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ColorProductoId"), 1L, 1);
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ColorProductoId");
-
-                    b.HasIndex("ColorId");
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("ColorProducto");
+                    b.ToTable("Color");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.CondicionPago", b =>
@@ -108,7 +92,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("CondicionPagoId");
 
-                    b.ToTable("CondicionPago", (string)null);
+                    b.ToTable("CondicionPago");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Departamento", b =>
@@ -125,7 +109,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("DepartamentoId");
 
-                    b.ToTable("Departamento", (string)null);
+                    b.ToTable("Departamento");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Empresa", b =>
@@ -146,7 +130,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("EmpresaId");
 
-                    b.ToTable("Empresa", (string)null);
+                    b.ToTable("Empresa");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Estado", b =>
@@ -163,7 +147,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("EstadoId");
 
-                    b.ToTable("Estado", (string)null);
+                    b.ToTable("Estado");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Existencia", b =>
@@ -189,7 +173,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Existencia", (string)null);
+                    b.ToTable("Existencia");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Grupo", b =>
@@ -206,7 +190,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("GrupoId");
 
-                    b.ToTable("Grupo", (string)null);
+                    b.ToTable("Grupo");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Ingreso", b =>
@@ -235,9 +219,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Property<int?>("MotivoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdenCompraId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProveedorId")
                         .HasColumnType("int");
 
@@ -253,14 +234,11 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("MotivoId");
 
-                    b.HasIndex("OrdenCompraId")
-                        .IsUnique();
-
                     b.HasIndex("ProveedorId");
 
                     b.HasIndex("TipoIngresoId");
 
-                    b.ToTable("Ingreso", (string)null);
+                    b.ToTable("Ingreso");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.IngresoDetalle", b =>
@@ -295,7 +273,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("IngresoDetalle", (string)null);
+                    b.ToTable("IngresoDetalle");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Linea", b =>
@@ -312,7 +290,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("LineaId");
 
-                    b.ToTable("Linea", (string)null);
+                    b.ToTable("Linea");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.LineaCompra", b =>
@@ -329,19 +307,19 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartamentoId")
+                    b.Property<int?>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Descuento")
                         .HasColumnType("float");
 
-                    b.Property<int>("OrdenCompraId")
+                    b.Property<int?>("OrdenCompraId")
                         .HasColumnType("int");
 
                     b.Property<double>("Precio")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProductoId")
+                    b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Total")
@@ -355,7 +333,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("LineaCompra", (string)null);
+                    b.ToTable("LineaCompra");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.LineaSalida", b =>
@@ -384,7 +362,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("SalidaId");
 
-                    b.ToTable("LineaSalida", (string)null);
+                    b.ToTable("LineaSalida");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Marca", b =>
@@ -435,7 +413,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("MotivoId");
 
-                    b.ToTable("Motivo", (string)null);
+                    b.ToTable("Motivo");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.OrdenCompra", b =>
@@ -446,10 +424,10 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrdenCompraId"), 1L, 1);
 
-                    b.Property<int>("BodegaId")
+                    b.Property<int>("CodProveedor")
                         .HasColumnType("int");
 
-                    b.Property<int>("CondicionPagoId")
+                    b.Property<int?>("CondicionPagoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Descuento")
@@ -464,7 +442,7 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Property<string>("Observacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProveedorId")
+                    b.Property<int?>("ProveedorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Referencia")
@@ -478,13 +456,11 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("OrdenCompraId");
 
-                    b.HasIndex("BodegaId");
-
                     b.HasIndex("CondicionPagoId");
 
                     b.HasIndex("ProveedorId");
 
-                    b.ToTable("OrdenCompra", (string)null);
+                    b.ToTable("OrdenCompra");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Producto", b =>
@@ -553,7 +529,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("TipoId");
 
-                    b.ToTable("Producto", (string)null);
+                    b.ToTable("Producto");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Proveedor", b =>
@@ -606,7 +582,10 @@ namespace DevSys.Gesinv.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TipoPersonaId")
+                    b.Property<int?>("TipoPersona")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TipoPersonaNavigationTipoPersonaId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TipoProveedorId")
@@ -620,11 +599,11 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("ProvinciaId");
 
-                    b.HasIndex("TipoPersonaId");
+                    b.HasIndex("TipoPersonaNavigationTipoPersonaId");
 
                     b.HasIndex("TipoProveedorId");
 
-                    b.ToTable("Proveedor", (string)null);
+                    b.ToTable("Proveedor");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Provincia", b =>
@@ -646,7 +625,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("EstadoId");
 
-                    b.ToTable("Provincia", (string)null);
+                    b.ToTable("Provincia");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Requisicion", b =>
@@ -674,7 +653,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("OrdenCompraId");
 
-                    b.ToTable("Requisicion", (string)null);
+                    b.ToTable("Requisicion");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Salida", b =>
@@ -712,7 +691,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("RequisicionId");
 
-                    b.ToTable("Salida", (string)null);
+                    b.ToTable("Salida");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Tipo", b =>
@@ -729,7 +708,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoId");
 
-                    b.ToTable("Tipo", (string)null);
+                    b.ToTable("Tipo");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.TipoIngreso", b =>
@@ -746,7 +725,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoIngresoId");
 
-                    b.ToTable("TipoIngreso", (string)null);
+                    b.ToTable("TipoIngreso");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.TipoPersona", b =>
@@ -763,7 +742,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoPersonaId");
 
-                    b.ToTable("TipoPersona", (string)null);
+                    b.ToTable("TipoPersona");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.TipoProveedor", b =>
@@ -780,7 +759,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasKey("TipoProveedorId");
 
-                    b.ToTable("TipoProveedor", (string)null);
+                    b.ToTable("TipoProveedor");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Usuario", b =>
@@ -806,7 +785,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Usuario", (string)null);
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Bodega", b =>
@@ -830,21 +809,11 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Navigation("Provincia");
                 });
 
-            modelBuilder.Entity("DevSys.Gesinv.Models.ColorProducto", b =>
+            modelBuilder.Entity("DevSys.Gesinv.Models.Color", b =>
                 {
-                    b.HasOne("DevSys.Gesinv.Models.Color", "Color")
-                        .WithMany("ColorProducto")
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DevSys.Gesinv.Models.Producto", "Producto")
-                        .WithMany("ColorProducto")
-                        .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
+                        .WithMany("Color")
+                        .HasForeignKey("ProductoId");
 
                     b.Navigation("Producto");
                 });
@@ -874,12 +843,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                         .WithMany("Ingreso")
                         .HasForeignKey("MotivoId");
 
-                    b.HasOne("DevSys.Gesinv.Models.OrdenCompra", "OrdenCompra")
-                        .WithOne("Ingreso")
-                        .HasForeignKey("DevSys.Gesinv.Models.Ingreso", "OrdenCompraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DevSys.Gesinv.Models.Proveedor", "Proveedor")
                         .WithMany("Ingreso")
                         .HasForeignKey("ProveedorId");
@@ -891,8 +854,6 @@ namespace DevSys.Gesinv.DAL.Migrations
                     b.Navigation("Bodega");
 
                     b.Navigation("Motivo");
-
-                    b.Navigation("OrdenCompra");
 
                     b.Navigation("Proveedor");
 
@@ -918,21 +879,15 @@ namespace DevSys.Gesinv.DAL.Migrations
                 {
                     b.HasOne("DevSys.Gesinv.Models.Departamento", "Departamento")
                         .WithMany("LineaCompra")
-                        .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartamentoId");
 
                     b.HasOne("DevSys.Gesinv.Models.OrdenCompra", "OrdenCompra")
                         .WithMany("LineaCompra")
-                        .HasForeignKey("OrdenCompraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrdenCompraId");
 
                     b.HasOne("DevSys.Gesinv.Models.Producto", "Producto")
                         .WithMany("LineaCompra")
-                        .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductoId");
 
                     b.Navigation("Departamento");
 
@@ -958,25 +913,13 @@ namespace DevSys.Gesinv.DAL.Migrations
 
             modelBuilder.Entity("DevSys.Gesinv.Models.OrdenCompra", b =>
                 {
-                    b.HasOne("DevSys.Gesinv.Models.Bodega", "Bodega")
-                        .WithMany("OrdenCompra")
-                        .HasForeignKey("BodegaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DevSys.Gesinv.Models.CondicionPago", "CondicionPago")
                         .WithMany("OrdenCompra")
-                        .HasForeignKey("CondicionPagoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CondicionPagoId");
 
                     b.HasOne("DevSys.Gesinv.Models.Proveedor", "Proveedor")
                         .WithMany("OrdenCompra")
-                        .HasForeignKey("ProveedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Bodega");
+                        .HasForeignKey("ProveedorId");
 
                     b.Navigation("CondicionPago");
 
@@ -1032,7 +975,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.HasOne("DevSys.Gesinv.Models.TipoPersona", "TipoPersonaNavigation")
                         .WithMany("Proveedor")
-                        .HasForeignKey("TipoPersonaId");
+                        .HasForeignKey("TipoPersonaNavigationTipoPersonaId");
 
                     b.HasOne("DevSys.Gesinv.Models.TipoProveedor", "TipoProveedor")
                         .WithMany("Proveedor")
@@ -1103,14 +1046,7 @@ namespace DevSys.Gesinv.DAL.Migrations
 
                     b.Navigation("Ingreso");
 
-                    b.Navigation("OrdenCompra");
-
                     b.Navigation("Salida");
-                });
-
-            modelBuilder.Entity("DevSys.Gesinv.Models.Color", b =>
-                {
-                    b.Navigation("ColorProducto");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.CondicionPago", b =>
@@ -1177,15 +1113,12 @@ namespace DevSys.Gesinv.DAL.Migrations
 
             modelBuilder.Entity("DevSys.Gesinv.Models.OrdenCompra", b =>
                 {
-                    b.Navigation("Ingreso")
-                        .IsRequired();
-
                     b.Navigation("LineaCompra");
                 });
 
             modelBuilder.Entity("DevSys.Gesinv.Models.Producto", b =>
                 {
-                    b.Navigation("ColorProducto");
+                    b.Navigation("Color");
 
                     b.Navigation("Existencia");
 

@@ -12,9 +12,9 @@ namespace DevSys.Gesinv.Logic.Services
     {
         private IGenericRepository<T> _repository;
 
-        public GenericService(IGenericRepository<T> respository)
+        public GenericService(IGenericRepository<T> repository)
         {
-            _repository = respository;
+            _repository = repository;
         }
 
         public async Task<bool> Create(T entity)
@@ -36,6 +36,11 @@ namespace DevSys.Gesinv.Logic.Services
         {
             return await _repository.GetById(id);
         }
+
+        //public async Task<T> GetLastId()
+        //{
+        //    return await _repository.GetLastId();
+        //}
 
         public async Task<bool> Update(T entity)
         {

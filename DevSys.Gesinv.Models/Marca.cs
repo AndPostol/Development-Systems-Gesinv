@@ -5,10 +5,14 @@ namespace DevSys.Gesinv.Models
 {
     public partial class Marca
     {
+        public Marca()
+        {
+            Producto = new HashSet<Producto>();
+        }
+
         public int MarcaId { get; set; }
         public string Nombre { get; set; } = null!;
-        public int? ProductoId { get; set; }
 
-        public virtual Producto? Producto { get; set; }
+        public virtual ICollection<Producto> Producto { get; set; }
     }
 }

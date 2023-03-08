@@ -46,8 +46,8 @@ namespace DevSys.Gesinv.DAL.Repositories
                             producto = linea.Producto;
 
                         }
-                        double descuento = producto.Precio * (linea.Descuento / 100);
-                        subtotal += ((producto.Precio * linea.Cantidad) + descuento);
+                        //double descuento = producto.Precio * (linea.Descuento / 100);
+                        //subtotal += ((producto.Precio * linea.Cantidad) + descuento);
 
                         // Registramos las lineas ingreso detalles
                         listIngresoDetalle.Add(new IngresoDetalle() { 
