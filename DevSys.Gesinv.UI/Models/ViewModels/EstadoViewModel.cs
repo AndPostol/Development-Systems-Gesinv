@@ -18,7 +18,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             };
             return estadoViewModel;
         }
-        public static List<EstadoViewModel> ToListModelView(List<Estado> lstModel)
+        public static List<EstadoViewModel> ToListModelView(IEnumerable<Estado> lstModel)
         {
             List<EstadoViewModel> EstadoListViewModel = new List<EstadoViewModel>();
             foreach (Estado item in lstModel)

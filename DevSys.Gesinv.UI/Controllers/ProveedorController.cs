@@ -10,9 +10,9 @@ namespace DevSys.Gesinv.UI.Controllers
     {
         private readonly IProveedorService _serviceProveedor;
         private readonly IEmpresaService _serviceEmpresa;
-        private readonly ITipoProveedorService _serviceTipoProveedor;
         private readonly IEstadoService _serviceEstado;
         private readonly IProvinciaService _serviceProvincia;
+        private readonly ITipoProveedorService _serviceTipoProveedor;
         private readonly ITipoPersonaService _serviceTipoPersona;
 
         public ProveedorController(IProveedorService serviceProveedor, IEmpresaService serviceEmpresa, ITipoProveedorService serviceTipoProveedor, IEstadoService serviceEstado, IProvinciaService serviceProvincia, ITipoPersonaService serviceTipoPersona)
@@ -54,6 +54,10 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProveedorController/Create
         public ActionResult Create()
         {
+            ViewBag.TipoPersona = getListTipoPersona();
+            ViewBag.TipoProveedor = getListTipoProveedor();
+            ViewBag.Estado = getListEstado();
+            ViewBag.Provincia = getListProvincia();
             return View();
         }
 
@@ -62,9 +66,12 @@ namespace DevSys.Gesinv.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProveedorViewModel proveedorViewModel)
         {
+
             if (ModelState.IsValid)
             {
-
+                Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
+                _serviceProveedor.Create(proveedor);
+                return RedirectToAction("Index","Proveedor");
             }
             return View();
         }
@@ -73,22 +80,25 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             ProveedorViewModel prov = ProveedorViewModel.ToViewModel(await _serviceProveedor.GetById(id));
+            ViewBag.TipoPersona = getListTipoPersona();
+            ViewBag.TipoProveedor = getListTipoProveedor();
+            ViewBag.Estado = getListEstado();
+            ViewBag.Provincia = getListProvincia();
             return View(prov);
         }
 
         // POST: ProveedorController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ProveedorViewModel proveedorViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
+                _serviceProveedor.Update(proveedor);
+                return RedirectToAction("Details","Proveedor", new { id = proveedor.ProveedorId });
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: ProveedorController/Delete/5
@@ -112,6 +122,24 @@ namespace DevSys.Gesinv.UI.Controllers
                 return View();
             }
         }
-        
+
+        public List<TipoPersonaViewModel> getListTipoPersona() 
+        {
+            return TipoPersonaViewModel.ToListModelView(_serviceTipoPersona.GetAll().Result);
+        }
+        public List<TipoProveedorViewModel> getListTipoProveedor()
+        {
+            return TipoProveedorViewModel.ToListModelView(_serviceTipoProveedor.GetAll().Result);
+        }
+        public  List<EstadoViewModel> getListEstado()
+        {
+            return EstadoViewModel.ToListModelView(_serviceEstado.GetAll().Result);
+        }
+        public List<ProvinciaViewModel> getListProvincia()
+        {
+            return ProvinciaViewModel.ToListModelView(_serviceProvincia.GetAll().Result);
+        }
+
+
     }
 }

@@ -18,7 +18,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             };
             return provinciaViewModel;
         }
-        public static List<ProvinciaViewModel> ToListModelView(List<Provincia> lstModel) 
+        public static List<ProvinciaViewModel> ToListModelView(IEnumerable<Provincia> lstModel) 
         {
             List<ProvinciaViewModel> provinciaListViewModel = new List<ProvinciaViewModel>();
             foreach (Provincia item in lstModel)

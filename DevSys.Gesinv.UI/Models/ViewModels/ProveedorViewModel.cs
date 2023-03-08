@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
@@ -15,6 +16,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public string Correo { get; set; } = null!;
         public DateTime? Plazo { get; set; }
         public string Ruc { get; set; } = null!;
+        [Display(Name ="Provincia")]
         public int? ProvinciaId { get; set; }
         public int? EstadoId { get; set; }
         public int? TipoPersonaId { get; set; }
@@ -50,6 +52,28 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 lstViewModel.Add(ToViewModel(item));
             }
             return lstViewModel;
+        }
+        public static Proveedor ToModel(ProveedorViewModel modelView)
+        {
+            Proveedor model = new Proveedor()
+            {
+                ProveedorId = modelView.ProveedorId,
+                EmpresaId = modelView.EmpresaId,
+                RazonSocial = modelView.RazonSocial,
+                Codigo = modelView.Codigo,
+                Contacto = modelView.Contacto,
+                TipoProveedorId = modelView.TipoProveedorId,
+                Direccion = modelView.Direccion,
+                Telefono = modelView.Telefono,
+                Correo = modelView.Correo,
+                Plazo = modelView.Plazo,
+                Ruc = modelView.Ruc,
+                ProvinciaId = modelView.ProvinciaId,
+                EstadoId = modelView.EstadoId,
+                TipoPersonaId = modelView.TipoPersonaId,
+                PaginaWeb = modelView.PaginaWeb
+            };
+            return model;
         }
 
     }

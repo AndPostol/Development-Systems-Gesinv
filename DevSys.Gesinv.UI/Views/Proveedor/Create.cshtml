@@ -12,16 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ProveedorId" class="control-label"></label>
-                <input asp-for="ProveedorId" class="form-control" />
-                <span asp-validation-for="ProveedorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmpresaId" class="control-label"></label>
-                <input asp-for="EmpresaId" class="form-control" />
-                <span asp-validation-for="EmpresaId" class="text-danger"></span>
-            </div>
+            <input type="hidden" value="1" asp-for="EmpresaId" />
             <div class="form-group">
                 <label asp-for="RazonSocial" class="control-label"></label>
                 <input asp-for="RazonSocial" class="form-control" />
@@ -39,7 +30,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="TipoProveedorId" class="control-label"></label>
-                <input asp-for="TipoProveedorId" class="form-control" />
+                <select asp-for="TipoProveedorId" class="form-control">
+                    <option>Seleccione</option>
+                    @foreach (var item in ViewBag.TipoProveedor)
+                    {
+                        <option value="@item.TipoProveedorId">@item.Nombre</option>
+                    }
+                </select>
                 <span asp-validation-for="TipoProveedorId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -69,17 +66,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProvinciaId" class="control-label"></label>
-                <input asp-for="ProvinciaId" class="form-control" />
+                <select asp-for="ProvinciaId" class="form-control">
+                    <option>Seleccione</option>
+                    @foreach (var item in ViewBag.Provincia)
+                    {
+                        <option value="@item.ProvinciaId">@item.Nombre</option>
+                    }
+                </select>
                 <span asp-validation-for="ProvinciaId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EstadoId" class="control-label"></label>
-                <input asp-for="EstadoId" class="form-control" />
+                    <select asp-for="EstadoId" class="form-control">
+                        <option>Seleccione</option>
+                        @foreach (var item in ViewBag.Estado)
+                        {
+                        <option value="@item.EstadoId">@item.Nombre</option>
+                        }
+                    </select>
                 <span asp-validation-for="EstadoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoPersonaId" class="control-label"></label>
-                <input asp-for="TipoPersonaId" class="form-control" />
+                <select asp-for="TipoPersonaId" class="form-control">
+                        <option>Seleccione</option>
+                        @foreach (var item in ViewBag.TipoPersona)
+                        {
+                            <option value="@item.TipoPersonaId">@item.Nombre</option>
+                        }
+                    </select>
                 <span asp-validation-for="TipoPersonaId" class="text-danger"></span>
             </div>
             <div class="form-group">

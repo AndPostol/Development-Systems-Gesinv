@@ -16,7 +16,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             };
             return TipoProveedorViewModel;
         }
-        public static List<TipoProveedorViewModel> ToListModelView(List<TipoProveedor> lstModel)
+        public static List<TipoProveedorViewModel> ToListModelView(IEnumerable<TipoProveedor> lstModel)
         {
             List<TipoProveedorViewModel> TipoProveedorListViewModel = new List<TipoProveedorViewModel>();
             foreach (TipoProveedor item in lstModel)

@@ -16,7 +16,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             };
             return TipoPersonaViewModel;
         }
-        public static List<TipoPersonaViewModel> ToListModelView(List<TipoPersona> lstModel)
+        public static List<TipoPersonaViewModel> ToListModelView(IEnumerable<TipoPersona> lstModel)
         {
             List<TipoPersonaViewModel> TipoPersonaListViewModel = new List<TipoPersonaViewModel>();
             foreach (TipoPersona item in lstModel)
