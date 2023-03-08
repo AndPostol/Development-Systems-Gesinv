@@ -15,69 +15,86 @@
     <title>Editar</title>
 </head>
 <body>
-
+  <form asp-action="Create">
 <div>
 
-<div>
-  <h5 align="center">SALIDA</h5>
-  <hr/>
-  <table class="table">
-    <thread>
-      <tr align="center">
-        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
-        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
-        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
-        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
-        <th></th>
-      </tr>
+  <div>
+    <h5 align="center">SALIDA</h5>
+    <hr/>
+
+    <table class="table">
+      <thread>
         <tr align="center">
-          <td>@Html.DropDownList("Motivo", sliMotivo)</td>
-          <td>@*@Html.DisplayFor(model => model.Fecha)*@<input type="date"></td>
-          <td>@Html.DropDownList("Bodega", sliBodega)</td>
-          <td><textarea cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
+          <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+          <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+          <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+          <th>@Html.DisplayNameFor(model => model.Comentario)</th>
           <th></th>
-      </tr>
-      </thread>
-  </table>
-</div>
+        </tr>
+          <tr align="center">
+            <td>@Html.DropDownList("MotivoId", ViewBag.sliMotivo as List<SelectListItem>,
+                                  "Seleccionar", new { @class= "form-control"})</td>
+            <td>@Html.TextBoxFor(model => model.Fecha, new { type = "date", @class= "form-control" })</td>
+            <td>@Html.DropDownList("BodegaId", ViewBag.sliBodega as List<SelectListItem>,
+                                  "Seleccionar", new { @class= "form-control"})</td>
+            <td>@Html.TextAreaFor(model => model.Comentario, new { @class= "form-control"})</td>
+            <th></th>
+        </tr>
+        </thread>
+    </table>
+  </div>
 
-<div>
-  <table class="table">
-    <h5 align="center">PRODUCTOS</h5>
-    <thread>
-      <tr align="center">
-        <th>Cód. Producto</th>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-        <th>Total</th>
-        <th></th>
-      </tr>
-  </thread>
-      <tbody>
-    @foreach (var item in Model.LineaSalida)
-    {
-      <tr align="center">
-        <td>@item.ProductoId</td>
-        <td>@item.ProductoNombre</td>
-        <td>@item.Cantidad</td>
-        <td>@item.CostoSalida</td>
-        <td>PENDIENTE</td>
-      </tr>
-    }
-  </tbody>
-  </table>
-</div>
+  <div>
+    <table class="table">
+      <h5 align="center">PRODUCTOS</h5>
+      <thread>
+        <tr align="center">
+          <th>Cód. Producto</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+    </thread>
+        <tbody>
+          @if (Model.LineaSalida != null)
+          {
+            for (var i= 0; i < Model.LineaSalida.Count(); i++)
+            {
+@*      @foreach (var item in Model.LineaSalida)
+      {*@
+        <tr align="center">
+@*          <td>@item.ProductoId</td>
+          <td>@item.ProductoNombre</td>
+          <td>@item.Cantidad</td>
+          <td>@item.ProductoPrecio</td>
+          <td>PENDIENTE</td>*@
+          <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoId, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => Model.LineaSalida[i].CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>
+          @*<td>@Html.TextBoxFor(model => item.ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => item.Cantidad, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => item.ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
+          <td>@Html.TextBoxFor(model => item.CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>*@
+        </tr>
+@*      }*@
+            }
+          }
+        </tbody>
+    </table>
+    <div class="d-flex flex-row-reverse">
+      <a class="btn btn-outline-success" asp-action="Index">Regresar</a>
+      <button type="submit" class="btn btn-outline-primary">Crear</button>
+    </div>
+  </div>
 
-<div class="d-flex flex-row-reverse">
-  <form>
-    <button type="submit" asp-action="Create" class="btn btn-outline-primary">Crear</button> |
-    <button type="submit" asp-action="Index" class="btn btn-outline-success">Regresar</button>
-@*    <a class="btn btn-outline-primary" asp-action="Create" >Crear</a> |
-    <a class="btn btn-outline-success" asp-action="Index">Regresar</a>*@
-  </form>
 </div>
-
-</div>
+ </form>
 </body>
 </html>
+
+
+

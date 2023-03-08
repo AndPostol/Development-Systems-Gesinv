@@ -1,6 +1,7 @@
 ﻿using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
@@ -8,8 +9,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   
   public class SalidaViewModel
   {
+    //[ValidateNever]
     [Display(Name = "Código")]
     public int SalidaId { get; set; }
+    [ValidateNever]
     public string Codigo { get; set; } = null!;
     public int? MotivoId { get; set; }
     [Display(Name ="Motivo")]
@@ -35,7 +38,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
       SalidaViewModel result = new()
       {
         SalidaId = model.SalidaId,
-        //Codigo = model.Codigo,
         MotivoNombre = model.Motivo.Nombre,
         Fecha = model.Fecha,
         BodegaNombre = model.Bodega.Direccion,

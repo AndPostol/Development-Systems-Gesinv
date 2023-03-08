@@ -81,7 +81,7 @@ namespace DevSys.Gesinv.UI.Controllers
           ProductoId = item.ProductoId,
           ProductoNombre = producto.Nombre,
           Cantidad = item.Cantidad,
-          CostoSalida = producto.Precio
+          ProductoPrecio = producto.Precio
         });
       }
 
@@ -94,8 +94,29 @@ namespace DevSys.Gesinv.UI.Controllers
     // POST: SalidaController/Create/
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create()
+    public async Task<IActionResult> Create(SalidaViewModel salidaVM)
     {
+      try
+      {
+        Salida crearSalida = new()
+        {
+          SalidaId = Convert.ToInt32(salidaVM.SalidaId),
+          MotivoId = Convert.ToInt32(salidaVM.MotivoId),
+          Fecha = Convert.ToDateTime(salidaVM.Fecha),
+          BodegaId = Convert.ToInt32(salidaVM.BodegaId),
+          Comentario = salidaVM.Comentario,
+          LineaSalida = new List<LineaSalida>()
+        };
+
+        if (ModelState.IsValid)
+        {
+          await Console.Out.WriteLineAsync("Hola");
+        }
+      }
+      catch (Exception)
+      {
+
+      }
 
       return View();
     }
@@ -119,7 +140,6 @@ namespace DevSys.Gesinv.UI.Controllers
 
       return View();
     }
-
 
     // GET: SalidaController/Delete/
     public async Task<IActionResult> Delete(int id)
@@ -145,6 +165,7 @@ namespace DevSys.Gesinv.UI.Controllers
       }
     }
 
+    // API de Pedidos
     public async Task<List<PedidoViewModel>> PedidosAPI(int? id = null)
     {
       HttpResponseMessage _responseMessage = await client.GetAsync(url);

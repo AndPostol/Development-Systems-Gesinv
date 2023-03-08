@@ -20,9 +20,9 @@
       <tr align="center">
         <th>Cód. Pedido</th>
         <th>Cód. Cliente</th>
-        <th>Cód. Linea Pedido</th>
+@*        <th>Cód. Linea Pedido</th>
         <th>Cód. Producto</th>
-        <th>Cantidad</th>
+        <th>Cantidad</th>*@
         <th></th>
       </tr>
   </thread>
@@ -32,9 +32,9 @@
       <tr align="center">
         <td>@item.Id</td>
         <td>@item.ClienteId</td>
-        <td>@item.LineaPedidoId</td>
+@*        <td>@item.LineaPedidoId</td>
         <td>@item.ProductoId</td>
-        <td>@item.Cantidad</td>
+        <td>@item.Cantidad</td>*@
         <td><a class="btn btn-outline-primary" asp-action="Create" asp-route-id="@item.Id">Ingresar</a></td>
       </tr>
     }
