@@ -16,12 +16,45 @@ namespace DevSys.Gesinv.DAL.Repositories
     public class ReporteRepository : IReporteRepository
     {
         private readonly ConfigurationConnection _connection;
-        public ReporteRepository(IOptions<ConfigurationConnection> connection) 
+        public ReporteRepository(IOptions<ConfigurationConnection> connection)
         {
             _connection = connection.Value;
         }
 
-        public async Task<List<ReporteIngreso>> obtenerReporteProveedores(
+        public async Task<List<ReporteIngreso>> obtenerReporteIngreso(int? motivo = null, string? fechaInicio = null, string? fechaFin = null, int? bodega = null, int? proveedor = null, int? tipoProducto = null)
+        {
+            List<ReporteIngreso> lstReporteIngreso = new List<ReporteIngreso>();
+            using (var connection = new SqlConnection(_connection.SQLConnection))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("sp_InformeIngreso", connection);
+                cmd.Parameters.AddWithValue("motivo", motivo);
+                cmd.Parameters.AddWithValue("fechaInicio", fechaInicio);
+                cmd.Parameters.AddWithValue("fechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("bodega", bodega);
+                cmd.Parameters.AddWithValue("proveedor", proveedor);
+                cmd.Parameters.AddWithValue("tipoProducto", tipoProducto);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    while (await dr.ReadAsync())
+                    {
+                        lstReporteIngreso.Add(new ReporteIngreso()
+                        {
+                            ProductoId = Convert.ToInt32(dr["ProductoId"]),
+                            Nombre = dr["Nombre"].ToString(),
+                            MotivoId = Convert.ToInt32(dr["MotivoId"]),
+                            Fecha = Convert.ToDateTime(dr["Fecha"]),
+                            Cantidad = Convert.ToInt32(dr["Cantidad"]),
+                            PrecioBruto = Convert.ToDouble(dr["PrecioBruto"])
+                        });
+                    }
+                }
+                return lstReporteIngreso;
+            }
+        }
+
+        public async Task<List<ReporteProveedor>> obtenerReporteProveedores(
             string? fechaInicio = null,
             string? fechaFin = null,
             string? ruc = null,
@@ -29,7 +62,7 @@ namespace DevSys.Gesinv.DAL.Repositories
             string? razonSocial = null,
             int? productoId = null)
         {
-            List<ReporteIngreso> lst = new List<ReporteIngreso>();
+            List<ReporteProveedor> lstReporteProveedor = new List<ReporteProveedor>();
             using (var connection = new SqlConnection(_connection.SQLConnection))
             {
                 connection.Open();
@@ -47,7 +80,7 @@ namespace DevSys.Gesinv.DAL.Repositories
                 {
                     while (await dr.ReadAsync())
                     {
-                        lst.Add(new ReporteIngreso
+                        lstReporteProveedor.Add(new ReporteProveedor
                         {
                             ProveedorId = Convert.ToInt32(dr["ProveedorId"]),
                             RazonSocial = dr["RazonSocial"].ToString(),
@@ -62,7 +95,43 @@ namespace DevSys.Gesinv.DAL.Repositories
                     }
                 }
             }
-            return lst;
+            return lstReporteProveedor;
+        }
+
+        public async Task<List<ReporteSalida>> obtenerReporteSalida(string? fechaInicio = null, string? fechaFin = null, int? bodega = null, int? proveedor = null, int? tipoProducto = null)
+        {
+            List<ReporteSalida> lstReporteSalida = new List<ReporteSalida>();
+            using (var connection = new SqlConnection(_connection.SQLConnection))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("sp_InformeSalida", connection);
+                cmd.Parameters.AddWithValue("fechaInicio", fechaInicio);
+                cmd.Parameters.AddWithValue("fechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("bodega", bodega);
+                cmd.Parameters.AddWithValue("proveedor", proveedor);
+                cmd.Parameters.AddWithValue("tipoProducto", tipoProducto);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    while (await dr.ReadAsync())
+                    {
+                        lstReporteSalida.Add(new ReporteSalida()
+                        {
+                            ProductoId = Convert.ToInt32(dr["ProductoId"]),
+                            Nombre = dr["Nombre"].ToString(),
+                            MotivoId = Convert.ToInt32(dr["MotivoId"]),
+                            IngresoFecha = Convert.ToDateTime(dr["Ingreso"]),
+                            SalidaFecha = Convert.ToDateTime(dr["Salida"]),
+                            TipoProveedor = Convert.ToInt32(dr["TipoProveedor"]),
+                            RazonSocial = dr["RazonSocial"].ToString(),
+                            Cantidad = Convert.ToInt32(dr["Cantidad"]),
+                            Stock = Convert.ToInt32(dr["Stock"]),
+                            CostoSalida = Convert.ToDouble(dr["CostoSalida"])
+                        });
+                    }
+                }
+                return lstReporteSalida;
+            }
         }
     }
 }

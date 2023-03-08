@@ -103,22 +103,7 @@ namespace DevSys.Gesinv.UI.Controllers
                 return View();
             }
         }
-        // GET
-        [HttpGet("Reporte")]
-        public async Task<IActionResult> Reporte(
-            string? fechaInicio = null,
-            string? fechaFin = null,
-            string? ruc = null,
-            int? codigo = null,
-            string? razonSocial = null,
-            int? producto = null 
-        ) 
 
-        {
-            List<ReporteIngreso> list = await _serviceReporte.obtenerReporteProveedores(fechaInicio, fechaFin, ruc, codigo, razonSocial, producto);
-            ViewBag.data = list;
-
-            return View();
-        }
+        
     }
 }

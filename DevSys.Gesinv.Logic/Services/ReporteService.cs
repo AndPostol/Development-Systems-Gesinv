@@ -17,15 +17,21 @@ namespace DevSys.Gesinv.Logic.Services
             _repository = repository;
         }
 
-        public async Task<List<ReporteIngreso>> obtenerReporteProveedores(
-            string? fechaInicio = null,
-            string? fechaFin = null,
-            string? ruc = null,
-            int? codigo = null,
-            string? razonSocial = null,
-            int? productoId = null)
+        public async Task<List<ReporteIngreso>> obtenerReporteIngreso(int? motivo, string? fechaInicio, string? fechaFin, int? bodega, int? proveedor, int? tipoProducto)
         {
-            List<ReporteIngreso> result = await _repository.obtenerReporteProveedores(fechaInicio,fechaFin,ruc,codigo,razonSocial,productoId);
+            List<ReporteIngreso> result = await _repository.obtenerReporteIngreso(motivo,fechaInicio,fechaFin,bodega,proveedor,tipoProducto);
+            return result;
+        }
+
+        public async Task<List<ReporteProveedor>> obtenerReporteProveedores(string? fechaInicio, string? fechaFin, string? ruc, int? codigo, string? razonSocial, int? productoId)
+        {
+            List<ReporteProveedor> result = await _repository.obtenerReporteProveedores(fechaInicio,fechaFin,ruc,codigo,razonSocial,productoId);
+            return result;
+        }
+
+        public async Task<List<ReporteSalida>> obtenerReporteSalida(string? fechaInicio, string? fechaFin, int? bodega, int? proveedor, int? tipoProducto)
+        {
+            List<ReporteSalida> result = await _repository.obtenerReporteSalida( fechaInicio, fechaFin, bodega, proveedor, tipoProducto);
             return result;
         }
     }

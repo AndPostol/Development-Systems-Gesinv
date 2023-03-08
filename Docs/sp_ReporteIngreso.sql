@@ -5,11 +5,11 @@ CREATE PROCEDURE sp_InformeIngreso(
 	 @fechaFin date= null,
 	 @bodega int = null,
 	 @proveedor int = null,
-	 @tipoProduto int = null
+	 @tipoProducto int = null
 )
 AS
 BEGIN
-	SELECT prod.Codigo, prod.Nombre, ing.MotivoId, ing.Fecha, det.Cantidad, det.PrecioBruto FROM [Ingreso] as ing 
+	SELECT prod.ProductoId, prod.Nombre, ing.MotivoId, ing.Fecha, det.Cantidad, det.PrecioBruto FROM [Ingreso] as ing 
 	INNER JOIN [IngresoDetalle] as det ON ing.IngresoId = det.IngresoId 
 	INNER JOIN [Producto] as prod ON det.ProductoId = prod.ProductoId
 	WHERE (@fechaInicio is null or @fechaInicio <= ing.Fecha)
@@ -17,6 +17,6 @@ BEGIN
 	AND (@motivo is null or ing.MotivoId = @motivo)
 	AND (@bodega is null or ing.BodegaId = @bodega)
 	AND (@proveedor is null or ing.ProveedorId = @proveedor)
-	AND (@tipoProduto is null or prod.TipoId = @tipoProduto)
+	AND (@tipoProducto is null or prod.TipoId = @tipoProducto)
 END
 GO

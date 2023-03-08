@@ -22,4 +22,8 @@
     <ProjectReference Include="..\DevSys.Gesinv.Models\DevSys.Gesinv.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Proveedor\" />
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,6 @@ using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using DevSys.Gesinv.Models;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
