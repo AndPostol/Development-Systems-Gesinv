@@ -10,10 +10,13 @@ namespace DevSys.Gesinv.DAL.DataContext
 {
     public class DbInventarioContext : DbContext
     {
-        private readonly string SQLConnecion = "Data Source=localhost;Initial Catalog=DbInventario;Integrated Security=True;Trust Server Certificate=True;";
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        public DbInventarioContext()
         {
-            options.UseSqlServer(SQLConnecion);
+
+        }
+        public DbInventarioContext(DbContextOptions<DbInventarioContext> options) : base(options)
+        {
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
@@ -26,14 +29,8 @@ namespace DevSys.Gesinv.DAL.DataContext
             //    .Property(l => l.LineaCompraId)
             //    .ValueGeneratedOnAdd();
         }
-        public DbInventarioContext()
-        {
-
-        }
-        public DbInventarioContext(DbContextOptions<DbInventarioContext> options): base(options)
-        {
-
-        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder options){}
         public virtual DbSet<Bodega> Bodega { get; set; } = null!;
         public virtual DbSet<Color> Color { get; set; } = null!;
         public virtual DbSet<CondicionPago> CondicionPago { get; set; } = null!;
