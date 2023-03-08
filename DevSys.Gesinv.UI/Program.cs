@@ -5,12 +5,15 @@ using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Logic.Services;
 using Microsoft.EntityFrameworkCore;
 using DevSys.Gesinv.Models;
+using DevSys.Gesinv.DAL.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // Servicios del Modulo de Orden Compra
+
 
 // Repositories
 builder.Services.AddScoped<IOrdenCompraRepository, OrdenCompraRepository>();
@@ -20,6 +23,8 @@ builder.Services.AddScoped<IGenericRepository<LineaCompra>, GenericRepository<Li
 builder.Services.AddScoped<IGenericRepository<Producto>, GenericRepository<Producto>>();
 builder.Services.AddScoped<IGenericRepository<Proveedor>, GenericRepository<Proveedor>>();
 builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
+
+builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
 
 
 
@@ -32,6 +37,9 @@ builder.Services.AddScoped<ILineaCompraService, LineaCompraService>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<IProveedorService, ProveedorService>();
 builder.Services.AddScoped<IBodegaService, BodegaService>();
+
+builder.Services.AddScoped<IReporteService, ReporteService>();
+
 
 
 
@@ -72,6 +80,7 @@ builder.Services.AddDbContext<DbInventarioContext>(options =>
 {
     options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection"));
 });
+builder.Services.Configure<ConfigurationConnection>(builder.Configuration.GetSection("ConnectionStrings"));
 
 var app = builder.Build();
 

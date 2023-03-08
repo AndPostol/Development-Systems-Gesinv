@@ -14,5 +14,6 @@ namespace DevSys.Gesinv.Logic.Services
         public ProveedorService(IGenericRepository<Proveedor> respository) : base(respository)
         {
         }
+
     }
 }
