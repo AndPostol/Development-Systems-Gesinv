@@ -34,7 +34,7 @@ namespace DevSys.Gesinv.UI.Controllers
         public async Task<ActionResult> Details(int id)
         {
             Ingreso query = await _service.GetById(id);
-            IngresoViewModel modelView = IngresoViewModel.ToINGModelView(query);
+            IngresoViewModel modelView = IngresoViewModel.ToViewModel(query);
             return View(modelView);
         }
 
@@ -91,7 +91,7 @@ namespace DevSys.Gesinv.UI.Controllers
                     row.Cantidad = Convert.ToInt32(collection[$"Cantidad{i}"]);
                 }
 
-                Ingreso model = IngresoViewModel.ToModelViewING(newIP);
+                Ingreso model = IngresoViewModel.ToModel(newIP);
                 Ingreso result = await _service.Modificar(model);
                 return View(result);
             }

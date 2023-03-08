@@ -20,9 +20,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual Ingreso? Ingreso { get; set; }
         public virtual Producto? Producto { get; set; }
 
-        public static IngresoDetalleViewModel ToINGModelView(IngresoDetalle model)
+        public static IngresoDetalle ToINGModel(IngresoDetalle model)
         {
-            IngresoDetalleViewModel viewINGModel = new IngresoDetalleViewModel()
+            IngresoDetalle viewINGModel = new IngresoDetalle()
             {
                  IngresoDetalleId  = model.IngresoDetalleId,
                  ProductoId = model.ProductoId,
@@ -34,6 +34,21 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             };
             return viewINGModel;
         }
-     
+        public static IngresoDetalle ToINGModelList(IngresoDetalle ViewINModel)
+        {
+            IngresoDetalle INGModel = new IngresoDetalle()
+            {
+                IngresoDetalleId = ViewINModel.IngresoDetalleId,
+                ProductoId = ViewINModel.ProductoId,
+                IngresoId = ViewINModel.IngresoId,
+                PrecioBruto = ViewINModel.PrecioBruto,
+                Fecha = ViewINModel.Fecha,
+                Caja = ViewINModel.Caja,
+                Cantidad = ViewINModel.Cantidad
+            };
+            return INGModel;
+        }
+      
+
     }
 }
