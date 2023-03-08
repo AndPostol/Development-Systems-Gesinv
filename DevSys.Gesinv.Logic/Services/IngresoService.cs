@@ -11,7 +11,7 @@ namespace DevSys.Gesinv.Logic.Services
 {
     public class IngresoService : GenericService<Ingreso>, IingresoService
     {
-        public IngresoService(IGenericRepository<Proveedor> respository) : base(respository)
+        public IngresoService(IGenericRepository<Ingreso> respository) : base(respository)
         {
         }
 

@@ -14,9 +14,9 @@ namespace DevSys.Gesinv.UI.Controllers
 {
     public class IngresoController : Controller 
     {
-        private readonly IngresoService _service;
+        private readonly IingresoService _service;
 
-        public IngresoController(IngresoService service)
+        public IngresoController(IingresoService service)
         {
             _service = service;
         } 

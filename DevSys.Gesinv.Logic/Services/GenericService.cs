@@ -13,22 +13,10 @@ namespace DevSys.Gesinv.Logic.Services
     public class GenericService<T> : IGenericService<T> where T : class
     {
         private IGenericRepository<T> _repository;
-        private IingresoRepository respository;
-        private IGenericRepository<Proveedor> respository1;
 
         public GenericService(IGenericRepository<T> respository)
         {
             _repository = respository;
-        }
-
-        public GenericService(IingresoRepository respository)
-        {
-            this.respository = respository;
-        }
-
-        public GenericService(IGenericRepository<Proveedor> respository1)
-        {
-            this.respository1 = respository1;
         }
 
         public async Task<bool> Create(T entity)
