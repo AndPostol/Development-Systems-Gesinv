@@ -10,7 +10,43 @@
 
 <h1>Reporte</h1>
 
-<div class="col-12">
+<div class="col-12 justify-content-center">
+    <div class="card col-6">
+        <form asp-controller="Proveedor" asp-action="Reporte" method="get">
+            <div class="card-body justify-content-center">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label>Fecha</label>
+                        <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
+                        <input type="date" class="form-control" name="fechaFin" id="fechaFin">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="ruc">Ruc</label>
+                        <input type="text" class="form-control" id="ruc" name="ruc" placeholder="00.000.000">
+                    </div>                
+                    <div class="form-group col-4">
+                    <label for="codigo">Codigo</label>
+                    <input type="number" class="form-control" id="codigo" name="codigo" placeholder="1256">
+                </div>          
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="razonSocial">Razon Social</label>
+                        <input type="text" class="form-control" id="razonSocial" name="razonSocial" placeholder="Razon Social...">
+                    </div>               
+                    <div class="form-group col-6">
+                    <label for="producto">Producto</label>
+                    <input type="text" class="form-control" id="producto" name="producto" placeholder="Producto...">
+                </div>
+
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </form>
+    </div>
     <div class="card">
         <div class="card-header">
         </div>

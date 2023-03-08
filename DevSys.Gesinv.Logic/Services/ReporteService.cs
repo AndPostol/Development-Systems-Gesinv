@@ -17,9 +17,15 @@ namespace DevSys.Gesinv.Logic.Services
             _repository = repository;
         }
 
-        public async Task<List<ReporteIngreso>> obtenerReporteProveedores()
+        public async Task<List<ReporteIngreso>> obtenerReporteProveedores(
+            string? fechaInicio = null,
+            string? fechaFin = null,
+            string? ruc = null,
+            int? codigo = null,
+            string? razonSocial = null,
+            int? productoId = null)
         {
-            List<ReporteIngreso> result = await _repository.obtenerReporteProveedores();
+            List<ReporteIngreso> result = await _repository.obtenerReporteProveedores(fechaInicio,fechaFin,ruc,codigo,razonSocial,productoId);
             return result;
         }
     }

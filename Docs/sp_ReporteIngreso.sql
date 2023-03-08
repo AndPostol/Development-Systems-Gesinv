@@ -1,5 +1,5 @@
 
-CREATE PROCEDURE informe_ingreso(
+CREATE PROCEDURE sp_InformeIngreso(
 	 @motivo int = null,
 	 @fechaInicio date= null,
 	 @fechaFin date= null,

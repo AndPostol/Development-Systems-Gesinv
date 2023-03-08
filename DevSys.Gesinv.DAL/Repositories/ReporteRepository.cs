@@ -21,13 +21,26 @@ namespace DevSys.Gesinv.DAL.Repositories
             _connection = connection.Value;
         }
 
-        public async Task<List<ReporteIngreso>> obtenerReporteProveedores()
+        public async Task<List<ReporteIngreso>> obtenerReporteProveedores(
+            string? fechaInicio = null,
+            string? fechaFin = null,
+            string? ruc = null,
+            int? codigo = null,
+            string? razonSocial = null,
+            int? productoId = null)
         {
             List<ReporteIngreso> lst = new List<ReporteIngreso>();
             using (var connection = new SqlConnection(_connection.SQLConnection))
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand("sp_InformeProveedor", connection);
+                cmd.Parameters.AddWithValue("fechaInicio", fechaInicio);
+                cmd.Parameters.AddWithValue("fechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("ruc", ruc);
+                cmd.Parameters.AddWithValue("codigo", codigo);
+                cmd.Parameters.AddWithValue("razonSocial", razonSocial);
+                cmd.Parameters.AddWithValue("producto", productoId);
+
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 using (var dr = await cmd.ExecuteReaderAsync())
