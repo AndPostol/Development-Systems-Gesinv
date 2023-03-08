@@ -30,7 +30,9 @@ namespace DevSys.Gesinv.DAL.DataContext
             //    .ValueGeneratedOnAdd();
         }
         
-        protected override void OnConfiguring(DbContextOptionsBuilder options){}
+        protected override void OnConfiguring(DbContextOptionsBuilder options){
+        
+        }
         public virtual DbSet<Bodega> Bodega { get; set; } = null!;
         public virtual DbSet<ColorProducto> ColorProducto { get; set; } = null!;
         public virtual DbSet<Color> Color { get; set; } = null!;
