@@ -9,7 +9,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   
   public class SalidaViewModel
   {
-    //[ValidateNever]
     [Display(Name = "Código")]
     public int SalidaId { get; set; }
     [ValidateNever]

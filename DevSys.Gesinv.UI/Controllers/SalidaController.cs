@@ -100,17 +100,19 @@ namespace DevSys.Gesinv.UI.Controllers
       {
         Salida crearSalida = new()
         {
-          SalidaId = Convert.ToInt32(salidaVM.SalidaId),
+          //SalidaId = Convert.ToInt32(salidaVM.SalidaId),
           MotivoId = Convert.ToInt32(salidaVM.MotivoId),
+          Codigo = "1",
           Fecha = Convert.ToDateTime(salidaVM.Fecha),
           BodegaId = Convert.ToInt32(salidaVM.BodegaId),
           Comentario = salidaVM.Comentario,
-          LineaSalida = new List<LineaSalida>()
+          LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
         };
 
         if (ModelState.IsValid)
         {
-          await Console.Out.WriteLineAsync("Hola");
+          await _salidaService.Create(crearSalida);
+          return RedirectToAction("Index", "Salida");
         }
       }
       catch (Exception)
