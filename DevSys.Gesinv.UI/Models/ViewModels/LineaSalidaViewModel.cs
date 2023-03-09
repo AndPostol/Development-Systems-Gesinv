@@ -7,7 +7,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 {
   public class LineaSalidaViewModel
   {
-    public int LineaSalidaId { get; set; }
+    public int LineaSalidaId { get; set; } = 0;
     public int SalidaId { get; set; }
     public int Cantidad { get; set; }
     public double CostoSalida { get; set; }
@@ -18,6 +18,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public string ProductoNombre { get; set; }
     [Display(Name = "Precio")]
     public double ProductoPrecio { get; set; }
+    public int PedidoId { get; set; }
+
     [ValidateNever]
     public virtual SalidaViewModel Salida { get; set; }
     [ValidateNever]
@@ -27,6 +29,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     {
       LineaSalidaViewModel result = new()
       {
+        LineaSalidaId = model.LineaSalidaId,
         SalidaId = model.SalidaId,
         ProductoId = model.Producto.ProductoId,
         ProductoNombre = model.Producto.Nombre,

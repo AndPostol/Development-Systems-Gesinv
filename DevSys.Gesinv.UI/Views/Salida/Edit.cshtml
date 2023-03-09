@@ -64,6 +64,7 @@
                 {
             <tr align="center">
               @Html.HiddenFor(model => Model.LineaSalida[i].SalidaId)
+              @Html.HiddenFor(model => Model.LineaSalida[i].LineaSalidaId)
               <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoId, new { @class = "form-control", @readonly = "readonly" })</td>
               <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
               <td>@Html.EditorFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control" })</td>

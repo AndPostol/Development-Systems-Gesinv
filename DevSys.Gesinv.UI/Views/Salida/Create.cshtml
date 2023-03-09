@@ -32,6 +32,7 @@
               <th></th>
             </tr>
               <tr align="center">
+                @Html.HiddenFor(model => Model.PedidoId)
                 <td>@Html.DropDownList("MotivoId", ViewBag.sliMotivo as List<SelectListItem>,
                                       "Seleccionar", new { @class= "form-control"})</td>
                 <td>@Html.TextBoxFor(model => model.Fecha, new { type = "date", @class= "form-control" })</td>
