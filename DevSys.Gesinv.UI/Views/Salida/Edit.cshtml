@@ -15,64 +15,103 @@
     <title>Editar</title>
 </head>
 <body>
-<div>
-  <h5 align="center">SALIDA</h5>
-  <hr/>
-    <table class="table">
-      <thread>
-        <tr align="center">
-          <th>@Html.DisplayNameFor(model => model.Codigo)</th>
-          <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
-          <th>@Html.DisplayNameFor(model => model.Fecha)</th>
-          <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
-          <th>@Html.DisplayNameFor(model => model.Comentario)</th>
-          <th></th>
-        </tr>
-        <tr align="center">
-          <td>@Html.DisplayFor(model => model.Codigo)</td>
-          <td>@Html.DropDownList("Motivo", sliMotivo)</td>
-          <td>@Html.DisplayFor(model => model.Fecha)<input type="date"></td>
-          <td>@Html.DropDownList("Bodega", sliBodega)</td>
-          <td><textarea cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
-          <th></th>
-        </tr>
-      </thread>
-    </table>
-</div>
+  <form asp-action="Edit">
+    <div>
 
-<div>
-  <h5 align="center">PRODUCTOS</h5>
-  <table class="table">
-    <thread>
-      <tr align="center">
-        <th>Codigo</th>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Costo</th>
-        <th></th>
-      </tr>
-    </thread>
-    <tbody>
-      @foreach (var item in Model.LineaSalida)
-      {
-        <tr align="center">
-          <td>@item.ProductoCodigo</td>
-          <td>@item.ProductoNombre</td>
-          <td><input asp-for=@item.Cantidad class="form-control"/></td>
-          <td><input asp-for=@item.CostoSalida class="form-control"/></td>
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>
+      <div>
+        <h5 align="center">SALIDA</h5>
+        <hr/>
+          <table class="table">
+            <thread>
+              <tr align="center">
+                @Html.HiddenFor(model => model.SalidaId)
+                <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+                <th></th>
+              </tr>
+                <tr align="center">
+                  <td>@Html.DropDownList("MotivoId", ViewBag.sliMotivo as List<SelectListItem>,
+                                        "Seleccionar", new { @class= "form-control"})</td>
+                  <td>@Html.TextBoxFor(model => model.Fecha, new { type = "date", @class= "form-control" })</td>
+                  <td>@Html.DropDownList("BodegaId", ViewBag.sliBodega as List<SelectListItem>,
+                                        "Seleccionar", new { @class= "form-control"})</td>
+                  <td>@Html.TextAreaFor(model => model.Comentario, new { @class= "form-control"})</td>
+                  <th></th>
+              </tr>
+            </thread>
+          </table>
+      </div>
+
+      <div>
+        <table class="table">
+          <h5 align="center">PRODUCTOS</h5>
+          <thread>
+            <tr align="center">
+              <th>Cód. Producto</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+        </thread>
+            <tbody>
+              @if (Model.LineaSalida != null)
+              {
+                for (var i= 0; i < Model.LineaSalida.Count(); i++)
+                {
+            <tr align="center">
+              @Html.HiddenFor(model => Model.LineaSalida[i].SalidaId)
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoId, new { @class = "form-control", @readonly = "readonly" })</td>
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
+              <td>@Html.EditorFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control" })</td>
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>
+            </tr>
+                }
+              }
+            </tbody>
+        </table>
+      </div>
+
+      @*<div>
+        <h5 align="center">PRODUCTOS</h5>
+        <table class="table">
+          <thread>
+            <tr align="center">
+              <th>Codigo</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Costo</th>
+              <th></th>
+            </tr>
+          </thread>
+          <tbody>
+            @foreach (var item in Model.LineaSalida)
+            {
+              <tr align="center">
+                <td>@item.ProductoCodigo</td>
+                <td>@item.ProductoNombre</td>
+                <td><input asp-for=@item.Cantidad class="form-control"/></td>
+                <td><input asp-for=@item.CostoSalida class="form-control"/></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>*@
 
 <div class="d-flex flex-row-reverse">
   <form asp-action="Edit">
     <input type="hidden" asp-for="SalidaId"/>
-    <input type="submit" value="Editar" class="btn btn-outline-primary"/> |
-    <a class="btn btn-outline-success" asp-action="Index">Regresar</a>
+    <a class="btn btn-outline-success" asp-action="Index">Regresar</a> |
+    <input type="submit" value="Editar" class="btn btn-outline-primary"/>
+    
   </form>
 </div>
 
+    </div>
+  </form>
 </body>
 </html>

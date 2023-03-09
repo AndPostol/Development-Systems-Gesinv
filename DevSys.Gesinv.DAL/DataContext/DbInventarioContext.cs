@@ -31,7 +31,7 @@ namespace DevSys.Gesinv.DAL.DataContext
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder options){
-      options.UseSqlServer("Data Source=localhost;Initial Catalog=DbInventario;Integrated Security=True;Trust Server Certificate=True;");
+        options.UseSqlServer("Data Source=localhost;Initial Catalog=DbInventario;Integrated Security=True;Trust Server Certificate=True;");
         }
         public virtual DbSet<Bodega> Bodega { get; set; } = null!;
         public virtual DbSet<ColorProducto> ColorProducto { get; set; } = null!;

@@ -119,7 +119,6 @@ namespace DevSys.Gesinv.UI.Controllers
       {
 
       }
-
       return View();
     }
 
@@ -137,8 +136,35 @@ namespace DevSys.Gesinv.UI.Controllers
 
     // POST: SalidaController/Edit/
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, SalidaViewModel salidaViewModel)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, SalidaViewModel salidaVM)
     {
+      try
+      {
+        Salida editarSalida = new()
+        {
+          //SalidaId = Convert.ToInt32(salidaVM.SalidaId),
+          MotivoId = Convert.ToInt32(salidaVM.MotivoId),
+          Codigo = "1",
+          Fecha = Convert.ToDateTime(salidaVM.Fecha),
+          BodegaId = Convert.ToInt32(salidaVM.BodegaId),
+          Comentario = salidaVM.Comentario,
+          LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
+        };
+        
+
+        if (ModelState.IsValid)
+        {
+          editarSalida.SalidaId = id;
+          await _salidaService.Update(editarSalida);
+          return RedirectToAction("Index", "Salida");
+        }
+
+      }
+      catch (Exception e)
+      {
+
+      }
 
       return View();
     }
@@ -154,6 +180,7 @@ namespace DevSys.Gesinv.UI.Controllers
 
     // POST: SalidaController/Delete/
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id, SalidaViewModel salidaViewModel)
     {
       try
