@@ -25,13 +25,14 @@ namespace DevSys.Gesinv.Logic.Services
             return await _repository.GetProductoColors(id);
         }
 
-        public async Task<Producto> ObtenerPorCodigo(int Codigo)
-        {
-            IEnumerable<Producto> queryProducto = await _repository.GetAll();
-            Producto producto = queryProducto.Where(producto => producto.Codigo == Codigo).FirstOrDefault();
-            return producto;
-        }
+        //public async Task<Producto> ObtenerPorCodigo(int Codigo)
+        //{
+        //    IEnumerable<Producto> queryProducto = await _repository.GetAll();
+        //    Producto producto = queryProducto.Where(producto => producto.Codigo == Codigo).FirstOrDefault();
+        //    return producto;
+        //}
 
+        //se habia pensado para hacer las busquedas, pero ya se hizo con javascript
         public async Task<Producto> ObtenerPorNombre(string Nombre)
   {
             IEnumerable<Producto> queryProducto = await _repository.GetAll();

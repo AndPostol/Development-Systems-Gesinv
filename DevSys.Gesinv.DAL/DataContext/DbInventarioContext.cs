@@ -54,7 +54,6 @@ namespace DevSys.Gesinv.DAL.DataContext
         public virtual DbSet<Producto> Producto { get; set; } = null!;
         public virtual DbSet<Proveedor> Proveedor { get; set; } = null!;
         public virtual DbSet<Provincia> Provincia { get; set; } = null!;
-        public virtual DbSet<Requisicion> Requisicion { get; set; } = null!;
         public virtual DbSet<Salida> Salida { get; set; } = null!;
         public virtual DbSet<Tipo> Tipo { get; set; } = null!;
         public virtual DbSet<TipoIngreso> TipoIngreso { get; set; } = null!;

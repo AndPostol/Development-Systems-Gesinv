@@ -118,7 +118,7 @@
                                 <input type="submit" value="Registrar" class="btn btn-primary"/>
                             </div>
                         </div>
-                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -263,7 +263,7 @@
                             response.push(find_product)
                             console.log(response)
                             const count_property = element.id.slice(-1)
-                            $(`#Linea-Codigo-${count_property}`).text(find_product.codigo)
+                            $(`#Linea-Codigo-${count_property}`).text(find_product.productoId)
                             $(`#Linea-PrecioUnitario-${count_property}`).val(find_product.precio)
                             //$(`#Linea-Unidad-${count_property}`).removeAttr("disabled").on('change', () => {
                             //})

@@ -29,6 +29,14 @@ namespace DevSys.Gesinv.UI.Controllers
             _colorService = colorService;
         }
 
+        [HttpGet]
+        public async Task<ActionResult> getAllProducto()
+        {
+            IEnumerable<Producto> query = await _productoService.GetAll();
+            List<ProductoViewModel> lstProduct = ProductoViewModel.ListViewModel(query);
+            return StatusCode(StatusCodes.Status200OK, lstProduct);
+        }
+
         // GET: ProductoController
         public async Task<ActionResult> Index()
         {

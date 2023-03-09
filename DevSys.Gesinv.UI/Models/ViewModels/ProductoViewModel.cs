@@ -15,8 +15,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public string Nombre { get; set; }
 
-        [Required]
-    public int Codigo { get; set; }
+        //Se decidio usar el ID como equivalente a un codigo 
+        //public int Codigo { get; set; }
 
         [Display(Name = "Linea")]
         public int? LineaID { get; set; }
@@ -72,8 +72,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public bool Perecible { get; set; }
 
-        [MaxLength(50)]
-    public string? Comentario { get; set; }
+        [MaxLength(50), ValidateNever]
+        public string? Comentario { get; set; }
 
         [Display(Name = "Caducidad"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public string FechaCaducidad { get; set; }
@@ -117,7 +117,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 ProductoID = producto.ProductoId,
                 Nombre = producto.Nombre,
-                Codigo = producto.Codigo,
+                //Codigo = producto.Codigo,
                 Unidad = producto.Unidad,
                 Caja = producto.Caja,
                 Activo = producto.Activo,
@@ -147,7 +147,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 ProductoId = productoViewModel.ProductoID,
                 Nombre = productoViewModel.Nombre,
-                Codigo = productoViewModel.Codigo,
+                //Codigo = productoViewModel.Codigo,
                 LineaId = productoViewModel.LineaID,
                 TipoId = productoViewModel.TipoID,
                 Unidad = productoViewModel.Unidad,
