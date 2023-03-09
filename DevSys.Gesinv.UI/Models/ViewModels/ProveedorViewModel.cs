@@ -27,7 +27,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProveedorId = model.ProveedorId,
                 EmpresaId = model.EmpresaId,
                 RazonSocial = model.RazonSocial,
-                Codigo= model.Codigo,
+                //Codigo= model.Codigo,
                 Contacto = model.Contacto,
                 TipoProveedorId = model.TipoProveedorId,
                 Direccion = model.Direccion,

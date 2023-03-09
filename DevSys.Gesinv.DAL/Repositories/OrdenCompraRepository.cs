@@ -59,7 +59,7 @@ namespace DevSys.Gesinv.DAL.Repositories
 
                     }
                     OCGenerada.Ingreso = new Ingreso() {
-                        CodigoIngreso = rand.Next(1,1000),
+                        //CodigoIngreso = rand.Next(1,1000),
                         ProveedorId = OCGenerada.ProveedorId,
                         Fecha = OCGenerada.Fecha,
                         Descuento = OCGenerada.SubTotal,

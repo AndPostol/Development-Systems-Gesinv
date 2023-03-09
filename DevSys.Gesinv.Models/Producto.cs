@@ -16,7 +16,6 @@ namespace DevSys.Gesinv.Models
 
         public int ProductoId { get; set; }
         public string Nombre { get; set; } = null!;
-        //public int Codigo { get; set; }
         public int? LineaId { get; set; }
         public int? MedidaId { get; set; }
         public int? TipoId { get; set; }

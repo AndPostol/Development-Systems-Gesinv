@@ -12,8 +12,6 @@ namespace DevSys.Gesinv.Models
 
         public int IngresoId { get; set; }
         public int OrdenCompraId { get; set; }
-
-        public int CodigoIngreso { get; set; }
         public int? ProveedorId { get; set; }
         public int? MotivoId { get; set; }
         public int? BodegaId { get; set; }

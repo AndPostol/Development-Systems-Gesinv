@@ -14,7 +14,6 @@ namespace DevSys.Gesinv.Models
         public int ProveedorId { get; set; }
         public int? EmpresaId { get; set; }
         public string RazonSocial { get; set; } = null!;
-        public int Codigo { get; set; }
         public string Contacto { get; set; } = null!;
         public int? TipoProveedorId { get; set; }
         public string Direccion { get; set; } = null!;

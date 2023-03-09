@@ -402,18 +402,18 @@ VALUES
 SET IDENTITY_INSERT [Provincia] OFF;
 
 SET IDENTITY_INSERT [Proveedor] ON;
-INSERT INTO [Proveedor] (ProveedorID,EmpresaID,RazonSocial,Codigo,Contacto,TipoProveedorID,Direccion,Telefono,Correo,Plazo,RUC,ProvinciaID,EstadoID,TipoPersonaID,PaginaWeb)
+INSERT INTO [Proveedor] (ProveedorID,EmpresaID,RazonSocial,Contacto,TipoProveedorID,Direccion,Telefono,Correo,Plazo,RUC,ProvinciaID,EstadoID,TipoPersonaID,PaginaWeb)
 VALUES
-  (1,3,'Felis Donec Tempor Company',8882,'Vance, Gregory K.',1,'2099 Convallis Rd.','+58 181-7442763','ligula@protonmail.org','08-29-22','40.996.900',3,2,2,'https://pinterest.com/fr'),
-  (2,6,'Lectus A Incorporated',2774,'Delgado, Aidan J.',3,'363-5304 Senectus Ave','+58 477-3134234','ante.bibendum@outlook.org','06-01-23','34.856.445',3,3,3,'http://pinterest.com/group/9'),
-  (3,7,'Tempus Corp.',5227,'James, Susan K.',1,'P.O. Box 124, 633 Odio. St.','+58 894-2812814','et.euismod@google.com','10-28-22','37.479.455',2,1,3,'https://cnn.com/user/110'),
-  (4,5,'Magna Lorem LLC',7688,'Dudley, Callum C.',2,'Ap #670-423 Nulla Street','+58 440-8485912','arcu.eu@outlook.org','04-17-22','39.757.927',2,2,2,'https://yahoo.com/fr'),
-  (5,5,'Auctor LLC',9478,'Rios, Forrest G.',3,'Ap #709-4535 Maecenas Rd.','+58 848-4621232','adipiscing.fringilla@google.com','10-29-23','471.231',1,2,3,'https://ebay.com/group/9'),
-  (6,8,'Duis Cursus Industries',3179,'Wheeler, Tatum J.',2,'883-5117 Massa. Av.','+58 652-2352884','nunc.commodo@google.com','03-18-22','43.815.532',1,1,2,'http://netflix.com/user/110'),
-  (7,5,'In Cursus Et Industries',9764,'Collier, Yuri Q.',2,'266-6455 Vitae St.','+58 978-8374457','aliquet.sem@outlook.com','05-09-23','49.196.600',2,1,2,'http://instagram.com/fr'),
-  (8,8,'Vivamus Corporation',3050,'Dillon, Cameron V.',2,'917-6900 Donec St.','+58 737-7553463','nulla.interdum.curabitur@hotmail.com','06-07-23','16.301.406',1,1,2,'http://netflix.com/sub'),
-  (9,9,'Non Cursus Institute',6796,'Rush, Phelan U.',2,'817-9884 Et Av.','+58 083-9362717','magnis@hotmail.org','06-21-23','30.548.582',1,1,2,'https://yahoo.com/group/9'),
-  (10,5,'Nullam Ut Associates',5984,'Kent, Sawyer K.',1,'Ap #192-4595 Aliquam Avenue','+58 582-4405520','aliquam.enim@hotmail.org','05-08-22','27.294.108',2,2,2,'https://youtube.com/en-us');
+  (1,3,'Felis Donec Tempor Company','Vance, Gregory K.',1,'2099 Convallis Rd.','+58 181-7442763','ligula@protonmail.org','08-29-22','40.996.900',3,2,2,'https://pinterest.com/fr'),
+  (2,6,'Lectus A Incorporated','Delgado, Aidan J.',3,'363-5304 Senectus Ave','+58 477-3134234','ante.bibendum@outlook.org','06-01-23','34.856.445',3,3,3,'http://pinterest.com/group/9'),
+  (3,7,'Tempus Corp.','James, Susan K.',1,'P.O. Box 124, 633 Odio. St.','+58 894-2812814','et.euismod@google.com','10-28-22','37.479.455',2,1,3,'https://cnn.com/user/110'),
+  (4,5,'Magna Lorem LLC','Dudley, Callum C.',2,'Ap #670-423 Nulla Street','+58 440-8485912','arcu.eu@outlook.org','04-17-22','39.757.927',2,2,2,'https://yahoo.com/fr'),
+  (5,5,'Auctor LLC','Rios, Forrest G.',3,'Ap #709-4535 Maecenas Rd.','+58 848-4621232','adipiscing.fringilla@google.com','10-29-23','471.231',1,2,3,'https://ebay.com/group/9'),
+  (6,8,'Duis Cursus Industries','Wheeler, Tatum J.',2,'883-5117 Massa. Av.','+58 652-2352884','nunc.commodo@google.com','03-18-22','43.815.532',1,1,2,'http://netflix.com/user/110'),
+  (7,5,'In Cursus Et Industries','Collier, Yuri Q.',2,'266-6455 Vitae St.','+58 978-8374457','aliquet.sem@outlook.com','05-09-23','49.196.600',2,1,2,'http://instagram.com/fr'),
+  (8,8,'Vivamus Corporation','Dillon, Cameron V.',2,'917-6900 Donec St.','+58 737-7553463','nulla.interdum.curabitur@hotmail.com','06-07-23','16.301.406',1,1,2,'http://netflix.com/sub'),
+  (9,9,'Non Cursus Institute','Rush, Phelan U.',2,'817-9884 Et Av.','+58 083-9362717','magnis@hotmail.org','06-21-23','30.548.582',1,1,2,'https://yahoo.com/group/9'),
+  (10,5,'Nullam Ut Associates','Kent, Sawyer K.',1,'Ap #192-4595 Aliquam Avenue','+58 582-4405520','aliquam.enim@hotmail.org','05-08-22','27.294.108',2,2,2,'https://youtube.com/en-us');
 SET IDENTITY_INSERT [Proveedor] OFF;
 
 SET IDENTITY_INSERT [CondicionPago] ON;
@@ -484,24 +484,6 @@ VALUES
   (2,'Internacional');
 SET IDENTITY_INSERT [TipoIngreso] OFF;
 
-  
-SET IDENTITY_INSERT [Requisicion] ON;
-
-INSERT INTO Requisicion (RequisicionID,CodigoRequisicion, Fecha, Comentario)
-VALUES
-  (1,1, CONVERT(DATETIME,'01/02/2023'),'lacus pede sagittis augue, eu'),
-  (2,2, CONVERT(DATETIME,'01/02/2023'),'eu nibh vulputate'),
-  (3,3, CONVERT(DATETIME,'01/02/2023'),'egestas lacinia. Sed congue, elit'),
-  (4,4, CONVERT(DATETIME,'01/02/2023'),'quis diam.'),
-  (5,5, CONVERT(DATETIME,'01/02/2023'),'nisi dictum augue malesuada malesuada. Integer id'),
-  (6,6, CONVERT(DATETIME,'01/02/2023'),'Nunc ut erat. Sed nunc est, mollis non,'),
-  (7,7, CONVERT(DATETIME,'01/02/2023'),'ac, fermentum'),
-  (8,8, CONVERT(DATETIME,'01/02/2023'),'Cras'),
-  (9,9, CONVERT(DATETIME,'01/02/2023'),'orci luctus et'),
-  (10,10, CONVERT(DATETIME,'01/02/2023'),'arcu eu odio tristique pharetra. Quisque ac');
-SET IDENTITY_INSERT [Requisicion] OFF;
-
-
 SET IDENTITY_INSERT [Color] ON;
 
 INSERT INTO [Color] (ColorID,Nombre)
@@ -537,18 +519,18 @@ SET IDENTITY_INSERT [Departamento] OFF;
 
 SET IDENTITY_INSERT [Salida] ON;
 
-INSERT INTO [Salida] (SalidaID,Codigo,Fecha,Comentario,MotivoID,BodegaID)
+INSERT INTO [Salida] (SalidaID,Fecha,Comentario,MotivoID,BodegaID)
 VALUES
-  (1,1, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing',1,1),
-  (2,2, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer',2,2),
-  (3,3, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing',3,3),
-  (4,4, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur',4,4),
-  (5,5, CONVERT(DATETIME,'01/02/2023'),'Lorem',5,5),
-  (6,6, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet,',6,1),
-  (7,7, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',1,2),
-  (8,8, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer',2,3),
-  (9,9, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer',3,4),
-  (10,10, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit',4,5);
+  (1, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing',1,1),
+  (2, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer',2,2),
+  (3, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing',3,3),
+  (4, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur',4,4),
+  (5, CONVERT(DATETIME,'01/02/2023'),'Lorem',5,5),
+  (6, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet,',6,1),
+  (7, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',1,2),
+  (8, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer',2,3),
+  (9, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit amet, consectetuer',3,4),
+  (10, CONVERT(DATETIME,'01/02/2023'),'Lorem ipsum dolor sit',4,5);
 
 SET IDENTITY_INSERT [Salida] OFF;
 
@@ -593,18 +575,18 @@ SET IDENTITY_INSERT [Grupo] OFF;
 
 SET IDENTITY_INSERT [Ingreso] ON;
 
-INSERT INTO [Ingreso] (IngresoID,OrdenCompraID,CodigoIngreso,ProveedorID,MotivoID,BodegaID,TipoIngresoID,Fecha,Descuento,Impuestos,Total)
+INSERT INTO [Ingreso] (IngresoID,OrdenCompraID,ProveedorID,MotivoID,BodegaID,TipoIngresoID,Fecha,Descuento,Impuestos,Total)
 VALUES
-  (1,1,3930,7,5,2,2,CONVERT(DATETIME,'04-04-23'),17,16,2734),
-  (2,2,8294,7,2,3,2,CONVERT(DATETIME,'01-17-23'),6,13,8490),
-  (3,3,2605,10,5,2,2,CONVERT(DATETIME,'02-04-23'),16,10,7241),
-  (4,4,7978,5,6,4,1,CONVERT(DATETIME,'01-05-24'),10,12,8000),
-  (5,5,2280,2,1,4,1,CONVERT(DATETIME,'06-30-22'),1,17,7287),
-  (6,6,2867,6,4,4,2,CONVERT(DATETIME,'03-27-22'),10,8,6935),
-  (7,7,3149,3,1,2,1,CONVERT(DATETIME,'04-24-22'),8,3,3203),
-  (8,8,4215,5,3,1,1,CONVERT(DATETIME,'07-07-22'),5,12,5458),
-  (9,9,1458,2,5,3,2,CONVERT(DATETIME,'05-06-23'),14,9,7347),
-  (10,10,6199,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
+  (1,1,7,5,2,2,CONVERT(DATETIME,'04-04-23'),17,16,2734),
+  (2,2,7,2,3,2,CONVERT(DATETIME,'01-17-23'),6,13,8490),
+  (3,3,10,5,2,2,CONVERT(DATETIME,'02-04-23'),16,10,7241),
+  (4,4,5,6,4,1,CONVERT(DATETIME,'01-05-24'),10,12,8000),
+  (5,5,2,1,4,1,CONVERT(DATETIME,'06-30-22'),1,17,7287),
+  (6,6,6,4,4,2,CONVERT(DATETIME,'03-27-22'),10,8,6935),
+  (7,7,3,1,2,1,CONVERT(DATETIME,'04-24-22'),8,3,3203),
+  (8,8,5,3,1,1,CONVERT(DATETIME,'07-07-22'),5,12,5458),
+  (9,9,2,5,3,2,CONVERT(DATETIME,'05-06-23'),14,9,7347),
+  (10,10,6,5,3,1,CONVERT(DATETIME,'07-31-22'),1,8,2448);
 SET IDENTITY_INSERT [Ingreso] OFF;
 
 SET IDENTITY_INSERT [Marca] ON;
@@ -639,18 +621,18 @@ VALUES
 SET IDENTITY_INSERT [Medida] OFF;
 
 SET IDENTITY_INSERT [Producto] ON;
-INSERT INTO [Producto] (ProductoID,Nombre,Codigo,LineaID,TipoID,Unidad,Caja,GrupoID,Activo,Iva,Perecible,Comentario,FechaCaducidad,Precio, MarcaID, MedidaID)
+INSERT INTO [Producto] (ProductoID,Nombre,LineaID,TipoID,Unidad,Caja,GrupoID,Activo,Iva,Perecible,Comentario,FechaCaducidad,Precio, MarcaID, MedidaID)
 VALUES
-  (1,'Vendas',2197,3,6,55,38,3,'0','1','0','libero lacus, varius et, euismod','09-22-23',190, 1, 2),
-  (2,'Gasas',9486,3,3,56,12,3,'0','0','0','tempor diam dictum sapien.','09-02-23',343, 2, 3),
-  (3,'Alcohol',6820,4,5,40,38,4,'1','0','0','vitae dolor. Donec fringilla. Donec feugiat metus sit amet','02-10-23',805, 3, 4),
-  (4,'Inyectadora',7817,1,3,18,20,2,'0','1','1','mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit','12-29-22',754, 4, 5),
-  (5,'Guantes',6503,3,2,65,43,3,'1','0','0','dolor dapibus gravida. Aliquam tincidunt,','04-23-22',933, 5, 6),
-  (6,'Par Muletas',1779,1,3,23,76,2,'1','0','1','Nulla eget metus eu erat','04-13-23',182, 6, 7),
-  (7,'Acetaminofen',8340,3,3,24,3,2,'1','0','0','non, dapibus rutrum, justo. Praesent luctus. Curabitur','12-17-23',555, 7, 8),
-  (8,'Yeso',8108,3,6,3,84,2,'1','0','0','a purus.','07-12-22',98, 8, 1),
-  (9,'Ibuprofeno',3776,4,2,29,22,4,'1','1','0','lorem ipsum sodales purus, in molestie tortor nibh sit amet','01-03-23',901, 9, 2),
-  (10,'Pack Paletas',4004,2,5,77,42,2,'0','1','1','id, erat. Etiam vestibulum massa rutrum magna. Cras','05-15-22',410, 10, 3);
+  (1,'Vendas',3,6,55,38,3,'0','1','0','libero lacus, varius et, euismod','09-22-23',190, 1, 2),
+  (2,'Gasas',3,3,56,12,3,'0','0','0','tempor diam dictum sapien.','09-02-23',343, 2, 3),
+  (3,'Alcohol',4,5,40,38,4,'1','0','0','vitae dolor. Donec fringilla. Donec feugiat metus sit amet','02-10-23',805, 3, 4),
+  (4,'Inyectadora',1,3,18,20,2,'0','1','1','mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit','12-29-22',754, 4, 5),
+  (5,'Guantes',3,2,65,43,3,'1','0','0','dolor dapibus gravida. Aliquam tincidunt,','04-23-22',933, 5, 6),
+  (6,'Par Muletas',1,3,23,76,2,'1','0','1','Nulla eget metus eu erat','04-13-23',182, 6, 7),
+  (7,'Acetaminofen',3,3,24,3,2,'1','0','0','non, dapibus rutrum, justo. Praesent luctus. Curabitur','12-17-23',555, 7, 8),
+  (8,'Yeso',3,6,3,84,2,'1','0','0','a purus.','07-12-22',98, 8, 1),
+  (9,'Ibuprofeno',4,2,29,22,4,'1','1','0','lorem ipsum sodales purus, in molestie tortor nibh sit amet','01-03-23',901, 9, 2),
+  (10,'Pack Paletas',2,5,77,42,2,'0','1','1','id, erat. Etiam vestibulum massa rutrum magna. Cras','05-15-22',410, 10, 3);
 SET IDENTITY_INSERT [Producto] OFF;
 
 SET IDENTITY_INSERT [ColorProducto] ON;
