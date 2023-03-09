@@ -62,25 +62,13 @@
           {
             for (var i= 0; i < Model.LineaSalida.Count(); i++)
             {
-@*      @foreach (var item in Model.LineaSalida)
-      {*@
         <tr align="center">
-@*          <td>@item.ProductoId</td>
-          <td>@item.ProductoNombre</td>
-          <td>@item.Cantidad</td>
-          <td>@item.ProductoPrecio</td>
-          <td>PENDIENTE</td>*@
           <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoId, new { @class = "form-control", @readonly = "readonly" })</td>
           <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
           <td>@Html.TextBoxFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control", @readonly = "readonly" })</td>
           <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
           <td>@Html.TextBoxFor(model => Model.LineaSalida[i].CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>
-          @*<td>@Html.TextBoxFor(model => item.ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
-          <td>@Html.TextBoxFor(model => item.Cantidad, new { @class = "form-control", @readonly = "readonly" })</td>
-          <td>@Html.TextBoxFor(model => item.ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
-          <td>@Html.TextBoxFor(model => item.CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>*@
         </tr>
-@*      }*@
             }
           }
         </tbody>
