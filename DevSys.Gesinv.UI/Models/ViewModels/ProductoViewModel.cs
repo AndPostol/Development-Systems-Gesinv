@@ -6,17 +6,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
-    public class ProductoViewModel
-    {
+  public class ProductoViewModel
+  {
         [Display(Name = "ID")]
         [ScaffoldColumn(false)] // oculta el atributo
         public int ProductoID { get; set; }
-        
+
         [Required]
         public string Nombre { get; set; }
 
         [Required]
-        public int Codigo { get; set; }
+    public int Codigo { get; set; }
 
         [Display(Name = "Linea")]
         public int? LineaID { get; set; }
@@ -56,8 +56,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public string MarcaNombre { get; set; }
 
         [Required]
-        public int Unidad { get; set; }
-        public int? Caja { get; set; }
+    public int Unidad { get; set; }
+    public int? Caja { get; set; }
 
         [Display(Name = "Grupo")]
         public int? GrupoID { get; set; }
@@ -73,7 +73,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public bool Perecible { get; set; }
 
         [MaxLength(50)]
-        public string? Comentario { get; set; }
+    public string? Comentario { get; set; }
 
         [Display(Name = "Caducidad"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public string FechaCaducidad { get; set; }
@@ -176,5 +176,15 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             return listViewModel;
         }
 
-    }
+    public Grupo? Grupo { get; set; }
+    public Linea? Linea { get; set; }
+    public Tipo? Tipo { get; set; }
+    public ICollection<Color> Color { get; set; }
+    public ICollection<ExistenciaViewModel> Existencia { get; set; }
+    public ICollection<IngresoDetalle> IngresoDetalle { get; set; }
+    public ICollection<LineaCompra> LineaCompra { get; set; }
+    public ICollection<LineaSalidaViewModel> LineaSalida { get; set; }
+    public ICollection<Marca> Marca { get; set; }
+    public ICollection<Medida> Medida { get; set; }
+  }
 }

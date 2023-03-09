@@ -14,11 +14,11 @@ using DevSys.Gesinv.DAL.Contracts;
 namespace DevSys.Gesinv.Logic.Services
 {
     public class BodegaService: GenericService<Bodega>, IBodegaService
-    {
+  {
         private readonly IGenericRepository<Bodega> _repository;
-        public BodegaService(IGenericRepository<Bodega> repository) : base(repository)
-        {
-            _repository = repository;
-        }
+    public BodegaService(IGenericRepository<Bodega> repository) : base(repository)
+    {
+      _repository = repository;
     }
+  }
 }

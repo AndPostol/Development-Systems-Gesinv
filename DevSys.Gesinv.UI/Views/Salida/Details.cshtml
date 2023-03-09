@@ -1,0 +1,80 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel
+
+@{
+    ViewData["Title"] = "Salida - Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalles</title>
+</head>
+<body>
+
+<div>
+  <h5 align="center">SALIDA</h5>
+  <hr/>
+  <table class="table">
+    <thread>
+      <tr align="center">
+        <th>@Html.DisplayNameFor(model => model.SalidaId)</th>
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+        <th></th>
+      </tr>
+      <tr align="center">
+        <td>@Html.DisplayFor(model => model.SalidaId)</td>
+        <td>@Html.DisplayFor(model => model.MotivoNombre)</td>
+        <td>@Html.DisplayFor(model => model.Fecha)</td>
+        <td>@Html.DisplayFor(model => model.BodegaNombre)</td>
+        <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
+        <th></th>
+      </tr>
+      </thread>
+  </table>
+</div>
+
+<div>
+  <h5 align="center">PRODUCTOS</h5>
+  <div>
+    <table class="table">
+      <thread>
+        <tr align="center">
+          <th>Código</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Costo</th>
+          <th></th>
+        </tr>
+      </thread>
+      <tbody>
+        @foreach (var item in Model.LineaSalida)
+        {
+          <tr align="center">
+            <td>@item.ProductoId</td>
+            <td>@item.ProductoNombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.CostoSalida</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex flex-row-reverse">
+    <form>
+    @*@Html.ActionLink("Editar", "Edit", new {  id = Model.SalidaId  }) |*@
+    @*@Html.ActionLink("Eliminar", "Delete", new {  id = Model.SalidaId  }) |*@
+    @*<a class="btn btn-primary" asp-action="Edit" asp-route-id="@model.SalidaId">Editar</a>*@
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.SalidaId">Editar</a> |
+    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.SalidaId">Eliminar</a> |
+    <a class="btn btn-outline-success" asp-action="Index">Regresar</a>
+    </form>
+  </div>
+</div>
+</body>
+</html>

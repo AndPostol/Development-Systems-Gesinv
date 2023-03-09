@@ -33,18 +33,18 @@ namespace DevSys.Gesinv.Logic.Services
         }
 
         public async Task<Producto> ObtenerPorNombre(string Nombre)
-        {
+  {
             IEnumerable<Producto> queryProducto = await _repository.GetAll();
             Producto producto = queryProducto.Where(producto => producto.Nombre == Nombre).FirstOrDefault();
             return producto;
         }
 
         public async Task<Producto> ProductosInactivos(bool Activo)
-        {
+    {
             IEnumerable<Producto> queryProducto = await _repository.GetAll();
             Producto producto = queryProducto.Where(producto => producto.Activo == Activo).FirstOrDefault();
             return producto;
-        }
     }
+  }
 }
 

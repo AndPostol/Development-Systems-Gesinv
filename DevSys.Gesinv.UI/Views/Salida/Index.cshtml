@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel>
+
+@{
+  ViewData["Title"] = "Salida";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <title>Index</title>
+</head>
+<body>
+
+<div>
+  <table class="table">
+    <h5 align="center">PEDIDOS</h5>
+    <thread>
+      <tr align="center">
+        <th>Cód. Pedido</th>
+        <th>Estatus</th>
+@*        <th>Cód. Linea Pedido</th>
+        <th>Cód. Producto</th>
+        <th>Cantidad</th>*@
+        <th></th>
+      </tr>
+  </thread>
+      <tbody>
+    @foreach (var item in ViewBag.Pedido)
+    {
+      <tr align="center">
+        <td>@item.Id</td>
+        <td>@item.Estatus</td>
+@*        <td>@item.LineaPedidoId</td>
+        <td>@item.ProductoId</td>
+        <td>@item.Cantidad</td>*@
+        <td><a class="btn btn-outline-primary" asp-action="Create" asp-route-id="@item.Id">Ingresar</a></td>
+      </tr>
+    }
+  </tbody>
+</div>
+
+<div>
+  <table class="table">
+      <h5 align="center">SALIDAS</h5>
+    <thread>
+      <tr align="center">
+        <th>@Html.DisplayNameFor(model => model.SalidaId)</th>
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+        <th></th>
+      </tr>
+    </thread>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr align="center">
+          <td>@Html.DisplayFor(modelItem => item.SalidaId)</td>
+          <td>@Html.DisplayFor(modelItem => item.MotivoNombre)</td>
+          <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+          <td>@Html.DisplayFor(modelItem => item.BodegaNombre)</td>
+          <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(modelItem => item.Comentario)</textarea></td>
+          <td>
+@*            @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
+            @Html.ActionLink("Editar", "Edit", new { id=item.SalidaId }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.SalidaId }) |*@
+            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a> |
+            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a> |
+            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
