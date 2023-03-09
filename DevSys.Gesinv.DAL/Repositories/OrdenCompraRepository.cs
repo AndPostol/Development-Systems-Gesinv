@@ -37,7 +37,7 @@ namespace DevSys.Gesinv.DAL.Repositories
                         Producto producto = await _dbContext.Producto.FindAsync(linea.ProductoId);
                         if (producto == null)
                         {
-                            linea.Producto.Codigo = rand.Next(1, 1000);
+                            //linea.Producto.Codigo = rand.Next(1, 1000);
                             linea.Producto.Activo = false;
                             linea.Producto.Iva = false;
                             linea.Producto.Perecible = false;
