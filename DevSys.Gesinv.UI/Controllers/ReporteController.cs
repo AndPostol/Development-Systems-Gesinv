@@ -18,7 +18,7 @@ namespace DevSys.Gesinv.UI.Controllers
 
         // GET: ReporteController
         // Reporte/Ingreso
-        [HttpGet("Ingreso")]
+        //[HttpGet("Ingreso")]
         public async Task<IActionResult> Ingreso(
             int? motivo = null, 
             string? fechaInicio = null, 
@@ -32,7 +32,7 @@ namespace DevSys.Gesinv.UI.Controllers
             ViewBag.data = list;
             return View();
         }
-        [HttpGet("Salida")]
+        //[HttpGet("Salida")]
         public async Task<IActionResult> Salida(
             string? fechaInicio = null,
             string? fechaFin = null,
@@ -46,7 +46,7 @@ namespace DevSys.Gesinv.UI.Controllers
             return View();
         }
 
-        [HttpGet("Proveedor")]
+        //[HttpGet("Proveedor")]
         public async Task<IActionResult> Proveedor(
             string? fechaInicio = null,
             string? fechaFin = null,

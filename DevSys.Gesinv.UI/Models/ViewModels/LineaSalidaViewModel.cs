@@ -30,7 +30,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         SalidaId = model.SalidaId,
         ProductoId = model.Producto.ProductoId,
         ProductoNombre = model.Producto.Nombre,
-        ProductoPrecio = model.Producto.Precio,
+        ProductoPrecio = Convert.ToDouble(model.Producto.Precio),
         Cantidad = model.Cantidad,
         CostoSalida = model.CostoSalida,
       };

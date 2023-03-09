@@ -81,7 +81,7 @@ namespace DevSys.Gesinv.UI.Controllers
           ProductoId = item.ProductoId,
           ProductoNombre = producto.Nombre,
           Cantidad = item.Cantidad,
-          ProductoPrecio = producto.Precio
+          ProductoPrecio = Convert.ToDouble(producto.Precio)
         });
       }
 
