@@ -27,6 +27,10 @@ builder.Services.AddScoped<IGenericRepository<TipoProveedor>, GenericRepository<
 builder.Services.AddScoped<IGenericRepository<Estado>, GenericRepository<Estado>>();
 builder.Services.AddScoped<IGenericRepository<Provincia>, GenericRepository<Provincia>>();
 builder.Services.AddScoped<IGenericRepository<TipoPersona>, GenericRepository<TipoPersona>>();
+builder.Services.AddScoped<IGenericRepository<Ingreso>, GenericRepository<Ingreso>>();
+
+
+
 
 // Services 
 builder.Services.AddScoped<IOrdenCompraService, OrdenCompraService>();
@@ -72,6 +76,7 @@ builder.Services.AddScoped<IExistenciaService, ExistenciaService>();
 
 builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
 builder.Services.AddScoped<IBodegaService, BodegaService>();
+builder.Services.AddScoped<IingresoService, IngresoService>();
 
 builder.Services.AddScoped<IGenericRepository<Medida>, GenericRepository<Medida>>();
 builder.Services.AddScoped<IMedidaService, MedidaService>();

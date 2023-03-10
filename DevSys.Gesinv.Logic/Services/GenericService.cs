@@ -1,5 +1,7 @@
 ﻿using DevSys.Gesinv.DAL.Contracts;
+using DevSys.Gesinv.DAL.Repositories;
 using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

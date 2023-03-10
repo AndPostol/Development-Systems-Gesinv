@@ -28,5 +28,6 @@ namespace DevSys.Gesinv.Models
         public virtual Proveedor? Proveedor { get; set; }
         public virtual TipoIngreso? TipoIngreso { get; set; }
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
+        
     }
 }

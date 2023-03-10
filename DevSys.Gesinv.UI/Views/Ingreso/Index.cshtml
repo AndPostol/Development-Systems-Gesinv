@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.IngresoViewModel>
+
+@{
+    ViewData["Title"] = "Ingreso de Producto";
+}
+@section Style{
+    <link rel="stylesheet" href="~/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<center><h1>Ingreso de Producto</h1></center>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+        </div>
+       
+
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>IngresoId</th>
+                        <th>ProveedorId</th>
+                        <th>MotivoId</th>
+                        <th>BodegaId</th>
+                        <th>TipoIngresoId</th>
+                        <th>Fecha</th>
+                        <th>Descuento</th>
+                        <th>Impuestos</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IngresoId</td>
+
+                            <td>
+                                @item.ProveedorId
+
+                            </td>
+                            <td>
+                                @item.MotivoId
+                            </td>
+                            <td>
+                                @item.BodegaId
+                            </td>
+                            <td>
+                                @item.TipoIngresoId
+                            </td>
+                            <td>
+                                @item.Fecha
+                            </td>
+                            <td>
+                                @item.Descuento
+                            </td>
+                            <td>
+                                @item.Impuestos
+                            </td>
+
+                            <td>
+                                @item.Total
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a asp-action="Edit" asp-route-id="@item.IngresoId" class="btn btn-primary">Editar</a>
+                                    <a asp-action="Details" asp-route-id="@item.IngresoId" class="btn btn-info">Detalles</a>
+                                    <a asp-action="Delete" asp-route-id="@item.IngresoId" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    
+
+                </tfoot>
+            </table>
+        </div>
+        
+    </div>
+</div>
