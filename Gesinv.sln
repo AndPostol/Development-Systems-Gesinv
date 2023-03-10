@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.Logic", "DevS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.UI", "DevSys.Gesinv.UI\DevSys.Gesinv.UI.csproj", "{B36D376E-CE59-4008-8A1C-306F92CE7D36}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Test Unit", "4 - Test Unit", "{3DBEAFE7-8880-461B-85D0-6A3BB3602BC9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Test", "4 - Test", "{3DBEAFE7-8880-461B-85D0-6A3BB3602BC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesinvTest", "GesinvTest\GesinvTest.csproj", "{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevSys.Gesinv.Unit.Test", "GesinvTest\DevSys.Gesinv.Unit.Test.csproj", "{87BD3126-0C7A-4D28-B710-6303ABA8CCE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
