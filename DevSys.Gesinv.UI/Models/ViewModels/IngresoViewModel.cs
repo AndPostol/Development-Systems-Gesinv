@@ -1,5 +1,6 @@
 ﻿using DevSys.Gesinv.DAL;
 using DevSys.Gesinv.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -20,43 +21,49 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
         public double Impuestos { get; set; }
         public double Total { get; set; }
 
-        public virtual Bodega? Bodega { get; set; }
-        public virtual OrdenCompra OrdenCompra { get; set; }
+        // Sets de datos que podemos usar para la vista (Recordar que esto no es necesario validarlo)
+        [ValidateNever]
+        public string? ProveedorNombre { get; set; }
+        [ValidateNever]
+        public string? MotivoNombre { get; set; } 
+        [ValidateNever]
+        public string? BodegaNombre { get; set; }
+        [ValidateNever]
+        public string? TipoIngresoNombre { get; set; }
 
-        public virtual Motivo? Motivo { get; set; }
-        public virtual Proveedor? Proveedor { get; set; }
-        public virtual TipoIngreso? TipoIngreso { get; set; }
-        public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
+        public virtual ICollection<IngresoDetalleViewModel>? IngresoDetalle { get; set; } // <-- Recuerda que esta va a ser tu referencia para crear y visualizar. No sirve para actualizar
 
-
-        public static List<IngresoViewModel> ToListIngModel(IEnumerable<Ingreso> lstModel)
+        // Esta funcion recibe una lista de Ingreso y devuelve una lista de IngresoViewModel
+        public static List<IngresoViewModel> ToListViewModel(IEnumerable<Ingreso> lstIngreso) // Perdon le cambie el nombre de la funcion nombre anterior ToListIngModel
         {
             
-            List<IngresoViewModel> lstModelView = new List<IngresoViewModel>();
-            foreach (var model in lstModel) 
+            List<IngresoViewModel> lstIngresoModelView = new List<IngresoViewModel>();
+            foreach (var model in lstIngreso) 
             {
-                lstModelView.Add(ToViewModel(model));
+                lstIngresoModelView.Add(ToViewModel(model));
             }
-            return lstModelView;
+            return lstIngresoModelView;
         }
-        public static Ingreso ToModel(IngresoViewModel modelViewIng)
+        // Funcion que recibe un IngresoViewModel y devuelve un Ingreso
+        public static Ingreso ToModel(IngresoViewModel modelViewIngreso)
         {
             Ingreso model = new Ingreso()
             {
-                IngresoId = modelViewIng.IngresoId,
-                OrdenCompraId = modelViewIng.OrdenCompraId,
-                ProveedorId = modelViewIng.ProveedorId,
-                MotivoId = modelViewIng.MotivoId,
-                BodegaId = modelViewIng.BodegaId,
-                TipoIngresoId = modelViewIng.TipoIngresoId,
-                Fecha = modelViewIng.Fecha,
-                Descuento = modelViewIng.Descuento,
-                Impuestos = modelViewIng.Impuestos,
-                Total = modelViewIng.Total,
+                IngresoId = modelViewIngreso.IngresoId,
+                OrdenCompraId = modelViewIngreso.OrdenCompraId,
+                ProveedorId = modelViewIngreso.ProveedorId,
+                MotivoId = modelViewIngreso.MotivoId,
+                BodegaId = modelViewIngreso.BodegaId,
+                TipoIngresoId = modelViewIngreso.TipoIngresoId,
+                Fecha = modelViewIngreso.Fecha,
+                Descuento = modelViewIngreso.Descuento,
+                Impuestos = modelViewIngreso.Impuestos,
+                Total = modelViewIngreso.Total, 
              
             };
             return model;
         }
+        // Funcion que recibe un Ingreso y devuelve un IngresoViewModel
         public static IngresoViewModel ToViewModel(Ingreso model)
         {
             IngresoViewModel result = new IngresoViewModel()
@@ -70,9 +77,17 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
                     Fecha = model.Fecha,
                     Descuento = model.Descuento,
                     Impuestos = model.Impuestos,
-                    Total = model.Total
+                    Total = model.Total,
+                    IngresoDetalle = IngresoDetalleViewModel.ToListViewModel(model.IngresoDetalle),
+                    // Apartir de aqui relleno los datos extras en mi view model
+                    ProveedorNombre = model.Proveedor?.RazonSocial ?? "Ninguna",
+                    BodegaNombre = model.Bodega?.Direccion ?? "Ninguna",
+                    MotivoNombre = model.Motivo?.Nombre ?? "Ninguna",
+                    TipoIngresoNombre = model.TipoIngreso?.Nombre ?? "Ninguna"
 
-             };
+
+
+            };
             return result;   
         }    
     }

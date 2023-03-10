@@ -8,45 +8,43 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public partial class IngresoDetalleViewModel
     {
-      
-        public int IngresoDetalleId { get; set; }
-        public int? ProductoId { get; set; }
-        public int? IngresoId { get; set; }
+
+        public int IngresoDetalleId { get; set; } = 0;
+        public int ProductoId { get; set; }
+        public int IngresoId { get; set; }
         public double PrecioBruto { get; set; }
         public DateTime Fecha { get; set; }
         public int Caja { get; set; }
         public int Cantidad { get; set; }
 
-        public virtual Ingreso? Ingreso { get; set; }
-        public virtual Producto? Producto { get; set; }
+        // Datos Extras
+        [ValidateNever]
+        public string? ProductoNombre { get; set; }
 
-        public static IngresoDetalle ToINGModel(IngresoDetalle model)
+
+        public static IngresoDetalleViewModel ToViewModel(IngresoDetalle IngresoDetalleModel)
         {
-            IngresoDetalle viewINGModel = new IngresoDetalle()
+            IngresoDetalleViewModel IngresoDetalleViewModel = new IngresoDetalleViewModel()
             {
-                 IngresoDetalleId  = model.IngresoDetalleId,
-                 ProductoId = model.ProductoId,
-                 IngresoId = model.IngresoId,
-                 PrecioBruto = model.PrecioBruto,
-                 Fecha = model.Fecha,
-                 Caja = model.Caja,
-                 Cantidad = model.Cantidad
+                 IngresoDetalleId  = IngresoDetalleModel.IngresoDetalleId,
+                 ProductoId = IngresoDetalleModel.ProductoId ?? 0,
+                 IngresoId = IngresoDetalleModel.IngresoId ?? 0,
+                 PrecioBruto = IngresoDetalleModel.PrecioBruto,
+                 Fecha = IngresoDetalleModel.Fecha,
+                 Caja = IngresoDetalleModel.Caja,
+                 Cantidad = IngresoDetalleModel.Cantidad,
+                 ProductoNombre = IngresoDetalleModel.Producto?.Nombre ?? "Ninguno"
             };
-            return viewINGModel;
+            return IngresoDetalleViewModel;
         }
-        public static IngresoDetalle ToINGModelList(IngresoDetalle ViewINModel)
+        public static List<IngresoDetalleViewModel> ToListViewModel(ICollection<IngresoDetalle> lstIngresoDetalleModel)
         {
-            IngresoDetalle INGModel = new IngresoDetalle()
+            List<IngresoDetalleViewModel> lstIngresoDetalleViewModel = new List<IngresoDetalleViewModel>();
+            foreach (IngresoDetalle ingresoDetalle in lstIngresoDetalleModel)
             {
-                IngresoDetalleId = ViewINModel.IngresoDetalleId,
-                ProductoId = ViewINModel.ProductoId,
-                IngresoId = ViewINModel.IngresoId,
-                PrecioBruto = ViewINModel.PrecioBruto,
-                Fecha = ViewINModel.Fecha,
-                Caja = ViewINModel.Caja,
-                Cantidad = ViewINModel.Cantidad
-            };
-            return INGModel;
+                lstIngresoDetalleViewModel.Add(ToViewModel(ingresoDetalle));
+            }
+            return lstIngresoDetalleViewModel;
         }
       
 
