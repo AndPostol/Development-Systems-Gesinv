@@ -151,7 +151,6 @@ namespace DevSys.Gesinv.UI.Controllers
         {
           SalidaId = Convert.ToInt32(salidaVM.SalidaId),
           MotivoId = Convert.ToInt32(salidaVM.MotivoId),
-          Codigo = "1",
           Fecha = Convert.ToDateTime(salidaVM.Fecha),
           BodegaId = Convert.ToInt32(salidaVM.BodegaId),
           Comentario = salidaVM.Comentario,

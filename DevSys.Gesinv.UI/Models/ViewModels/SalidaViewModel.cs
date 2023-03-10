@@ -12,7 +12,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     [Display(Name = "Código")]
     public int SalidaId { get; set; }
     [ValidateNever]
-    public string Codigo { get; set; } = null!;
     public int? MotivoId { get; set; }
     [Display(Name ="Motivo")]
     public string? MotivoNombre { get; set; }
