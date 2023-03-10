@@ -46,7 +46,6 @@ namespace DevSys.Gesinv.DAL.Repositories
                             _dbContext.Existencia.Add(nuevaExistencia);
                         }
                     }
-                    await _dbContext.Salida.AddAsync(salida);
                     await _dbContext.SaveChangesAsync();
                     transaction.Commit();
                 }

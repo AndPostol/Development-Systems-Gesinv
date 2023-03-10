@@ -138,7 +138,7 @@ namespace DevSys.Gesinv.UI.Controllers
     [HttpPost]
     public async Task<IActionResult> Edit(int id, SalidaViewModel salidaViewModel)
     {
-
+        
       return View();
     }
 

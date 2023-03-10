@@ -116,7 +116,7 @@ namespace DevSys.Gesinv.UI.Controllers
                 if (ModelState.IsValid)
                 {
                     Ingreso ingresoEditado = IngresoViewModel.ToModel(ingresoViewModel);
-                    await _service.Registrar(ingresoEditado);
+                        await _service.Registrar(ingresoEditado);
                 }
                 return RedirectToAction(nameof(Index));
             }

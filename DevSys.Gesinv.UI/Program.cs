@@ -115,6 +115,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Ingreso}/{action=Edit}/{id=11}");
+    pattern: "{controller=Salida}/{action=Index}/{id?}");
 
 app.Run();
