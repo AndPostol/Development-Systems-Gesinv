@@ -77,32 +77,6 @@
         </table>
       </div>
 
-      @*<div>
-        <h5 align="center">PRODUCTOS</h5>
-        <table class="table">
-          <thread>
-            <tr align="center">
-              <th>Codigo</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Costo</th>
-              <th></th>
-            </tr>
-          </thread>
-          <tbody>
-            @foreach (var item in Model.LineaSalida)
-            {
-              <tr align="center">
-                <td>@item.ProductoCodigo</td>
-                <td>@item.ProductoNombre</td>
-                <td><input asp-for=@item.Cantidad class="form-control"/></td>
-                <td><input asp-for=@item.CostoSalida class="form-control"/></td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>*@
-
 <div class="d-flex flex-row-reverse">
   <form asp-action="Edit">
     <input type="hidden" asp-for="SalidaId"/>
