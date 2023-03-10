@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Security.Policy;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -66,7 +67,7 @@ namespace DevSys.Gesinv.UI.Controllers
     }
 
     // GET: SalidaController/Create/
-    public async Task<IActionResult> Create(int id)
+    public async Task<IActionResult> Create(int id) //id = PedidoId
     {
       List<PedidoViewModel> pedido = new();
       SalidaViewModel salidaGet = new();
@@ -78,6 +79,7 @@ namespace DevSys.Gesinv.UI.Controllers
       {
         Producto producto = await _productoService.GetById(item.ProductoId);
         salidaGet.LineaSalida.Add(new LineaSalidaViewModel() {
+          PedidoId = item.Id,
           ProductoId = item.ProductoId,
           ProductoNombre = producto.Nombre,
           Cantidad = item.Cantidad,
@@ -87,6 +89,8 @@ namespace DevSys.Gesinv.UI.Controllers
 
       DDLBodega();
       DDLMotivo();
+
+      salidaGet.PedidoId = id;
 
       return View(salidaGet);
     }
@@ -98,6 +102,8 @@ namespace DevSys.Gesinv.UI.Controllers
     {
       try
       {
+
+
         Salida crearSalida = new()
         {
           //SalidaId = Convert.ToInt32(salidaVM.SalidaId),
@@ -111,6 +117,7 @@ namespace DevSys.Gesinv.UI.Controllers
         if (ModelState.IsValid)
         {
           await _salidaService.Create(crearSalida);
+          await CambioEstatusPedido(salidaVM.PedidoId);
           return RedirectToAction("Index", "Salida");
         }
       }
@@ -118,7 +125,6 @@ namespace DevSys.Gesinv.UI.Controllers
       {
 
       }
-
       return View();
     }
 
@@ -136,9 +142,36 @@ namespace DevSys.Gesinv.UI.Controllers
 
     // POST: SalidaController/Edit/
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, SalidaViewModel salidaViewModel)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, SalidaViewModel salidaVM)
     {
+      try
+      {
+        Salida editarSalida = new Salida()
+        {
+          SalidaId = Convert.ToInt32(salidaVM.SalidaId),
+          MotivoId = Convert.ToInt32(salidaVM.MotivoId),
+          Codigo = "1",
+          Fecha = Convert.ToDateTime(salidaVM.Fecha),
+          BodegaId = Convert.ToInt32(salidaVM.BodegaId),
+          Comentario = salidaVM.Comentario,
+          LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
+        };
         
+
+        if (ModelState.IsValid)
+        {
+          //editarSalida.SalidaId = id;
+          await _salidaService.Update(editarSalida);
+          return RedirectToAction("Index", "Salida");
+        }
+
+      }
+      catch (Exception e)
+      {
+
+      }
+
       return View();
     }
 
@@ -153,6 +186,7 @@ namespace DevSys.Gesinv.UI.Controllers
 
     // POST: SalidaController/Delete/
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id, SalidaViewModel salidaViewModel)
     {
       try
@@ -227,6 +261,17 @@ namespace DevSys.Gesinv.UI.Controllers
         };
       });
       ViewBag.sliMotivo = sliMotivo;
+    }
+
+    public async Task<ActionResult> CambioEstatusPedido(int pedidoId)
+    {
+      HttpResponseMessage _responseMessage = await client.PutAsJsonAsync(url + "/" + pedidoId, new {id = pedidoId});
+      if (_responseMessage.IsSuccessStatusCode)
+      {
+        return RedirectToAction("Index");
+      }
+
+      return RedirectToAction("Error");
     }
   }
 }

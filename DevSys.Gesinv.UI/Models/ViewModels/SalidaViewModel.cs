@@ -27,6 +27,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     [Display(Name = "Bodega")]
     public string? BodegaNombre { get; set; }
 
+    public int PedidoId { get; set; }
+
     public BodegaViewModel? Bodega { get; set; }
     public MotivoViewModel? Motivo { get; set; }
     public RequisicionViewModel? Requisicion { get; set; }
