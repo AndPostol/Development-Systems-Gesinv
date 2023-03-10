@@ -54,6 +54,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     {
       LineaSalida model = new()
       {
+          LineaSalidaId = viewModel.LineaSalidaId,
         SalidaId = viewModel.SalidaId,
         ProductoId = viewModel.ProductoId,
         Cantidad = viewModel.Cantidad,

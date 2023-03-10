@@ -147,19 +147,19 @@ namespace DevSys.Gesinv.UI.Controllers
     {
       try
       {
-        Salida editarSalida = new Salida()
-        {
-          SalidaId = Convert.ToInt32(salidaVM.SalidaId),
-          MotivoId = Convert.ToInt32(salidaVM.MotivoId),
-          Fecha = Convert.ToDateTime(salidaVM.Fecha),
-          BodegaId = Convert.ToInt32(salidaVM.BodegaId),
-          Comentario = salidaVM.Comentario,
-          LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
-        };
         
 
         if (ModelState.IsValid)
         {
+            Salida editarSalida = new Salida()
+            {
+              SalidaId = Convert.ToInt32(salidaVM.SalidaId),
+              MotivoId = Convert.ToInt32(salidaVM.MotivoId),
+              Fecha = Convert.ToDateTime(salidaVM.Fecha),
+              BodegaId = Convert.ToInt32(salidaVM.BodegaId),
+              Comentario = salidaVM.Comentario,
+              LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
+            };
           //editarSalida.SalidaId = id;
           await _salidaService.Update(editarSalida);
           return RedirectToAction("Index", "Salida");
