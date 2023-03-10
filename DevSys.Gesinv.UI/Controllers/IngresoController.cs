@@ -54,7 +54,6 @@ namespace DevSys.Gesinv.UI.Controllers
                 IngresoViewModel newIP = new IngresoViewModel()
                 {
                      IngresoId = Convert.ToInt32(collection["IngresoId"]),
-                     CodigoIngreso = Convert.ToInt32(collection["CodigoIngreso"]),
                      ProveedorId = Convert.ToInt32(collection["ProveedorId"]),
                      MotivoId = Convert.ToInt32(collection["MotivoId"]),
                      BodegaId = Convert.ToInt32(collection["BodegaId"]),

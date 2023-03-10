@@ -11,7 +11,6 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
         public int IngresoId { get; set; }
         public int OrdenCompraId { get; set; }
 
-        public int CodigoIngreso { get; set; }
         public int? ProveedorId { get; set; }
         public int? MotivoId { get; set; }
         public int? BodegaId { get; set; }
@@ -46,7 +45,6 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
             {
                 IngresoId = modelViewIng.IngresoId,
                 OrdenCompraId = modelViewIng.OrdenCompraId,
-                CodigoIngreso = modelViewIng.CodigoIngreso,
                 ProveedorId = modelViewIng.ProveedorId,
                 MotivoId = modelViewIng.MotivoId,
                 BodegaId = modelViewIng.BodegaId,
@@ -65,7 +63,6 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
              {
                     IngresoId = model.IngresoId,
                     OrdenCompraId = model.OrdenCompraId,
-                    CodigoIngreso = model.CodigoIngreso,
                     ProveedorId = model.ProveedorId,
                     MotivoId = model.MotivoId,
                     BodegaId = model.BodegaId,
