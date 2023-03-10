@@ -11,11 +11,16 @@ namespace DevSys.Gesinv.Logic.Services
 {
   public class SalidaService : GenericService<Salida>, ISalidaService
   {
-    private IGenericRepository<Salida> _repository;
+        private ISalidaRepository _repository;
 
-    public SalidaService(IGenericRepository<Salida> repository) : base(repository)
-    {
-      _repository = repository;
+        public SalidaService(ISalidaRepository repository) : base(repository)
+        {
+          _repository = repository;
+        }
+
+        public async Task<Salida> Registrar(Salida salida)
+        {
+            return await _repository.Registrar(salida);
+        }
     }
-  }
 }

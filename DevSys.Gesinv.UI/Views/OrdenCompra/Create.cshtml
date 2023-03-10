@@ -261,7 +261,6 @@
                                 ? { productoId: 0, codigo: 0, precio: 0 }
                                 : response.find(r => element.value == r.productoId)
                             response.push(find_product)
-                            console.log(response)
                             const count_property = element.id.slice(-1)
                             $(`#Linea-Codigo-${count_property}`).text(find_product.productoId)
                             $(`#Linea-PrecioUnitario-${count_property}`).val(find_product.precio)

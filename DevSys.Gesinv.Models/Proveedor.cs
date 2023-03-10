@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DevSys.Gesinv.Models
 {
@@ -25,6 +26,9 @@ namespace DevSys.Gesinv.Models
         public int? EstadoId { get; set; }
         public int? TipoPersonaId { get; set; }
         public string? PaginaWeb { get; set; }
+        [DefaultValue(true)]
+        public bool Confirmado { get; set; }
+        public bool Activo { get; set; }
 
         public virtual Empresa? Empresa { get; set; }
         public virtual Estado? Estado { get; set; }

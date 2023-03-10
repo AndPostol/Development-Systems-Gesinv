@@ -27,7 +27,8 @@ builder.Services.AddScoped<IGenericRepository<TipoProveedor>, GenericRepository<
 builder.Services.AddScoped<IGenericRepository<Estado>, GenericRepository<Estado>>();
 builder.Services.AddScoped<IGenericRepository<Provincia>, GenericRepository<Provincia>>();
 builder.Services.AddScoped<IGenericRepository<TipoPersona>, GenericRepository<TipoPersona>>();
-builder.Services.AddScoped<IGenericRepository<Ingreso>, GenericRepository<Ingreso>>();
+//builder.Services.AddScoped<IGenericRepository<Ingreso>, GenericRepository<Ingreso>>();
+builder.Services.AddScoped<IIngresoRepository, IngresoRepository>();
 
 
 
@@ -65,7 +66,7 @@ builder.Services.AddScoped<ITipoService, TipoService>();
 builder.Services.AddScoped<IGenericRepository<Grupo>, GenericRepository<Grupo>>();
 builder.Services.AddScoped<IGrupoService, GrupoService>();
 
-builder.Services.AddScoped<IGenericRepository<Salida>, GenericRepository<Salida>>();
+builder.Services.AddScoped<ISalidaRepository, SalidaRepository>();
 builder.Services.AddScoped<ISalidaService, SalidaService>();
 
 builder.Services.AddScoped<IGenericRepository<LineaSalida>, GenericRepository<LineaSalida>>();
@@ -76,7 +77,7 @@ builder.Services.AddScoped<IExistenciaService, ExistenciaService>();
 
 builder.Services.AddScoped<IGenericRepository<Bodega>, GenericRepository<Bodega>>();
 builder.Services.AddScoped<IBodegaService, BodegaService>();
-builder.Services.AddScoped<IingresoService, IngresoService>();
+builder.Services.AddScoped<IIngresoService, IngresoService>();
 
 builder.Services.AddScoped<IGenericRepository<Medida>, GenericRepository<Medida>>();
 builder.Services.AddScoped<IMedidaService, MedidaService>();
@@ -114,6 +115,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Ingreso}/{action=Edit}/{id=11}");
 
 app.Run();

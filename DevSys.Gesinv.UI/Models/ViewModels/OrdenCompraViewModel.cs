@@ -14,6 +14,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int CondicionPagoId { get; set; }
         [Display(Name = "Bodega")]
         public int BodegaId { get; set; }
+        public bool Confirmado { get; set; } = false;
 
         public string? Observacion { get; set; }
         public DateTime? Fecha { get; set; }
@@ -48,6 +49,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 OrdenCompraId = modelView.OrdenCompraId,
                 ProveedorId= modelView.ProveedorId,
                 BodegaId = modelView.BodegaId,
+                Confirmado = modelView.Confirmado,
                 Referencia= modelView.Referencia,
                 CondicionPagoId= modelView.CondicionPagoId,
                 Observacion = modelView.Observacion,
@@ -68,6 +70,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProveedorId= model.Proveedor.ProveedorId,
                 BodegaId= model.BodegaId,
                 BodedaNombre = model.Bodega.Direccion,
+                Confirmado = model.Confirmado,
                 Referencia= model.Referencia,
                 CondicionPagoId= model.CondicionPago.CondicionPagoId,
                 Observacion = model.Observacion,

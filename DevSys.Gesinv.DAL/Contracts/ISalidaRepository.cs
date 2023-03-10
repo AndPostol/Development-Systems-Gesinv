@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevSys.Gesinv.Logic.Contracts
+namespace DevSys.Gesinv.DAL.Contracts
 {
-  public interface ISalidaService : IGenericService<Salida>
-  {
+    public interface ISalidaRepository : IGenericRepository<Salida>
+    {
         Task<Salida> Registrar(Salida salida);
     }
 }

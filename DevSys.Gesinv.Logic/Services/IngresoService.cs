@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 
 namespace DevSys.Gesinv.Logic.Services
 {
-    public class IngresoService : GenericService<Ingreso>, IingresoService
+    public class IngresoService : GenericService<Ingreso>, IIngresoService
     {
-        public IngresoService(IGenericRepository<Ingreso> respository) : base(respository)
+        private IIngresoRepository _repository;
+
+        public IngresoService(IIngresoRepository respository) : base(respository)
         {
+            _repository = respository;
         }
 
-        public Task<Ingreso> Modificar(Ingreso entidad)
+        public async Task<Ingreso> Registrar(Ingreso ingreso)
         {
-            throw new NotImplementedException();
+            return await _repository.Registrar(ingreso);
         }
     }
 }

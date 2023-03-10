@@ -7,6 +7,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     {
         public int ProveedorId { get; set; }
         public int? EmpresaId { get; set; }
+        public bool Activo { get; set; } = false;
+
         public string RazonSocial { get; set; } = null!;
         public string Contacto { get; set; } = null!;
         public int? TipoProveedorId { get; set; }
@@ -27,6 +29,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 ProveedorId = model.ProveedorId,
                 EmpresaId = model.EmpresaId,
+                Activo = model.Activo,
                 RazonSocial = model.RazonSocial,
                 Contacto = model.Contacto,
                 TipoProveedorId = model.TipoProveedorId,
@@ -57,6 +60,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 ProveedorId = modelView.ProveedorId,
                 EmpresaId = modelView.EmpresaId,
+                Activo = modelView.Activo,
                 RazonSocial = modelView.RazonSocial,
                 Contacto = modelView.Contacto,
                 TipoProveedorId = modelView.TipoProveedorId,

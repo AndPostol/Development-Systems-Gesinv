@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DevSys.Gesinv.Models
 {
@@ -20,6 +21,9 @@ namespace DevSys.Gesinv.Models
         public double Descuento { get; set; }
         public double Impuestos { get; set; }
         public double Total { get; set; }
+        
+        [DefaultValue(false)]
+        public bool Confirmado { get; set; }
 
         public virtual Bodega? Bodega { get; set; }
         public virtual OrdenCompra OrdenCompra{ get; set; }

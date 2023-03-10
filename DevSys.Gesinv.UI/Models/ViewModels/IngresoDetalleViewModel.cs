@@ -37,6 +37,20 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             };
             return IngresoDetalleViewModel;
         }
+        public static IngresoDetalle ToModel(IngresoDetalleViewModel IngresoDetalleViewModel)
+        {
+            IngresoDetalle IngresoDetalleModel = new IngresoDetalle()
+            {
+                IngresoDetalleId = IngresoDetalleViewModel.IngresoDetalleId,
+                ProductoId = IngresoDetalleViewModel.ProductoId,
+                IngresoId = IngresoDetalleViewModel.IngresoId,
+                PrecioBruto = IngresoDetalleViewModel.PrecioBruto,
+                Fecha = IngresoDetalleViewModel.Fecha,
+                Caja = IngresoDetalleViewModel.Caja,
+                Cantidad = IngresoDetalleViewModel.Cantidad,
+            };
+            return IngresoDetalleModel;
+        }
         public static List<IngresoDetalleViewModel> ToListViewModel(ICollection<IngresoDetalle> lstIngresoDetalleModel)
         {
             List<IngresoDetalleViewModel> lstIngresoDetalleViewModel = new List<IngresoDetalleViewModel>();
@@ -46,7 +60,16 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             }
             return lstIngresoDetalleViewModel;
         }
-      
+        public static List<IngresoDetalle> ToListModel(List<IngresoDetalleViewModel> lstIngresoDetalleViewModel)
+        {
+            List<IngresoDetalle> lstIngresoDetalleModel = new List<IngresoDetalle>();
+            foreach (IngresoDetalleViewModel ingresoDetalleViewModel in lstIngresoDetalleViewModel)
+            {
+                lstIngresoDetalleModel.Add(ToModel(ingresoDetalleViewModel));
+            }
+            return lstIngresoDetalleModel;
+        }
+
 
     }
 }

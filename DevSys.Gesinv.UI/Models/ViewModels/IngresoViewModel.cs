@@ -2,7 +2,6 @@
 using DevSys.Gesinv.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
     namespace DevSys.Gesinv.UI.Models.ViewModels
     {
@@ -11,6 +10,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
         
         public int IngresoId { get; set; }
         public int OrdenCompraId { get; set; }
+
+        public bool Confirmado { get; set; } = false;
 
         public int? ProveedorId { get; set; }
         public int? MotivoId { get; set; }
@@ -30,8 +31,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
         public string? BodegaNombre { get; set; }
         [ValidateNever]
         public string? TipoIngresoNombre { get; set; }
-
-        public virtual ICollection<IngresoDetalleViewModel>? IngresoDetalle { get; set; } // <-- Recuerda que esta va a ser tu referencia para crear y visualizar. No sirve para actualizar
+        
+        public virtual List<IngresoDetalleViewModel>? IngresoDetalle { get; set; } // <-- Recuerda que esta va a ser tu referencia para crear y visualizar. No sirve para actualizar
 
         // Esta funcion recibe una lista de Ingreso y devuelve una lista de IngresoViewModel
         public static List<IngresoViewModel> ToListViewModel(IEnumerable<Ingreso> lstIngreso) // Perdon le cambie el nombre de la funcion nombre anterior ToListIngModel
@@ -51,6 +52,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
             {
                 IngresoId = modelViewIngreso.IngresoId,
                 OrdenCompraId = modelViewIngreso.OrdenCompraId,
+                Confirmado= modelViewIngreso.Confirmado,
                 ProveedorId = modelViewIngreso.ProveedorId,
                 MotivoId = modelViewIngreso.MotivoId,
                 BodegaId = modelViewIngreso.BodegaId,
@@ -59,6 +61,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
                 Descuento = modelViewIngreso.Descuento,
                 Impuestos = modelViewIngreso.Impuestos,
                 Total = modelViewIngreso.Total, 
+                IngresoDetalle = IngresoDetalleViewModel.ToListModel(modelViewIngreso.IngresoDetalle ?? new List<IngresoDetalleViewModel>())
              
             };
             return model;
@@ -70,6 +73,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
              {
                     IngresoId = model.IngresoId,
                     OrdenCompraId = model.OrdenCompraId,
+                    Confirmado = model.Confirmado,
                     ProveedorId = model.ProveedorId,
                     MotivoId = model.MotivoId,
                     BodegaId = model.BodegaId,

@@ -12,9 +12,9 @@ namespace DevSys.Gesinv.UI.Controllers
 {
     public class IngresoController : Controller 
     {
-        private readonly IingresoService _service;
+        private readonly IIngresoService _service;
 
-        public IngresoController(IingresoService service)
+        public IngresoController(IIngresoService service)
         {
             _service = service;
         } 
@@ -109,10 +109,15 @@ namespace DevSys.Gesinv.UI.Controllers
         // POST: IngresoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, IngresoViewModel ingresoViewModel) // <-- Recibimos lo que nos envia el formulario de GET
         {
             try
             {
+                if (ModelState.IsValid)
+                {
+                    Ingreso ingresoEditado = IngresoViewModel.ToModel(ingresoViewModel);
+                    await _service.Registrar(ingresoEditado);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

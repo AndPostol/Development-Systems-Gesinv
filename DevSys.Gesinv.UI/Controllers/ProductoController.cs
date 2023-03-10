@@ -32,9 +32,18 @@ namespace DevSys.Gesinv.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> getAllProducto()
         {
-            IEnumerable<Producto> query = await _productoService.GetAll();
-            List<ProductoViewModel> lstProduct = ProductoViewModel.ListViewModel(query);
-            return StatusCode(StatusCodes.Status200OK, lstProduct);
+            IEnumerable<Producto> queryProducto = await _productoService.GetAll();
+            List<object> lstProductoData = new List<object>();
+            foreach (Producto producto in queryProducto)
+            {
+                lstProductoData.Add(new {
+                    productoId = producto.ProductoId,
+                    Nombre = producto.Nombre,
+                    codigo = producto.ProductoId.ToString(),
+                    precio = producto.Precio,
+                });
+            }
+            return StatusCode(StatusCodes.Status200OK, lstProductoData);
         }
 
         // GET: ProductoController
