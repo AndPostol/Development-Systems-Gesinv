@@ -82,8 +82,6 @@ builder.Services.AddScoped<IColorService, ColorService>();
 builder.Services.AddScoped<IGenericRepository<Motivo>, GenericRepository<Motivo>>();
 builder.Services.AddScoped<IMotivoService, MotivoService>();
 
-builder.Services.AddScoped<IGenericRepository<Requisicion>, GenericRepository<Requisicion>>();
-builder.Services.AddScoped<IRequisicionService, RequisicionService>();
 
 // Inyeccion de dependencia
 builder.Services.AddDbContext<DbInventarioContext>(options =>
