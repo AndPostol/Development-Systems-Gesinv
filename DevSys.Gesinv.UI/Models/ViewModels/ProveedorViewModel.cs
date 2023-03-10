@@ -8,7 +8,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int ProveedorId { get; set; }
         public int? EmpresaId { get; set; }
         public string RazonSocial { get; set; } = null!;
-        public int Codigo { get; set; }
         public string Contacto { get; set; } = null!;
         public int? TipoProveedorId { get; set; }
         public string Direccion { get; set; } = null!;
@@ -29,7 +28,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProveedorId = model.ProveedorId,
                 EmpresaId = model.EmpresaId,
                 RazonSocial = model.RazonSocial,
-                //Codigo= model.Codigo,
                 Contacto = model.Contacto,
                 TipoProveedorId = model.TipoProveedorId,
                 Direccion = model.Direccion,
@@ -60,7 +58,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProveedorId = modelView.ProveedorId,
                 EmpresaId = modelView.EmpresaId,
                 RazonSocial = modelView.RazonSocial,
-                Codigo = modelView.Codigo,
                 Contacto = modelView.Contacto,
                 TipoProveedorId = modelView.TipoProveedorId,
                 Direccion = modelView.Direccion,
