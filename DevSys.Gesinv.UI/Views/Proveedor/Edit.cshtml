@@ -1,0 +1,119 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.ProveedorViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ProveedorViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@Model.ProveedorId" asp-for="ProveedorId"/>
+            <input type="hidden" value="1" asp-for="EmpresaId" name="EmpresaId" />
+            <div class="form-group">
+                <label asp-for="RazonSocial" class="control-label"></label>
+                <input asp-for="RazonSocial" class="form-control" />
+                <span asp-validation-for="RazonSocial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contacto" class="control-label"></label>
+                <input asp-for="Contacto" class="form-control" />
+                <span asp-validation-for="Contacto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoProveedorId" class="control-label"></label>
+                <select asp-for="TipoProveedorId" class="form-control">
+                    <option>Seleccione</option>
+                    @foreach (var item in ViewBag.TipoProveedor)
+                    {
+                            <option value="@item.TipoProveedorId">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="TipoProveedorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plazo" class="control-label"></label>
+                <input asp-for="Plazo" class="form-control" />
+                <span asp-validation-for="Plazo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ruc" class="control-label"></label>
+                <input asp-for="Ruc" class="form-control" />
+                <span asp-validation-for="Ruc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinciaId" class="control-label"></label>
+                <select asp-for="ProvinciaId" class="form-control">
+                    <option>Seleccione</option>
+                    @foreach (var item in ViewBag.Provincia)
+                    {
+                            <option value="@item.ProvinciaId">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="ProvinciaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoId" class="control-label"></label>
+                <select asp-for="EstadoId" class="form-control">
+                    <option>Seleccione</option>
+                    @foreach (var item in ViewBag.Estado)
+                    {
+                        <option value="@item.EstadoId">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="EstadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoPersonaId" class="control-label"></label>
+                <select asp-for="TipoPersonaId" class="form-control">
+                        <option>Seleccione</option>
+                    @foreach (var item in ViewBag.TipoPersona)
+                    {
+                                <option value="@item.TipoPersonaId">@item.Nombre</option>
+                    }
+                    </select>
+                <span asp-validation-for="TipoPersonaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaginaWeb" class="control-label"></label>
+                <input asp-for="PaginaWeb" class="form-control" />
+                <span asp-validation-for="PaginaWeb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

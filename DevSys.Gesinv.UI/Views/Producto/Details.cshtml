@@ -5,15 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>@Html.DisplayFor(model => model.Nombre)</h3>
+<h1>Details</h1>
 
 <div>
+    <h4>ProductoViewModel</h4>
     <hr />
     <dl class="row">
-        @*<dt class = "col-sm-1">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductoId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductoId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Codigo)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Codigo)
         </dd>*@
         <dt class = "col-sm-1">
@@ -22,70 +35,70 @@
         <dd class = "col-sm-2">
             @Html.DisplayFor(model => model.LineaNombre)
         </dd>
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.TipoNombre)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LineaId)
         </dt>
-        <dd class = "col-sm-2">
-            @Html.DisplayFor(model => model.TipoNombre)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LineaId)
         </dd>
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.MarcaNombre)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoId)
         </dt>
-        <dd class = "col-sm-2">
-            @Html.DisplayFor(model => model.MarcaNombre)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoId)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Unidad)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Unidad)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Caja)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Caja)
         </dd>
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.GrupoNombre)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GrupoId)
         </dt>
-        <dd class = "col-sm-2">
-            @Html.DisplayFor(model => model.GrupoNombre)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GrupoId)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Activo)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Activo)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Iva)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Iva)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Perecible)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Perecible)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Comentario)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Comentario)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaCaducidad)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaCaducidad)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Precio)
         </dt>
-        <dd class = "col-sm-2">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Precio)
         </dd>
         <dt class="col-sm-1">Ubicación y Stock</dt>
@@ -114,6 +127,6 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Edit", "Producto", new { id = @Model.ProductoID })">Editar</a>
-    <a class="btn btn-danger" asp-action="Index">Regresar</a>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.ProductoId }) |
+    <a asp-action="Index">Back to List</a>
 </div>
