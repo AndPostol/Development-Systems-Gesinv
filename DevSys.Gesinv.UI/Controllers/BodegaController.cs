@@ -1,9 +1,11 @@
 ﻿using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
+    [Authorize]
     public class BodegaController : Controller
     {
         private readonly IBodegaService _service;

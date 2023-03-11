@@ -1,11 +1,13 @@
 ﻿using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
+    [Authorize]
     public class LineaCompraController : Controller
     {
         // GET: LineaCompraController

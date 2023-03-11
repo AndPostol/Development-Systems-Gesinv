@@ -1,10 +1,12 @@
 ﻿using DevSys.Gesinv.DAL.Contracts;
 using DevSys.Gesinv.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
+    [Authorize]
     public class ReporteController : Controller
     {
         private readonly IReporteRepository _service;
