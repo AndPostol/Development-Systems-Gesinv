@@ -2,6 +2,7 @@
 using DevSys.Gesinv.Logic.Services;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -13,7 +14,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-  public class SalidaController : Controller
+    [Authorize]
+    public class SalidaController : Controller
   {
     //API PEDIDO
     HttpClient client;

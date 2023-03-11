@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.DAL.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,7 @@ builder.Services.AddScoped<IGenericRepository<TipoProveedor>, GenericRepository<
 builder.Services.AddScoped<IGenericRepository<Estado>, GenericRepository<Estado>>();
 builder.Services.AddScoped<IGenericRepository<Provincia>, GenericRepository<Provincia>>();
 builder.Services.AddScoped<IGenericRepository<TipoPersona>, GenericRepository<TipoPersona>>();
+builder.Services.AddScoped<IGenericRepository<Usuario>, GenericRepository<Usuario>>();
 //builder.Services.AddScoped<IGenericRepository<Ingreso>, GenericRepository<Ingreso>>();
 builder.Services.AddScoped<IIngresoRepository, IngresoRepository>();
 
@@ -45,6 +48,7 @@ builder.Services.AddScoped<ITipoProveedorService, TipoProveedorService>();
 builder.Services.AddScoped<IEstadoService, EstadoService>();
 builder.Services.AddScoped<IProvinciaService, ProvinciaService>();
 builder.Services.AddScoped<ITipoPersonaService, TipoPersonaService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 
 //Inyencción de dependencias
@@ -96,6 +100,22 @@ builder.Services.AddDbContext<DbInventarioContext>(options =>
 });
 builder.Services.Configure<ConfigurationConnection>(builder.Configuration.GetSection("ConnectionStrings"));
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Acceso/IniciarSesion";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
+
+builder.Services.AddControllersWithViews(options => {
+    options.Filters.Add(
+            new ResponseCacheAttribute
+            {
+                NoStore = true,
+                Location = ResponseCacheLocation.None,
+            }
+        );
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -111,10 +131,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Producto}/{action=Index}/{id?}");
+    pattern: "{controller=Acceso}/{action=IniciarSesion}/{id?}");
 
 app.Run();

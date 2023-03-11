@@ -3,9 +3,11 @@ using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
+    [Authorize]
     public class ProductoController : Controller
     {
         private readonly IProductoService _productoService;

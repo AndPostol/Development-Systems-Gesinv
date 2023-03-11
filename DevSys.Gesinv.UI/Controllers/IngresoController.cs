@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
+    [Authorize]
     public class IngresoController : Controller 
     {
         private readonly IIngresoService _service;
