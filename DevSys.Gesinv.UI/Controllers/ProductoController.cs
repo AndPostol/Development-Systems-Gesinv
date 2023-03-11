@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿ using Microsoft.AspNetCore.Mvc;
 using DevSys.Gesinv.Logic.Contracts;
 using DevSys.Gesinv.Models;
 using DevSys.Gesinv.UI.Models.ViewModels;

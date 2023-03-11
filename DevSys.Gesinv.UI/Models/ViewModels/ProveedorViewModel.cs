@@ -20,7 +20,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name ="Tipo")]
         public int? TipoProveedorId { get; set; }
 
-        [Required(ErrorMessage ="Este campo es requerido"), StringLength(2)]
+        [Required(ErrorMessage ="Este campo es requerido"), StringLength(30)]
         public string Direccion { get; set; } = null!;
 
         [Phone, Required(ErrorMessage ="Este campo es requerido")]

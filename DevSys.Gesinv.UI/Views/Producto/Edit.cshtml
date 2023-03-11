@@ -9,9 +9,10 @@
 
 <div class="row justify-content-center">
     <div class="card col-10">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div class="card-body container-fluid">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @Html.HiddenFor(m => Model.ProductoID)
                 <div class="row justify-content-center row-cols-4">
                     <div class="form-group  px-2">
                         <label asp-for="Nombre" class="control-label"></label>
@@ -199,7 +200,7 @@
                     <span asp-validation-for="Caja" class="text-danger"></span>
                 </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
                 
             </div>
