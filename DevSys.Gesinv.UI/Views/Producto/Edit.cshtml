@@ -149,14 +149,14 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <tr>
                                 @foreach (var item in Model?.Existencia)
                                 {
-                                    <th>@item.Bodega.Direccion</th>
-                                    <td>@item.Stock</td>
+                                    <tr>
+                                        <th>@item.Bodega.Direccion</th>
+                                        <td>@item.Stock</td>
+                                    </tr>
                                 }
                                 
-                            </tr>
                         </tbody>
                     </table>
                     
