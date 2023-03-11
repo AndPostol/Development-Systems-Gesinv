@@ -5,183 +5,209 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Editar Producto #@Model.ProductoID</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+    <div class="card col-10">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="ProductoID" hidden="hidden" class="form-control" />
-                <span asp-validation-for="ProductoID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
+            <div class="card-body container-fluid">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row justify-content-center row-cols-4">
+                    <div class="form-group  px-2">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group  px-2">
+                        <label asp-for="Precio" class="control-label"></label>
+                        <input asp-for="Precio" class="form-control" />
+                        <span asp-validation-for="Precio" class="text-danger"></span>
+                    </div>
+                    <div class="form-group  px-2">
+                        <label asp-for="MarcaId" class="control-label"></label>
+                        <select asp-for="MarcaId" class="form-control">
+                            @foreach (var item in ViewBag.MarcaOptions)
+                            {
+                                if (item.MarcaId == Model?.MarcaId)
+                                {
+                                    <option value="@item.MarcaId" selected>@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.MarcaId">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="MarcaId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group  px-2">
+                        <label asp-for="MedidaId" class="control-label"></label>
+                        <select asp-for="MedidaId" class="form-control">
+                            @foreach (var item in ViewBag.MedidaOptions)
+                            {
+                                if (item.MedidaId == Model?.MedidaId)
+                                {
+                                    <option value="@item.MedidaId" selected>@item.Dimension</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.MedidaId">@item.Dimension</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="MarcaId" class="text-danger"></span>
+                    </div>
+                </div>
             @*<div class="form-group">
                 <label asp-for="Codigo" class="control-label"></label>
                 <input asp-for="Codigo" class="form-control" />
                 <span asp-validation-for="Codigo" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <label asp-for="LineaID" class="control-label"></label>
-                <select asp-for="LineaID" class="form-select">
-                    @foreach (var item in ViewBag.LineaOptions)
-                    {
-                       if (item.LineaId == Model?.LineaID)
-                       {
-                            <option value="@item.LineaId" selected>@item.Nombre</option>
-                       }
-                       else
-                       {
-                         <option value="@item.LineaId">@item.Nombre</option>   
-                       }
-                    }
-                </select>
-                <span asp-validation-for="LineaID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoID" class="control-label"></label>
-                <select asp-for="TipoID" class="form-select">
-                    @foreach (var item in ViewBag.TipoOptions)
-                    {
-                       if (item.TipoId == Model?.TipoID)
-                       {
-                            <option value="@item.TipoId" selected>@item.Nombre</option>
-                       }
-                       else
-                       {
-                         <option value="@item.TipoId">@item.Nombre</option>   
-                       }
-                    }
-                </select>
-                <span asp-validation-for="TipoID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Unidad" class="control-label"></label>
-                <input asp-for="Unidad" class="form-control" />
-                <span asp-validation-for="Unidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Caja" class="control-label"></label>
-                <input asp-for="Caja" class="form-control" />
-                <span asp-validation-for="Caja" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GrupoID" class="control-label"></label>
-                <select asp-for="GrupoID" class="form-select">
-                    @foreach (var item in ViewBag.GrupoOptions)
-                    {
-                       if (item.GrupoId == Model?.GrupoID)
-                       {
-                            <option value="@item.GrupoId" selected>@item.Nombre</option>
-                       }
-                       else
-                       {
-                         <option value="@item.GrupoId">@item.Nombre</option>   
-                       }
-                    }
-                </select>
-                <span asp-validation-for="GrupoID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @Html.CheckBoxFor(model => model.Activo)
-                <label asp-for="Activo" class="control-label"></label>
-                <span asp-validation-for="Activo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @Html.CheckBoxFor(model => model.Iva)
-                <label asp-for="Iva" class="control-label"></label>
-                <span asp-validation-for="Iva" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @Html.CheckBoxFor(model => model.Perecible)
-                <label asp-for="Perecible" class="control-label"></label>
-                <span asp-validation-for="Perecible" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Comentario" class="control-label"></label>
-                <input asp-for="Comentario" class="form-control" />
-                <span asp-validation-for="Comentario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaCaducidad" class="control-label"></label>
-                <input asp-for="FechaCaducidad" class="form-control"/>
-                <span asp-validation-for="FechaCaducidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group row">
-                <label>Ubicación</label>
-               @foreach (var item in Model?.Existencia)
-               {
-                   <div>@item.Bodega.Direccion</div>
-                   <div>@item.Stock</div>
-               }
-            </div>
-            <div class="form-group">
-                <label asp-for="MarcaId" class="control-label"></label>
-                <select asp-for="MarcaId" class="form-select">
-                    @foreach (var item in ViewBag.MarcaOptions)
-                    {
-                       if (item.MarcaId == Model?.MarcaId)
-                       {
-                            <option value="@item.MarcaId" selected>@item.Nombre</option>
-                       }
-                       else
-                       {
-                         <option value="@item.MarcaId">@item.Nombre</option>   
-                       }
-                    }
-                </select>
-                <span asp-validation-for="MarcaId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MedidaId" class="control-label"></label>
-                <select asp-for="MedidaId" class="form-select">
-                    @foreach (var item in ViewBag.MedidaOptions)
-                    {
-                       if (item.MedidaId == Model?.MedidaId)
-                       {
-                            <option value="@item.MedidaId" selected>@item.Dimension</option>
-                       }
-                       else
-                       {
-                         <option value="@item.MedidaId">@item.Dimension</option>   
-                       }
-                    }
-                </select>
-                <span asp-validation-for="MarcaId" class="text-danger"></span>
-            </div>
-            <div class="form-check">
-               <label asp-for="ColorProducto" class="control-label"></label>
-               <select asp-for="ListaColoresId" name="ListaColoresId" class="form-select" multiple>
-                   @foreach (var item in ViewBag.ColorOptions)
-                   {   
-                      if (item.IsSelected == true)
-                      {  
-                         <option value="@item.ColorId" selected>@item.Nombre</option>
-                      }
-                      else
-                      {
-                         <option value="@item.ColorId">@item.Nombre</option>
-                      } 
-                   }
-               </select>
-               <span asp-validation-for="ColorProducto" class="text-danger"></span>
-            </div>
+                <div class="row row-cols-3">
+                    <div class="form-group px-2">
+                        <label asp-for="LineaID" class="control-label"></label>
+                        <select asp-for="LineaID" class="form-control">
+                            @foreach (var item in ViewBag.LineaOptions)
+                            {
+                               if (item.LineaId == Model?.LineaID)
+                               {
+                                    <option value="@item.LineaId" selected>@item.Nombre</option>
+                               }
+                               else
+                               {
+                                 <option value="@item.LineaId">@item.Nombre</option>   
+                               }
+                            }
+                        </select>
+                        <span asp-validation-for="LineaID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="TipoID" class="control-label"></label>
+                        <select asp-for="TipoID" class="form-control">
+                            @foreach (var item in ViewBag.TipoOptions)
+                            {
+                               if (item.TipoId == Model?.TipoID)
+                               {
+                                    <option value="@item.TipoId" selected>@item.Nombre</option>
+                               }
+                               else
+                               {
+                                 <option value="@item.TipoId">@item.Nombre</option>   
+                               }
+                            }
+                        </select>
+                        <span asp-validation-for="TipoID" class="text-danger"></span>
+                    </div>           
+                    <div class="form-group px-2">
+                        <label asp-for="GrupoID" class="control-label"></label>
+                        <select asp-for="GrupoID" class="form-control">
+                            @foreach (var item in ViewBag.GrupoOptions)
+                            {
+                               if (item.GrupoId == Model?.GrupoID)
+                               {
+                                    <option value="@item.GrupoId" selected>@item.Nombre</option>
+                               }
+                               else
+                               {
+                                 <option value="@item.GrupoId">@item.Nombre</option>   
+                               }
+                            }
+                        </select>
+                        <span asp-validation-for="GrupoID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row row-cols-3">
+                    <div class="form-group ">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(model => model.Activo)
+                            <label asp-for="Activo" class="form-check-label" for="Activo"></label>
+                            <span asp-validation-for="Activo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        @Html.CheckBoxFor(model => model.Iva)
+                        <label asp-for="Iva" class="control-label"></label>
+                        <span asp-validation-for="Iva" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        @Html.CheckBoxFor(model => model.Perecible)
+                        <label asp-for="Perecible" class="control-label"></label>
+                        <span asp-validation-for="Perecible" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaCaducidad" class="control-label"></label>
+                        <input asp-for="FechaCaducidad" class="form-control" />
+                        <span asp-validation-for="FechaCaducidad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row col-8">
+                    <table class="table table-bordered">
+                        <thead class ="table-dark">
+                            <tr>
+                                <th scope="col">Bodega</th>
+                                <th scope="col">Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                @foreach (var item in Model?.Existencia)
+                                {
+                                    <th>@item.Bodega.Direccion</th>
+                                    <td>@item.Stock</td>
+                                }
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                
+                </div>
+                <div class="row row-cols-2">
+                    <div class="form-group px-3">
+                        <label asp-for="Comentario" class="control-label"></label>
+                        <input asp-for="Comentario" class="form-control" />
+                        <span asp-validation-for="Comentario" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-3">
+                        <label asp-for="ColorProducto" class="control-label"></label>
+                        <select asp-for="ListaColoresId" name="ListaColoresId" class="form-control" multiple>
+                            @foreach (var item in ViewBag.ColorOptions)
+                            {
+                                if (item.IsSelected == true)
+                                {
+                                    <option value="@item.ColorId" selected>@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ColorId">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="ColorProducto" class="text-danger"></span>
+                    </div>
+                </div>
+            
+            
+                <div class="form-group">
+                    <label asp-for="Unidad" class="control-label"></label>
+                    <input asp-for="Unidad" class="form-control" />
+                    <span asp-validation-for="Unidad" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Caja" class="control-label"></label>
+                    <input asp-for="Caja" class="form-control" />
+                    <span asp-validation-for="Caja" class="text-danger"></span>
+                </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+                
             </div>
         </form>
     </div>
 </div>
+
+
 
 <div>
     <a class="btn btn-primary" asp-action="Index">Regresar</a>
@@ -189,4 +215,10 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/js/demo.js"></script>
+
+    $(function () {
+        bsCustomFileInput.init();
+    });
 }
