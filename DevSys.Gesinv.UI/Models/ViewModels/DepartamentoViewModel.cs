@@ -1,11 +1,14 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class DepartamentoViewModel
     {
-
+        [Required]
         public int DepartamentoId { get; set; }
+
+        [StringLength(70, MinimumLength = 2)]
         public string Nombre { get; set; } = null!;
 
 

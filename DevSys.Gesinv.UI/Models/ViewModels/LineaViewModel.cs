@@ -1,10 +1,13 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class LineaViewModel
     {
         public int LineaId { get; set; }
+
+        [StringLength(70, MinimumLength = 3, ErrorMessage = "{0} debe tener al menos 3 letras")]
         public string Nombre { get; set; }
 
 

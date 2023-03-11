@@ -1,11 +1,14 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class CondicionPagoViewModel
     {
-
+        [Required]
         public int CondicionPagoId { get; set; }
+
+        [StringLength(70, MinimumLength = 3)]
         public string Nombre { get; set; } = null!;
 
         public static CondicionPagoViewModel ToViewModel(CondicionPago model) 

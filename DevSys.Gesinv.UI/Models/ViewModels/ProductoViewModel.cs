@@ -8,85 +8,49 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 {
   public class ProductoViewModel
   {
-        [Display(Name = "ID")]
-        [ScaffoldColumn(false)] // oculta el atributo
+        [ScaffoldColumn(false), Display(Name = "Codigo")] // oculta el atributo de las vistas
         public int ProductoID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Indique el nombre del producto")]
         public string Nombre { get; set; }
-
-        //Se decidio usar el ID como equivalente a un codigo 
-        //public int Codigo { get; set; }
 
         [Display(Name = "Linea")]
         public int? LineaID { get; set; }
 
-        [Display(Name = "Linea")]
-        public string? LineaNombre { get; set; } 
-
-
-        //para hacer el dropdownlist https://www.youtube.com/watch?v=A1yJVmtIDXA
-        [ValidateNever] //para que no la mapee a la DB
-        public List<SelectListItem> LineasSelectList { get; set; }
-        
-        [ValidateNever]
-        public List<SelectListItem> TiposSelectList { get; set; }
-        
-        [ValidateNever]
-        public List<SelectListItem> GruposSelectList { get; set; }
-        
-        [ValidateNever]
-        public List<SelectListItem> MarcasSelectList { get; set; }
-        
-        public List<int> ListaColoresId { get; set; }
-
-
         [Display(Name = "Tipo")]
         public int? TipoID { get; set; }
-
-        [Display(Name = "Tipo")]
-        public string? TipoNombre { get; set; }
 
         public string? Bodega { get; set; }
 
         [Display(Name = "Marca")]
         public int? MarcaId { get; set; }
 
-        [Display(Name = "Marca"), ValidateNever]
-        public string MarcaNombre { get; set; }
-
-        [Required]
-    public int Unidad { get; set; }
-    public int? Caja { get; set; }
+        [Required(ErrorMessage ="Este campo es requerido")]
+        public int Unidad { get; set; }
+        public int? Caja { get; set; }
 
         [Display(Name = "Grupo")]
         public int? GrupoID { get; set; }
 
-        [Display(Name = "Grupo")]
-        public string? GrupoNombre { get; set; }
-
         [Required]
         public bool Activo { get; set; }
+
         [Required]
         public bool Iva { get; set; }
-        [Required]
+
         public bool Perecible { get; set; }
 
-        [MaxLength(50), ValidateNever]
+        [MaxLength(50), ValidateNever] //tuve que colocarlo validate never porque me traia false en el ModelState.IsValid
         public string? Comentario { get; set; }
 
-        [Display(Name = "Caducidad"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public string FechaCaducidad { get; set; }
+        [Display(Name = "Caducidad"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = false)]
+        public string? FechaCaducidad { get; set; }
 
         [Column(TypeName = "decimal(5, 2)"), Required]
         public decimal Precio { get; set; }
         
         [Display(Name = "Medida")]
         public int? MedidaId { get; set; }
-        [Display(Name = "Medida")]
-        public string? MedidaNombre { get; set; }   
-
-        
 
         public virtual Marca? Marca { get; set; }
         public virtual Medida? Medida { get; set; }
@@ -94,12 +58,13 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public virtual Linea? Linea { get; set; }
         public virtual Tipo? Tipo { get; set; }
 
+
         [Display(Name = "Color"), ValidateNever]
         public virtual ICollection<ColorProducto> ColorProducto { get; set; }
 
         [ValidateNever]
         public virtual ICollection<Existencia> Existencia { get; set; }
-        
+
         [ValidateNever]
         public virtual ICollection<IngresoDetalle> IngresoDetalle { get; set; }
 
@@ -108,6 +73,37 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         [ValidateNever]
         public virtual ICollection<LineaSalida> LineaSalida { get; set; }
+
+
+        //Solo para las Vistas
+        [Display(Name = "Linea"), ValidateNever]
+        public string? LineaNombre { get; set; }
+
+        [Display(Name = "Marca"), ValidateNever]
+        public string MarcaNombre { get; set; }
+
+        [Display(Name = "Tipo")]
+        public string? TipoNombre { get; set; }
+
+        [Display(Name = "Grupo")]
+        public string? GrupoNombre { get; set; }
+
+        [Display(Name = "Medida")]
+        public string? MedidaNombre { get; set; }
+
+        public List<int> ListaColoresId { get; set; }
+
+        [ValidateNever] //para que no valide, ya que son datos extra
+        public List<SelectListItem> LineasSelectList { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> TiposSelectList { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> GruposSelectList { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> MarcasSelectList { get; set; }   
         
 
         public static ProductoViewModel ConvertToViewModel(Producto producto)

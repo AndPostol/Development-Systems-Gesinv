@@ -22,7 +22,7 @@ namespace DevSys.Gesinv.Unit.Test
         {
             Mock<IGenericRepository<Salida>> _genericRepository = new GenericRepositoryMock<Salida>()._genericRepository;
 
-            _salidaService = new SalidaService(_genericRepository.Object);
+            _salidaService = new SalidaService((ISalidaRepository)_genericRepository.Object);
         }
 
         [TestMethod]

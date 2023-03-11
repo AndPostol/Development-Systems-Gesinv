@@ -6,21 +6,44 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public class ProveedorViewModel
     {
         public int ProveedorId { get; set; }
+
+        [Display(Name = "Empresa")]
         public int? EmpresaId { get; set; }
         public bool Activo { get; set; } = false;
 
-        public string RazonSocial { get; set; } = null!;
+        [Display(Name ="Razón Social"), Required]
+        public string RazonSocial { get; set; }
+
+        [Required(ErrorMessage = "Indique el nombre del proveedor"), Display(Name = "Nombre")]
         public string Contacto { get; set; } = null!;
+        
+        [Display(Name ="Tipo")]
         public int? TipoProveedorId { get; set; }
+
+        [Required(ErrorMessage ="Este campo es requerido"), StringLength(2)]
         public string Direccion { get; set; } = null!;
+
+        [Phone, Required(ErrorMessage ="Este campo es requerido")]
         public string Telefono { get; set; } = null!;
+
+        [EmailAddress, Required(ErrorMessage = "Este campo es requerido")]
         public string Correo { get; set; } = null!;
+
         public DateTime? Plazo { get; set; }
+
+        [Display(Name = "RIF"), Required(ErrorMessage = "Este campo es requerido")]
         public string Ruc { get; set; } = null!;
+
         [Display(Name ="Provincia")]
         public int? ProvinciaId { get; set; }
+
+        [Display(Name ="Estado")]
         public int? EstadoId { get; set; }
+
+        [Display(Name = "Tipo")]
         public int? TipoPersonaId { get; set; }
+
+        [Url]
         public string? PaginaWeb { get; set; }
 
         public static ProveedorViewModel ToViewModel(Proveedor model)

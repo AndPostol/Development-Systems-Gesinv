@@ -7,16 +7,18 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public class OrdenCompraViewModel
     {
         public int OrdenCompraId { get; set; }
-        [Display(Name = "Proveedor")]
+        [Display(Name = "Proveedor"), Required(ErrorMessage ="Este campo es requerido")]
         public int ProveedorId { get; set; }
         public string? Referencia { get; set; }
-        [Display(Name = "Condicion de pago")]
+        [Display(Name = "Condicion de pago"), Required(ErrorMessage = "Este campo es requerido")]
         public int CondicionPagoId { get; set; }
-        [Display(Name = "Bodega")]
+        [Display(Name = "Bodega"), Required(ErrorMessage = "Este campo es requerido")]
         public int BodegaId { get; set; }
         public bool Confirmado { get; set; } = false;
 
         public string? Observacion { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = false)]
         public DateTime? Fecha { get; set; }
         public double SubTotal { get; set; }
         public double Descuento { get; set; }

@@ -1,10 +1,13 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class TipoPersonaViewModel
     {
         public int TipoPersonaId { get; set; }
+
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "{0} debe tener al menos 2 letras")]
         public string Nombre { get; set; } = null!;
 
         public static TipoPersonaViewModel ToModelView(TipoPersona model)

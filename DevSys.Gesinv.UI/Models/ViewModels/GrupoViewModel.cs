@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
@@ -9,7 +10,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             Producto = new HashSet<Producto>();
         }
 
+        [Required]
         public int GrupoId { get; set; }
+
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "{0} debe tener al menos 3 letras")]
         public string Nombre { get; set; } = null!;
 
         public virtual ICollection<Producto> Producto { get; set; }
