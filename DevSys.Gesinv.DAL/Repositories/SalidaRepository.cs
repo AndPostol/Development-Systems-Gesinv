@@ -26,14 +26,22 @@ namespace DevSys.Gesinv.DAL.Repositories
             {
                 try
                 {
+
                     foreach (LineaSalida linea in salida.LineaSalida)
                     {
                         Existencia? registrada = await _dbContext.Existencia.
                             Where(e => e.ProductoId == linea.ProductoId && e.BodegaId == salida.BodegaId)
-                            .FirstAsync();
+                            .FirstOrDefaultAsync();
                         if (registrada != null)
                         {
-                            registrada.Stock = registrada.Stock + linea.Cantidad;
+                            if (registrada.Stock < linea.Cantidad)
+                            {
+                                Console.WriteLine("No hay suficiente Inventario para esta orden");
+                            }
+                            else 
+                            {
+                                registrada.Stock = registrada.Stock - linea.Cantidad;
+                            }
                         }
                         else
                         {
@@ -46,6 +54,7 @@ namespace DevSys.Gesinv.DAL.Repositories
                             _dbContext.Existencia.Add(nuevaExistencia);
                         }
                     }
+                    _dbContext.Salida.Add(salidaGenerada);
                     await _dbContext.SaveChangesAsync();
                     transaction.Commit();
                 }

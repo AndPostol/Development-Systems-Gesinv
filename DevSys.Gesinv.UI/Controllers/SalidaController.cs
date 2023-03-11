@@ -116,7 +116,7 @@ namespace DevSys.Gesinv.UI.Controllers
 
         if (ModelState.IsValid)
         {
-          await _salidaService.Create(crearSalida);
+          await _salidaService.Registrar(crearSalida);
           await CambioEstatusPedido(salidaVM.PedidoId);
           return RedirectToAction("Index", "Salida");
         }
@@ -134,8 +134,8 @@ namespace DevSys.Gesinv.UI.Controllers
       Salida _salida = await _salidaService.GetById(id);
       SalidaViewModel salidaVM = SalidaViewModel.ToSalidaVM(_salida);
 
-      DDLBodega();
-      DDLMotivo();
+      DDLBodega(salidaVM.BodegaId ?? 0);
+      DDLMotivo(salidaVM.MotivoId ?? 0);
 
       return View(salidaVM);
     }
@@ -147,19 +147,19 @@ namespace DevSys.Gesinv.UI.Controllers
     {
       try
       {
-        Salida editarSalida = new Salida()
-        {
-          SalidaId = Convert.ToInt32(salidaVM.SalidaId),
-          MotivoId = Convert.ToInt32(salidaVM.MotivoId),
-          Fecha = Convert.ToDateTime(salidaVM.Fecha),
-          BodegaId = Convert.ToInt32(salidaVM.BodegaId),
-          Comentario = salidaVM.Comentario,
-          LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
-        };
         
 
         if (ModelState.IsValid)
         {
+            Salida editarSalida = new Salida()
+            {
+              SalidaId = Convert.ToInt32(salidaVM.SalidaId),
+              MotivoId = Convert.ToInt32(salidaVM.MotivoId),
+              Fecha = Convert.ToDateTime(salidaVM.Fecha),
+              BodegaId = Convert.ToInt32(salidaVM.BodegaId),
+              Comentario = salidaVM.Comentario,
+              LineaSalida = LineaSalidaViewModel.ToLineaSalidaModelList(salidaVM.LineaSalida)
+            };
           //editarSalida.SalidaId = id;
           await _salidaService.Update(editarSalida);
           return RedirectToAction("Index", "Salida");
@@ -217,7 +217,7 @@ namespace DevSys.Gesinv.UI.Controllers
     }
 
     // DropDownList BODEGA 
-    public async void DDLBodega()
+    public async void DDLBodega(int idSelectBodega = 0)
     {
       List<Bodega> _bodega = _bodegaService.GetAll().Result.ToList();
       List<BodegaViewModel> lstBodegaVM = _bodega
@@ -229,18 +229,25 @@ namespace DevSys.Gesinv.UI.Controllers
 
       List<SelectListItem> sliBodega = lstBodegaVM.ConvertAll(b =>
       {
-        return new SelectListItem()
-        {
-          Text = b.Direccion.ToString(),
-          Value = b.BodegaId.ToString(),
-          Selected = false
-        };
+          SelectListItem item = new SelectListItem();
+          item.Text = b.Direccion.ToString();
+          item.Value = b.BodegaId.ToString();
+
+          if (idSelectBodega == b.BodegaId)
+          {
+             item.Selected = true;
+          }
+          else
+          {
+              item.Selected = false;
+          }
+          return item;
       });
       ViewBag.sliBodega = sliBodega;
     }
 
     // DropDownList MOTIVO
-    public async void DDLMotivo()
+    public async void DDLMotivo(int idSelectMotivo = 0)
     {
       List<Motivo> _motivo = _motivoService.GetAll().Result.ToList();
       List<MotivoViewModel> lstMotivoVM = _motivo
@@ -252,12 +259,20 @@ namespace DevSys.Gesinv.UI.Controllers
 
       List<SelectListItem> sliMotivo = lstMotivoVM.ConvertAll(m =>
       {
-        return new SelectListItem()
-        {
-          Text = m.Nombre.ToString(),
-          Value = m.MotivoId.ToString(),
-          Selected = false
-        };
+          SelectListItem item = new SelectListItem();
+          item.Text = m.Nombre.ToString();
+          item.Value = m.MotivoId.ToString();
+
+          if (idSelectMotivo == m.MotivoId)
+          {
+              item.Selected = true;
+          }
+          else
+          {
+              item.Selected = false;
+          }
+          return item;
+          
       });
       ViewBag.sliMotivo = sliMotivo;
     }

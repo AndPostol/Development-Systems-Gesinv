@@ -17,8 +17,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
     [Display(Name ="Motivo")]
     public string? MotivoNombre { get; set; }
-
-    [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+    //[DataType(DataType.Date)]
+    //[DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
     public DateTime Fecha { get; set; }
 
     public string? Comentario { get; set; }
@@ -40,6 +40,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
       {
         SalidaId = model.SalidaId,
         MotivoNombre = model.Motivo.Nombre,
+        MotivoId = model.MotivoId,
+        BodegaId= model.BodegaId,
         Fecha = model.Fecha,
         BodegaNombre = model.Bodega.Direccion,
         Comentario = model.Comentario,
