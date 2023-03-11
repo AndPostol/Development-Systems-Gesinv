@@ -33,12 +33,12 @@
               </tr>
                 <tr align="center">
                   @*<td>@Html.DropDownListFor(d => d.MotivoId == Model.MotivoId, ViewBag.sliMotivo as List<SelectListItem>,
-                                        "Seleccionar", new { @class= "form-control"})</td>*@
-                            <td>
+                                      "Seleccionar", new { @class= "form-control"})</td>*@
+                    <td>
 
-                                <select asp-for="MotivoId" asp-items="ViewBag.sliMotivo" class="form-control">
-                                </select>
-                            </td>
+                        <select asp-for="MotivoId" asp-items="ViewBag.sliMotivo" class="form-control">
+                        </select>
+                    </td>
 
                   <td>
                         <input asp-for="Fecha" class="form-control"/>
@@ -80,7 +80,7 @@
               @Html.HiddenFor(model => Model.LineaSalida[i].LineaSalidaId)
               <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoId, new { @class = "form-control", @readonly = "readonly" })</td>
               <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
-              <td>@Html.EditorFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control" })</td>
+                <td>@Html.TextBoxFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control",@readonly = "readonly" })</td>
               <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
               <td>@Html.TextBoxFor(model => Model.LineaSalida[i].CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>
             </tr>

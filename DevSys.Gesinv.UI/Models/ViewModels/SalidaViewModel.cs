@@ -39,6 +39,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
       {
         SalidaId = model.SalidaId,
         MotivoNombre = model.Motivo.Nombre,
+        MotivoId = model.MotivoId,
+        BodegaId= model.BodegaId,
         Fecha = model.Fecha,
         BodegaNombre = model.Bodega.Direccion,
         Comentario = model.Comentario,
