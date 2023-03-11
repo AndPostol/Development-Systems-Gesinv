@@ -15,8 +15,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public int? MotivoId { get; set; }
     [Display(Name ="Motivo")]
     public string? MotivoNombre { get; set; }
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+    //[DataType(DataType.Date)]
+    //[DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
     public DateTime Fecha { get; set; }
     public string? Comentario { get; set; }
     public int? RequisicionId { get; set; }
