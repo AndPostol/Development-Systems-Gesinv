@@ -10,7 +10,7 @@ namespace DevSys.Gesinv.Logic.Contracts
     public interface IEmpresaService
     {
         public interface IEmpresaService : IGenericService<Empresa> 
-        { 
-        }
+    {
     }
+}
 }

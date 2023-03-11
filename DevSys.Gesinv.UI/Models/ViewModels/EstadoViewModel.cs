@@ -1,11 +1,16 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class EstadoViewModel
     {
+        [Required]
         public int EstadoId { get; set; }
+
+        [StringLength(70, MinimumLength = 3)]
         public string Nombre { get; set; } = null!;
+
         public virtual List<ProvinciaViewModel> Provincia { get; set; }
 
         public static EstadoViewModel ToModelView(Estado model)

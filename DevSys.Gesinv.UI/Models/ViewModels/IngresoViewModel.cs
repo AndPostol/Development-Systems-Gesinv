@@ -2,24 +2,39 @@
 using DevSys.Gesinv.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 
-    namespace DevSys.Gesinv.UI.Models.ViewModels
+namespace DevSys.Gesinv.UI.Models.ViewModels
     {
     public class IngresoViewModel
     {
         
         public int IngresoId { get; set; }
+
+        [Required(ErrorMessage = "El codigo de la orden es requerido")]
         public int OrdenCompraId { get; set; }
 
         public bool Confirmado { get; set; } = false;
 
+        [Display(Name = "Proveedor")]
         public int? ProveedorId { get; set; }
+
+        [Display(Name = "Motivo")]
         public int? MotivoId { get; set; }
+
+        [Display(Name = "Bodega")]
         public int? BodegaId { get; set; }
+
+        [Display(Name = "Tipo de Ingreso")]
         public int? TipoIngresoId { get; set; }
+
+        [Required(ErrorMessage = "Indique la fecha"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = false)]
         public DateTime Fecha { get; set; }
+
         public double Descuento { get; set; }
         public double Impuestos { get; set; }
+
+        [Required]
         public double Total { get; set; }
 
         // Sets de datos que podemos usar para la vista (Recordar que esto no es necesario validarlo)

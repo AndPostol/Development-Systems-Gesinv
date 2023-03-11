@@ -9,6 +9,6 @@ using DevSys.Gesinv.Models;
 namespace DevSys.Gesinv.Logic.Contracts
 {
     public interface IBodegaService: IGenericService<Bodega>
-  {
-  }
+    {
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
@@ -10,6 +11,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         }
 
         public int MedidaId { get; set; }
+
+        [StringLength(10, MinimumLength = 1, ErrorMessage = "{0} debe tener al menos 1 letra")]
         public string Dimension { get; set; } = null!;
 
         public virtual ICollection<Producto> Producto { get; set; }

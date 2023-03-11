@@ -1,12 +1,15 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class ColorProductoViewModel
     {
+        [Display(Name = "Colores")]
         public int ColorProductoId { get; set; }
         public int ColorId { get; set; }
         public int ProductoId { get; set; } 
+
         public virtual Producto? Producto { get; set; }
         public virtual Color? Color { get; set; }
 

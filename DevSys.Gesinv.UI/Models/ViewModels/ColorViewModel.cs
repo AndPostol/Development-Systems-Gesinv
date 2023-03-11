@@ -1,19 +1,18 @@
 ﻿using DevSys.Gesinv.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class ColorViewModel
     {
-        //public ColorViewModel()
-        //{
-        //    ColorProducto = new HashSet<ColorProducto>();
-        //}
-
+        [Required]
         public int ColorId { get; set; }
-        public string Nombre { get; set; } = null!;
-        public bool IsSelected { get; set; } = false;
 
-       //public virtual ICollection<ColorProducto> ColorProducto { get; set; }
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "{0} debe tener al menos 3 letras")]
+        public string Nombre { get; set; } = null!;
+
+        [Required]
+        public bool IsSelected { get; set; } = false;
 
         public static ColorViewModel ConvertToViewModel(Color color)
         {
@@ -21,7 +20,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
             {
                 ColorId = color.ColorId,
                 Nombre = color.Nombre,
-                //ColorProducto = color.ColorProducto
             };
             return colorViewModel;
         }

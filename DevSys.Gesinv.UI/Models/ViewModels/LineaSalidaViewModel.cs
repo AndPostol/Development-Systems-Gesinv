@@ -8,16 +8,28 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   public class LineaSalidaViewModel
   {
     public int LineaSalidaId { get; set; } = 0;
+    
+    [Required(ErrorMessage ="Indique el codigo de Salida")]
     public int SalidaId { get; set; }
+
+    [Required(ErrorMessage ="Este campo es requerido")]
     public int Cantidad { get; set; }
+
+    [Required(ErrorMessage = "Este campo es requerido")]
     public double CostoSalida { get; set; }
+
     [Display(Name = "Código")]
     public int? ProductoId { get; set; }
+
     public int? ProductoCodigo { get; set; }
+
     [Display(Name = "Producto")]
     public string ProductoNombre { get; set; }
+
     [Display(Name = "Precio")]
     public double ProductoPrecio { get; set; }
+
+    [Display(Name = "Pedido")]
     public int PedidoId { get; set; }
 
     [ValidateNever]

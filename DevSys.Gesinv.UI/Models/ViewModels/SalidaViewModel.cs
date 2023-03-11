@@ -11,18 +11,20 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
   {
     [Display(Name = "Código")]
     public int SalidaId { get; set; }
+
     [ValidateNever]
     public int? MotivoId { get; set; }
+
     [Display(Name ="Motivo")]
     public string? MotivoNombre { get; set; }
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+
+    [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
     public DateTime Fecha { get; set; }
+
     public string? Comentario { get; set; }
-    public int? RequisicionId { get; set; }
-    [Display(Name = "Requisición")]
-    public string? RequisicionCodigo { get; set; }
+
     public int? BodegaId { get; set; }
+
     [Display(Name = "Bodega")]
     public string? BodegaNombre { get; set; }
 
@@ -30,7 +32,6 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
     public BodegaViewModel? Bodega { get; set; }
     public MotivoViewModel? Motivo { get; set; }
-    public RequisicionViewModel? Requisicion { get; set; }
     public List<LineaSalidaViewModel> LineaSalida { get; set; }
 
     public static SalidaViewModel ToSalidaVM(Salida model)

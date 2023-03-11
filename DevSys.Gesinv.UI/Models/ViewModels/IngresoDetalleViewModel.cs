@@ -3,18 +3,32 @@ using DevSys.Gesinv.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public partial class IngresoDetalleViewModel
     {
 
+        
         public int IngresoDetalleId { get; set; } = 0;
+
+        [Required(ErrorMessage = "Por favor ingrese un producto")]
         public int ProductoId { get; set; }
+
+        [Required(ErrorMessage = "Este campo es requerido para generar el detalle del ingreso")]
         public int IngresoId { get; set; }
+
+        [Required(ErrorMessage = "Este campo es requerido")]
         public double PrecioBruto { get; set; }
+
+        [Required(ErrorMessage = "Introduzca la fecha"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = false)]
         public DateTime Fecha { get; set; }
+
+        [Required (ErrorMessage = "Este campo es requerido"), Range(0, 10000)]
         public int Caja { get; set; }
+
+        [Required(ErrorMessage = "Este campo es requerido"), Range(0, 10000)]
         public int Cantidad { get; set; }
 
         // Datos Extras

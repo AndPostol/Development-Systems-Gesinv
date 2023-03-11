@@ -1,18 +1,32 @@
 ﻿using DevSys.Gesinv.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
 {
     public class LineaCompraViewModel
     {
         public int LineaCompraId { get; set; }
+
+        [Required(ErrorMessage = "Ingrese el codigo de orden compra")]
         public int OrdenCompraId { get; set; }
+
+        [Required(ErrorMessage = "Ingrese producto"), Display(Name = "Producto")]
         public int ProductoId { get; set; }
+
+        [Required(ErrorMessage = "Ingrese el Departamento"), Display(Name = "Departamento")]
         public int DepartamentoId { get; set; }
+
+        [Required(ErrorMessage = "Indique la cantidad de productos")]
         public int Cantidad { get; set; }
+
         public int? Caja { get; set; }
+
+        [Required(ErrorMessage = "Indique el precio del producto")]
         public double Precio { get; set; }
         public double Descuento { get; set; }
+
+        [Required(ErrorMessage = "Este campo es requerido")]
         public double Total { get; set; }
 
         [ValidateNever]
