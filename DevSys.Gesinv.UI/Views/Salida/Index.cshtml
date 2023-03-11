@@ -1,81 +1,114 @@
 ﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel>
 
+
 @{
   ViewData["Title"] = "Salida";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-  <meta name="viewport" content="width=device-width"/>
-  <title>Index</title>
-</head>
-<body>
+@section Style{
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 
-<div>
-  <table class="table">
-    <h5 align="center">PEDIDOS</h5>
-    <thread>
-      <tr align="center">
-        <th>Cód. Pedido</th>
-        <th>Estatus</th>
-@*        <th>Cód. Linea Pedido</th>
-        <th>Cód. Producto</th>
-        <th>Cantidad</th>*@
-        <th></th>
-      </tr>
-  </thread>
-      <tbody>
-    @foreach (var item in ViewBag.Pedido)
-    {
-      <tr align="center">
-        <td>@item.Id</td>
-        <td>@item.Estatus</td>
-@*        <td>@item.LineaPedidoId</td>
-        <td>@item.ProductoId</td>
-        <td>@item.Cantidad</td>*@
-        <td><a class="btn btn-outline-primary" asp-action="Create" asp-route-id="@item.Id">Ingresar</a></td>
-      </tr>
+}
+
+<div class="card">
+    <div class="card-body">
+
+      <div class="content">
+
+    <div class="card">
+       <div class="card-body table-responsive p-0" style="height: 400px;">
+
+         <h5 align="center" style="font-weight:bold; padding-top:10px">PEDIDOS</h5>
+                    <table class="table table-bordered table-striped">
+        <thread>
+          <tr align="center">
+            <th>Cód. Pedido</th>
+            <th>Estatus</th>
+    @*        <th>Cód. Linea Pedido</th>
+            <th>Cód. Producto</th>
+            <th>Cantidad</th>*@
+            <th></th>
+          </tr>
+      </thread>
+          <tbody>
+        @foreach (var item in ViewBag.Pedido)
+        {
+          <tr align="center">
+            <td>@item.Id</td>
+           <td>@item.Estatus</td>
+    @*        <td>@item.LineaPedidoId</td>
+            <td>@item.ProductoId</td>
+            <td>@item.Cantidad</td>*@
+            <td><a class="btn btn-outline-primary" asp-action="Create" asp-route-id="@item.Id">Ingresar</a></td>
+          </tr>
+        }
+      </tbody>
+      </table>
+       </div>
+
+
+    </div>
+        
+    <div class="card">
+                <div class="card-body table-responsive p-0 table table-bordered table-striped" style="height: 400px;">
+        <div class="container-fluid">
+              <table class="table">
+                            <h5 align="center" style="font-weight:bold ; padding-top:10px">SALIDAS</h5>
+                <thread>
+                  <tr align="center">
+                    <th>@Html.DisplayNameFor(model => model.SalidaId)</th>
+                    <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                    <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+                    <th></th>
+                  </tr>
+                </thread>
+                <tbody>
+                  @foreach (var item in Model)
+                  {
+                    <tr align="center">
+                      <td>@Html.DisplayFor(modelItem => item.SalidaId)</td>
+                      <td>@Html.DisplayFor(modelItem => item.MotivoNombre)</td>
+                      <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                      <td>@Html.DisplayFor(modelItem => item.BodegaNombre)</td>
+                      <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(modelItem => item.Comentario)</textarea></td>
+                      <td>
+            @*            @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
+                        @Html.ActionLink("Editar", "Edit", new { id=item.SalidaId }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id=item.SalidaId }) |*@
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a> |
+                        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a> |
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+ 
+
+        </div>
+    
+        </div>
+    
+        </div>
+      
+        </div>
+    </div>
+</div>
+    
+
+    @section Scripts {
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../../dist/js/demo.js"></script>
     }
-  </tbody>
-</div>
-
-<div>
-  <table class="table">
-      <h5 align="center">SALIDAS</h5>
-    <thread>
-      <tr align="center">
-        <th>@Html.DisplayNameFor(model => model.SalidaId)</th>
-        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
-        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
-        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
-        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
-        <th></th>
-      </tr>
-    </thread>
-    <tbody>
-      @foreach (var item in Model)
-      {
-        <tr align="center">
-          <td>@Html.DisplayFor(modelItem => item.SalidaId)</td>
-          <td>@Html.DisplayFor(modelItem => item.MotivoNombre)</td>
-          <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
-          <td>@Html.DisplayFor(modelItem => item.BodegaNombre)</td>
-          <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(modelItem => item.Comentario)</textarea></td>
-          <td>
-@*            @Html.ActionLink("Detalles", "Details", new { id=item.SalidaId }) |
-            @Html.ActionLink("Editar", "Edit", new { id=item.SalidaId }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.SalidaId }) |*@
-            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.SalidaId">Detalles</a> |
-            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.SalidaId">Editar</a> |
-            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.SalidaId">Eliminar</a>
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>
-
-</body>
-</html>
