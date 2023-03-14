@@ -1,4 +1,5 @@
-﻿using DevSys.Gesinv.DAL.Configuration;
+﻿using Castle.Core.Internal;
+using DevSys.Gesinv.DAL.Configuration;
 using DevSys.Gesinv.DAL.Contracts;
 using DevSys.Gesinv.DAL.DataContext;
 using DevSys.Gesinv.Models;
@@ -39,11 +40,12 @@ namespace DevSys.Gesinv.DAL.Repositories
                 {
                     while (await dr.ReadAsync())
                     {
+                        Console.WriteLine(dr["MotivoId"]);
                         lstReporteIngreso.Add(new ReporteIngreso()
                         {
                             ProductoId = Convert.ToInt32(dr["ProductoId"]),
                             Nombre = dr["Nombre"].ToString(),
-                            MotivoId = Convert.ToInt32(dr["MotivoId"]),
+                            MotivoId = Convert.ToInt32(String.IsNullOrEmpty(dr["MotivoId"].ToString()) ? 0 : dr["MotivoId"]),
                             Fecha = Convert.ToDateTime(dr["Fecha"]),
                             Cantidad = Convert.ToInt32(dr["Cantidad"]),
                             PrecioBruto = Convert.ToDouble(dr["PrecioBruto"])
@@ -83,11 +85,11 @@ namespace DevSys.Gesinv.DAL.Repositories
                         lstReporteProveedor.Add(new ReporteProveedor
                         {
                             ProveedorId = Convert.ToInt32(dr["ProveedorId"]),
-                            RazonSocial = dr["RazonSocial"].ToString(),
+                            RazonSocial = dr["RazonSocial"].ToString() ?? "No asignado",
                             OrdenCompraId = Convert.ToInt32(dr["OrdenCompraId"]),
                             ProductoId = Convert.ToInt32(dr["ProductoId"]),
-                            Nombre = dr["Nombre"].ToString(),
-                            Fecha = Convert.ToDateTime(dr["Fecha"]),
+                            Nombre = dr["Nombre"].ToString() ?? "No asignado",
+                            Fecha = Convert.ToDateTime(dr["Fecha"] ?? DateTime.Now),
                             Cantidad = Convert.ToInt32(dr["Cantidad"]),
                             Precio = Convert.ToDouble(dr["Precio"])
                         });
