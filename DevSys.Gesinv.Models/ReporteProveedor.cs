@@ -9,13 +9,13 @@ namespace DevSys.Gesinv.Models
     public class ReporteProveedor
     {
         public int ProveedorId { get; set; }
-        public string RazonSocial { get; set; }
-        public int OrdenCompraId { get; set; }
-        public int ProductoId { get; set; }
-        public string Nombre { get; set; }
+        public string RazonSocial { get; set; } = "No asignado";
+        public int OrdenCompraId { get; set; } = 0;
+        public int ProductoId { get; set; } = 0;
+        public string Nombre { get; set; } = "No asignado";
         public DateTime Fecha { get; set; }
-        public int Cantidad { get; set; }
+        public int Cantidad { get; set; } = 0;
 
-        public double Precio { get; set; }
+        public double Precio { get; set; } = 0;
     }
 }
