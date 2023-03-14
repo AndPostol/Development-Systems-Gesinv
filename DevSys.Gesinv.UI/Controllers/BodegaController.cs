@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class BodegaController : Controller
     {
         private readonly IBodegaService _service;

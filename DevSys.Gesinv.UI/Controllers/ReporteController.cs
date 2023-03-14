@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class ReporteController : Controller
     {
         private readonly IReporteRepository _service;

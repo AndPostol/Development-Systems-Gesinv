@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class OrdenCompraController : Controller
     {
         private readonly IOrdenCompraService _service;

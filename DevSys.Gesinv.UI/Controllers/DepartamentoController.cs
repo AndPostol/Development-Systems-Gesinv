@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class DepartamentoController : Controller
     {
         private readonly IDepartamentoService _service;

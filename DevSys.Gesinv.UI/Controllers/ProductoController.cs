@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class ProductoController : Controller
     {
         private readonly IProductoService _productoService;

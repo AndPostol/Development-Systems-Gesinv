@@ -14,7 +14,6 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class SalidaController : Controller
   {
     //API PEDIDO

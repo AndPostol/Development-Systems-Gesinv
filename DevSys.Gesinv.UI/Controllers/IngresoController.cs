@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class IngresoController : Controller 
     {
         private readonly IIngresoService _service;

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class LineaCompraController : Controller
     {
         // GET: LineaCompraController

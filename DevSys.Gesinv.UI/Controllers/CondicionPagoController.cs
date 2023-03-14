@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevSys.Gesinv.UI.Controllers
 {
-    [Authorize]
     public class CondicionPagoController : Controller
     {
         private readonly ICondicionPagoService _service;
