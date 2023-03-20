@@ -1,0 +1,138 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.OrdenCompraViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles #@Model.OrdenCompraId</h1>
+<div class="row justify-content-center">
+
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+            
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Codigo</label>
+                        <p class="form-control">
+                            @Model.OrdenCompraId
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Proveedor</label>
+                        <p class="form-control">
+                            @Model.NombreProveedor
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Fecha</label>
+                        <p class="form-control">
+                            @Model.Fecha
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Condicion de pago</label>
+                        <p class="form-control">
+                            @Model.CondicionPago
+                        </p>
+                    </div>
+                    </div>
+
+                <div class="row">
+                
+                    <table class="table table-striped">
+                       <thead>
+                            <tr>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Entrega</th>
+                                <th scope="col">Unidad</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio Unitario</th>
+                                <th scope="col">%</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            @foreach (var item in Model.LineaCompra)
+                            {
+                            <tr>
+                                <td>@item.Producto.ProductoId</td>
+                                <td>@item.Producto.Nombre</td>
+                                <td>@item.Departamento.Nombre</td>
+                                <td>@item.Caja</td>
+                                <td>@item.Cantidad</td>
+                                <td>@item.Precio</td>
+                                <td>@item.Descuento</td>
+                                <td>@item.Total</td>
+                            </tr>
+                            }
+                       </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group col-8">
+                            <label class="control-label">Observacion</label>
+                            <p class="form-control">
+                                @Model.Observacion
+                            </p>
+                        </div>
+                        <div class="form-group col-8">
+                            <label class="control-label">Referencia</label>
+                            <p class="form-control">
+                                @Model.Referencia
+                            </p>
+                        </div>
+                        <div class="form-group col-8">
+                            <label class="control-label">Bodega</label>
+                            <p class="form-control">
+                                @Model.BodedaNombre
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label class="control-label">Subtotal</label>
+                            <p class="form-control">
+                                @Model.SubTotal
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Descuento</label>
+                            <p class="form-control">
+                                @Model.Descuento
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Impuestos</label>
+                            <p class="form-control">
+                                @Model.Impuestos
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Total</label>
+                            <p class="form-control">
+                                @Model.Total
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer" style="background-color: white;">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                        </div>
+                        <div class="form-group col-6" style="text-align: end;">
+                            <a asp-action="Edit" asp-route-id="@Model.OrdenCompraId" class="btn btn-warning">
+                                Editar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

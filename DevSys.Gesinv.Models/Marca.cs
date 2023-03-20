@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class Marca
     {
-        public int MarcaId { get; set; }
-        public int Nombre { get; set; }
-        public int? ProductoId { get; set; }
+        public Marca()
+        {
+            Producto = new HashSet<Producto>();
+        }
 
-        public virtual Producto? Producto { get; set; }
+        public int MarcaId { get; set; }
+        public string Nombre { get; set; } = null!;
+
+        public virtual ICollection<Producto> Producto { get; set; }
     }
 }

@@ -1,15 +1,15 @@
 table Producto {
   ProductoID int [primary key]
-  Nombre varchar 
-  Codigo int 
+  Nombre varchar [not null]
+  Codigo int [not null, unique]
   LineaID int [ref: - Linea.LineaID,null]
   TipoID int [ref: - Tipo.TipoID, null]
-  Unidad int 
-  Caja int 
+  Unidad int [not null]
+  Caja int [default:0]
   GrupoID int [ref: - Grupo.GrupoID, null]
-  Activo bool [default:false]
-  IVA bool [default:false]
-  Perecible bool [default:false]
+  Activo bit [default:0]
+  IVA bit [default:0]
+  Perecible bit [default:0]
   Comentario text [null]
   FechaCaducidad datetime [null]
   Precio float [not null]
@@ -29,21 +29,20 @@ table Grupo{ // Como categoria
 
 table Proveedor {
   ProveedorID int [primary key]
-  EmpresaID int [ref: > Empresa.EmpresaID] // Esta relacion es pensando
+  EmpresaID int [ref: > Empresa.EmpresaID, null] // Esta relacion es pensando
   // que no existe una lista de proveedores
   RazonSocial varchar  [not null]
-  Nombre varchar  [not null]
-  Codigo int  [not null, unique, increment]
+  Codigo int  [not null, unique]
   Contacto varchar  [not null]
-  TipoProveedorID int  [ref: - TipoProveedor.TipoProveedorID]
+  TipoProveedorID int  [ref: - TipoProveedor.TipoProveedorID, null]
   Direccion varchar [not null]
   Telefono varchar  [not null]
-  Email email  [not null]
+  Correo varchar  [not null]
   Plazo datetime // Se relaciona con ingreso
   RUC varchar  [not null]
-  ProvinciaID int [ref: - Provincia.ProvinciaID]
-  EstadoID int [ref: - Estado.EstadoID]
-  TipoPersona int [ref: - TipoPersona.TipoPersonaID]
+  ProvinciaID int [ref: - Provincia.ProvinciaID, null]
+  EstadoID int [ref: - Estado.EstadoID, null]
+  TipoPersona int [ref: - TipoPersona.TipoPersonaID, null]
   PaginaWeb varchar  [null]
   
 }
@@ -57,52 +56,53 @@ table TipoPersona{
 }
 table Bodega{
   BodegaID int [primary key]
-  EmpresaID int [ref: > Empresa.EmpresaID]
+  EmpresaID int [ref: > Empresa.EmpresaID, null]
   Direccion varchar  [not null]
-  ProvinciaID int [ref: - Provincia.ProvinciaID]
-  EstadoID int [ref: - Estado.EstadoID]
+  ProvinciaID int [ref: - Provincia.ProvinciaID, null]
+  EstadoID int [ref: - Estado.EstadoID, null]
 }
 table Estado{
   EstadoID int [primary key]
-  Nombre varchar  [not null]
+  Estado varchar  [not null]
 }
 table Provincia{
   ProvinciaID int [primary key]
-  Nombre varchar  [not null]
+  EstadoID int [ref: > Estado.EstadoID, null]
+  Provincia varchar  [not null]
 }
 table OrdenCompra { // Relacion con producto como linea LineaCompra
   OrdenCompraID int [primary key]
-  ProveedorID int [ref: > Proveedor.ProveedorID ] // Relacion con el Empresa
+  ProveedorID int [ref: > Proveedor.ProveedorID , null] // Relacion con el Empresa
   CodProveedor int  [not null]
   Referencia varchar
-  CondicionPagoID int [ref: - CondicionPago.CondicionPagoID]
+  CondicionPagoID int [ref: - CondicionPago.CondicionPagoID, null]
   Observacion text  [null]
-  Fecha datetime
+  Fecha datetime [not null]
   SubTotal float [not null]
   Descuento float [not null]
   Impuestos float [not null]
   Total float [not null]
 }
 table CondicionPago {
-  CondicionPagoID int [pk]
+  CondicionPagoID int [primary key]
   Nombre varchar [not null]
 }
 table Ingreso {
   IngresoID int [primary key]
-  CodigoIngreso int  [not null, unique, increment]
-  ProveedorID int [ref: - Proveedor.ProveedorID]
-  MotivoID int [ref: - Motivo.MotivoID]
-  BodegaID int [ref: - Bodega.BodegaID]
-  TipoIngresoID int [ref: - TipoIngreso.TipoIngresoID]
+  CodigoIngreso int  [not null, unique]
+  ProveedorID int [ref: - Proveedor.ProveedorID, null]
+  MotivoID int [ref: - Motivo.MotivoID, null]
+  BodegaID int [ref: - Bodega.BodegaID, null]
+  TipoIngresoID int [ref: - TipoIngreso.TipoIngresoID, null]
   Fecha datetime [not null]
   Descuento float [not null]
   Impuestos float [not null]
   Total float [not null]
 }
 table IngresoDetalle {
-  IngresoDetalleID int [PK]
-  ProductoID int [ref: > Producto.ProductoID]
-  IngresoID int [ref: > Ingreso.IngresoID]
+  IngresoDetalleID int [primary key]
+  ProductoID int [ref: > Producto.ProductoID, null]
+  IngresoID int [ref: > Ingreso.IngresoID, null]
   PrecioBruto float [not null]
   Fecha datetime [not null]
   Caja int [not null]
@@ -110,54 +110,54 @@ table IngresoDetalle {
   
 }
 table TipoIngreso{
-  TipoIngresoID [PK]
-  Nombre varchar
+  TipoIngresoID int [primary key]
+  Nombre varchar [not null]
 }
 table Motivo {
-  MotivoID int [PK]
+  MotivoID int [primary key]
   Nombre varchar [not null]
 }
 table Salida {
   SalidaID int [primary key]
-  Codigo varchar [not null, unique, increment]
-  MotivoID int [ref: - Motivo.MotivoID]
+  Codigo varchar [not null, unique]
+  MotivoID int [ref: - Motivo.MotivoID, null]
   Fecha datetime [not null] 
   Comentario text
-  RequisicionID int [ref: - Requisicion.RequisicionID]
-  BodegaID int [not null, ref: - Bodega.BodegaID]
+  RequisicionID int [ref: - Requisicion.RequisicionID, null]
+  BodegaID int [ref: - Bodega.BodegaID, null]
 }
 table Requisicion {
   RequisicionID int [primary key]
-  CodigoRequisicion varchar [not null, unique, increment]
+  CodigoRequisicion varchar [not null, unique]
   Fecha datetime [not null]
-  OrdenCompraID int [ref: - Departamento.DepartamentoID] 
+  OrdenCompraID int [ref: - Departamento.DepartamentoID, null] 
   Comentario varchar
 }
 
 table Empresa {
   EmpresaID int [primary key]
-  Correo email [not null, unique]
+  Correo varchar [not null, unique]
   Password varchar [not null]
 }
 table Usuario{
   UsuarioID int [primary key]
-  Correo email [not null, unique]
+  Correo varchar [not null, unique]
   Password varchar [not null]
-  EmpresaID int [ref: > Empresa.EmpresaID]
+  EmpresaID int [ref: > Empresa.EmpresaID, null]
 }
 table Existencia
 {
   ExistenciaID int [primary key]
-  ProductoID int [ref: > Producto.ProductoID]
-  BodegaID int  [ref: > Bodega.BodegaID]
+  ProductoID int [ref: > Producto.ProductoID, null]
+  BodegaID int  [ref: > Bodega.BodegaID, null]
   Stock int [not null]
 }
 // Crear tabla linea LineaCompra
 table LineaCompra {
   LineaCompraID int [primary key]
-  OrdenCompraID int [ref: > OrdenCompra.OrdenCompraID]
-  ProductoID int [ref: > Producto.ProductoID]
-  DepartamentoID int [ref: - Departamento.DepartamentoID]
+  OrdenCompraID int [ref: > OrdenCompra.OrdenCompraID, null]
+  ProductoID int [ref: > Producto.ProductoID, null]
+  DepartamentoID int [ref: - Departamento.DepartamentoID, null]
   Cantidad int [not null]
   Caja [int] [null]
   Precio float [not null]
@@ -165,28 +165,28 @@ table LineaCompra {
   Total float [not null]
 }
 table LineaSalida {
-  LineaSalidaID int [PK]
-  SalidaID int [ref: > Salida.SalidaID]
+  LineaSalidaID int [primary key]
+  SalidaID int [ref: > Salida.SalidaID, null]
   Cantidad int  [not null]
   CostoSalida float [not null]
-  ProductoID int [ref: > Producto.ProductoID]
+  ProductoID int [ref: > Producto.ProductoID, null]
 }
 table Color {
-  ColorID int [PK]
+  ColorID int [primary key]
   Nombre varchar [not null]
-  ProductoID int [ref: - Producto.ProductoID]
+  ProductoID int [ref: - Producto.ProductoID, null]
 }
 table Marca {
-  MarcaID int [PK]
-  Nombre int [not null]
-  ProductoID int [ref: - Producto.ProductoID]
+  MarcaID int [primary key]
+  Nombre varchar [not null]
+  ProductoID int [ref: - Producto.ProductoID, null]
 }
 table Medida {
-  MedidaID int [PK]
+  MedidaID int [primary key]
   Dimension varchar [not null]
-  ProductoID int [ref: - Producto.ProductoID]
+  ProductoID int [ref: - Producto.ProductoID, null]
 }
 table Departamento {
-  DepartamentoID int [PK]
-  Nombre varchar
+  DepartamentoID int [primary key]
+  Nombre varchar [not null]
 }

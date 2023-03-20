@@ -1,0 +1,132 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel
+
+@{
+  ViewData["Title"] = "Salida - Editar";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  List<SelectListItem> sliBodega = (List<SelectListItem>)ViewBag.sliBodega;
+  List<SelectListItem> sliMotivo = (List<SelectListItem>)ViewBag.sliMotivo;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar</title>
+    @section Style{
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    }
+</head>
+<body>
+  <form asp-action="Edit">
+    <div>
+            <div class="card">
+                <div class="card-body">
+
+      <div class="card">
+        <div class="card-body" style="height: 250px;">
+           <h5 align="center" style="font-weight:bold; padding-top:10px">SALIDA</h5>
+       <table class="table table-responsivetable table-bordered table-striped">
+            <thread>
+              <tr align="center">
+                @Html.HiddenFor(model => model.SalidaId)
+                <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+                <th></th>
+              </tr>
+                <tr align="center">
+                  @*<td>@Html.DropDownListFor(d => d.MotivoId == Model.MotivoId, ViewBag.sliMotivo as List<SelectListItem>,
+                                      "Seleccionar", new { @class= "form-control"})</td>*@
+                    <td>
+
+                        <select asp-for="MotivoId" asp-items="ViewBag.sliMotivo" class="form-control">
+                        </select>
+                    </td>
+
+                  <td>
+                        <input asp-for="Fecha" class="form-control"/>
+                  </td>
+                  <td>
+                      @*@Html.DropDownList("BodegaId", ViewBag.sliBodega as List<SelectListItem>,
+                                        "Seleccionar", new { @class= "form-control"})</td>*@
+                    <select asp-for="BodegaId" asp-items="ViewBag.sliBodega" class="form-control">
+
+                    </select>
+                </td>
+                  <td>@Html.TextAreaFor(model => model.Comentario, new { @class= "form-control"})</td>
+                  <th></th>
+              </tr>
+            </thread>
+          </table>
+       </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body " style="height: 250px;">
+        <table class="table table-responsivetable table-bordered table-striped">
+        <h5 align="center" style="font-weight:bold; padding-top:10px">PRODUCTOS</h5>
+          <thread>
+            <tr align="center">
+              <th>Cód. Producto</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+        </thread>
+            <tbody>
+              @if (Model.LineaSalida != null)
+              {
+                for (var i= 0; i < Model.LineaSalida.Count(); i++)
+                {
+            <tr align="center">
+              @Html.HiddenFor(model => Model.LineaSalida[i].SalidaId)
+              @Html.HiddenFor(model => Model.LineaSalida[i].LineaSalidaId)
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoId, new { @class = "form-control", @readonly = "readonly" })</td>
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoNombre, new { @class = "form-control", @readonly = "readonly" })</td>
+                <td>@Html.TextBoxFor(model => Model.LineaSalida[i].Cantidad, new { @class = "form-control",@readonly = "readonly" })</td>
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].ProductoPrecio, new { @class = "form-control", @readonly = "readonly" })</td>
+              <td>@Html.TextBoxFor(model => Model.LineaSalida[i].CostoSalida, new { @class = "form-control", @readonly = "readonly" })</td>
+            </tr>
+                }
+              }
+            </tbody>
+        </table>
+      </div>
+      </div>
+
+<div class="d-flex flex-row-reverse">
+  <form asp-action="Edit">
+    <input type="hidden" asp-for="SalidaId"/>
+    <a class="btn btn-outline-success" asp-action="Index">Regresar</a> |
+    <input type="submit" value="Editar" class="btn btn-outline-primary"/>
+    
+  </form>
+</div>
+                </div>
+            </div>
+
+
+    </div>
+  </form>
+
+    @section Scripts {
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../../dist/js/demo.js"></script>
+    }
+
+</body>
+</html>

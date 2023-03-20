@@ -1,5 +1,7 @@
 ﻿using DevSys.Gesinv.DAL.Contracts;
+using DevSys.Gesinv.DAL.Repositories;
 using DevSys.Gesinv.Logic.Contracts;
+using DevSys.Gesinv.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,9 @@ namespace DevSys.Gesinv.Logic.Services
     {
         private IGenericRepository<T> _repository;
 
-        public GenericService(IGenericRepository<T> respository)
+        public GenericService(IGenericRepository<T> repository)
         {
-            _repository = respository;
+            _repository = repository;
         }
 
         public async Task<bool> Create(T entity)
@@ -37,9 +39,14 @@ namespace DevSys.Gesinv.Logic.Services
             return await _repository.GetById(id);
         }
 
-        public Task<bool> Update(T entity)
+        //public async Task<T> GetLastId()
+        //{
+        //    return await _repository.GetLastId();
+        //}
+
+        public async Task<bool> Update(T entity)
         {
-            return _repository.Update(entity);
+            return await _repository.Update(entity);
         }
     }
 
