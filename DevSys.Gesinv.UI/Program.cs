@@ -9,6 +9,7 @@ using DevSys.Gesinv.DAL.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -117,6 +118,16 @@ builder.Services.AddControllersWithViews(options => {
         );
 });
 var app = builder.Build();
+
+var filesql = "../Docs/Insert-Data.sql";
+var sql = await File.ReadAllTextAsync(filesql);
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+    dbContext.Database.Migrate();
+    dbContext.Database.ExecuteSqlRaw(sql);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
