@@ -124,7 +124,7 @@ var sql = await File.ReadAllTextAsync(filesql);
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<DbInventarioContext>();
     dbContext.Database.Migrate();
     dbContext.Database.ExecuteSqlRaw(sql);
 }
