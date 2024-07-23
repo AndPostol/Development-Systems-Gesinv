@@ -1,4 +1,5 @@
-﻿using DevSys.Gesinv.Models;
+﻿using Castle.Core.Internal;
+using DevSys.Gesinv.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
@@ -44,7 +45,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public string? Comentario { get; set; }
 
         [Display(Name = "Caducidad"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = false)]
-        public string? FechaCaducidad { get; set; }
+        public DateTime? FechaCaducidad { get; set; }
 
         [Column(TypeName = "decimal(5, 2)"), Required]
         public decimal Precio { get; set; }
@@ -120,7 +121,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Iva = producto.Iva,
                 Perecible = producto.Perecible,
                 Comentario = producto.Comentario,
-                FechaCaducidad = producto.FechaCaducidad.Value.ToString("dd/MM/yyyy"),
+                FechaCaducidad = producto.FechaCaducidad != null ? producto.FechaCaducidad : null,
                 Precio = producto.Precio,
                 LineaNombre = producto.Linea.Nombre,
                 TipoNombre = producto.Tipo.Nombre,
@@ -155,7 +156,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 MedidaId= productoViewModel.MedidaId,
                 Perecible = productoViewModel.Perecible,
                 Comentario = productoViewModel.Comentario,
-                FechaCaducidad = DateTime.Parse(productoViewModel.FechaCaducidad),
+                FechaCaducidad = productoViewModel.FechaCaducidad != null ? productoViewModel.FechaCaducidad : null,
                 Precio = (decimal)productoViewModel.Precio,
                 ColorProducto = productoViewModel.ColorProducto
             };

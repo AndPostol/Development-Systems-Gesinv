@@ -10,117 +10,130 @@
 <div>
     <h4>ProductoViewModel</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductoID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductoID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.LineaNombre)
-        </dt>
-        <dd class = "col-sm-2">
-            @Html.DisplayFor(model => model.LineaNombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LineaID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LineaID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Unidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Unidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Caja)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Caja)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GrupoID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GrupoID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Activo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Iva)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Iva)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Perecible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Perecible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Comentario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Comentario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCaducidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCaducidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-        <dt class="col-sm-1">Ubicación y Stock</dt>
-        <dd class = "col-sm-2">
-            @foreach (var item in Model?.Existencia)
-            {
-               <div>@item.Bodega.Direccion</div>
-               <div>@item.Stock</div>
-            }
-        </dd>
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.ColorProducto)
-        </dt>
-        <dd class = "col-sm-1">
-            @foreach (var item in Model?.ColorProducto)
-            {
-                <div>@item.Color.Nombre</div>
-            }
-        </dd>
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.MedidaNombre)
-        </dt>
-        <dd class = "col-sm-1">
-            @Html.DisplayFor(model => model.MedidaNombre)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.ProductoID }) |
-    <a asp-action="Index">Back to List</a>
+
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Nombre</label>
+                        <p class="form-control">
+                            @Model.Nombre
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Precio</label>
+                        <p class="form-control">
+                            @Model.Precio
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Marca</label>
+                        <p class="form-control">
+                            @Model.MarcaNombre
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Medida</label>
+                        <p class="form-control">
+                            @Model.MedidaNombre
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Linea</label>
+                        <p class="form-control">
+                            @Model.LineaNombre
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Tipo</label>
+                        <p class="form-control">
+                            @Model.TipoNombre
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Grupo</label>
+                        <p class="form-control">
+                            @Model.GrupoNombre
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Activo</label>
+                        <p class="form-control">
+                            @Model.Activo
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Iva</label>
+                        <p class="form-control">
+                            @Model.Iva
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Perecible</label>
+                        <p class="form-control">
+                            @Model.Perecible
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Caducidad</label>
+                        <p class="form-control">
+                            @Model.FechaCaducidad?.ToString("MM/dd/yyyy")
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Comentario</label>
+                        <p class="form-control">
+                            @Model.Comentario
+                        </p>
+                    </div>
+                    <div class="form-group col-3">
+                        <label class="control-label">Color</label>
+                        <p class="form-control">
+                            @Model.ListaColoresId
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Unidad</label>
+                        <p class="form-control">
+                            @Model.Unidad
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Caja</label>
+                        <p class="form-control">
+                            @Model.Caja
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" style="background-color: white;">
+                <div class="row">
+                    <div class="col-6 ">
+                        <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                    </div>
+                    <div class="form-group col-6" style="text-align: end;">
+                        <a asp-action="Edit" asp-route-id="@Model.ProductoID" class="btn btn-warning">
+                            Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
 </div>
