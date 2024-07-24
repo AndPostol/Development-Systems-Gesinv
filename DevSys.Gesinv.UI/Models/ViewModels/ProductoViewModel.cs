@@ -63,6 +63,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name = "Color"), ValidateNever]
         public virtual ICollection<ColorProducto> ColorProducto { get; set; }
 
+        public List<string> ListColorName { get; set; }
+
         [ValidateNever]
         public virtual ICollection<Existencia> Existencia { get; set; }
 
@@ -133,7 +135,8 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 Existencia = producto.Existencia,
                 ColorProducto = producto.ColorProducto,
                 ListaColoresId = producto.ColorProducto.Select(c => c.ColorId).ToList(),
-
+                ListColorName = producto.ColorProducto.Select(c => c.Color.Nombre).ToList(),
+                
             };
             return productoViewModel;
         }

@@ -7,33 +7,33 @@
 
 <h1>Details</h1>
 
-<div>
+
+<div class="d-flex flex-column" >
     <h4>ProductoViewModel</h4>
     <hr />
-
-    <div class="col-10">
+    <div class="col-10 align-self-center">
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Nombre</label>
                         <p class="form-control">
                             @Model.Nombre
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Precio</label>
                         <p class="form-control">
                             @Model.Precio
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Marca</label>
                         <p class="form-control">
                             @Model.MarcaNombre
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Medida</label>
                         <p class="form-control">
                             @Model.MedidaNombre
@@ -41,19 +41,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Linea</label>
                         <p class="form-control">
                             @Model.LineaNombre
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Tipo</label>
                         <p class="form-control">
                             @Model.TipoNombre
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Grupo</label>
                         <p class="form-control">
                             @Model.GrupoNombre
@@ -61,19 +61,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Activo</label>
                         <p class="form-control">
                             @Model.Activo
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Iva</label>
                         <p class="form-control">
                             @Model.Iva
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Perecible</label>
                         <p class="form-control">
                             @Model.Perecible
@@ -81,32 +81,76 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Caducidad</label>
                         <p class="form-control">
-                            @Model.FechaCaducidad?.ToString("MM/dd/yyyy")
+                            @if(Model.FechaCaducidad != null)
+                            {
+                                @Model.FechaCaducidad?.ToString("MM/dd/yyyy")
+
+                            }
+                            else
+                            {
+                                <span>
+                                    No necesita fecha de caducidad 
+                                </span>
+                            }
                         </p>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Bodega</th>
+                                    <th scope="col">Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @if (Model.Existencia.FirstOrDefault() != null)
+                                {
+                                    @foreach (var item in Model?.Existencia)
+                                    {
+                                        <tr>
+                                            <th>@item.Bodega.Direccion</th>
+                                            <td>@item.Stock</td>
+                                        </tr>
+                                    }
+                                    
+                                }
+                                else{
+                                    <tr>
+                                        <td colspan="2" class="text-center">No existen productos almacenados</td>
+                                    </tr>
+                                }
 
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Comentario</label>
                         <p class="form-control">
                             @Model.Comentario
                         </p>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Color</label>
-                        <p class="form-control">
-                            @Model.ListaColoresId
-                        </p>
+                        <div class="d-flex">
+                            @foreach (var item in Model.ListColorName)
+                            {
+                                @* <span class="d-inline-block" style="width: 20px; height:20px; background-color:@item; margin: 10px;"></span>  *@
+                                <p class="form-control col">
+                                    @item
+                                </p>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Unidad</label>
                         <p class="form-control">
                             @Model.Unidad
@@ -114,7 +158,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col">
                         <label class="control-label">Caja</label>
                         <p class="form-control">
                             @Model.Caja
