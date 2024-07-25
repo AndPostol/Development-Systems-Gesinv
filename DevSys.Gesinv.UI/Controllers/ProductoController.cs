@@ -183,31 +183,8 @@ namespace DevSys.Gesinv.UI.Controllers
         {
             ProductoViewModel productoViewModel = ProductoViewModel.ConvertToViewModel(await _productoService.GetById(id));
 
-            List<MarcaViewModel> lstMarca = MarcaViewModel.ListViewModel(await _marcaService.GetAll());
-            ViewBag.MarcaOptions = lstMarca;
-
-            List<LineaViewModel> lstLinea = LineaViewModel.ListViewModel(await _lineaService.GetAll());
-            ViewBag.LineaOptions = lstLinea;
-
-            List<GrupoViewModel> lstGrupo = GrupoViewModel.ListViewModel(await _grupoService.GetAll());
-            ViewBag.GrupoOptions = lstGrupo;
-
-            List<MedidaViewModel> lstMedida = MedidaViewModel.ListViewModel(await _medidaService.GetAll());
-            ViewBag.MedidaOptions = lstMedida;
-
-            List<TipoViewModel> lstTipo = TipoViewModel.ListViewModel(await _tipoService.GetAll());
-            ViewBag.TipoOptions = lstTipo;
-
-            List<ColorViewModel> lstColor = ColorViewModel.ListViewModel(await _colorService.GetAll());
-            foreach(int idColor in productoViewModel.ListaColoresId)
-            {
-                ColorViewModel colorSelect = lstColor.Find(c => c.ColorId == idColor); //?? new ColorViewModel(); //condicion que reemplaza con el segundo valor
-                if (colorSelect != null)
-                {
-                    colorSelect.IsSelected = true;
-                }
-            }
-            ViewBag.ColorOptions = lstColor;
+            object info = await dataForms(productoViewModel); 
+            ViewBag.Info = info;
 
             return View(productoViewModel);
         }
@@ -222,26 +199,31 @@ namespace DevSys.Gesinv.UI.Controllers
             if (producto.ColorProducto != null)
             {
                 producto.ColorProducto.Clear();
-                foreach (var item in productoViewModel.ListaColoresId)
+                if (productoViewModel.ListaColoresId?.FirstOrDefault() != null)
                 {
-                    producto.ColorProducto.Add(new ColorProducto { ProductoId = productoViewModel.ProductoID,ColorId = item });
+                    foreach (var item in productoViewModel.ListaColoresId){
+                        producto.ColorProducto.Add(new ColorProducto { ProductoId = productoViewModel.ProductoID,ColorId = item });
+                    }                                        
                 }
             }
 
             try
             {
-                await _colorProductoService.EliminarColoresByIdProducto(producto.ProductoId);
                 if (ModelState.IsValid)
                 {
                     await _productoService.Update(producto);
+                    return RedirectToAction("Index" , "Producto");
                 }
-                return RedirectToAction("Index", "Producto");
-
+                else
+                {
+                    object info = await dataForms(productoViewModel);
+                    ViewBag.Info = info;
+                    return View(productoViewModel);
+                }
 
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.Message;
                 return View(productoViewModel);
             }
         }
@@ -268,6 +250,38 @@ namespace DevSys.Gesinv.UI.Controllers
                 ViewBag.Message = ex.Message;
                 return View(productoViewModel);
             }
+        }
+
+        private async Task<object> dataForms(ProductoViewModel productoViewModel) { // This function is for get data for fill options and inputs for forms
+            List<MarcaViewModel> lstMarca = MarcaViewModel.ListViewModel(await _marcaService.GetAll());
+            List<LineaViewModel> lstLinea = LineaViewModel.ListViewModel(await _lineaService.GetAll());
+            List<GrupoViewModel> lstGrupo = GrupoViewModel.ListViewModel(await _grupoService.GetAll());
+            List<MedidaViewModel> lstMedida = MedidaViewModel.ListViewModel(await _medidaService.GetAll());
+            List<TipoViewModel> lstTipo = TipoViewModel.ListViewModel(await _tipoService.GetAll());
+            List<ColorViewModel> lstColor = ColorViewModel.ListViewModel(await _colorService.GetAll());
+            if (productoViewModel.ListaColoresId != null)
+            {
+                foreach (int idColor in productoViewModel.ListaColoresId)
+                {
+                    ColorViewModel colorSelect = lstColor.Find(c => c.ColorId == idColor); //?? new ColorViewModel(); //condicion que reemplaza con el segundo valor
+                    if (colorSelect != null)
+                    {
+                        colorSelect.IsSelected = true;
+                    }
+                }
+
+            }
+
+
+
+            return new { 
+                MarcaOptions = lstMarca,
+                LineaOptions = lstLinea,
+                GrupoOptions = lstGrupo,
+                MedidaOptions = lstMedida,
+                TipoOptions = lstTipo,
+                ColorOptions = lstColor
+            };
         }
     }
 }

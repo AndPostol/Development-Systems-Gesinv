@@ -27,7 +27,7 @@
                     <div class="form-group  px-2">
                         <label asp-for="MarcaId" class="control-label"></label>
                         <select asp-for="MarcaId" class="form-control">
-                            @foreach (var item in ViewBag.MarcaOptions)
+                            @foreach (var item in ViewBag.Info.MarcaOptions)
                             {
                                 if (item.MarcaId == Model?.MarcaId)
                                 {
@@ -44,7 +44,7 @@
                     <div class="form-group  px-2">
                         <label asp-for="MedidaId" class="control-label"></label>
                         <select asp-for="MedidaId" class="form-control">
-                            @foreach (var item in ViewBag.MedidaOptions)
+                            @foreach (var item in ViewBag.Info.MedidaOptions)
                             {
                                 if (item.MedidaId == Model?.MedidaId)
                                 {
@@ -68,7 +68,7 @@
                     <div class="form-group px-2">
                         <label asp-for="LineaID" class="control-label"></label>
                         <select asp-for="LineaID" class="form-control">
-                            @foreach (var item in ViewBag.LineaOptions)
+                            @foreach (var item in ViewBag.Info.LineaOptions)
                             {
                                if (item.LineaId == Model?.LineaID)
                                {
@@ -85,7 +85,7 @@
                     <div class="form-group px-2">
                         <label asp-for="TipoID" class="control-label"></label>
                         <select asp-for="TipoID" class="form-control">
-                            @foreach (var item in ViewBag.TipoOptions)
+                            @foreach (var item in ViewBag.Info.TipoOptions)
                             {
                                if (item.TipoId == Model?.TipoID)
                                {
@@ -102,7 +102,7 @@
                     <div class="form-group px-2">
                         <label asp-for="GrupoID" class="control-label"></label>
                         <select asp-for="GrupoID" class="form-control">
-                            @foreach (var item in ViewBag.GrupoOptions)
+                            @foreach (var item in ViewBag.Info.GrupoOptions)
                             {
                                if (item.GrupoId == Model?.GrupoID)
                                {
@@ -150,6 +150,8 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
+                            @if(Model?.Existencia != null){
+
                                 @foreach (var item in Model?.Existencia)
                                 {
                                     <tr>
@@ -157,7 +159,15 @@
                                         <td>@item.Stock</td>
                                     </tr>
                                 }
-                                
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th>No tiene</th>
+                                    <td>Nada</td>
+                                </tr>
+                            }
+
                         </tbody>
                     </table>
                     
@@ -172,7 +182,7 @@
                     <div class="form-group px-3">
                         <label asp-for="ColorProducto" class="control-label"></label>
                         <select asp-for="ListaColoresId" name="ListaColoresId" class="form-control" multiple>
-                            @foreach (var item in ViewBag.ColorOptions)
+                            @foreach (var item in ViewBag.Info.ColorOptions)
                             {
                                 if (item.IsSelected == true)
                                 {

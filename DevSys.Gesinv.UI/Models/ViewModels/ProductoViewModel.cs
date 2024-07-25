@@ -62,7 +62,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         [Display(Name = "Color"), ValidateNever]
         public virtual ICollection<ColorProducto> ColorProducto { get; set; }
-
+        [ValidateNever]
         public List<string> ListColorName { get; set; }
 
         [ValidateNever]
@@ -94,7 +94,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name = "Medida")]
         public string? MedidaNombre { get; set; }
 
-        public List<int> ListaColoresId { get; set; }
+        public List<int>? ListaColoresId { get; set; }
 
         [ValidateNever] //para que no valide, ya que son datos extra
         public List<SelectListItem> LineasSelectList { get; set; }

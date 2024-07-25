@@ -139,11 +139,19 @@
                     <div class="form-group col">
                         <label class="control-label">Color</label>
                         <div class="d-flex">
-                            @foreach (var item in Model.ListColorName)
+                            @if(Model.ListColorName.FirstOrDefault() != null){
+                                @foreach (var item in Model.ListColorName)
+                                {
+                                    @* <span class="d-inline-block" style="width: 20px; height:20px; background-color:@item; margin: 10px;"></span>  *@
+                                    <p class="form-control col">
+                                        @item
+                                    </p>
+                                }
+                            }
+                            else
                             {
-                                @* <span class="d-inline-block" style="width: 20px; height:20px; background-color:@item; margin: 10px;"></span>  *@
                                 <p class="form-control col">
-                                    @item
+                                    No tienen color
                                 </p>
                             }
                         </div>
