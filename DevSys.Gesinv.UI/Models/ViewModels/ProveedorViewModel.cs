@@ -1,4 +1,5 @@
 ﻿using DevSys.Gesinv.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevSys.Gesinv.UI.Models.ViewModels
@@ -46,6 +47,15 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Url]
         public string? PaginaWeb { get; set; }
 
+        // This fields is for make easier access some data
+        [ValidateNever]
+        public string? NombreTipo { get; set; }
+        [ValidateNever]
+        public string? NombreEstado { get; set; }
+        [ValidateNever]
+        public string? NombreProvincia { get; set; }
+
+
         public static ProveedorViewModel ToViewModel(Proveedor model)
         {
             ProveedorViewModel modelView = new ProveedorViewModel()
@@ -64,7 +74,10 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
                 ProvinciaId = model.ProvinciaId,
                 EstadoId = model.EstadoId,
                 TipoPersonaId = model.TipoPersonaId,
-                PaginaWeb = model.PaginaWeb
+                PaginaWeb = model.PaginaWeb,
+                NombreTipo = model.TipoPersona.Nombre,
+                NombreEstado = model.Estado.Nombre,
+                NombreProvincia = model.Provincia.Nombre
             };
             return modelView;
         }

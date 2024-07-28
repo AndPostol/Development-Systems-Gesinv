@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using DevSys.Gesinv.DAL;
+﻿using Microsoft.EntityFrameworkCore;
 using DevSys.Gesinv.Models;
-using System.ComponentModel;
 
 namespace DevSys.Gesinv.DAL.DataContext
 {
@@ -28,6 +23,7 @@ namespace DevSys.Gesinv.DAL.DataContext
             //    .Entity<LineaCompra>()
             //    .Property(l => l.LineaCompraId)
             //    .ValueGeneratedOnAdd();
+
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder options){

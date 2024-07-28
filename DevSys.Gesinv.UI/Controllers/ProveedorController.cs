@@ -33,7 +33,7 @@ namespace DevSys.Gesinv.UI.Controllers
             List<ProveedorViewModel> lstPedido = ProveedorViewModel.ToViewModelList(await _serviceProveedor.GetAll());
             return View(lstPedido);
         }
-        [HttpGet]
+        [HttpGet] //API 
         public async Task<IActionResult> getList()
         {
             IEnumerable<Proveedor> query = await _serviceProveedor.GetAll();
@@ -49,8 +49,8 @@ namespace DevSys.Gesinv.UI.Controllers
         // GET: ProveedorController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            ProveedorViewModel prov = ProveedorViewModel.ToViewModel(await _serviceProveedor.GetById(id));
-            return View(prov);
+            ProveedorViewModel proveedorViewModel = ProveedorViewModel.ToViewModel(await _serviceProveedor.GetById(id));
+            return View(proveedorViewModel);
         }
 
         // GET: ProveedorController/Create
@@ -68,14 +68,30 @@ namespace DevSys.Gesinv.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProveedorViewModel proveedorViewModel)
         {
-
-            if (ModelState.IsValid)
+            try {
+                if (ModelState.IsValid)
+                {
+                    Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
+                    _serviceProveedor.Create(proveedor);
+                    return RedirectToAction("Index", "Proveedor");
+                }
+                else
+                {
+                    ViewBag.TipoPersona = getListTipoPersona();
+                    ViewBag.TipoProveedor = getListTipoProveedor();
+                    ViewBag.Estado = getListEstado();
+                    ViewBag.Provincia = getListProvincia();
+                    return View(proveedorViewModel);
+                }
+            } 
+            catch (Exception e)
             {
-                Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
-                _serviceProveedor.Create(proveedor);
-                return RedirectToAction("Index","Proveedor");
+                ViewBag.TipoPersona = getListTipoPersona();
+                ViewBag.TipoProveedor = getListTipoProveedor();
+                ViewBag.Estado = getListEstado();
+                ViewBag.Provincia = getListProvincia();
+                return View(proveedorViewModel);
             }
-            return View();
         }
 
         // GET: ProveedorController/Edit/5
@@ -94,13 +110,31 @@ namespace DevSys.Gesinv.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ProveedorViewModel proveedorViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
-                _serviceProveedor.Update(proveedor);
-                return RedirectToAction("Details","Proveedor", new { id = proveedor.ProveedorId });
+            try { 
+                if (ModelState.IsValid)
+                {
+                    Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
+                    _serviceProveedor.Update(proveedor);
+                    return RedirectToAction("Details","Proveedor", new { id = proveedor.ProveedorId });
+                }
+                else
+                {
+                    ViewBag.TipoPersona = getListTipoPersona();
+                    ViewBag.TipoProveedor = getListTipoProveedor();
+                    ViewBag.Estado = getListEstado();
+                    ViewBag.Provincia = getListProvincia();
+                    return View(proveedorViewModel);
+                }
             }
-            return View();
+            catch(Exception e) {
+
+                ViewBag.TipoPersona = getListTipoPersona();
+                ViewBag.TipoProveedor = getListTipoProveedor();
+                ViewBag.Estado = getListEstado();
+                ViewBag.Provincia = getListProvincia();
+                return View(proveedorViewModel);
+            }
+
         }
 
         // GET: ProveedorController/Delete/5

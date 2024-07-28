@@ -4,99 +4,105 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
-    <h4>ProveedorViewModel</h4>
+    <h4>Proveedor #@Model.ProveedorId</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProveedorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProveedorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmpresaId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmpresaId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RazonSocial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RazonSocial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Contacto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contacto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoProveedorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoProveedorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Direccion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Correo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Correo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Plazo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Plazo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ruc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ruc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProvinciaId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProvinciaId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EstadoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EstadoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoPersonaId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoPersonaId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaginaWeb)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaginaWeb)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.ProveedorId }) |
-    <a asp-action="Index">Back to List</a>
+    <div class="row justify-content-center">
+        <div class="card col-10">
+            <div class="card-body container-fluid">
+                <div class="row row-cols-3">
+                    <div class="form-group px-2">
+                        <label class="control-label">Contacto</label>
+                        <p class="form-control">
+                            @Model.Contacto
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Razon Social</label>
+                        <p class="form-control">
+                            @Model.RazonSocial
+
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Ruc</label>
+                        <p class="form-control">
+                            @Model.Ruc
+
+                        </p>
+                    </div>
+                </div>
+                <div class="row row-cols-3">
+                    <div class="form-group px-2">
+                        <label class="control-label">Correo</label>
+                        <p class="form-control">
+                            @Model.Correo
+
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Direccion</label>
+                        <p class="form-control">
+                            @Model.Direccion
+
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Telefono</label>
+                        <p class="form-control">
+                            @Model.Telefono
+                        </p>
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="form-group px-2">
+                        <label class="control-label">Plazo</label>
+                        <p class="form-control">
+                            @Model.Plazo
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Tipo</label>
+                        <p class="form-control">
+                            @Model.NombreTipo
+                        </p>
+                    </div>
+                </div>
+                <div class="row row-cols-1">
+                    <div class="form-group px-2">
+                        <label class="control-label">Estado</label>
+                        <p class="form-control">
+                            @Model.NombreEstado
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Provincia</label>
+                        <p class="form-control">
+                            @Model.NombreProvincia
+                        </p>
+                    </div>
+                    <div class="form-group px-2">
+                        <label class="control-label">Pagina Web</label>
+                        <p class="form-control">
+                            @Model.PaginaWeb
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer" style="background-color: white;">
+                <div class="row">
+                    <div class="col-6 ">
+                        <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                    </div>
+                    <div class="form-group col-6" style="text-align: end;">
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.ProveedorId">Editar</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
