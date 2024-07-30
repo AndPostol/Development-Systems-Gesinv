@@ -18,6 +18,17 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
+IF EXISTS (
+    SELECT * 
+    FROM sys.objects 
+    WHERE object_id = OBJECT_ID(N'[dbo].[sp_InformeProveedor]') 
+          AND type IN (N'P', N'PC')
+)
+BEGIN
+    DROP PROCEDURE [dbo].[sp_InformeProveedor]
+END
+GO
+
 CREATE PROCEDURE sp_InformeProveedor(
 	 @fechaInicio date = null,
 	 @fechaFin date = null,
@@ -53,3 +64,4 @@ BEGIN
 	AND (@producto is null or @producto = prod.ProductoId)
 END
 GO
+

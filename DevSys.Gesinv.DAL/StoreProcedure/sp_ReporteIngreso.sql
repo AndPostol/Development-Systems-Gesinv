@@ -1,4 +1,13 @@
-
+IF EXISTS (
+    SELECT * 
+    FROM sys.objects 
+    WHERE object_id = OBJECT_ID(N'[dbo].[sp_InformeIngreso]') 
+          AND type IN (N'P', N'PC')
+)
+BEGIN
+    DROP PROCEDURE [dbo].[sp_InformeIngreso]
+END
+GO
 CREATE PROCEDURE sp_InformeIngreso(
 	 @motivo int = null,
 	 @fechaInicio date= null,
