@@ -49,7 +49,7 @@
                         <span asp-validation-for="Telefono" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row row-cols-2">
+                <div class="row row-cols-4">
                     <div class="form-group px-2">
                         <label asp-for="Plazo" class="control-label"></label>
                         <input asp-for="Plazo" class="form-control" />
@@ -62,6 +62,17 @@
                             @foreach (var item in ViewBag.TipoPersona)
                             {
                                 <option value="@item.TipoPersonaId">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TipoPersonaId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="TipoProveedorId" class="control-label"></label>
+                        <select asp-for="TipoProveedorId" class="form-control">
+                            <option>Seleccione</option>
+                            @foreach (var item in ViewBag.TipoProveedor)
+                            {
+                                <option value="@item.TipoProveedorId">@item.Nombre</option>
                             }
                         </select>
                         <span asp-validation-for="TipoPersonaId" class="text-danger"></span>

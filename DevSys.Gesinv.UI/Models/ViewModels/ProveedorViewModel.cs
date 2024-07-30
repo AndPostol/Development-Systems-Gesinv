@@ -18,7 +18,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required(ErrorMessage = "Indique el nombre del proveedor"), Display(Name = "Nombre")]
         public string Contacto { get; set; } = null!;
         
-        [Display(Name ="Tipo")]
+        [Display(Name ="Tipo Proveedor")]
         public int? TipoProveedorId { get; set; }
 
         [Required(ErrorMessage ="Este campo es requerido"), StringLength(30)]
@@ -41,7 +41,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name ="Estado")]
         public int? EstadoId { get; set; }
 
-        [Display(Name = "Tipo")]
+        [Display(Name = "Tipo Persona")]
         public int? TipoPersonaId { get; set; }
 
         [Url]
