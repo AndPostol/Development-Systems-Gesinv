@@ -66,13 +66,13 @@ namespace DevSys.Gesinv.UI.Controllers
         // POST: ProveedorController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProveedorViewModel proveedorViewModel)
+        public async Task<ActionResult> Create(ProveedorViewModel proveedorViewModel)
         {
             try {
                 if (ModelState.IsValid)
                 {
                     Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
-                    _serviceProveedor.Create(proveedor);
+                    await _serviceProveedor.Create(proveedor);
                     return RedirectToAction("Index", "Proveedor");
                 }
                 else
@@ -108,13 +108,13 @@ namespace DevSys.Gesinv.UI.Controllers
         // POST: ProveedorController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ProveedorViewModel proveedorViewModel)
+        public async Task<ActionResult> Edit(int id, ProveedorViewModel proveedorViewModel)
         {
             try { 
                 if (ModelState.IsValid)
                 {
                     Proveedor proveedor = ProveedorViewModel.ToModel(proveedorViewModel);
-                    _serviceProveedor.Update(proveedor);
+                    await _serviceProveedor.Update(proveedor);
                     return RedirectToAction("Details","Proveedor", new { id = proveedor.ProveedorId });
                 }
                 else
