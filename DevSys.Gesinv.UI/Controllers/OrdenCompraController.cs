@@ -101,8 +101,8 @@ namespace DevSys.Gesinv.UI.Controllers
                 }
 
                 OrdenCompra model = OrdenCompraViewModel.ToModel(nuevaOC);
-                // OrdenCompra result = await _service.Registrar(model);
-                return RedirectToAction("Details", "OrdenCompra", new { id = 2 });
+                OrdenCompra result = await _service.Registrar(model);
+                return RedirectToAction("Details", "OrdenCompra", new { id = result.OrdenCompraId });
             }
             catch (Exception e)
             {
