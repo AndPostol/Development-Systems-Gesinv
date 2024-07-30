@@ -27,6 +27,9 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public List<LineaCompraViewModel> LineaCompra { get; set; }
         // Adds
         [ValidateNever]
+        public List<ProductoViewModel> productos { get; set; }
+
+        [ValidateNever]
         public string? NombreProveedor { get; set; }
         [ValidateNever]
         public string? CondicionPago { get; set; }

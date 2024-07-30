@@ -70,32 +70,39 @@ namespace DevSys.Gesinv.UI.Controllers
 
                 for (int i = 1; i <= cantidad; i++)
                 {
-                    LineaCompraViewModel row = new LineaCompraViewModel();
                     try
                     {
-                        row.ProductoId = Convert.ToInt32(collection[$"Linea-Nombre-{i}"]);
-                    }
-                    catch (Exception)
-                    {
-                        row.ProductoId = 0;
-                        row.Producto = new Producto
+
+                        LineaCompraViewModel row = new LineaCompraViewModel();
+                        try
                         {
-                            Nombre = collection[$"Linea-Nombre-{i}"],
-                            Precio = Convert.ToDecimal(collection[$"Linea-PrecioUnitario-{i}"])
-                        };
+                            row.ProductoId = Convert.ToInt32(collection[$"Linea-Nombre-{i}"]);
+                        }
+                        catch (Exception)
+                        {
+                            row.ProductoId = 0;
+                            row.Producto = new Producto
+                            {
+                                Nombre = collection[$"Linea-Nombre-{i}"],
+                                Precio = Convert.ToDecimal(collection[$"Linea-PrecioUnitario-{i}"])
+                            };
+                        }
+                        row.DepartamentoId = Convert.ToInt32(collection[$"Linea-Departamento-{i}"]);
+                        row.Cantidad = Convert.ToInt32(collection[$"Linea-Cantidad-{i}"]);
+                        row.Caja = 0;
+                        row.Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"]);
+                        row.Descuento = Convert.ToDouble(collection[$"Linea-Descuento-{i}"]);
+                        row.Total = Convert.ToDouble(collection[$"Linea-Total-{i}"]);
+                        nuevaOC.LineaCompra.Add(row);
                     }
-                    row.DepartamentoId = Convert.ToInt32(collection[$"Linea-Departamento-{i}"]);
-                    row.Cantidad = Convert.ToInt32(collection[$"Linea-Cantidad-{i}"]);
-                    row.Caja = 0;
-                    row.Precio = Convert.ToDouble(collection[$"Linea-PrecioUnitario-{i}"]);
-                    row.Descuento = Convert.ToDouble(collection[$"Linea-Descuento-{i}"]);
-                    row.Total = Convert.ToDouble(collection[$"Linea-Total-{i}"]);
-                    nuevaOC.LineaCompra.Add(row);
+                    catch{
+                        return View(nuevaOC);
+                    }
                 }
 
                 OrdenCompra model = OrdenCompraViewModel.ToModel(nuevaOC);
-                OrdenCompra result = await _service.Registrar(model);
-                return RedirectToAction("Details", "OrdenCompra", new { id = result.OrdenCompraId });
+                // OrdenCompra result = await _service.Registrar(model);
+                return RedirectToAction("Details", "OrdenCompra", new { id = 2 });
             }
             catch (Exception e)
             {

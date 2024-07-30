@@ -208,16 +208,16 @@
             count += 1;
             $("#LineaCompra").append(
                 $("<tr>").append(
-                    $("<td>").append(`<p class="form-control" id="Linea-Codigo-${count}" name="Linea-Codigo-${count}">${20250}</p>`),
+                    $("<td>").append(`<p class="form-control" id="Linea-Codigo-${count}" name="Linea-Codigo-${count}">${0}</p>`),
                     $("<td>").append(`<select class="custom-select rounded-0 PendienteProducts" style="width: 200px;" id="Linea-Nombre-${count}" name="Linea-Nombre-${count}" placeholder="Type to search...">
                                     <option selected>Seleccione</option>
                             </select>`),
                     $("<td>").append(`<select class="custom-select rounded-0" style="width: 150px;" id="Linea-Departamento-${count}" name="Linea-Departamento-${count}" aria-label="Default select example">
                                     <option selected>Seleccione</option>
                             ${departamentos_select}</select>`),
-                    $("<td>").append(`<input type="number" disabled="disabled" value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
-                    $("<td>").append(`<input type="number" disabled="disabled" value="1" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
-                    $("<td>").append(`<input type="number" readonly value="1" id="Linea-PrecioUnitario-${count}" name="Linea-PrecioUnitario-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" disabled="disabled" required value="0" id="Linea-Unidad-${count}" name="Linea-Unidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" disabled="disabled" required value="1" id="Linea-Cantidad-${count}" name="Linea-Cantidad-${count}" class="form-control" />`),
+                    $("<td>").append(`<input type="number" readonly value="1" required id="Linea-PrecioUnitario-${count}" name="Linea-PrecioUnitario-${count}" class="form-control" />`),
                     $("<td>").append(`<input type="number" readonly value="1" id="Linea-Descuento-${count}" name="Linea-Descuento-${count}" class="form-control" />`),
                     $("<td>").append(`<input type="number" readonly value="1" id="Linea-Total-${count}" name="Linea-Total-${count}" class="form-control" />`)
                 )
