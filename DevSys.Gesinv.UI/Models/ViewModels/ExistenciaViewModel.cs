@@ -11,7 +11,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public int? ProductoId { get; set; }
     public int? BodegaId { get; set; }
 
-    [Range(0, 10000)]
+    [Range(0, 10000, ErrorMessage ="Fuera del limite")]
     public int Stock { get; set; }
 
     public virtual BodegaViewModel? Bodega { get; set; }

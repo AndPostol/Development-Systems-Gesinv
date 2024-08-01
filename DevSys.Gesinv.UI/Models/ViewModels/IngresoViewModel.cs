@@ -16,22 +16,23 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         public bool Confirmado { get; set; } = false;
 
-        [Display(Name = "Proveedor")]
+        [Display(Name = "Proveedor"), Required(ErrorMessage = "Requerido")]
         public int? ProveedorId { get; set; }
 
-        [Display(Name = "Motivo")]
+        [Display(Name = "Motivo"), Required(ErrorMessage = "Requerido")]
         public int? MotivoId { get; set; }
 
-        [Display(Name = "Bodega")]
+        [Display(Name = "Bodega"), Required(ErrorMessage = "Requerido")]
         public int? BodegaId { get; set; }
 
-        [Display(Name = "Tipo de Ingreso")]
+        [Display(Name = "Tipo de Ingreso"), Required(ErrorMessage = "Requerido")]
         public int? TipoIngresoId { get; set; }
 
         [Required(ErrorMessage = "Indique la fecha"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = false)]
         public DateTime Fecha { get; set; }
-
+        [Required(ErrorMessage = "Requerido")]
         public double Descuento { get; set; }
+        [Required(ErrorMessage = "Requerido")]
         public double Impuestos { get; set; }
 
         [Required]

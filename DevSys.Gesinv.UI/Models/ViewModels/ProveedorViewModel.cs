@@ -12,13 +12,13 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         public int? EmpresaId { get; set; }
         public bool Activo { get; set; } = false;
 
-        [Display(Name ="Razón Social"), Required]
+        [Display(Name ="Razón Social"), Required(ErrorMessage ="Requerido")]
         public string RazonSocial { get; set; }
 
         [Required(ErrorMessage = "Indique el nombre del proveedor"), Display(Name = "Nombre")]
         public string Contacto { get; set; } = null!;
         
-        [Display(Name ="Tipo Proveedor")]
+        [Display(Name = "Tipo Proveedor"), Required(ErrorMessage = "Requerido")]
         public int? TipoProveedorId { get; set; }
 
         [Required(ErrorMessage ="Este campo es requerido"), StringLength(30)]
@@ -35,13 +35,13 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Display(Name = "RIF"), Required(ErrorMessage = "Este campo es requerido")]
         public string Ruc { get; set; } = null!;
 
-        [Display(Name ="Provincia")]
+        [Display(Name = "Provincia"), Required(ErrorMessage = "Requerido")]
         public int? ProvinciaId { get; set; }
 
-        [Display(Name ="Estado")]
+        [Display(Name ="Estado"), Required(ErrorMessage = "Requerido")]
         public int? EstadoId { get; set; }
 
-        [Display(Name = "Tipo Persona")]
+        [Display(Name = "Tipo Persona"), Required(ErrorMessage = "Requerido")]
         public int? TipoPersonaId { get; set; }
 
         [Url]

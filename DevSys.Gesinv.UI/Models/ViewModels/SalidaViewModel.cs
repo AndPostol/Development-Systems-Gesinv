@@ -19,6 +19,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
     public string? MotivoNombre { get; set; }
     //[DataType(DataType.Date)]
     //[DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+    [Required(ErrorMessage ="Requerido")]
     public DateTime Fecha { get; set; }
 
     public string? Comentario { get; set; }

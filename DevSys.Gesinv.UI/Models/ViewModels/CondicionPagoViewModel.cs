@@ -8,7 +8,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public int CondicionPagoId { get; set; }
 
-        [StringLength(70, MinimumLength = 3)]
+        [StringLength(70, MinimumLength = 3, ErrorMessage ="Minimo {0} letras")]
         public string Nombre { get; set; } = null!;
 
         public static CondicionPagoViewModel ToViewModel(CondicionPago model) 

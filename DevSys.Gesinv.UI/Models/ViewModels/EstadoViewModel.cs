@@ -8,7 +8,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public int EstadoId { get; set; }
 
-        [StringLength(70, MinimumLength = 3)]
+        [StringLength(70, MinimumLength = 3, ErrorMessage = "Minimo {0} letras")]
         public string Nombre { get; set; } = null!;
 
         public virtual List<ProvinciaViewModel> Provincia { get; set; }

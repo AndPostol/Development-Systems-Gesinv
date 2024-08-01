@@ -24,6 +24,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
 
         [Required(ErrorMessage = "Indique el precio del producto")]
         public double Precio { get; set; }
+
         public double Descuento { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]

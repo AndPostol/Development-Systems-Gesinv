@@ -12,7 +12,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [ScaffoldColumn(false), Display(Name = "Codigo")] // oculta el atributo de las vistas
         public int ProductoID { get; set; }
 
-        [Required(ErrorMessage ="Indique el nombre del producto")]
+        [Required(ErrorMessage ="Requerido el nombre")]
         public string Nombre { get; set; }
 
         [Display(Name = "Linea")]

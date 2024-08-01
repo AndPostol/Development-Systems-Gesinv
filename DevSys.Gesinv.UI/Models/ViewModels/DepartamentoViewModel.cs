@@ -8,7 +8,7 @@ namespace DevSys.Gesinv.UI.Models.ViewModels
         [Required]
         public int DepartamentoId { get; set; }
 
-        [StringLength(70, MinimumLength = 2)]
+        [StringLength(70, MinimumLength = 2, ErrorMessage ="Minimo {0} letras")]
         public string Nombre { get; set; } = null!;
 
 
