@@ -1,10 +1,19 @@
 # Gesinv
 
-## Instalación
+## Instalación Base de Datos
 
-1 - Crean una base de datos en su gestor de SQLServer con el nombre DbInventario  
-2 - Abran el archivo archivo que esta **Docs/DiagramaInventario.sql** copien el contenido y realicen una query a la BD creada anteriormente. El query se debe ejecutar de manera exitosa.  
-3 - Listo ya puedes trabajar con el proyecto :).  
+1 - Instalan los siguientes paquetes:  
+    -- Microsoft.EntityFrameworkCore 6.0.13  
+    -- Microsoft.EntityFrameworkCore.SqlServer 6.0.13  
+    -- Microsoft.EntityFrameworkCore.Tools 6.0.13  
+2 - Colocan la solucion DAL como predeterminada y abren la terminal de nuget  
+3 - Ejecutan el comando Update-Database  
+4 - Listo ya tiene la tienen la BD ya creada en su SQL Server  
+### Opcional  
+5 - Vamos a la carpeta Docs del programa y ubicamos el archivo llamado Insert-Data.sql   
+6 - Vamos a nuestra DbInventario en nuestro SQL Server, creamos una nueva Query y pegamos el contenido de Insert-Data.sql  
+7 - Ejecutamos y listo tendriamos data de prueba en nuestra BD  
+
 
 **Nota: Recuerden que los paquetes nuget no vienen en el repositorio instalar sus respectivos paquetes para trabajar.** 
 

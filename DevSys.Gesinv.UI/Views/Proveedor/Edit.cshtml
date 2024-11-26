@@ -1,0 +1,127 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.ProveedorViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editor</h1>
+
+<h4>Proveedor #@Model.ProveedorId</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="card col-10">
+        <form asp-action="Edit" method="post">
+            <div class="card-body container-fluid">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="@Model.ProveedorId" asp-for="ProveedorId" />
+                <input type="hidden" value="@Model.EmpresaId" asp-for="EmpresaId" />
+                <div class="row row-cols-3">
+                    <div class="form-group px-2">
+                        <label asp-for="Contacto" class="control-label"></label>
+                        <input asp-for="Contacto" class="form-control" />
+                        <span asp-validation-for="Contacto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="RazonSocial" class="control-label"></label>
+                        <input asp-for="RazonSocial" class="form-control" />
+                        <span asp-validation-for="RazonSocial" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="Ruc" class="control-label"></label>
+                        <input asp-for="Ruc" class="form-control" />
+                        <span asp-validation-for="Ruc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row row-cols-3">
+                    <div class="form-group px-2">
+                        <label asp-for="Correo" class="control-label"></label>
+                        <input asp-for="Correo" class="form-control" />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="Direccion" class="control-label"></label>
+                        <input asp-for="Direccion" class="form-control" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row row-cols-4">
+                    <div class="form-group px-2">
+                        <label asp-for="Plazo" class="control-label"></label>
+                        <input asp-for="Plazo" class="form-control" />
+                        <span asp-validation-for="Plazo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="TipoPersonaId" class="control-label"></label>
+                        <select asp-for="TipoPersonaId" class="form-control">
+                            <option>Seleccione</option>
+                            @foreach (var item in ViewBag.TipoPersona)
+                            {
+                                <option value="@item.TipoPersonaId">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TipoPersonaId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="TipoProveedorId" class="control-label"></label>
+                        <select asp-for="TipoProveedorId" class="form-control">
+                            <option>Seleccione</option>
+                            @foreach (var item in ViewBag.TipoProveedor)
+                            {
+                                <option value="@item.TipoProveedorId">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TipoPersonaId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row row-cols-1">
+                    <div class="form-group px-2">
+                        <label asp-for="EstadoId" class="control-label"></label>
+                        <select asp-for="EstadoId" class="form-control">
+                            <option>Seleccione</option>
+                            @foreach (var item in ViewBag.Estado)
+                            {
+                                <option value="@item.EstadoId">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="EstadoId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="ProvinciaId" class="control-label"></label>
+                        <select asp-for="ProvinciaId" class="form-control">
+                            <option>Seleccione</option>
+                            @foreach (var item in ViewBag.Provincia)
+                            {
+                                <option value="@item.ProvinciaId">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="ProvinciaId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-2">
+                        <label asp-for="PaginaWeb" class="control-label"></label>
+                        <input asp-for="PaginaWeb" class="form-control" />
+                        <span asp-validation-for="PaginaWeb" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer" style="background-color: white;">
+                <div class="row">
+                    <div class="col-6 ">
+                        <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                    </div>
+                    <div class="form-group col-6" style="text-align: end;">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

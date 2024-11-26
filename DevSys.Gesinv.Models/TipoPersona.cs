@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class TipoPersona
     {

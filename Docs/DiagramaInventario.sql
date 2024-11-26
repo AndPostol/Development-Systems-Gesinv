@@ -1,11 +1,11 @@
 CREATE TABLE [Producto] (
   [ProductoID] int PRIMARY KEY,
-  [Nombre] nvarchar(255),
-  [Codigo] int,
+  [Nombre] nvarchar(255) NOT NULL,
+  [Codigo] int UNIQUE NOT NULL,
   [LineaID] int,
   [TipoID] int,
-  [Unidad] int,
-  [Caja] int,
+  [Unidad] int NOT NULL,
+  [Caja] int DEFAULT (0),
   [GrupoID] int,
   [Activo] bit DEFAULT (0),
   [IVA] bit DEFAULT (0),
@@ -38,13 +38,12 @@ CREATE TABLE [Proveedor] (
   [ProveedorID] int PRIMARY KEY,
   [EmpresaID] int,
   [RazonSocial] nvarchar(255) NOT NULL,
-  [Nombre] nvarchar(255) NOT NULL,
   [Codigo] int UNIQUE NOT NULL,
   [Contacto] nvarchar(255) NOT NULL,
   [TipoProveedorID] int,
   [Direccion] nvarchar(255) NOT NULL,
   [Telefono] nvarchar(255) NOT NULL,
-  [Email] nvarchar(255) NOT NULL,
+  [Correo] nvarchar(255) NOT NULL,
   [Plazo] datetime,
   [RUC] nvarchar(255) NOT NULL,
   [ProvinciaID] int,
@@ -77,13 +76,14 @@ GO
 
 CREATE TABLE [Estado] (
   [EstadoID] int PRIMARY KEY,
-  [Nombre] nvarchar(255) NOT NULL
+  [Estado] nvarchar(255) NOT NULL
 )
 GO
 
 CREATE TABLE [Provincia] (
   [ProvinciaID] int PRIMARY KEY,
-  [Nombre] nvarchar(255) NOT NULL
+  [EstadoID] int,
+  [Provincia] nvarchar(255) NOT NULL
 )
 GO
 
@@ -94,7 +94,7 @@ CREATE TABLE [OrdenCompra] (
   [Referencia] nvarchar(255),
   [CondicionPagoID] int,
   [Observacion] text,
-  [Fecha] datetime,
+  [Fecha] datetime NOT NULL,
   [SubTotal] float NOT NULL,
   [Descuento] float NOT NULL,
   [Impuestos] float NOT NULL,
@@ -135,7 +135,7 @@ GO
 
 CREATE TABLE [TipoIngreso] (
   [TipoIngresoID] int PRIMARY KEY,
-  [Nombre] nvarchar(255)
+  [Nombre] nvarchar(255) NOT NULL
 )
 GO
 
@@ -152,7 +152,7 @@ CREATE TABLE [Salida] (
   [Fecha] datetime NOT NULL,
   [Comentario] text,
   [RequisicionID] int,
-  [BodegaID] int NOT NULL
+  [BodegaID] int
 )
 GO
 
@@ -219,7 +219,7 @@ GO
 
 CREATE TABLE [Marca] (
   [MarcaID] int PRIMARY KEY,
-  [Nombre] int NOT NULL,
+  [Nombre] nvarchar(255) NOT NULL,
   [ProductoID] int
 )
 GO
@@ -233,7 +233,7 @@ GO
 
 CREATE TABLE [Departamento] (
   [DepartamentoID] int PRIMARY KEY,
-  [Nombre] nvarchar(255)
+  [Nombre] nvarchar(255) NOT NULL
 )
 GO
 
@@ -268,6 +268,9 @@ ALTER TABLE [Bodega] ADD FOREIGN KEY ([ProvinciaID]) REFERENCES [Provincia] ([Pr
 GO
 
 ALTER TABLE [Bodega] ADD FOREIGN KEY ([EstadoID]) REFERENCES [Estado] ([EstadoID])
+GO
+
+ALTER TABLE [Provincia] ADD FOREIGN KEY ([EstadoID]) REFERENCES [Estado] ([EstadoID])
 GO
 
 ALTER TABLE [OrdenCompra] ADD FOREIGN KEY ([ProveedorID]) REFERENCES [Proveedor] ([ProveedorID])

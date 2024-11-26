@@ -1,0 +1,76 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.SalidaViewModel
+
+@{
+    ViewData["Title"] = "Salida - Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <title>Eliminar</title>
+</head>
+<body>
+    <h3>Desea eliminar el registro?</h3>
+<div>
+  <div>
+  <h5 align="center">SALIDA</h5>
+<hr />
+  <table class="table">
+    <thread>
+      <tr align="center">
+        <th>@Html.DisplayNameFor(model => model.MotivoNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.BodegaNombre)</th>
+        <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+        <th></th>
+      </tr>
+      <tr align="center">
+        <td>@Html.DisplayFor(model => model.MotivoNombre)</td>
+        <td>@Html.DisplayFor(model => model.Fecha)</td>
+        <td>@Html.DisplayFor(model => model.BodegaNombre)</td>
+        <td><textarea disabled cols="30" rows="2">@Html.DisplayFor(model => model.Comentario)</textarea></td>
+        <th></th>
+      </tr>
+    </thread>
+  </table>
+</div>
+<div>
+  <h5 align="center">PRODUCTOS</h5>
+  <div>
+    <table class="table">
+      <thread>
+        <tr align="center">
+          <th>Codigo</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Costo</th>
+          <th></th>
+        </tr>
+      </thread>
+      <tbody>
+        @foreach (var item in Model.LineaSalida)
+        {
+          <tr align="center">
+            <td>@item.ProductoCodigo</td>
+            <td>@item.ProductoNombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.CostoSalida</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex flex-row-reverse">
+  <form asp-action="Delete">
+    <input type="hidden" asp-for="SalidaId"/>
+    <input type="submit" value="Eliminar" class="btn btn-outline-danger"/> |
+    <a class="btn btn-outline-success" asp-action="Index">Regresar</a>
+  </form>
+  </div>
+</div>
+</body>
+</html>

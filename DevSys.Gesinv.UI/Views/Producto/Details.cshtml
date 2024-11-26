@@ -1,0 +1,191 @@
+﻿@model DevSys.Gesinv.UI.Models.ViewModels.ProductoViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+
+<div class="d-flex flex-column" >
+    <h4>ProductoViewModel</h4>
+    <hr />
+    <div class="col-10 align-self-center">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Nombre</label>
+                        <p class="form-control">
+                            @Model.Nombre
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Precio</label>
+                        <p class="form-control">
+                            @Model.Precio
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Marca</label>
+                        <p class="form-control">
+                            @Model.MarcaNombre
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Medida</label>
+                        <p class="form-control">
+                            @Model.MedidaNombre
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Linea</label>
+                        <p class="form-control">
+                            @Model.LineaNombre
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Tipo</label>
+                        <p class="form-control">
+                            @Model.TipoNombre
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Grupo</label>
+                        <p class="form-control">
+                            @Model.GrupoNombre
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Activo</label>
+                        <p class="form-control">
+                            @Model.Activo
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Iva</label>
+                        <p class="form-control">
+                            @Model.Iva
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Perecible</label>
+                        <p class="form-control">
+                            @Model.Perecible
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Caducidad</label>
+                        <p class="form-control">
+                            @if(Model.FechaCaducidad != null)
+                            {
+                                @Model.FechaCaducidad?.ToString("MM/dd/yyyy")
+
+                            }
+                            else
+                            {
+                                <span>
+                                    No necesita fecha de caducidad 
+                                </span>
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Bodega</th>
+                                    <th scope="col">Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @if (Model.Existencia.FirstOrDefault() != null)
+                                {
+                                    @foreach (var item in Model?.Existencia)
+                                    {
+                                        <tr>
+                                            <th>@item.Bodega.Direccion</th>
+                                            <td>@item.Stock</td>
+                                        </tr>
+                                    }
+                                    
+                                }
+                                else{
+                                    <tr>
+                                        <td colspan="2" class="text-center">No existen productos almacenados</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Comentario</label>
+                        <p class="form-control">
+                            @Model.Comentario
+                        </p>
+                    </div>
+                    <div class="form-group col">
+                        <label class="control-label">Color</label>
+                        <div class="d-flex">
+                            @if(Model.ListColorName.FirstOrDefault() != null){
+                                @foreach (var item in Model.ListColorName)
+                                {
+                                    @* <span class="d-inline-block" style="width: 20px; height:20px; background-color:@item; margin: 10px;"></span>  *@
+                                    <p class="form-control col">
+                                        @item
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <p class="form-control col">
+                                    No tienen color
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Unidad</label>
+                        <p class="form-control">
+                            @Model.Unidad
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label class="control-label">Caja</label>
+                        <p class="form-control">
+                            @Model.Caja
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" style="background-color: white;">
+                <div class="row">
+                    <div class="col-6 ">
+                        <a class="btn btn-info" asp-action="Index">Volver a la lista</a>
+                    </div>
+                    <div class="form-group col-6" style="text-align: end;">
+                        <a asp-action="Edit" asp-route-id="@Model.ProductoID" class="btn btn-warning">
+                            Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+</div>

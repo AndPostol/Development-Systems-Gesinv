@@ -19,11 +19,11 @@ namespace DevSys.Gesinv.DAL.Repositories
             _dbContext = new DbInventarioContext();
             table = _dbContext.Set<T>();
         }
+
         public GenericRepository(DbInventarioContext dbContext)
         {
             _dbContext = dbContext;
             table = _dbContext.Set<T>();
-
         }
 
         public async Task<bool> Create(T entity)
@@ -51,6 +51,12 @@ namespace DevSys.Gesinv.DAL.Repositories
             return await table.FindAsync(id);
         }
 
+        //public Task<T> GetLastId()
+        //{
+        //    ();
+        //}
+
+
         //public Task<IEnumerable<T>> GetName(string name)
         //{
         //    return await table.Where;
@@ -63,8 +69,5 @@ namespace DevSys.Gesinv.DAL.Repositories
             await _dbContext.SaveChangesAsync();
             return true; // Preguntar esto a chala 
         }
-
-
     }
-
 }

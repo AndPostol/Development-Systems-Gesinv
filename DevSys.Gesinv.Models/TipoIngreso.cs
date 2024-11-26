@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class TipoIngreso
     {
@@ -11,7 +11,7 @@ namespace DevSys.Gesinv.DAL
         }
 
         public int TipoIngresoId { get; set; }
-        public string? Nombre { get; set; }
+        public string Nombre { get; set; } = null!;
 
         public virtual ICollection<Ingreso> Ingreso { get; set; }
     }

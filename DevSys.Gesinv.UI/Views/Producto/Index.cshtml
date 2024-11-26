@@ -1,0 +1,130 @@
+﻿@model IEnumerable<DevSys.Gesinv.UI.Models.ViewModels.ProductoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <link rel="stylesheet" href="~/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<h3>Catálogo de Productos</h3>
+
+<p>
+    <a class="btn bg-gradient-primary" asp-action="Create">Crear Producto</a>
+</p>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Codigo</th>
+                        <th>Linea</th>
+                        <th>Tipo</th>
+                        <th>Grupo</th>
+                        <th>Activo</th>
+                        <th>Bodega/Stock</th>
+                        <th>Precio</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.ProductoID</td>
+                            <td>@item.LineaNombre</td>
+                            <td>@item.TipoNombre</td>
+                            <td>@item.GrupoNombre</td>
+                            <td>@if (item.Activo == true)
+                                {
+                                    <i class="fa-solid fas fa-check"></i>
+                                }
+                            </td>
+                            <td>
+                                @foreach (var bodega in item.Existencia)
+                                {
+                                    <p>@bodega.Bodega.Direccion: @bodega.Stock</p>
+                                }
+                            </td>
+                            <td>
+                                @item.Precio
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a asp-action="Edit" asp-route-id="@item.ProductoID" class="btn btn-primary">Editar</a>
+                                    <a asp-action="Details" asp-route-id="@item.ProductoID" class="btn btn-info">Detalles</a>
+                                    <a asp-action="Delete" asp-route-id="@item.ProductoID" class="btn btn-danger">Eliminar</a>
+                                </div>
+                            </td>
+                        </tr>    
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Codigo</th>
+                        <th>Linea</th>
+                        <th>Tipo</th>
+                        <th>Grupo</th>
+                        <th>Activo</th>
+                        <th>Bodega/Stock</th>
+                        <th>Precio</th>
+                        <th>Opciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script>
+        $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": true,
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "No hay data disponible",
+                    "info": "Mostrando producto _START_ de _END_ de _TOTAL_",
+                    "infoEmpty": "Mostrando 0 de 0 de 0 entradas",
+                    "infoFiltered": "(filtrado de _MAX_ total producto)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ producto",
+                    "loadingRecords": "Cargando...",
+                    "processing": "",
+                    "search": "Buscar:",
+                    "zeroRecords": "No se encontraron productos relacionado con su busqueda",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": Ordena de manera ascendente",
+                        "sortDescending": ": Ordena de manera descendente"
+                    }
+                }
+        });
+
+    </script>
+}

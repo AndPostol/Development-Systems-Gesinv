@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewData["Title"] = "Salida";
+}
+
+@section Style{
+    <link rel="stylesheet" href="~/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<h1>Reporte Salida</h1>
+
+
+<div class="col-12 justify-content-center">
+    <div class="card col-6">
+        <form asp-controller="Reporte" asp-action="Salida" method="get">
+            <div class="card-body justify-content-center">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label>Fecha</label>
+                        <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
+                        <input type="date" class="form-control" name="fechaFin" id="fechaFin">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="bodega">Bodega</label>
+                        <input type="number" class="form-control" id="bodega" name="bodega">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="proveedor">Proveedor</label>
+                        <input type="number" class="form-control" id="proveedor" name="proveedor">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="tipoProducto">Tipo de producto</label>
+                        <input type="text" class="form-control" id="tipoProducto" name="tipoProducto">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Cod Prod</th>
+                        <th>Nombre</th>
+                        <th>Motivo</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Fecha Salida</th>
+                        <th>Tipo Proveedor</th>
+                        <th>Razon Social</th>
+                        <th>Cantidad</th>
+                        <th>Stock</th>
+                        <th>Costo Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.data)
+                    {
+                        <tr>
+                            <td>
+                                @item.ProductoId
+                            </td>
+                            <td>
+                                @item.Nombre
+                            </td>
+                            <td>
+                                @item.MotivoId
+                            </td>
+                            <td>
+                                @item.IngresoFecha
+                            </td> 
+                            <td>
+                                @item.SalidaFecha
+                            </td>
+                            <td>
+                                @item.TipoProveedor
+                            </td>
+                            <td>
+                                @item.RazonSocial
+                            </td>
+                            <td>
+                                @item.Cantidad
+                            </td>
+                            <td>
+                                @item.Stock
+                            </td>
+                            <td>
+                                @item.CostoSalida
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Cod Prod</th>
+                        <th>Nombre</th>
+                        <th>Motivo</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Fecha Salida</th>
+                        <th>Tipo Proveedor</th>
+                        <th>Razon Social</th>
+                        <th>Cantidad</th>
+                        <th>Stock</th>
+                        <th>Costo Salida</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script>
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": true,
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay data disponible",
+                "info": "Mostrando producto _START_ de _END_ de _TOTAL_",
+                "infoEmpty": "Mostrando 0 de 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ total producto)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ producto",
+                "loadingRecords": "Cargando...",
+                "processing": "",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron productos relacionado con su busqueda",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": Ordena de manera ascendente",
+                    "sortDescending": ": Ordena de manera descendente"
+                }
+            }
+        });
+
+    </script>
+
+}
+
+

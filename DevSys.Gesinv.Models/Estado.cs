@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevSys.Gesinv.DAL
+namespace DevSys.Gesinv.Models
 {
     public partial class Estado
     {
@@ -9,6 +9,7 @@ namespace DevSys.Gesinv.DAL
         {
             Bodega = new HashSet<Bodega>();
             Proveedor = new HashSet<Proveedor>();
+            Provincia = new HashSet<Provincia>();
         }
 
         public int EstadoId { get; set; }
@@ -16,5 +17,6 @@ namespace DevSys.Gesinv.DAL
 
         public virtual ICollection<Bodega> Bodega { get; set; }
         public virtual ICollection<Proveedor> Proveedor { get; set; }
+        public virtual ICollection<Provincia> Provincia { get; set; }
     }
 }
